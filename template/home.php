@@ -8,13 +8,16 @@ Template Name: Thesaurus Home
 */
 global $ths_service_url, $ths_plugin_slug;
 
+ini_set('display_errors', '0');
+
 $ths_config = get_option('ths_config');
 
 $site_language = strtolower(get_bloginfo('language'));
 $lang = substr($site_language,0,2);
 
 // set query using default param q (query) or s (wordpress search) or newexpr (metaiah)
-$q = $_GET['s'] . $_GET['q'];
+$q = $_GET['q'];
+// $q = $_GET['s'] . $_GET['q'];
 $tquery = stripslashes( trim($q) );
 $filter = $_GET['filter'];
 $count=300;

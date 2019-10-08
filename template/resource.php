@@ -185,7 +185,7 @@
 
                                                 <!-- Entry Version -->
                                                 <?php
-                                                if ($arr_PreferredDescriptors[0]['entry_version']){
+                                                if (!empty($arr_PreferredDescriptors[0]['entry_version'])){
                                                 ?>
                                                     <tr>
                                                         <td width="150px" class="text-right"><small><b>Entry Version</b></small></td>
@@ -202,7 +202,7 @@
                                                 <!-- Abbreviation -->
                                                 <?php
 
-                                                if ($qualifier_abbreviation){
+                                                if (!empty($qualifier_abbreviation)){
                                                 ?>
                                                     <tr>
                                                         <td width="150px" class="text-right"><small><b>Abbreviation</b></small></td>
@@ -320,7 +320,7 @@
                                                 <?php
                                                 if (!empty($arr_CASN1_PreferredRegistryNumber)){
                                                     foreach ($arr_CASN1_PreferredRegistryNumber as $key => $value) {
-                                                        if ($arr_CASN1_PreferredRegistryNumber[$key]['casn1_name']){
+                                                        if (!empty($arr_CASN1_PreferredRegistryNumber[$key]['casn1_name'])){
                                                             ?>
                                                             <tr>
                                                                 <td width="150px" class="text-right"><small><b>CAS Type 1 Name(s)</b></small></td>
@@ -331,10 +331,13 @@
                                                                     }
                                                                 }
                                                                 foreach ($arr_CASN1_PreferredRegistryNumber as $key => $value) {
-                                                                    echo $arr_CASN1_PreferredRegistryNumber[$key]['casn1_name'];
+                                                                    if(!empty($arr_CASN1_PreferredRegistryNumber[$key]['casn1_name'])){
+                                                                        echo $arr_CASN1_PreferredRegistryNumber[$key]['casn1_name'];
+                                                                    }
+
                                                                 }
                                                                 foreach ($arr_CASN1_PreferredRegistryNumber as $key => $value) {
-                                                                    if ($arr_CASN1_PreferredRegistryNumber[$key]['casn1_name']){
+                                                                    if (!empty($arr_CASN1_PreferredRegistryNumber[$key]['casn1_name'])){
                                                                         ?>
                                                                     </small>
                                                                 </td>
@@ -621,7 +624,7 @@
                                                         $tam_string=strlen($string);
                                                         $tam=(intval($arr_HierarchicalTree[$key]['level'])*10)+$tam_string;
 
-                                                        if ( $arr_HierarchicalTree[$key]['tree_number_registry'] ){
+                                                        if (!empty($arr_HierarchicalTree[$key]['tree_number_registry'])){
                                                         ?>
                                                             <font color="red">
                                                             <?php echo str_replace("-", "&nbsp;",str_pad($string,$tam,"-",STR_PAD_LEFT)); ?>
@@ -633,7 +636,7 @@
                                                             <?php echo str_replace("-", "&nbsp;",str_pad($string,$tam,"-",STR_PAD_LEFT)); ?>
                                                         <?php
                                                         }
-                                                        if ( $arr_HierarchicalTree[$key]['leaf'] ) {
+                                                        if (!empty($arr_HierarchicalTree[$key]['leaf'])) {
                                                             echo " +";
                                                         }
                                                         ?>
@@ -925,7 +928,7 @@
                                 ?>
 
                                 <?php                               
-                                if ($has_qualifier){
+                                if (!empty($has_qualifier)){
                                 ?>
                                     <div class="tab-pane fade" id="concepts" role="tabpanel">
 
@@ -1096,7 +1099,7 @@
                                                         $has_synonymous=True;
                                                     }
                                                 }
-                                                if ($has_synonymous){
+                                                if (!empty($has_synonymous)){
                                                 ?>
                                                     <tr>
                                                         <td width="150px" class="text-right"><small><b>Entry Term(s)</b></small></td>

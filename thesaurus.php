@@ -8,6 +8,8 @@ Version: 1.0
 Author URI: http://reddes.bvsalud.org/
 */
 
+ini_set('display_errors', '0');
+
 define('THESAURUS_PLUGIN_VERSION', '1.0' );
 
 define('THESAURUS_SYMBOLIC_LINK', false );
@@ -203,8 +205,11 @@ if(!class_exists('Thesaurus_Plugin')) {
 
         function google_analytics_code(){
             global $wp;
-
-            $pagename = $wp->query_vars["pagename"];
+            $pagename='';
+            if(isset($wp->query_vars["pagename"])){
+                $pagename = $wp->query_vars["pagename"];
+            }
+            
             $ths_config = get_option('ths_config');
 
             // check if is defined GA code and pagename starts with plugin slug

@@ -1,5 +1,7 @@
 <?php
 
+ini_set('display_errors', '0');
+
 function ConceptRelationName($concept_relation_name){
 	switch ($concept_relation_name) {
 		case 'NRW':
@@ -27,7 +29,9 @@ function phparraysort($Array, $SortBy=array(), $Sort = SORT_REGULAR) {
 		foreach ($Array as $Key => $Val) {
 			$Sort_key = '';
 			foreach ($SortBy as $Key_key) {
-				$Sort_key .= $Val[$Key_key];
+				if(!empty($Val[$Key_key])){
+					$Sort_key .= $Val[$Key_key];
+				}
 			}                
 			$Map[$Key] = $Sort_key;
 		}
@@ -60,10 +64,11 @@ function cmp($a, $b)
 $URL="http://fi-admin.beta.bvsalud.org/api/";
 
 $decs_code = $_GET['id'];
-$ths = $_GET['thesaurus'];
-if(!isset($ths)){
-	$ths=1;
-}
+$ths = (isset($_GET['thesaurus'])) ? intval($_GET['thesaurus']) : 1;
+// $ths = $_GET['thesaurus'];
+// if(!isset($ths)){
+// 	$ths=1;
+// }
 
 $json = file_get_contents($URL."desc/thesaurus/?format=json&ths=$ths&decs_code=$decs_code");
 $json_data = json_decode($json, true);
