@@ -65,10 +65,6 @@ $URL="http://fi-admin.beta.bvsalud.org/api/";
 
 $decs_code = $_GET['id'];
 $ths = (isset($_GET['thesaurus'])) ? intval($_GET['thesaurus']) : 1;
-// $ths = $_GET['thesaurus'];
-// if(!isset($ths)){
-// 	$ths=1;
-// }
 
 $json = file_get_contents($URL."desc/thesaurus/?format=json&ths=$ths&decs_code=$decs_code");
 $json_data = json_decode($json, true);
@@ -140,7 +136,7 @@ if ($has_descriptor){
 			$arr_TermListDesc=$arr_IdentifierConceptListDesc[$key]['TermListDesc'];
 			$arr_PreferredDescriptors = array();
 			foreach ($arr_TermListDesc as $key => $value) {
-				if ($arr_TermListDesc[$key]['concept_preferred_term']=='Y' and $arr_TermListDesc[$key]['record_preferred_term']=='Y' and $arr_TermListDesc[$key]['language_code']!='es-es' and $arr_TermListDesc[$key]['term_string']!='' and $arr_TermListDesc[$key]['language_code']!='') {
+				if ($arr_TermListDesc[$key]['concept_preferred_term']=='Y' and $arr_TermListDesc[$key]['record_preferred_term']=='Y' and $arr_TermListDesc[$key]['term_string']!='' and $arr_TermListDesc[$key]['language_code']!='') {
 					$arr_temp=array();
 					$arr_temp['term_string']=$arr_TermListDesc[$key]['term_string'];
 					$arr_temp['language_code']=$arr_TermListDesc[$key]['language_code'];
@@ -176,7 +172,7 @@ if ($has_descriptor){
 			$arr_ConceptList=$arr_IdentifierConceptListDesc[$key]['ConceptListDesc'];
 			$arr_PreferredScopeNote = array();
 			foreach ($arr_ConceptList as $key => $value) {
-				if ($arr_ConceptList[$key]['language_code']!='es-es' and $arr_ConceptList[$key]['scope_note']!='' and $arr_ConceptList[$key]['language_code']!='') {
+				if ($arr_ConceptList[$key]['scope_note']!='' and $arr_ConceptList[$key]['language_code']!='') {
 					$arr_temp=array();
 					$arr_temp['scope_note']=$arr_ConceptList[$key]['scope_note'];
 					$arr_temp['language_code']=$arr_ConceptList[$key]['language_code'];
@@ -234,7 +230,7 @@ if ($has_descriptor){
 	// Previous Indexing
 	$arr_PreviousIndexingList = array();
 	foreach ($arr_PreviousIndexingListDesc as $key => $value) {
-		if ($arr_PreviousIndexingListDesc[$key]['language_code']!='es-es' and $arr_PreviousIndexingListDesc[$key]['previous_indexing']!='' and $arr_PreviousIndexingListDesc[$key]['language_code']!='') {
+		if ($arr_PreviousIndexingListDesc[$key]['previous_indexing']!='' and $arr_PreviousIndexingListDesc[$key]['language_code']!='') {
 			$arr_temp=array();
 			$arr_temp['previous_indexing']=$arr_PreviousIndexingListDesc[$key]['previous_indexing'];
 			$arr_temp['language_code']=$arr_PreviousIndexingListDesc[$key]['language_code'];
@@ -267,7 +263,7 @@ if ($has_descriptor){
 	$arr_EntryTerms = array();
 	foreach ($arr_IdentifierConceptListDesc as $key => $value) {
 		foreach ($arr_IdentifierConceptListDesc[$key]['TermListDesc'] as $key1 => $value1) {
-			if ($arr_IdentifierConceptListDesc[$key]['TermListDesc'][$key1]['record_preferred_term'] == 'N' and $arr_IdentifierConceptListDesc[$key]['TermListDesc'][$key1]['language_code'] != 'es-es'){
+			if ($arr_IdentifierConceptListDesc[$key]['TermListDesc'][$key1]['record_preferred_term'] == 'N'){
 				$arr_temp=array();
 				$arr_temp['term_string']=$arr_IdentifierConceptListDesc[$key]['TermListDesc'][$key1]['term_string'];
 				$arr_temp['language_code']=$arr_IdentifierConceptListDesc[$key]['TermListDesc'][$key1]['language_code']."<br>";
@@ -289,14 +285,12 @@ if ($has_descriptor){
 				// foreach ($arr_IdentifierDesc[$key]['Abbreviations'][$key1][$key2] as $key3 => $value3) {
 				if (is_array($arr_IdentifierDesc[$key]['Abbreviations'][$key1][$key2])){
 					foreach ($arr_IdentifierDesc[$key]['Abbreviations'][$key1][$key2] as $key3 => $value3) {
-						if ($arr_IdentifierDesc[$key]['Abbreviations'][$key1][$key2][$key3]['language_code']!='es-es'){
-							$arr_term_string_translations=array();
-							$arr_term_string_translations['abbreviation']=$arr_IdentifierDesc[$key]['Abbreviations'][$key1]['abbreviation'];
-							$arr_term_string_translations['term_string']=$arr_IdentifierDesc[$key]['Abbreviations'][$key1][$key2][$key3]['term_string'];
-							$arr_term_string_translations['language_code']=$arr_IdentifierDesc[$key]['Abbreviations'][$key1][$key2][$key3]['language_code'];
-							$arr_temp[]=$arr_term_string_translations;
-							unset($arr_term_string_translations);
-						}
+						$arr_term_string_translations=array();
+						$arr_term_string_translations['abbreviation']=$arr_IdentifierDesc[$key]['Abbreviations'][$key1]['abbreviation'];
+						$arr_term_string_translations['term_string']=$arr_IdentifierDesc[$key]['Abbreviations'][$key1][$key2][$key3]['term_string'];
+						$arr_term_string_translations['language_code']=$arr_IdentifierDesc[$key]['Abbreviations'][$key1][$key2][$key3]['language_code'];
+						$arr_temp[]=$arr_term_string_translations;
+						unset($arr_term_string_translations);
 					}
 				}
 			}
@@ -364,7 +358,7 @@ if ($has_descriptor){
 				$arr_TermListDesc=$arr_IdentifierConceptListQualif[$key]['TermListQualif'];
 				$arr_PreferredDescriptors = array();
 				foreach ($arr_TermListDesc as $key => $value) {
-					if ($arr_TermListDesc[$key]['concept_preferred_term']=='Y' and $arr_TermListDesc[$key]['record_preferred_term']=='Y' and $arr_TermListDesc[$key]['language_code']!='es-es' and $arr_TermListDesc[$key]['term_string']!='' and $arr_TermListDesc[$key]['language_code']!='') {
+					if ($arr_TermListDesc[$key]['concept_preferred_term']=='Y' and $arr_TermListDesc[$key]['record_preferred_term']=='Y' and $arr_TermListDesc[$key]['term_string']!='' and $arr_TermListDesc[$key]['language_code']!='') {
 						$arr_temp=array();
 						$arr_temp['term_string']=$arr_TermListDesc[$key]['term_string'];
 						$arr_temp['language_code']=$arr_TermListDesc[$key]['language_code'];
@@ -401,7 +395,7 @@ if ($has_descriptor){
 				$arr_ConceptList=$arr_IdentifierConceptListQualif[$key]['ConceptListQualif'];
 				$arr_PreferredScopeNote = array();
 				foreach ($arr_ConceptList as $key => $value) {
-					if ($arr_ConceptList[$key]['language_code']!='es-es' and $arr_ConceptList[$key]['scope_note']!='' and $arr_ConceptList[$key]['language_code']!='') {
+					if ($arr_ConceptList[$key]['scope_note']!='' and $arr_ConceptList[$key]['language_code']!='') {
 						$arr_temp=array();
 						$arr_temp['scope_note']=$arr_ConceptList[$key]['scope_note'];
 						$arr_temp['language_code']=$arr_ConceptList[$key]['language_code'];
@@ -417,7 +411,7 @@ if ($has_descriptor){
 		$arr_EntryTerms = array();
 		foreach ($arr_IdentifierConceptListQualif as $key => $value) {
 			foreach ($arr_IdentifierConceptListQualif[$key]['TermListQualif'] as $key1 => $value1) {
-				if ($arr_IdentifierConceptListQualif[$key]['TermListQualif'][$key1]['record_preferred_term'] == 'N' and $arr_IdentifierConceptListQualif[$key]['TermListDesc'][$key1]['language_code'] != 'es-es'){
+				if ($arr_IdentifierConceptListQualif[$key]['TermListQualif'][$key1]['record_preferred_term'] == 'N'){
 					$arr_temp=array();
 					$arr_temp['term_string']=$arr_IdentifierConceptListQualif[$key]['TermListQualif'][$key1]['term_string'];
 					$arr_temp['language_code']=$arr_IdentifierConceptListQualif[$key]['TermListQualif'][$key1]['language_code']."<br>";

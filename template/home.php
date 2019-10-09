@@ -109,6 +109,10 @@ if ($response){
                     $arr_temp['ths_preferredterm_fr']=utf8_decode($docs->ths_preferredterm_fr[0]);
                 }
 
+                if ($docs->ths_preferredterm_eses[0]) {
+                    $arr_temp['ths_preferredterm_eses']=utf8_decode($docs->ths_preferredterm_fr[0]);
+                }
+
                 $arr_result[]=$arr_temp;
                 unset($arr_temp);
 
@@ -215,6 +219,7 @@ if ($response){
                         $ths_preferredterm_es=$resultado[$key]['ths_preferredterm_es'];
                         $ths_preferredterm_pt=$resultado[$key]['ths_preferredterm_pt'];
                         $ths_preferredterm_fr=$resultado[$key]['ths_preferredterm_fr'];
+                        $ths_preferredterm_eses=$resultado[$key]['ths_preferredterm_eses'];
                         ?>
 
                         <div style="border-bottom: 1px solid #ddd; padding: 12px 0;">
@@ -222,67 +227,162 @@ if ($response){
                             switch ($lang) {
                                 case 'en':
                                 ?>
-                                <small class="badge badgeWarning">En</small>
-                                <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code; ?>"><?php echo $ths_preferredterm_en; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;
-                                <small class="badge badgeWarning">Es</small>
-                                <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code; ?>"><?php echo $ths_preferredterm_es; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;
-                                <small class="badge badgeWarning">Pt</small>
-                                <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code; ?>"><?php echo $ths_preferredterm_pt; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;
-                                <small class="badge badgeWarning">Fr</small>
-                                <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code; ?>"><?php echo $ths_preferredterm_fr; ?></a>
-                                <?php
+                                <?php if (isset($ths_preferredterm_en)) { ?>
+                                    <small class="badge badgeWarning">en-US</small>
+                                    <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code; ?>"><?php echo $ths_preferredterm_en; ?></a>
+                                <?php } ?>
+
+                                <?php if (isset($ths_preferredterm_es)) { ?>
+                                    &nbsp;&nbsp;|&nbsp;&nbsp;
+                                    <small class="badge badgeWarning">es</small>
+                                    <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code; ?>"><?php echo $ths_preferredterm_es; ?></a>
+                                <?php } ?>
+
+                                <?php if (isset($ths_preferredterm_pt)) { ?>
+                                    &nbsp;&nbsp;|&nbsp;&nbsp;
+                                    <small class="badge badgeWarning">pt-BR</small>
+                                    <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code; ?>"><?php echo $ths_preferredterm_pt; ?></a>
+                                <?php } ?>
+
+                                <?php if (isset($ths_preferredterm_fr)) { ?>
+                                    &nbsp;&nbsp;|&nbsp;&nbsp;
+                                    <small class="badge badgeWarning">fr-FR</small>
+                                    <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code; ?>"><?php echo $ths_preferredterm_fr; ?></a>
+                                <?php } ?>
+
+                                <?php if (isset($ths_preferredterm_eses)) { ?>
+                                    &nbsp;&nbsp;|&nbsp;&nbsp;
+                                    <small class="badge badgeWarning">es-ES</small>
+                                    <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code; ?>"><?php echo $ths_preferredterm_eses; ?></a>
+                                <?php }
                                 break;
 
                                 case 'es':
                                 ?>
-                                <small class="badge badgeWarning">Es</small>
-                                <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code; ?>"><?php echo $ths_preferredterm_es; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;
-                                <small class="badge badgeWarning">En</small>
-                                <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code; ?>"><?php echo $ths_preferredterm_en; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;
-                                <small class="badge badgeWarning">Pt</small>
-                                <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code; ?>"><?php echo $ths_preferredterm_pt; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;
-                                <small class="badge badgeWarning">Fr</small>
-                                <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code; ?>"><?php echo $ths_preferredterm_fr; ?></a>
-                                <?php
+                                <?php if (isset($ths_preferredterm_es)) { ?>
+                                    <small class="badge badgeWarning">es</small>
+                                    <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code; ?>"><?php echo $ths_preferredterm_es; ?></a>
+                                <?php } ?>
+
+                                <?php if (isset($ths_preferredterm_en)) { ?>
+                                    &nbsp;&nbsp;|&nbsp;&nbsp;
+                                    <small class="badge badgeWarning">en-US</small>
+                                    <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code; ?>"><?php echo $ths_preferredterm_en; ?></a>
+                                <?php } ?>
+
+                                <?php if (isset($ths_preferredterm_pt)) { ?>
+                                    &nbsp;&nbsp;|&nbsp;&nbsp;
+                                    <small class="badge badgeWarning">pt-BR</small>
+                                    <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code; ?>"><?php echo $ths_preferredterm_pt; ?></a>
+                                <?php } ?>
+
+                                <?php if (isset($ths_preferredterm_fr)) { ?>
+                                    &nbsp;&nbsp;|&nbsp;&nbsp;
+                                    <small class="badge badgeWarning">fr-FR</small>
+                                    <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code; ?>"><?php echo $ths_preferredterm_fr; ?></a>
+                                <?php } ?>
+
+                                <?php if (isset($ths_preferredterm_eses)) { ?>
+                                    &nbsp;&nbsp;|&nbsp;&nbsp;
+                                    <small class="badge badgeWarning">es-ES</small>
+                                    <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code; ?>"><?php echo $ths_preferredterm_eses; ?></a>
+                                <?php }
                                 break;
 
                                 case 'pt':
                                 ?>
-                                <small class="badge badgeWarning">Pt</small>
-                                <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code; ?>"><?php echo $ths_preferredterm_pt; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;
-                                <small class="badge badgeWarning">En</small>
-                                <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code; ?>"><?php echo $ths_preferredterm_en; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;
-                                <small class="badge badgeWarning">Es</small>
-                                <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code; ?>"><?php echo $ths_preferredterm_es; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;
-                                <small class="badge badgeWarning">Fr</small>
-                                <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code; ?>"><?php echo $ths_preferredterm_fr; ?></a>
-                                <?php
+                                <?php if (isset($ths_preferredterm_pt)) { ?>
+                                    <small class="badge badgeWarning">pt-BR</small>
+                                    <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code; ?>"><?php echo $ths_preferredterm_pt; ?></a>
+                                <?php } ?>
+
+                                <?php if (isset($ths_preferredterm_en)) { ?>
+                                    &nbsp;&nbsp;|&nbsp;&nbsp;
+                                    <small class="badge badgeWarning">en-US</small>
+                                    <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code; ?>"><?php echo $ths_preferredterm_en; ?></a>
+                                <?php } ?>
+
+                                <?php if (isset($ths_preferredterm_es)) { ?>
+                                    &nbsp;&nbsp;|&nbsp;&nbsp;
+                                    <small class="badge badgeWarning">es</small>
+                                    <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code; ?>"><?php echo $ths_preferredterm_es; ?></a>
+                                <?php } ?>
+
+                                <?php if (isset($ths_preferredterm_fr)) { ?>
+                                    &nbsp;&nbsp;|&nbsp;&nbsp;
+                                    <small class="badge badgeWarning">fr-FR</small>
+                                    <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code; ?>"><?php echo $ths_preferredterm_fr; ?></a>
+                                <?php } ?>
+
+                                <?php if (isset($ths_preferredterm_eses)) { ?>
+                                    &nbsp;&nbsp;|&nbsp;&nbsp;
+                                    <small class="badge badgeWarning">es-ES</small>
+                                    <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code; ?>"><?php echo $ths_preferredterm_eses; ?></a>
+                                <?php }
                                 break;
 
                                 case 'fr':
                                 ?>
-                                <small class="badge badgeWarning">Fr</small>
-                                <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code; ?>"><?php echo $ths_preferredterm_fr; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;
-                                <small class="badge badgeWarning">En</small>
-                                <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code; ?>"><?php echo $ths_preferredterm_en; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;
-                                <small class="badge badgeWarning">Es</small>
-                                <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code; ?>"><?php echo $ths_preferredterm_es; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;
-                                <small class="badge badgeWarning">Pt</small>
-                                <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code; ?>"><?php echo $ths_preferredterm_pt; ?></a>
-                                <?php
+                                <?php if (isset($ths_preferredterm_fr)) { ?>
+                                    <small class="badge badgeWarning">fr-FR</small>
+                                    <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code; ?>"><?php echo $ths_preferredterm_fr; ?></a>
+                                <?php } ?>
+
+                                <?php if (isset($ths_preferredterm_en)) { ?>
+                                    &nbsp;&nbsp;|&nbsp;&nbsp;
+                                    <small class="badge badgeWarning">en-US</small>
+                                    <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code; ?>"><?php echo $ths_preferredterm_en; ?></a>
+                                <?php } ?>
+
+                                <?php if (isset($ths_preferredterm_es)) { ?>
+                                    &nbsp;&nbsp;|&nbsp;&nbsp;
+                                    <small class="badge badgeWarning">es</small>
+                                    <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code; ?>"><?php echo $ths_preferredterm_es; ?></a>
+                                <?php } ?>
+
+                                <?php if (isset($ths_preferredterm_pt)) { ?>
+                                    &nbsp;&nbsp;|&nbsp;&nbsp;
+                                    <small class="badge badgeWarning">pt-BR</small>
+                                    <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code; ?>"><?php echo $ths_preferredterm_pt; ?></a>
+                                <?php } ?>
+
+                                <?php if (isset($ths_preferredterm_eses)) { ?>
+                                    &nbsp;&nbsp;|&nbsp;&nbsp;
+                                    <small class="badge badgeWarning">es-ES</small>
+                                    <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code; ?>"><?php echo $ths_preferredterm_eses; ?></a>
+                                <?php }
                                 break;
 
                                 default:
                                 ?>
-                                <small class="badge badgeWarning">En</small>
-                                <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code; ?>"><?php echo $ths_preferredterm_en; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;
-                                <small class="badge badgeWarning">Es</small>
-                                <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code; ?>"><?php echo $ths_preferredterm_es; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;
-                                <small class="badge badgeWarning">Pt</small>
-                                <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code; ?>"><?php echo $ths_preferredterm_pt; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;
-                                <small class="badge badgeWarning">Fr</small>
-                                <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code; ?>"><?php echo $ths_preferredterm_fr; ?></a>
-                                <?php
+                                <?php if (isset($ths_preferredterm_en)) { ?>
+                                    <small class="badge badgeWarning">en-US</small>
+                                    <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code; ?>"><?php echo $ths_preferredterm_en; ?></a>
+                                <?php } ?>
+
+                                <?php if (isset($ths_preferredterm_es)) { ?>
+                                    &nbsp;&nbsp;|&nbsp;&nbsp;
+                                    <small class="badge badgeWarning">es</small>
+                                    <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code; ?>"><?php echo $ths_preferredterm_es; ?></a>
+                                <?php } ?>
+
+                                <?php if (isset($ths_preferredterm_pt)) { ?>
+                                    &nbsp;&nbsp;|&nbsp;&nbsp;
+                                    <small class="badge badgeWarning">pt-BR</small>
+                                    <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code; ?>"><?php echo $ths_preferredterm_pt; ?></a>
+                                <?php } ?>
+
+                                <?php if (isset($ths_preferredterm_fr)) { ?>
+                                    &nbsp;&nbsp;|&nbsp;&nbsp;
+                                    <small class="badge badgeWarning">fr-FR</small>
+                                    <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code; ?>"><?php echo $ths_preferredterm_fr; ?></a>
+                                <?php } ?>
+
+                                <?php if (isset($ths_preferredterm_eses)) { ?>
+                                    &nbsp;&nbsp;|&nbsp;&nbsp;
+                                    <small class="badge badgeWarning">es-ES</small>
+                                    <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code; ?>"><?php echo $ths_preferredterm_eses; ?></a>
+                                <?php }
                                 break;
 
                             }

@@ -32,7 +32,27 @@
                                     <p>
                                         <?php echo $arr_PreferredDescriptors[$key]['term_string']; ?>
                                         <small class="badge badgeWarning">
-                                            <?php echo $arr_PreferredDescriptors[$key]['language_code']; ?>
+                                            <?php 
+                                                if (isset($arr_PreferredDescriptors[$key]['language_code'])){
+                                                    switch ($arr_PreferredDescriptors[$key]['language_code']) {
+                                                        case 'en':
+                                                            echo "en-US";
+                                                            break;
+                                                        case 'es':
+                                                            echo "es";
+                                                            break;
+                                                        case 'pt-br':
+                                                            echo "pt-BR";
+                                                            break;
+                                                        case 'fr':
+                                                            echo "fr-FR";
+                                                            break;
+                                                        case 'es-es':
+                                                            echo "es-ES";
+                                                            break;
+                                                    }
+                                                }
+                                            ?>
                                         </small>
                                     </p>
                                     <?php
@@ -47,6 +67,7 @@
                             if ($has_descriptor) {
                                 ?>
                                 Unique ID: <?php echo $arr_IdentifierDesc[0]['descriptor_ui']; ?> <br>
+                                DeCS ID: <?php echo $arr_IdentifierDesc[0]['decs_code']; ?> <br>
                                 Date Established: <?php echo $arr_IdentifierDesc[0]['date_established']; ?> <br>
                                 Date of Entry: <?php echo $arr_IdentifierDesc[0]['date_created']; ?> <br>
                                 Revision Date: <?php echo $arr_IdentifierDesc[0]['date_revised']; ?>
@@ -54,6 +75,7 @@
                             } elseif ($has_qualifier) {
                                 ?>
                                 Unique ID: <?php echo $arr_IdentifierQualif[0]['qualifier_ui']; ?> <br>
+                                DeCS ID: <?php echo $arr_IdentifierQualif[0]['decs_code']; ?> <br>
                                 Date Established: <?php echo $arr_IdentifierQualif[0]['date_established']; ?> <br>
                                 Date of Entry: <?php echo $arr_IdentifierQualif[0]['date_created']; ?> <br>
                                 Revision Date: <?php echo $arr_IdentifierQualif[0]['date_revised']; ?>
