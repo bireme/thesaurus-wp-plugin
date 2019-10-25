@@ -1,8 +1,7 @@
 <?php include 'plugin_thesaurus.php' ?>
-<?php get_template_part('includes/topAcessibility') ?>
 <?php get_header(); ?>
 <?php get_template_part('includes/search') ?>
-
+<?php $idioma = pll_current_language(); ?>
 <!-- 
     Template Name: Thesaurus Home 
 -->
@@ -12,7 +11,7 @@
         <div class="container">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="<?php echo get_option('siteurl'); ?>">Home</a></li>
+                    <li class="breadcrumb-item"><a href="<?php echo get_option('siteurl'); ?>/<?php echo $idioma=='en'?'':$idioma; ?>">Home</a></li>
                 </ol>
             </nav>
 
