@@ -246,9 +246,9 @@
                                                         <td>
                                                             <small>
                                                             <?php
-                                                            $count=0;
+                                                            $count=1;
                                                             foreach ($arr_EntryTerms as $key => $value) {
-                                                                if ($count==0){
+                                                                if ($count==1){
                                                             ?>
                                                                     <small class="badge badgeWarning">
                                                                         <?php
@@ -892,10 +892,10 @@
                                                             $arr_EntryTerms = phparraysort($arr_EntryTerms, array('language_code','term_string'));
                                                             // usort($arr_EntryTerms, "cmp"); 
 
-                                                            $count=0;
+                                                            $count=1;
                                                             foreach ($arr_EntryTerms as $k5 => $v5) {
 
-                                                                    if ($count==0){
+                                                                    if ($count==1){
                                                                         ?>
                                                                         <small class="badge badgeWarning">
                                                                             <?php
