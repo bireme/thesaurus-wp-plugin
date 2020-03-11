@@ -1,9 +1,12 @@
 <?php include 'plugin_thesaurus.php' ?>
 <?php get_header(); ?>
+
 <?php get_template_part('includes/search') ?>
 <?php $lang = pll_current_language(); ?>
 
 <?php
+
+
 $lang_another = $_GET[lang_another];
 // echo "lang_another [".$lang_another."]<br>";
 // echo "lang_another 2ltr[".substr($lang_another,0,2)."]<br>";
