@@ -287,6 +287,7 @@ if ($has_descriptor){
 					foreach ($arr_IdentifierDesc[$key]['Abbreviations'][$key1][$key2] as $key3 => $value3) {
 						$arr_term_string_translations=array();
 						$arr_term_string_translations['abbreviation']=$arr_IdentifierDesc[$key]['Abbreviations'][$key1]['abbreviation'];
+						$arr_term_string_translations['decs_code']=$arr_IdentifierDesc[$key]['Abbreviations'][$key1]['decs_code'];
 						$arr_term_string_translations['term_string']=$arr_IdentifierDesc[$key]['Abbreviations'][$key1][$key2][$key3]['term_string'];
 						$arr_term_string_translations['language_code']=$arr_IdentifierDesc[$key]['Abbreviations'][$key1][$key2][$key3]['language_code'];
 						$arr_temp[]=$arr_term_string_translations;
