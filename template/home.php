@@ -294,8 +294,8 @@ if ($response){
         <div class="col-12 text-center">
             <div class="alert alert-success" role="alert">
                 <?php
-                pll_e('Search for:');
-                echo "<b> $q </b>";
+                pll_e('Search for');
+                echo ":<b> $q </b>";
                 ?>
                 |
                 <?php if ( isset($total) && strval($total) == 0 ) :?>
@@ -379,7 +379,7 @@ if ($response){
 
                                 <?php if ($ths_sym) { ?>
                                 <tr>
-                                    <td class="text-right badge-light align-middle"><?php pll_e('Synonyms English'); ?>:</td>
+                                    <td class="text-right badge-light align-middle"><?php pll_e('Entry term(s)'); ?>:</td>
                                     <td>
                                         <?php
                                             foreach ($ths_sym as $key => $value) {
@@ -415,7 +415,7 @@ if ($response){
                         <div class="row-fluid">
 
                             <br>
-                            <font size="2"><?php pll_e('Page:'); ?></font>
+                            <font size="2"><?php pll_e('Page'); ?>:</font>
                             <?php 
                             for($i = 1; $i <= $contar; $i++){
                                 if($i == $atual){

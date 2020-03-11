@@ -437,7 +437,7 @@ function choice_category($categ,$lang){
                                 if(!empty($arr_EntryTerms)){
                                 ?>
                                 <tr>
-                                    <td class="text-right badge-light align-middle"><?php pll_e('Entry terms'); ?>:</td>
+                                    <td class="text-right badge-light align-middle"><?php pll_e('Entry term(s)'); ?>:</td>
                                     <td>
                                         <?php
                                             foreach ($arr_EntryTerms as $key => $value) {
