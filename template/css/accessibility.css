@@ -1,32 +1,36 @@
-#barAcessibilidade{
+#barAccessibility{
 	background: #4e7952; /*Cor da barra*/
 	color: #fff;
 	padding: 6px 0;
 	font-size: 12px;
 }
-#barAcessibilidade a{
+#barAccessibility a{
 	color: #fff;
 	text-decoration: none;
 }
-#barAcessibilidade a:hover{
+#barAccessibility a:hover{
 	color: #ddd;
 }
-#acessibilidadeFontes{
+#accessibilityFontes{
 	text-align: right;
 }
-#acessibilidadeFontes a{
+#accessibilityFontes a{
 	padding: 0 5px; 
 	cursor: pointer;
+	border-right: 1px solid #ddd;
 }
-#acessibilidadeTutorial a{
+#accessibilityFontes a:nth-last-child(1){
+	border-right: none;
+}
+#accessibilityTutorial a{
 	margin-left: 5px;
 }
-#acessibilidadeTutorial span{
+#accessibilityTutorial span{
 	background-color: #ddd;
 	color: #000;
 	padding: 0 5px;
 }
-#acessibilidadeTutorial a:hover span{
+#accessibilityTutorial a:hover span{
 	background-color: #fff;
 }
 ::selection{ /*cor de texto selecionado*/
@@ -88,9 +92,9 @@ ex: ".bodyBlack .noticias" para div noticia
 }
 @media (max-width: 768px){
 	#topAcessibility,
-	#acessibilidadeFontes,
-	#acessibilidadeTutorial{
+	#accessibilityFontes,
+	#accessibilityTutorial{
 		text-align: center;
 	}
-	#acessibilidadeTutorial{display: none;}
+	#accessibilityTutorial{display: none;}
 }

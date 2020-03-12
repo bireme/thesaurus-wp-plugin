@@ -1,7 +1,8 @@
 <?php include 'plugin_thesaurus.php' ?>
 <?php get_header(); ?>
 
-<?php get_template_part('includes/search') ?>
+<?php get_template_part('includes/navInter') ?>
+
 <?php $lang = pll_current_language(); ?>
 
 <?php
@@ -734,7 +735,7 @@ function choice_category($categ,$lang){
                 <?php                               
                 if ($has_descriptor){
                 ?>
-                    <div class="tab-pane fade" id="concepts" role="tabpanel">
+                    <div class="tab-pane fade boxTree" id="Concepts" role="tabpanel" aria-labelledby="Concepts-tab">
 
                         <?php
                         foreach ($arr_Concept_and_Term as $key => $value) {
@@ -1132,7 +1133,7 @@ function choice_category($categ,$lang){
                 <?php                               
                 if (!empty($has_qualifier)){
                 ?>
-                    <div class="tab-pane fade" id="concepts" role="tabpanel">
+                    <div class="tab-pane fade boxTree" id="Concepts" role="tabpanel" aria-labelledby="Concepts-tab">
 
                         <?php
                         foreach ($arr_Concept_and_Term as $key => $value) {

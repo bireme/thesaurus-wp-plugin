@@ -48,14 +48,13 @@ document.onkeydown=function(e){
 	if((e.which == 50 || e.which == 98) && pressedALT == true) {
 		window.location.assign("#nav");
 	}
-	//Footer ALT + 4
-	if((e.which == 52 || e.which == 100) && pressedALT == true) {
-		window.location.assign("#footer");
-	}
 	//Footer ALT + 3
 	if((e.which == 51 || e.which == 99) && pressedALT == true) {
-		jQuery('#searchInside').show();
-		jQuery('#btSearch>i').addClass('fa-times');
+		window.location.assign("#footer");
+	}
+	//Footer ALT + 4
+	if((e.which == 52 || e.which == 100) && pressedALT == true) {
+		// window.location.assign("#pesquisa");
 		jQuery("#fieldSearch").focus();
 	}
 }

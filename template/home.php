@@ -1,5 +1,7 @@
 <?php get_header(); ?>
-<?php get_template_part('includes/search') ?>
+
+<?php get_template_part('includes/navInter') ?>
+
 <?php $lang = pll_current_language(); ?>
 <?php
 /*
@@ -123,19 +125,20 @@ if ($response){
                 $arr_temp['ths_decs_code']=$docs->ths_decs_code;
 
                 if ($docs->ths_mh_en[0]) {
-                    $arr_temp['ths_mh_en']=utf8_decode($docs->ths_mh_en[0]);
+                    $arr_temp['ths_mh_en']=$docs->ths_mh_en[0];
                 }
 
                 if ($docs->ths_mh_es[0]) {
-                    $arr_temp['ths_mh_es']=utf8_decode($docs->ths_mh_es[0]);
+                    $arr_temp['ths_mh_es']=$docs->ths_mh_es[0];
                 }
 
                 if ($docs->ths_mh_pt[0]) {
-                    $arr_temp['ths_mh_pt']=utf8_decode($docs->ths_mh_pt[0]);
+                    // $arr_temp['ths_mh_pt']=utf8_decode($docs->ths_mh_pt[0]);
+                    $arr_temp['ths_mh_pt']=$docs->ths_mh_pt[0];
                 }
 
                 if ($docs->ths_mh_fr[0]) {
-                    $arr_temp['ths_mh_fr']=utf8_decode($docs->ths_mh_fr[0]);
+                    $arr_temp['ths_mh_fr']=$docs->ths_mh_fr[0];
                 }
 
 
@@ -145,17 +148,17 @@ if ($response){
                         // EN
                         if ($docs->ths_mh_et_en) {
                             foreach ($docs->ths_mh_et_en as $key => $value) {
-                                array_push($arr_sym, utf8_decode($value));
+                                array_push($arr_sym, $value);
                             }
                         }
                         if ($docs->ths_pep_en) {
                             foreach ($docs->ths_pep_en as $key => $value) {
-                                array_push($arr_sym, utf8_decode($value));
+                                array_push($arr_sym, $value);
                             }
                         }
                         if ($docs->ths_pep_et_en) {
                             foreach ($docs->ths_pep_et_en as $key => $value) {
-                                array_push($arr_sym, utf8_decode($value));
+                                array_push($arr_sym, $value);
                             }
                         }
 
@@ -165,17 +168,17 @@ if ($response){
                         // ES
                         if ($docs->ths_mh_et_es) {
                             foreach ($docs->ths_mh_et_es as $key => $value) {
-                                array_push($arr_sym, utf8_decode($value));
+                                array_push($arr_sym, $value);
                             }
                         }
                         if ($docs->ths_pep_es) {
                             foreach ($docs->ths_pep_es as $key => $value) {
-                                array_push($arr_sym, utf8_decode($value));
+                                array_push($arr_sym, $value);
                             }
                         }
                         if ($docs->ths_pep_et_es) {
                             foreach ($docs->ths_pep_et_es as $key => $value) {
-                                array_push($arr_sym, utf8_decode($value));
+                                array_push($arr_sym, $value);
                             }
                         }
 
@@ -185,17 +188,17 @@ if ($response){
                         // PT
                         if ($docs->ths_mh_et_pt) {
                             foreach ($docs->ths_mh_et_pt as $key => $value) {
-                                array_push($arr_sym, utf8_decode($value));
+                                array_push($arr_sym, $value);
                             }
                         }
                         if ($docs->ths_pep_es) {
                             foreach ($docs->ths_pep_pt as $key => $value) {
-                                array_push($arr_sym, utf8_decode($value));
+                                array_push($arr_sym, $value);
                             }
                         }
                         if ($docs->ths_pep_et_pt) {
                             foreach ($docs->ths_pep_et_pt as $key => $value) {
-                                array_push($arr_sym, utf8_decode($value));
+                                array_push($arr_sym, $value);
                             }
                         }
 
@@ -205,17 +208,17 @@ if ($response){
                         // FR
                         if ($docs->ths_mh_et_fr) {
                             foreach ($docs->ths_mh_et_fr as $key => $value) {
-                                array_push($arr_sym, utf8_decode($value));
+                                array_push($arr_sym, $value);
                             }
                         }
                         if ($docs->ths_pep_fr) {
                             foreach ($docs->ths_pep_fr as $key => $value) {
-                                array_push($arr_sym, utf8_decode($value));
+                                array_push($arr_sym, $value);
                             }
                         }
                         if ($docs->ths_pep_et_fr) {
                             foreach ($docs->ths_pep_et_fr as $key => $value) {
-                                array_push($arr_sym, utf8_decode($value));
+                                array_push($arr_sym, $value);
                             }
                         }
 
