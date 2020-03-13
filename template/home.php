@@ -18,10 +18,16 @@ $lang = substr($site_language,0,2);
 
 // set query using default param q (query) or s (wordpress search) or newexpr (metaiah)
 $q = $_GET['q'];
-// $q = $_GET['s'] . $_GET['q'];
 $tquery = stripslashes( trim($q) );
 $filter = $_GET['filter'];
 $count=300;
+
+// Possibilidade de uso futuro dependendo da solução no Solr, se for encontrada não será necessário
+// // Tenta deixar a primeira letra do texto maiúscula quando form selecionado ths_exact_term
+// if ( $filter == 'ths_exact_term' ){
+//     $tquery = ucfirst($tquery);
+//     echo "[".$tquery."]";
+// }
 
 
 // NOVO
@@ -59,9 +65,8 @@ if ($tquery){
             break;
 
         case 'ths_exact_term':
-            // *** Não pesquisa:
+            // *** pesquisa ok:
             // Réforme d'animaux
-
             $query = 'ths_exact_term:' . '"' . $tquery . '" AND django_ct:"thesaurus.identifierdesc"';
             break;
 
@@ -324,14 +329,14 @@ if ($response){
 
 ?>
 
-<section class="container">
+<section class="container" id="main_container">
     <div class="padding1">
 
         <div class="col-12 text-center">
             <div class="alert alert-success" role="alert">
                 <?php
                 pll_e('Search for');
-                echo ":<b> ".str_replace('\\', '', $q)." </b>";
+                echo ":<b> ".stripslashes($q)." </b>";
                 ?>
                 |
                 <?php if ( isset($total) && strval($total) == 0 ) :?>
@@ -430,7 +435,7 @@ if ($response){
                         </div>
                     </div>
                     <div class="col-12 col-md-2 boxBtnSeeMore">
-                        <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.str_replace('\\', '', $q); ?>" class="btn btn-success btn-sm btnSeeMore"><?php pll_e('See details'); ?></a>
+                        <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.stripslashes($q); ?>" class="btn btn-success btn-sm btnSeeMore"><?php pll_e('See details'); ?></a>
                     </div>
                 </div>
                 <br>
