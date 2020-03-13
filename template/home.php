@@ -141,6 +141,15 @@ if ($response){
                     $arr_temp['ths_mh_fr']=$docs->ths_mh_fr[0];
                 }
 
+                // Para os sinônimos foi necessário um tratamento que pesquisa na string a ocorrência de ?.
+                // Isso se fez necessário pois o conteúdo indexado no XML para o Solr está em iso-8859-1. Isso quer dizer que
+                // todos os caracteres que estão fora da faixa comportada por esse encode não foi traduzido, e em seu lugar
+                // ficou cravado ?.
+                // No momento esse foi o preço a ser pago até outra solução.
+                // Utilizou-se então:
+                // if (strpos(' '.$value,'?') != 1){
+                //     array_push($arr_sym, $value);
+                // }
 
                 switch ($lang) {
                     case 'en':
@@ -148,17 +157,23 @@ if ($response){
                         // EN
                         if ($docs->ths_mh_et_en) {
                             foreach ($docs->ths_mh_et_en as $key => $value) {
-                                array_push($arr_sym, $value);
+                                if (strpos(' '.$value,'?') != 1){
+                                    array_push($arr_sym, $value);
+                                }
                             }
                         }
                         if ($docs->ths_pep_en) {
                             foreach ($docs->ths_pep_en as $key => $value) {
-                                array_push($arr_sym, $value);
+                                if (strpos(' '.$value,'?') != 1){
+                                    array_push($arr_sym, $value);
+                                }
                             }
                         }
                         if ($docs->ths_pep_et_en) {
                             foreach ($docs->ths_pep_et_en as $key => $value) {
-                                array_push($arr_sym, $value);
+                                if (strpos(' '.$value,'?') != 1){
+                                    array_push($arr_sym, $value);
+                                }
                             }
                         }
 
@@ -168,17 +183,23 @@ if ($response){
                         // ES
                         if ($docs->ths_mh_et_es) {
                             foreach ($docs->ths_mh_et_es as $key => $value) {
-                                array_push($arr_sym, $value);
+                                if (strpos(' '.$value,'?') != 1){
+                                    array_push($arr_sym, $value);
+                                }
                             }
                         }
                         if ($docs->ths_pep_es) {
                             foreach ($docs->ths_pep_es as $key => $value) {
-                                array_push($arr_sym, $value);
+                                if (strpos(' '.$value,'?') != 1){
+                                    array_push($arr_sym, $value);
+                                }
                             }
                         }
                         if ($docs->ths_pep_et_es) {
                             foreach ($docs->ths_pep_et_es as $key => $value) {
-                                array_push($arr_sym, $value);
+                                if (strpos(' '.$value,'?') != 1){
+                                    array_push($arr_sym, $value);
+                                }
                             }
                         }
 
@@ -188,17 +209,24 @@ if ($response){
                         // PT
                         if ($docs->ths_mh_et_pt) {
                             foreach ($docs->ths_mh_et_pt as $key => $value) {
-                                array_push($arr_sym, $value);
+                                if (strpos(' '.$value,'?') != 1){
+                                    array_push($arr_sym, $value);
+                                }
                             }
                         }
-                        if ($docs->ths_pep_es) {
+
+                        if ($docs->ths_pep_pt) {
                             foreach ($docs->ths_pep_pt as $key => $value) {
-                                array_push($arr_sym, $value);
+                                if (strpos(' '.$value,'?') != 1){
+                                    array_push($arr_sym, $value);
+                                }
                             }
                         }
                         if ($docs->ths_pep_et_pt) {
                             foreach ($docs->ths_pep_et_pt as $key => $value) {
-                                array_push($arr_sym, $value);
+                                if (strpos(' '.$value,'?') != 1){
+                                    array_push($arr_sym, $value);
+                                }
                             }
                         }
 
@@ -208,17 +236,23 @@ if ($response){
                         // FR
                         if ($docs->ths_mh_et_fr) {
                             foreach ($docs->ths_mh_et_fr as $key => $value) {
-                                array_push($arr_sym, $value);
+                                if (strpos(' '.$value,'?') != 1){
+                                    array_push($arr_sym, $value);
+                                }
                             }
                         }
                         if ($docs->ths_pep_fr) {
                             foreach ($docs->ths_pep_fr as $key => $value) {
-                                array_push($arr_sym, $value);
+                                if (strpos(' '.$value,'?') != 1){
+                                    array_push($arr_sym, $value);
+                                }
                             }
                         }
                         if ($docs->ths_pep_et_fr) {
                             foreach ($docs->ths_pep_et_fr as $key => $value) {
-                                array_push($arr_sym, $value);
+                                if (strpos(' '.$value,'?') != 1){
+                                    array_push($arr_sym, $value);
+                                }
                             }
                         }
 
@@ -288,7 +322,6 @@ if ($response){
 
 // echo "<pre>"; print_r($arr_result); echo "</pre>";
 
-
 ?>
 
 <section class="container">
@@ -298,7 +331,7 @@ if ($response){
             <div class="alert alert-success" role="alert">
                 <?php
                 pll_e('Search for');
-                echo ":<b> $q </b>";
+                echo ":<b> ".str_replace('\\', '', $q)." </b>";
                 ?>
                 |
                 <?php if ( isset($total) && strval($total) == 0 ) :?>
@@ -397,8 +430,7 @@ if ($response){
                         </div>
                     </div>
                     <div class="col-12 col-md-2 boxBtnSeeMore">
-                        <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code; ?>" class="btn btn-success btn-sm btnSeeMore"><?php pll_e('See details'); ?></a>
-                        <!-- <a href="resource.php" class="btn btn-success btn-sm btnSeeMore">Ver Detalhes</a> -->
+                        <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.str_replace('\\', '', $q); ?>" class="btn btn-success btn-sm btnSeeMore"><?php pll_e('See details'); ?></a>
                     </div>
                 </div>
                 <br>

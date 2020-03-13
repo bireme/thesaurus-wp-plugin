@@ -1,4 +1,12 @@
 <?php include 'plugin_thesaurus.php' ?>
+
+<!-- Garante que o valor pequisado passe adiante -->
+<?php
+    $id = $_GET['id'];
+    $q = $_GET['q'];
+    $filter = $_GET['filter'];
+?>
+
 <?php get_header(); ?>
 
 <?php get_template_part('includes/navInter') ?>
@@ -366,19 +374,11 @@ function choice_category($categ,$lang){
                         </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 
-                            <a class="dropdown-item" href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $arr_IdentifierDesc[0]['decs_code']; ?>&lang_another=en"><?php pll_e('English'); ?></a>
-                            <a class="dropdown-item" href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $arr_IdentifierDesc[0]['decs_code']; ?>&lang_another=es"><?php pll_e('Spanish'); ?></a>
-                            <a class="dropdown-item" href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $arr_IdentifierDesc[0]['decs_code']; ?>&lang_another=pt-br"><?php pll_e('Portuguese'); ?></a>
-                            <a class="dropdown-item" href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $arr_IdentifierDesc[0]['decs_code']; ?>&lang_another=fr"><?php pll_e('French'); ?></a>
+                            <a class="dropdown-item" href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $arr_IdentifierDesc[0]['decs_code'].'&filter='.$filter.'&q='.str_replace('\\', '', $q); ?>&lang_another=en"><?php pll_e('English'); ?></a>
+                            <a class="dropdown-item" href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $arr_IdentifierDesc[0]['decs_code'].'&filter='.$filter.'&q='.str_replace('\\', '', $q); ?>&lang_another=es"><?php pll_e('Spanish'); ?></a>
+                            <a class="dropdown-item" href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $arr_IdentifierDesc[0]['decs_code'].'&filter='.$filter.'&q='.str_replace('\\', '', $q); ?>&lang_another=pt-br"><?php pll_e('Portuguese'); ?></a>
+                            <a class="dropdown-item" href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $arr_IdentifierDesc[0]['decs_code'].'&filter='.$filter.'&q='.str_replace('\\', '', $q); ?>&lang_another=fr"><?php pll_e('French'); ?></a>
 
-
-<!-- 
-                            <a class="dropdown-item" href="#"><?php pll_e('English'); ?></a>
-                            <a class="dropdown-item" href="#"><?php pll_e('Spanish'); ?></a>
-                            <a class="dropdown-item" href="#"><?php pll_e('Portuguese'); ?></a>
-                            <a class="dropdown-item" href="#"><?php pll_e('French'); ?></a>
-
- -->
                         </div>
                     </li>
                 </ul>
