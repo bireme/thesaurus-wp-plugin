@@ -16,6 +16,9 @@ $ths_config = get_option('ths_config');
 $site_language = strtolower(get_bloginfo('language'));
 $lang = substr($site_language,0,2);
 
+// echo "[".$lang."]";
+
+
 // set query using default param q (query) or s (wordpress search) or newexpr (metaiah)
 $q = $_GET['q'];
 $tquery = stripslashes( trim($q) );
@@ -71,7 +74,6 @@ if ($tquery){
             break;
 
         case 'ths_treenumber':
-            // $query = 'ths_treenumber:' . '"' . $tquery . '" AND django_ct:"thesaurus.identifierdesc"';
             $query = 'ths_treenumber:' . '"' . $tquery . '" AND django_ct:"thesaurus.identifierdesc"';
             break;
 
@@ -95,17 +97,17 @@ if ($tquery){
 // echo "---> ".$ths_service_request."<br>";
 
 
-// Função para ordenar palavras que tenham acento
-function callback($name1,$name2){
+// Função para ordenar Entry Terms que tenham acento
+function SortET($name1,$name2){
     $patterns = array(
         'a' => '(á|à|â|ä|Á|À|Â|Ä)',
         'e' => '(é|è|ê|ë|É|È|Ê|Ë)',
         'i' => '(í|ì|î|ï|Í|Ì|Î|Ï)',
         'o' => '(ó|ò|ô|ö|Ó|Ò|Ô|Ö)',
         'u' => '(ú|ù|û|ü|Ú|Ù|Û|Ü)'
-    );          
+    );
     $name1 = preg_replace(array_values($patterns), array_keys($patterns), $name1);
-    $name2 = preg_replace(array_values($patterns), array_keys($patterns), $name2);          
+    $name2 = preg_replace(array_values($patterns), array_keys($patterns), $name2);
     return strcasecmp($name1, $name2);
 }
 
@@ -269,7 +271,7 @@ if ($response){
                     // break;
                 }
 
-                uasort($arr_sym,"callback");
+                uasort($arr_sym,"SortET");
                 array_push($arr_temp, $arr_sym);
                 unset($arr_sym);
 
@@ -325,7 +327,87 @@ if ($response){
     $arr_result = array();
 }
 
+
+// Função para ordenar corretamente o MH de acordo com o idioma escolhido
+function SortMHResultEN($name1,$name2){
+    $patterns = array(
+        'a' => '(á|à|â|ä|Á|À|Â|Ä)',
+        'e' => '(é|è|ê|ë|É|È|Ê|Ë)',
+        'i' => '(í|ì|î|ï|Í|Ì|Î|Ï)',
+        'o' => '(ó|ò|ô|ö|Ó|Ò|Ô|Ö)',
+        'u' => '(ú|ù|û|ü|Ú|Ù|Û|Ü)'
+    );
+    $name1 = preg_replace(array_values($patterns), array_keys($patterns), $name1["ths_mh_en"]);
+    $name2 = preg_replace(array_values($patterns), array_keys($patterns), $name2["ths_mh_en"]);
+    return strcasecmp($name1, $name2);
+}
+
+function SortMHResultES($name1,$name2){
+    $patterns = array(
+        'a' => '(á|à|â|ä|Á|À|Â|Ä)',
+        'e' => '(é|è|ê|ë|É|È|Ê|Ë)',
+        'i' => '(í|ì|î|ï|Í|Ì|Î|Ï)',
+        'o' => '(ó|ò|ô|ö|Ó|Ò|Ô|Ö)',
+        'u' => '(ú|ù|û|ü|Ú|Ù|Û|Ü)'
+    );
+    $name1 = preg_replace(array_values($patterns), array_keys($patterns), $name1["ths_mh_es"]);
+    $name2 = preg_replace(array_values($patterns), array_keys($patterns), $name2["ths_mh_es"]);
+    return strcasecmp($name1, $name2);
+}
+
+function SortMHResultPT($name1,$name2){
+    $patterns = array(
+        'a' => '(á|à|â|ä|Á|À|Â|Ä)',
+        'e' => '(é|è|ê|ë|É|È|Ê|Ë)',
+        'i' => '(í|ì|î|ï|Í|Ì|Î|Ï)',
+        'o' => '(ó|ò|ô|ö|Ó|Ò|Ô|Ö)',
+        'u' => '(ú|ù|û|ü|Ú|Ù|Û|Ü)'
+    );
+    $name1 = preg_replace(array_values($patterns), array_keys($patterns), $name1["ths_mh_pt"]);
+    $name2 = preg_replace(array_values($patterns), array_keys($patterns), $name2["ths_mh_pt"]);
+    return strcasecmp($name1, $name2);
+}
+
+function SortMHResultFR($name1,$name2){
+    $patterns = array(
+        'a' => '(á|à|â|ä|Á|À|Â|Ä)',
+        'e' => '(é|è|ê|ë|É|È|Ê|Ë)',
+        'i' => '(í|ì|î|ï|Í|Ì|Î|Ï)',
+        'o' => '(ó|ò|ô|ö|Ó|Ò|Ô|Ö)',
+        'u' => '(ú|ù|û|ü|Ú|Ù|Û|Ü)'
+    );
+    $name1 = preg_replace(array_values($patterns), array_keys($patterns), $name1["ths_mh_fr"]);
+    $name2 = preg_replace(array_values($patterns), array_keys($patterns), $name2["ths_mh_fr"]);
+    return strcasecmp($name1, $name2);
+}
+
+// Faz o ordenamento correto de acordo com o idioma escolhido para visualização no navegador
+switch ($lang) {
+    case 'en':
+    uasort($arr_result,"SortMHResultEN");
+    break;
+    case 'es':
+    uasort($arr_result,"SortMHResultES");
+    break;
+    case 'pt':
+    uasort($arr_result,"SortMHResultPT");
+    break;
+    case 'fr':
+    uasort($arr_result,"SortMHResultFR");
+    break;
+    default:
+    uasort($arr_result,"SortMHResultEN");
+    break;
+}
+
+
+
+
+
+// echo "<hr>";
+
 // echo "<pre>"; print_r($arr_result); echo "</pre>";
+
 
 ?>
 
@@ -401,22 +483,52 @@ if ($response){
                                     
                             </span>
                             <table class="table table-bordered table-sm font12">
-                                <tr>
-                                    <td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor English'); ?>:</td>
-                                    <td><b><?php echo $ths_mh_en; ?></b></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor Spanish'); ?>:</td>
-                                    <td><b><?php echo $ths_mh_es; ?></b></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor Portuguese'); ?>:</td>
-                                    <td><b><?php echo $ths_mh_pt; ?></b></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor French'); ?>:</td>
-                                    <td><b><?php echo $ths_mh_fr; ?></b></td>
-                                </tr>
+
+                                <?php
+                                    // Acompanha o idioma escolhido no portal
+                                    switch ($lang) {
+                                        case 'en':
+                                ?>
+                                            <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor English'); ?>:</td><td><b><?php echo $ths_mh_en; ?></b></td></tr>
+                                            <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor Spanish'); ?>:</td><td><b><?php echo $ths_mh_es; ?></b></td></tr>
+                                            <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor Portuguese'); ?>:</td><td><b><?php echo $ths_mh_pt; ?></b></td></tr>
+                                            <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor French'); ?>:</td><td><b><?php echo $ths_mh_fr; ?></b></td></tr>
+                                <?php
+                                            break;
+                                        case 'es':
+                                ?>
+                                            <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor Spanish'); ?>:</td><td><b><?php echo $ths_mh_es; ?></b></td></tr>
+                                            <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor English'); ?>:</td><td><b><?php echo $ths_mh_en; ?></b></td></tr>
+                                            <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor Portuguese'); ?>:</td><td><b><?php echo $ths_mh_pt; ?></b></td></tr>
+                                            <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor French'); ?>:</td><td><b><?php echo $ths_mh_fr; ?></b></td></tr>
+
+                                <?php
+                                            break;
+                                        case 'pt':
+                                ?>
+                                            <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor Portuguese'); ?>:</td><td><b><?php echo $ths_mh_pt; ?></b></td></tr>
+                                            <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor English'); ?>:</td><td><b><?php echo $ths_mh_en; ?></b></td></tr>
+                                            <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor Spanish'); ?>:</td><td><b><?php echo $ths_mh_es; ?></b></td></tr>
+                                            <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor French'); ?>:</td><td><b><?php echo $ths_mh_fr; ?></b></td></tr>
+                                <?php
+                                            break;
+                                        case 'fr':
+                                ?>
+                                            <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor French'); ?>:</td><td><b><?php echo $ths_mh_fr; ?></b></td></tr>
+                                            <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor English'); ?>:</td><td><b><?php echo $ths_mh_en; ?></b></td></tr>
+                                            <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor Spanish'); ?>:</td><td><b><?php echo $ths_mh_es; ?></b></td></tr>
+                                            <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor Portuguese'); ?>:</td><td><b><?php echo $ths_mh_pt; ?></b></td></tr>
+
+                                <?php
+                                            break;
+                                    }
+                                ?>
+
+
+
+
+
+
 
                                 <?php if ($ths_sym) { ?>
                                 <tr>
@@ -424,7 +536,7 @@ if ($response){
                                     <td>
                                         <?php
                                             foreach ($ths_sym as $key => $value) {
-                                                print $value;?><br><?php
+                                                echo $value."<br>";
                                             }
                                         ?>
                                     </td>

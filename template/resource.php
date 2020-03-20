@@ -11,11 +11,12 @@
 
 <?php get_template_part('includes/navInter') ?>
 
-<?php $lang = pll_current_language(); ?>
+<?php $lang = pll_current_language();
+// echo "[".$lang."]";
+?>
+
 
 <?php
-
-
 $lang_another = $_GET[lang_another];
 // echo "lang_another [".$lang_another."]<br>";
 // echo "lang_another 2ltr[".substr($lang_another,0,2)."]<br>";
@@ -372,12 +373,10 @@ function choice_category($categ,$lang){
                             <i class="fas fa-globe-americas"></i>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-
-                            <a class="dropdown-item" href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $arr_IdentifierDesc[0]['decs_code'].'&filter='.$filter.'&q='.stripslashes($q); ?>&lang_another=en"><?php pll_e('English'); ?></a>
-                            <a class="dropdown-item" href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $arr_IdentifierDesc[0]['decs_code'].'&filter='.$filter.'&q='.stripslashes($q); ?>&lang_another=es"><?php pll_e('Spanish'); ?></a>
-                            <a class="dropdown-item" href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $arr_IdentifierDesc[0]['decs_code'].'&filter='.$filter.'&q='.stripslashes($q); ?>&lang_another=pt-br"><?php pll_e('Portuguese'); ?></a>
-                            <a class="dropdown-item" href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $arr_IdentifierDesc[0]['decs_code'].'&filter='.$filter.'&q='.stripslashes($q); ?>&lang_another=fr"><?php pll_e('French'); ?></a>
-
+                            <a class="dropdown-item" href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php if ( $arr_IdentifierDesc[0]['decs_code']) { echo $arr_IdentifierDesc[0]['decs_code'].'&filter='.$filter.'&q='.stripslashes($q); } elseif ( $arr_IdentifierQualif[0]['decs_code'] ) { echo $arr_IdentifierQualif[0]['decs_code']; } ?>&lang_another=en"><?php pll_e('English'); ?></a>
+                            <a class="dropdown-item" href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php if ( $arr_IdentifierDesc[0]['decs_code']) { echo $arr_IdentifierDesc[0]['decs_code'].'&filter='.$filter.'&q='.stripslashes($q); } elseif ( $arr_IdentifierQualif[0]['decs_code'] ) { echo $arr_IdentifierQualif[0]['decs_code']; } ?>&lang_another=es"><?php pll_e('Spanish'); ?></a>
+                            <a class="dropdown-item" href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php if ( $arr_IdentifierDesc[0]['decs_code']) { echo $arr_IdentifierDesc[0]['decs_code'].'&filter='.$filter.'&q='.stripslashes($q); } elseif ( $arr_IdentifierQualif[0]['decs_code'] ) { echo $arr_IdentifierQualif[0]['decs_code']; } ?>&lang_another=pt-br"><?php pll_e('Portuguese'); ?></a>
+                            <a class="dropdown-item" href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php if ( $arr_IdentifierDesc[0]['decs_code']) { echo $arr_IdentifierDesc[0]['decs_code'].'&filter='.$filter.'&q='.stripslashes($q); } elseif ( $arr_IdentifierQualif[0]['decs_code'] ) { echo $arr_IdentifierQualif[0]['decs_code']; } ?>&lang_another=fr"><?php pll_e('French'); ?></a>
                         </div>
                     </li>
                 </ul>
@@ -387,49 +386,112 @@ function choice_category($categ,$lang){
                             <table class="table table-bordered table-sm font12">
 
                                 <?php
-                                foreach ($arr_PreferredDescriptors as $key => $value) {
-                                    if ( $arr_PreferredDescriptors[$key]['language_code'] == 'en' ){
-                                    ?>
-                                    <tr>
-                                        <td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor English'); ?>:</td>
-                                        <td><b><?php echo $arr_PreferredDescriptors[$key]['term_string']; ?></b></td>
-                                    </tr>
-                                    <?php
-                                    }
-                                }
+                                // Acompanha o idioma escolhido no portal
+                                switch ($lang) {
+                                    case 'en':
+                                ?>
+                                        <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor English'); ?>:</td><td><b>
+                                <?php
+                                    foreach ($arr_PreferredDescriptors as $key => $value) { if ( $arr_PreferredDescriptors[$key]['language_code'] == 'en' ){ echo $arr_PreferredDescriptors[$key]['term_string'];}}
+                                ?>
+                                        </b></td></tr>
+                                        <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor Spanish'); ?>:</td><td><b>
+                                <?php
+                                    foreach ($arr_PreferredDescriptors as $key => $value) { if ( $arr_PreferredDescriptors[$key]['language_code'] == 'es' ){ echo $arr_PreferredDescriptors[$key]['term_string'];}}
+                                ?>
+                                        </b></td></tr>
+                                        <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor Portuguese'); ?>:</td><td><b>
+                                <?php
+                                    foreach ($arr_PreferredDescriptors as $key => $value) { if ( $arr_PreferredDescriptors[$key]['language_code'] == 'pt-br' ){ echo $arr_PreferredDescriptors[$key]['term_string'];}}
+                                ?>
+                                        </b></td></tr>
+                                        <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor French'); ?>:</td><td><b>
 
-                                foreach ($arr_PreferredDescriptors as $key => $value) {
-                                    if ( $arr_PreferredDescriptors[$key]['language_code'] == 'es' ){
-                                    ?>
-                                    <tr>
-                                        <td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor Spanish'); ?>:</td>
-                                        <td><b><?php echo $arr_PreferredDescriptors[$key]['term_string']; ?></b></td>
-                                    </tr>
-                                    <?php
-                                    }
-                                }
+                                <?php
+                                    foreach ($arr_PreferredDescriptors as $key => $value) { if ( $arr_PreferredDescriptors[$key]['language_code'] == 'fr' ){ echo $arr_PreferredDescriptors[$key]['term_string'];}}
+                                ?>
+                                        </b></td></tr>
+                                <?php
+                                        break;
 
-                                foreach ($arr_PreferredDescriptors as $key => $value) {
-                                    if ( $arr_PreferredDescriptors[$key]['language_code'] == 'pt-br' ){
-                                    ?>
-                                    <tr>
-                                        <td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor Portuguese'); ?>:</td>
-                                        <td><b><?php echo $arr_PreferredDescriptors[$key]['term_string']; ?></b></td>
-                                    </tr>
-                                    <?php
-                                    }
-                                }
+                                    case 'es':
+                                ?>
+                                        <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor Spanish'); ?>:</td><td><b>
+                                <?php
+                                    foreach ($arr_PreferredDescriptors as $key => $value) { if ( $arr_PreferredDescriptors[$key]['language_code'] == 'es' ){ echo $arr_PreferredDescriptors[$key]['term_string'];}}
+                                ?>
+                                        </b></td></tr>
+                                        <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor English'); ?>:</td><td><b>
+                                <?php
+                                    foreach ($arr_PreferredDescriptors as $key => $value) { if ( $arr_PreferredDescriptors[$key]['language_code'] == 'en' ){ echo $arr_PreferredDescriptors[$key]['term_string'];}}
+                                ?>
+                                        </b></td></tr>
+                                        <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor Portuguese'); ?>:</td><td><b>
+                                <?php
+                                    foreach ($arr_PreferredDescriptors as $key => $value) { if ( $arr_PreferredDescriptors[$key]['language_code'] == 'pt-br' ){ echo $arr_PreferredDescriptors[$key]['term_string'];}}
+                                ?>
+                                        </b></td></tr>
+                                        <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor French'); ?>:</td><td><b>
 
-                                foreach ($arr_PreferredDescriptors as $key => $value) {
-                                    if ( $arr_PreferredDescriptors[$key]['language_code'] == 'fr' ){
-                                    ?>
-                                    <tr>
-                                        <td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor French'); ?>:</td>
-                                        <td><b><?php echo $arr_PreferredDescriptors[$key]['term_string']; ?></b></td>
-                                    </tr>
-                                    <?php
+                                <?php
+                                    foreach ($arr_PreferredDescriptors as $key => $value) { if ( $arr_PreferredDescriptors[$key]['language_code'] == 'fr' ){ echo $arr_PreferredDescriptors[$key]['term_string'];}}
+                                ?>
+                                        </b></td></tr>
+                                <?php
+                                        break;
+
+                                    case 'pt':
+                                ?>
+                                        <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor Portuguese'); ?>:</td><td><b>
+                                <?php
+                                    foreach ($arr_PreferredDescriptors as $key => $value) { if ( $arr_PreferredDescriptors[$key]['language_code'] == 'pt-br' ){ echo $arr_PreferredDescriptors[$key]['term_string'];}}
+                                ?>
+                                        </b></td></tr>
+                                        <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor English'); ?>:</td><td><b>
+                                <?php
+                                    foreach ($arr_PreferredDescriptors as $key => $value) { if ( $arr_PreferredDescriptors[$key]['language_code'] == 'en' ){ echo $arr_PreferredDescriptors[$key]['term_string'];}}
+                                ?>
+                                        </b></td></tr>
+                                        <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor Spanish'); ?>:</td><td><b>
+                                <?php
+                                    foreach ($arr_PreferredDescriptors as $key => $value) { if ( $arr_PreferredDescriptors[$key]['language_code'] == 'es' ){ echo $arr_PreferredDescriptors[$key]['term_string'];}}
+                                ?>
+                                        </b></td></tr>
+                                        <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor French'); ?>:</td><td><b>
+
+                                <?php
+                                    foreach ($arr_PreferredDescriptors as $key => $value) { if ( $arr_PreferredDescriptors[$key]['language_code'] == 'fr' ){ echo $arr_PreferredDescriptors[$key]['term_string'];}}
+                                ?>
+                                        </b></td></tr>
+                                <?php
+                                        break;
+
+                                    case 'fr':
+                                ?>
+                                        <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor French'); ?>:</td><td><b>
+                                <?php
+                                    foreach ($arr_PreferredDescriptors as $key => $value) { if ( $arr_PreferredDescriptors[$key]['language_code'] == 'fr' ){ echo $arr_PreferredDescriptors[$key]['term_string'];}}
+                                ?>
+                                        </b></td></tr>
+                                        <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor English'); ?>:</td><td><b>
+                                <?php
+                                    foreach ($arr_PreferredDescriptors as $key => $value) { if ( $arr_PreferredDescriptors[$key]['language_code'] == 'en' ){ echo $arr_PreferredDescriptors[$key]['term_string'];}}
+                                ?>
+                                        </b></td></tr>
+                                        <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor Spanish'); ?>:</td><td><b>
+                                <?php
+                                    foreach ($arr_PreferredDescriptors as $key => $value) { if ( $arr_PreferredDescriptors[$key]['language_code'] == 'es' ){ echo $arr_PreferredDescriptors[$key]['term_string'];}}
+                                ?>
+                                        </b></td></tr>
+                                        <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor Portuguese'); ?>:</td><td><b>
+                                <?php
+                                    foreach ($arr_PreferredDescriptors as $key => $value) { if ( $arr_PreferredDescriptors[$key]['language_code'] == 'pt-br' ){ echo $arr_PreferredDescriptors[$key]['term_string'];}}
+                                ?>
+                                        </b></td></tr>
+                                <?php
+                                        break;
+
                                     }
-                                }
                                 ?>
 
                                 <!-- Entry Term -->
@@ -574,55 +636,166 @@ function choice_category($categ,$lang){
                                 }
                                 ?>
 
-
+                                <!-- Online Note -->
                                 <?php
-                                if ( $arr_IdentifierDesc[0]['decs_code'] ){
+                                if(!empty($arr_Description)){
                                 ?>
-                                    <tr>
-                                        <td class="text-right"><?php pll_e('DeCS ID'); ?>:</td>
-                                        <td><?php echo $arr_IdentifierDesc[0]['decs_code']; ?></td>
-                                    </tr>
+                                <tr>
+                                    <td class="text-right badge-light align-middle"><?php pll_e('Online Note'); ?>:</td>
+                                    <td>
+                                        <?php
+                                            foreach ($arr_Description as $key => $value) {
+                                                $language_code=convLang($value['language_code']);
+                                                if ( $lang_another ) {
+                                                    if ( $language_code == $lang_another ) {
+                                                        echo $value['online_note'].'<br>';
+                                                    }
+                                                } elseif ( $language_code == $lang_ths ){
+                                                    echo $value['online_note'].'<br>';
+                                                }
+                                            }
+                                        ?>
+                                    </td>
+                                </tr>
                                 <?php
                                 }
                                 ?>
 
-
-
+                                <!-- History Note -->
                                 <?php
-                                if ( $arr_IdentifierDesc[0]['descriptor_ui'] ){
+                                if(!empty($arr_Description)){
                                 ?>
-                                    <tr>
-                                        <td class="text-right">Identificador Único:</td>
-                                        <td><?php echo $arr_IdentifierDesc[0]['descriptor_ui']; ?></td>
-                                    </tr>
+                                <tr>
+                                    <td class="text-right badge-light align-middle"><?php pll_e('History Note'); ?>:</td>
+                                    <td>
+                                        <?php
+                                            foreach ($arr_Description as $key => $value) {
+                                                $language_code=convLang($value['language_code']);
+                                                if ( $lang_another ) {
+                                                    if ( $language_code == $lang_another ) {
+                                                        echo $value['history_note'].'<br>';
+                                                    }
+                                                } elseif ( $language_code == $lang_ths ){
+                                                    echo $value['history_note'].'<br>';
+                                                }
+                                            }
+                                        ?>
+                                    </td>
+                                </tr>
                                 <?php
                                 }
                                 ?>
+
+                                <!-- Entry Version - campo do qualificador -->
+                                <?php
+                                if ($has_qualifier){ 
+                                ?>
+                                    <tr><td class="text-right badge-light align-middle"><?php pll_e('Entry Version'); ?>:</td><td>
+                                <?php
+                                    // Acompanha o idioma escolhido no portal
+                                            foreach ($arr_PreferredDescriptors as $key => $value) {
+                                                $language_code=convLang($value['language_code']);
+                                                if ( $lang_another ) {
+                                                    if ( $language_code == $lang_another ) {
+                                                        echo $value['entry_version'].'<br>';
+                                                    }
+                                                } elseif ( $language_code == $lang_ths ){
+                                                    echo $value['entry_version'].'<br>';
+                                                }
+                                            }
+                                ?>
+                                    </td></tr>
+                                <?php
+                                }
+                                ?>
+
+                                <!-- Abbreviation - campo do qualificador -->
+                                <?php
+                                if(!empty($qualifier_abbreviation)){
+                                ?>
+                                <tr>
+                                    <td class="text-right badge-light align-middle"><?php pll_e('Abbreviation'); ?>:</td>
+                                    <td>
+                                        <?php
+                                        echo $qualifier_abbreviation;
+                                        ?>
+                                    </td>
+                                </tr>
+                                <?php
+                                }
+                                ?>
+
+                                <!-- Decs ID -->
+                                <tr>
+                                    <td class="text-right badge-light align-middle"><?php pll_e('DeCS ID'); ?>:</td>
+                                    <td>
+                                        <?php
+                                        if ( !empty($arr_IdentifierDesc[0]['decs_code']) ){
+                                            echo $arr_IdentifierDesc[0]['decs_code'];
+                                        } elseif ( !empty($arr_IdentifierQualif[0]['decs_code']) ){
+                                            echo $arr_IdentifierQualif[0]['decs_code'];
+                                        }
+                                        ?>
+                                    </td>
+                                </tr>
+
+
+                                <!-- DescriptorUI / QualifierUI-->
+                                <tr>
+                                    <td class="text-right badge-light align-middle">Identificador Único:</td>
+                                    <td>
+                                        <?php
+                                        if ( !empty($arr_IdentifierDesc[0]['descriptor_ui']) ){
+                                            echo $arr_IdentifierDesc[0]['descriptor_ui'];
+                                        } elseif ( !empty($arr_IdentifierQualif[0]['qualifier_ui']) ){
+                                            echo $arr_IdentifierQualif[0]['qualifier_ui'];
+                                        }
+                                        ?>
+                                    </td>
+                                </tr>
                                 
 
-                                <?php
-                                if ( $arr_IdentifierDesc[0]['date_created'] ){
-                                ?>
-                                    <tr>
-                                        <td class="text-right"><?php pll_e('Date of Entry'); ?>:</td>
-                                        <td><?php echo $arr_IdentifierDesc[0]['date_created']; ?></td>
-                                    </tr>
-                                <?php
-                                }
-                                ?>
+                                <!-- Date Established -->
+                                <tr>
+                                    <td class="text-right badge-light align-middle"><?php pll_e('Date Established'); ?>:</td>
+                                    <td>
+                                    <?php
+                                    if ( !empty($arr_IdentifierDesc[0]['date_established']) ){
+                                        echo $arr_IdentifierDesc[0]['date_established'];
+                                    } elseif ( !empty($arr_IdentifierQualif[0]['date_established']) ){
+                                        echo $arr_IdentifierQualif[0]['date_established'];
+                                    }
+                                    ?>
+                                    </td>
+                                </tr>
 
+                                <!-- Date of Entry -->
+                                <tr>
+                                    <td class="text-right badge-light align-middle"><?php pll_e('Date of Entry'); ?>:</td>
+                                    <td>
+                                    <?php
+                                    if ( !empty($arr_IdentifierDesc[0]['date_created']) ){
+                                        echo $arr_IdentifierDesc[0]['date_created'];
+                                    } elseif ( !empty($arr_IdentifierQualif[0]['date_created']) ){
+                                        echo $arr_IdentifierQualif[0]['date_created'];
+                                    }
+                                    ?>
+                                    </td>
+                                </tr>
 
-                                <?php
-                                if ( $arr_IdentifierDesc[0]['date_revised'] ){
-                                ?>
-                                    <tr>
-                                        <td class="text-right"><?php pll_e('Revision Date'); ?>:</td>
-                                        <td><?php echo $arr_IdentifierDesc[0]['date_revised']; ?></td>
-                                    </tr>
-                                <?php
-                                }
-                                ?>
-
+                                <!-- Revision Date -->
+                                <tr>
+                                    <td class="text-right badge-light align-middle"><?php pll_e('Revision Date'); ?>:</td>
+                                    <td>
+                                    <?php
+                                    if ( !empty($arr_IdentifierDesc[0]['date_revised']) ){
+                                        echo $arr_IdentifierDesc[0]['date_created'];
+                                    } elseif ( !empty($arr_IdentifierQualif[0]['date_revised']) ){
+                                        echo $arr_IdentifierQualif[0]['date_revised'];
+                                    }
+                                    ?>
+                                    </td>
+                                </tr>
 
                             </table>
                         </div>

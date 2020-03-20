@@ -356,14 +356,14 @@ if ($has_descriptor){
 		foreach ($arr_IdentifierConceptListQualif as $key => $value) {
 			if ($arr_IdentifierConceptListQualif[$key]['preferred_concept']=='Y') {
 				// Termo preferido
-				$arr_TermListDesc=$arr_IdentifierConceptListQualif[$key]['TermListQualif'];
+				$arr_TermListQualif=$arr_IdentifierConceptListQualif[$key]['TermListQualif'];
 				$arr_PreferredDescriptors = array();
-				foreach ($arr_TermListDesc as $key => $value) {
-					if ($arr_TermListDesc[$key]['concept_preferred_term']=='Y' and $arr_TermListDesc[$key]['record_preferred_term']=='Y' and $arr_TermListDesc[$key]['term_string']!='' and $arr_TermListDesc[$key]['language_code']!='') {
+				foreach ($arr_TermListQualif as $key => $value) {
+					if ($arr_TermListQualif[$key]['concept_preferred_term']=='Y' and $arr_TermListQualif[$key]['record_preferred_term']=='Y' and $arr_TermListQualif[$key]['term_string']!='' and $arr_TermListQualif[$key]['language_code']!='') {
 						$arr_temp=array();
-						$arr_temp['term_string']=$arr_TermListDesc[$key]['term_string'];
-						$arr_temp['language_code']=$arr_TermListDesc[$key]['language_code'];
-						$arr_temp['entry_version']=$arr_TermListDesc[$key]['entry_version'];
+						$arr_temp['term_string']=$arr_TermListQualif[$key]['term_string'];
+						$arr_temp['language_code']=$arr_TermListQualif[$key]['language_code'];
+						$arr_temp['entry_version']=$arr_TermListQualif[$key]['entry_version'];
 						$arr_PreferredDescriptors[]=$arr_temp;
 					}
 				}
