@@ -13,14 +13,12 @@
 
 <?php $lang = pll_current_language();
 // echo "[".$lang."]";
-?>
-
-
-<?php
 $lang_another = $_GET[lang_another];
 // echo "lang_another [".$lang_another."]<br>";
 // echo "lang_another 2ltr[".substr($lang_another,0,2)."]<br>";
+// echo "<pre>"; print_r($arr_sym); echo "</pre>";
 ?>
+
 
 
 <?php
@@ -317,18 +315,15 @@ function choice_category($categ,$lang){
 
 }
 
-
-// echo "<pre>"; print_r($arr_sym); echo "</pre>";
-
 ?>
 
 <!-- 
     Template Name: Thesaurus Home 
 -->
 
-            <?php
-            if($has_descriptor or $has_qualifier){
-                ?>
+<?php
+if($has_descriptor or $has_qualifier){
+?>
 
     <section class="container containerAos" id="main_container">
 
@@ -739,7 +734,6 @@ function choice_category($categ,$lang){
                                     </td>
                                 </tr>
 
-
                                 <!-- DescriptorUI / QualifierUI-->
                                 <tr>
                                     <td class="text-right badge-light align-middle">Identificador Único:</td>
@@ -753,7 +747,6 @@ function choice_category($categ,$lang){
                                         ?>
                                     </td>
                                 </tr>
-                                
 
                                 <!-- Date Established -->
                                 <tr>
@@ -801,105 +794,101 @@ function choice_category($categ,$lang){
                         </div>
                     </div>
 
-
                     <div class="tab-pane fade boxTree" id="Tree_Structures" role="tabpanel" aria-labelledby="Tree_Structures-tab">
                         <ul class="listTree">
 
+                            <?php
+
+                            $count=0;
+                            foreach ($arr_HierarchicalTree as $key => $value) {
+                            ?>
+                                <li>
+                                    <ul class="tree" id="1">
 
                                         <?php
 
-                                        $count=0;
-                                        foreach ($arr_HierarchicalTree as $key => $value) {
-                                        ?>
-                                            <li>
-                                                <ul class="tree" id="1">
+                                            $tree_number=$arr_HierarchicalTree[$key]['tree_number'];
+                                            $char1 = substr($tree_number, 0, 1);
+                                            $char2 = substr($tree_number, 1, 1);
+                                            if (preg_match("/[0-9]/", $char2) == 1 ) {
+                                                // echo 'NLM';
+                                                $categ=$char1;
+                                            } else {
+                                                // echo 'DeCs';
+                                                $categ=$char1.$char2;
+                                            }
 
-                                                    <?php
+                                            $categ_string=choice_category($categ,$lang);
 
-                                                        $tree_number=$arr_HierarchicalTree[$key]['tree_number'];
-                                                        $char1 = substr($tree_number, 0, 1);
-                                                        $char2 = substr($tree_number, 1, 1);
-                                                        if (preg_match("/[0-9]/", $char2) == 1 ) {
-                                                            // echo 'NLM';
-                                                            $categ=$char1;
-                                                        } else {
-                                                            // echo 'DeCs';
-                                                            $categ=$char1.$char2;
-                                                        }
+                                            if ( strlen($tree_number) == 3 and $count == 0 ) {
+                                                echo "<b>".$categ_string."</b><br>";
+                                            }
 
-                                                        $categ_string=choice_category($categ,$lang);
+                                            $tree_number_original=$arr_HierarchicalTree[$key]['tree_number_original'];
 
-                                                        if ( strlen($tree_number) == 3 and $count == 0 ) {
-                                                            echo "<b>".$categ_string."</b><br>";
-                                                        }
+                                            if ( $count > 0 and $tree_number_original != $tree_number_original_old and strlen($tree_number) == 3){
+                                                echo "<hr>";
+                                                echo "<b>".$categ_string."</b><br>";
+                                            }
 
-                                                        $tree_number_original=$arr_HierarchicalTree[$key]['tree_number_original'];
+                                            foreach ($arr_HierarchicalTree[$key]['term_string_translations'] as $key1 => $value1) {
+                                                $language_code=convLang($arr_HierarchicalTree[$key]['term_string_translations'][$key1]['language_code']);
 
-                                                        if ( $count > 0 and $tree_number_original != $tree_number_original_old and strlen($tree_number) == 3){
-                                                            echo "<hr>";
-                                                            echo "<b>".$categ_string."</b><br>";
-                                                        }
+                                                if ( $lang_another ) {
+                                                    if ( $language_code == $lang_another ) {
+                                                    $term_string=$arr_HierarchicalTree[$key]['term_string_translations'][$key1]['term_string'];
+                                                    }
+                                                } elseif ( $language_code == $lang_ths ){
+                                                    $term_string=$arr_HierarchicalTree[$key]['term_string_translations'][$key1]['term_string'];
+                                                }
 
-                                                        foreach ($arr_HierarchicalTree[$key]['term_string_translations'] as $key1 => $value1) {
-                                                            $language_code=convLang($arr_HierarchicalTree[$key]['term_string_translations'][$key1]['language_code']);
+                                            }
 
-                                                            if ( $lang_another ) {
-                                                                if ( $language_code == $lang_another ) {
-                                                                $term_string=$arr_HierarchicalTree[$key]['term_string_translations'][$key1]['term_string'];
-                                                                }
-                                                            } elseif ( $language_code == $lang_ths ){
-                                                                $term_string=$arr_HierarchicalTree[$key]['term_string_translations'][$key1]['term_string'];
-                                                            }
+                                            ?>
+                                            <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $arr_HierarchicalTree[$key]['id'];?>">
+                                            
 
-                                                        }
+                                            <?php 
+                                            // Concatena string
+                                            $string= $term_string . ' [' . $tree_number . ']';
 
-                                                        ?>
-                                                        <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $arr_HierarchicalTree[$key]['id'];?>">
-                                                        
+                                            $tam_string=strlen($string);
+                                            $tam=(intval($arr_HierarchicalTree[$key]['level'])*10)+$tam_string;
 
-                                                        <?php 
-                                                        // Concatena string
-                                                        $string= $term_string . ' [' . $tree_number . ']';
+                                            if (!empty($arr_HierarchicalTree[$key]['tree_number_registry'])){
 
-                                                        $tam_string=strlen($string);
-                                                        $tam=(intval($arr_HierarchicalTree[$key]['level'])*10)+$tam_string;
+                                            ?>
+                                                <font color="red">
+                                                <?php echo str_replace("-", "&nbsp;",str_pad($string,$tam,"-",STR_PAD_LEFT)); ?>
+                                                </font>
 
-                                                        if (!empty($arr_HierarchicalTree[$key]['tree_number_registry'])){
+                                            <?php
+                                            } else {
+                                            ?>
+                                                <?php echo str_replace("-", "&nbsp;",str_pad($string,$tam,"-",STR_PAD_LEFT)); ?>
+                                            <?php
+                                            }
+                                            if (!empty($arr_HierarchicalTree[$key]['leaf'])) {
+                                                echo " +";
+                                            }
+                                            ?>
 
-                                                        ?>
-                                                            <font color="red">
-                                                            <?php echo str_replace("-", "&nbsp;",str_pad($string,$tam,"-",STR_PAD_LEFT)); ?>
-                                                            </font>
+                                            </a>
 
-                                                        <?php
-                                                        } else {
-                                                        ?>
-                                                            <?php echo str_replace("-", "&nbsp;",str_pad($string,$tam,"-",STR_PAD_LEFT)); ?>
-                                                        <?php
-                                                        }
-                                                        if (!empty($arr_HierarchicalTree[$key]['leaf'])) {
-                                                            echo " +";
-                                                        }
-                                                        ?>
-
-                                                        </a>
-
-                                                        <?php 
+                                            <?php 
 
 
-                                                    ?>
-
-                                                </ul>
-                                            </li>
-                                        <?php
-
-                                            $tree_number_original_old=$tree_number_original;
-                                            $count++;
-
-                                        }
                                         ?>
 
+                                    </ul>
+                                </li>
+                            <?php
 
+                                $tree_number_original_old=$tree_number_original;
+                                $count++;
+
+                            }
+                            ?>
 
                         </ul>
                     </div>
@@ -981,13 +970,8 @@ function choice_category($categ,$lang){
                                     <a href="#<?php echo $arr_Concept_and_Term[$key][$key1]['concept_ui']; ?>" data-toggle="collapse"><b>
                             <?php
                                     echo "Without translation";
-                                    // echo $arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key6]['term_string']; 
                             ?>
                                 </b></a>
-
-<!--                                 <small class="badge badgeWarning">
-                                    <?php echo $arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key6]['language_code']; ?>
-                                </small> -->
 
                                     <?php 
                                         $concept_relation_name=ConceptRelationName($arr_Concept_and_Term[$key][$key1]['concept_relation_name']);
@@ -1120,7 +1104,6 @@ function choice_category($categ,$lang){
 
                                         }
 
-
                                         $arr_PreferredTerms = array_filter($arr_PreferredTerms); // Limpa array
                                         usort($arr_PreferredTerms, "cmp"); 
                                         foreach ($arr_PreferredTerms as $k1 => $value) {
@@ -1193,7 +1176,6 @@ function choice_category($categ,$lang){
                                             foreach ($arr_Concept_and_Term[$key][$key1]['TermListDesc'] as $key5 => $value5) {
                                                 $language_code=convLang($arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key5]['language_code']);
 
-
                                                 if ( $lang_another ) {
                                                     $lang_another=convLang($lang_another);
                                                     if ($language_code == $lang_another){
@@ -1249,7 +1231,6 @@ function choice_category($categ,$lang){
 
                                             $arr_EntryTerms = array_filter($arr_EntryTerms); // Limpa array
                                             $arr_EntryTerms = phparraysort($arr_EntryTerms, array('language_code','term_string'));
-                                            // usort($arr_EntryTerms, "cmp"); 
 
                                             $count=1;
                                             foreach ($arr_EntryTerms as $k5 => $v5) {
@@ -1299,55 +1280,90 @@ function choice_category($categ,$lang){
                         }
                         ?>
                 <?php
-                }
+                } // fecha if (!empty($has_descriptor)){
                 ?>
 
                 <?php                               
                 if (!empty($has_qualifier)){
                 ?>
+
                     <div class="tab-pane fade boxTree" id="Concepts" role="tabpanel" aria-labelledby="Concepts-tab">
 
                         <?php
                         foreach ($arr_Concept_and_Term as $key => $value) {
                             foreach ($arr_Concept_and_Term[$key] as $key1 => $value1) {
                                 $id_concept_ui=$arr_Concept_and_Term[$key][$key1]['concept_ui'];
-                                // Determina se existe tradução para o idioma requerido - no caso pt-br está cravado mas poderá ser passado como paramentro pelo ambiente
+
                                 foreach ($arr_Concept_and_Term[$key][$key1]['TermListQualif'] as $key2 => $value2) {
+
                                     $language_code=convLang($arr_Concept_and_Term[$key][$key1]['TermListQualif'][$key2]['language_code']);
 
-                                    if ($language_code == $lang_ths and $arr_Concept_and_Term[$key][$key1]['TermListQualif'][$key2]['concept_preferred_term']=='Y') {
+                                    if ( $lang_another ) {
+                                        $lang_another=convLang($lang_another);
+                                        if ( $language_code == $lang_another and $arr_Concept_and_Term[$key][$key1]['TermListQualif'][$key2]['concept_preferred_term']=='Y') {
+                                            $has_term_in_language=True;
+                                        }
+                                    } elseif ( $language_code == $lang_ths and $arr_Concept_and_Term[$key][$key1]['TermListQualif'][$key2]['concept_preferred_term']=='Y') {
                                         $has_term_in_language=True;
                                     }
+
                                 }
+
                                 if ($has_term_in_language){
                                     foreach ($arr_Concept_and_Term[$key][$key1]['TermListQualif'] as $key7 => $value7) {
                                         $language_code=convLang($arr_Concept_and_Term[$key][$key1]['TermListQualif'][$key7]['language_code']);
-                                        if ($language_code == $lang_ths and $arr_Concept_and_Term[$key][$key1]['TermListQualif'][$key7]['concept_preferred_term']=='Y') {
+                                        $lang_another=convLang($lang_another);
+
+                                    if ( $lang_another ) {
+                                        if ( $language_code == $lang_another and $arr_Concept_and_Term[$key][$key1]['TermListQualif'][$key7]['concept_preferred_term']=='Y') {
+
                         ?>
                                             <a href="#<?php echo $arr_Concept_and_Term[$key][$key1]['concept_ui']; ?>" data-toggle="collapse">
                         <?php
                                             echo $arr_Concept_and_Term[$key][$key1]['TermListQualif'][$key7]['term_string']; 
                         ?>
                                             </a>
-                                            <?php 
-                                                $concept_relation_name=ConceptRelationName($arr_Concept_and_Term[$key][$key1]['concept_relation_name']);
-                                                echo "- <i>".$concept_relation_name."</i>";
-                                            ?>
+
+                                        <?php 
+                                            $concept_relation_name=ConceptRelationName($arr_Concept_and_Term[$key][$key1]['concept_relation_name']);
+                                            echo "- <i>".$concept_relation_name."</i>";
+                                        ?>
                                         <br>
-                            <?php
+                                    <?php
                                         break;
+                                        }
+                                    } else {
+
+                                        if ( $language_code == $lang_ths and $arr_Concept_and_Term[$key][$key1]['TermListQualif'][$key7]['concept_preferred_term']=='Y') {
+                        ?>
+                                            <a href="#<?php echo $arr_Concept_and_Term[$key][$key1]['concept_ui']; ?>" data-toggle="collapse">
+                        <?php
+                                            echo $arr_Concept_and_Term[$key][$key1]['TermListQualif'][$key7]['term_string']; 
+                        ?>
+                                            </a>
+
+                                        <?php 
+                                            $concept_relation_name=ConceptRelationName($arr_Concept_and_Term[$key][$key1]['concept_relation_name']);
+                                            echo "- <i>".$concept_relation_name."</i>";
+                                        ?>
+                                        <br>
+                                    <?php
+                                        break;
+                                        }
                                     }
                                 }
+
                             }
                             // Se não tem a tradução para a linguagem pega a primeira que houver
                             if (!$has_term_in_language){
                                 foreach ($arr_Concept_and_Term[$key][$key1]['TermListQualif'] as $key6 => $value6) {
                             ?>
-                                    <a href="#<?php echo $arr_Concept_and_Term[$key][$key1]['concept_ui']; ?>" data-toggle="collapse">
+                                    <a href="#<?php echo $arr_Concept_and_Term[$key][$key1]['concept_ui']; ?>" data-toggle="collapse"><b>
                             <?php
-                                    echo $arr_Concept_and_Term[$key][$key1]['TermListQualif'][$key6]['term_string']; 
+                                    echo "Without translation";
                             ?>
-                                    </a>
+                                </b></a>
+
                                     <?php 
                                         $concept_relation_name=ConceptRelationName($arr_Concept_and_Term[$key][$key1]['concept_relation_name']);
                                         echo "<i>".$concept_relation_name."</i>";
@@ -1387,15 +1403,27 @@ function choice_category($categ,$lang){
                                         <?php
                                         // Scope Note
                                         foreach ($arr_Concept_and_Term[$key][$key1]['ConceptListQualif'] as $key3 => $value3) {
-                                            $language_code=convLang($arr_Concept_and_Term[$key][$key1]['ConceptListQualif'][$key3]['language_code']);
-                                            if ($language_code == $lang_ths){
-                                        ?>
+                                        $language_code=convLang($arr_Concept_and_Term[$key][$key1]['ConceptListQualif'][$key3]['language_code']);
+
+                                            if ( $lang_another ) {
+                                                $lang_another=convLang($lang_another);
+                                                if ($language_code == $lang_another){
+                                                ?>
+                                                    <p>
+                                                        <?php
+                                                        echo $arr_Concept_and_Term[$key][$key1]['ConceptListQualif'][$key3]['scope_note'];
+                                                        ?>
+                                                    </p>
+                                                <?php
+                                                }
+                                            } elseif ($language_code == $lang_ths){
+                                            ?>
                                                 <p>
                                                     <?php
                                                     echo $arr_Concept_and_Term[$key][$key1]['ConceptListQualif'][$key3]['scope_note'];
                                                     ?>
                                                 </p>
-                                        <?php
+                                            <?php
                                             }
                                         }
                                         ?>
@@ -1412,28 +1440,61 @@ function choice_category($categ,$lang){
                                         <small>
                                         <?php
                                         foreach ($arr_Concept_and_Term[$key][$key1]['TermListQualif'] as $key4 => $value4) {
+
                                             $language_code=convLang($arr_Concept_and_Term[$key][$key1]['TermListQualif'][$key4]['language_code']);
-                                            if (
-                                                ((
-                                                    $arr_Concept_and_Term[$key][$key1]['preferred_concept']=='Y' and 
-                                                    $arr_Concept_and_Term[$key][$key1]['TermListQualif'][$key4]['concept_preferred_term']=='Y' and 
-                                                    $arr_Concept_and_Term[$key][$key1]['TermListQualif'][$key4]['record_preferred_term']=='Y' 
-                                                )
-                                                or 
-                                                (
-                                                    $arr_Concept_and_Term[$key][$key1]['preferred_concept']=='N' and 
-                                                    $arr_Concept_and_Term[$key][$key1]['TermListQualif'][$key4]['concept_preferred_term']=='Y' and 
-                                                    $arr_Concept_and_Term[$key][$key1]['TermListQualif'][$key4]['record_preferred_term']=='N' 
-                                                )) 
-                                                and 
-                                                    $language_code == $lang_ths
-                                            ){
-                                                $arr_temp=array();
-                                                $arr_temp['term_string']=$arr_Concept_and_Term[$key][$key1]['TermListQualif'][$key4]['term_string'];
-                                                $arr_temp['language_code']=$arr_Concept_and_Term[$key][$key1]['TermListQualif'][$key4]['language_code'];
-                                                $arr_PreferredTerms[]=$arr_temp;
+
+                                            if ( $lang_another ) {
+                                                $lang_another=convLang($lang_another);
+                                                if ($language_code == $lang_another){
+
+                                                    if (
+                                                        ((
+                                                            $arr_Concept_and_Term[$key][$key1]['preferred_concept']=='Y' and 
+                                                            $arr_Concept_and_Term[$key][$key1]['TermListQualif'][$key4]['concept_preferred_term']=='Y' and 
+                                                            $arr_Concept_and_Term[$key][$key1]['TermListQualif'][$key4]['record_preferred_term']=='Y' 
+                                                        )
+                                                        or 
+                                                        (
+                                                            $arr_Concept_and_Term[$key][$key1]['preferred_concept']=='N' and 
+                                                            $arr_Concept_and_Term[$key][$key1]['TermListQualif'][$key4]['concept_preferred_term']=='Y' and 
+                                                            $arr_Concept_and_Term[$key][$key1]['TermListQualif'][$key4]['record_preferred_term']=='N' 
+                                                        )) 
+                                                        and
+                                                        ( $language_code == $lang_another )
+                                                    ){
+                                                        $arr_temp=array();
+                                                        $arr_temp['term_string']=$arr_Concept_and_Term[$key][$key1]['TermListQualif'][$key4]['term_string'];
+                                                        $arr_temp['language_code']=$arr_Concept_and_Term[$key][$key1]['TermListQualif'][$key4]['language_code'];
+                                                        $arr_PreferredTerms[]=$arr_temp;
+                                                    }
+                                                }
+
+                                            } else {
+
+                                                if (
+                                                    ((
+                                                        $arr_Concept_and_Term[$key][$key1]['preferred_concept']=='Y' and 
+                                                        $arr_Concept_and_Term[$key][$key1]['TermListQualif'][$key4]['concept_preferred_term']=='Y' and 
+                                                        $arr_Concept_and_Term[$key][$key1]['TermListQualif'][$key4]['record_preferred_term']=='Y' 
+                                                    )
+                                                    or 
+                                                    (
+                                                        $arr_Concept_and_Term[$key][$key1]['preferred_concept']=='N' and 
+                                                        $arr_Concept_and_Term[$key][$key1]['TermListQualif'][$key4]['concept_preferred_term']=='Y' and 
+                                                        $arr_Concept_and_Term[$key][$key1]['TermListQualif'][$key4]['record_preferred_term']=='N' 
+                                                    )) 
+                                                    and
+                                                    ( $language_code == $lang_ths )
+                                                ){
+                                                    $arr_temp=array();
+                                                    $arr_temp['term_string']=$arr_Concept_and_Term[$key][$key1]['TermListQualif'][$key4]['term_string'];
+                                                    $arr_temp['language_code']=$arr_Concept_and_Term[$key][$key1]['TermListQualif'][$key4]['language_code'];
+                                                    $arr_PreferredTerms[]=$arr_temp;
+                                                }
                                             }
+
                                         }
+
                                         $arr_PreferredTerms = array_filter($arr_PreferredTerms); // Limpa array
                                         usort($arr_PreferredTerms, "cmp"); 
                                         foreach ($arr_PreferredTerms as $k1 => $value) {
@@ -1447,10 +1508,35 @@ function choice_category($categ,$lang){
                                     </td>
                                 </tr>
                                 <?php
+
                                 // Verifica a existência de Sinônimo
                                 foreach ($arr_Concept_and_Term[$key][$key1]['TermListQualif'] as $key5 => $value5) {
                                     $language_code=convLang($arr_Concept_and_Term[$key][$key1]['TermListQualif'][$key5]['language_code']);
-                                    if (
+
+                                    if ( $lang_another ) {
+                                        $lang_another=convLang($lang_another);
+                                        if ($language_code == $lang_another){
+
+                                            if (
+                                                ((
+                                                    $arr_Concept_and_Term[$key][$key1]['preferred_concept']=='Y' and 
+                                                    $arr_Concept_and_Term[$key][$key1]['TermListQualif'][$key5]['concept_preferred_term']=='N' and 
+                                                    $arr_Concept_and_Term[$key][$key1]['TermListQualif'][$key5]['record_preferred_term']=='N' 
+                                                )
+                                                or 
+                                                (
+                                                    $arr_Concept_and_Term[$key][$key1]['preferred_concept']=='N' and 
+                                                    $arr_Concept_and_Term[$key][$key1]['TermListQualif'][$key5]['concept_preferred_term']=='N' and 
+                                                    $arr_Concept_and_Term[$key][$key1]['TermListQualif'][$key5]['record_preferred_term']=='N' 
+                                                )) 
+                                                and
+                                                $language_code == $lang_another
+                                            ){
+                                                $has_synonymous=True;
+                                            }
+
+                                        }
+                                    } elseif (
                                         ((
                                             $arr_Concept_and_Term[$key][$key1]['preferred_concept']=='Y' and 
                                             $arr_Concept_and_Term[$key][$key1]['TermListQualif'][$key5]['concept_preferred_term']=='N' and 
@@ -1462,13 +1548,15 @@ function choice_category($categ,$lang){
                                             $arr_Concept_and_Term[$key][$key1]['TermListQualif'][$key5]['concept_preferred_term']=='N' and 
                                             $arr_Concept_and_Term[$key][$key1]['TermListQualif'][$key5]['record_preferred_term']=='N' 
                                         )) 
-                                        and 
-                                            $language_code == $lang_ths
+                                        and
+                                        $language_code == $lang_ths
                                     ){
                                         $has_synonymous=True;
                                     }
-                                }
-                                if (!empty($has_synonymous)){
+
+                                } // foreach
+
+                                if ($has_synonymous){
                                 ?>
                                     <tr>
                                         <td width="25%" class="text-right"><small><b><?php pll_e('Entry term(s)'); ?></b></small></td>
@@ -1478,7 +1566,37 @@ function choice_category($categ,$lang){
                                             unset($arr_EntryTerms);
                                             foreach ($arr_Concept_and_Term[$key][$key1]['TermListQualif'] as $key5 => $value5) {
                                                 $language_code=convLang($arr_Concept_and_Term[$key][$key1]['TermListQualif'][$key5]['language_code']);
-                                                if (
+
+
+                                                if ( $lang_another ) {
+                                                    $lang_another=convLang($lang_another);
+                                                    if ($language_code == $lang_another){
+
+                                                        if (
+                                                            ((
+                                                                $arr_Concept_and_Term[$key][$key1]['preferred_concept']=='Y' and 
+                                                                $arr_Concept_and_Term[$key][$key1]['TermListQualif'][$key5]['record_preferred_term']=='N' and 
+                                                                $arr_Concept_and_Term[$key][$key1]['TermListQualif'][$key5]['record_preferred_term']=='N' 
+                                                            )
+                                                            or 
+                                                            (
+                                                                $arr_Concept_and_Term[$key][$key1]['preferred_concept']=='N' and 
+                                                                $arr_Concept_and_Term[$key][$key1]['TermListQualif'][$key5]['concept_preferred_term']=='N' and 
+                                                                $arr_Concept_and_Term[$key][$key1]['TermListQualif'][$key5]['record_preferred_term']=='N' 
+                                                            )) 
+                                                            and
+                                                                $language_code == $lang_another
+                                                        ){
+
+                                                            $arr_temp=array();
+                                                            $arr_temp['term_string']=$arr_Concept_and_Term[$key][$key1]['TermListQualif'][$key5]['term_string'];
+                                                            $arr_temp['language_code']=$arr_Concept_and_Term[$key][$key1]['TermListQualif'][$key5]['language_code'];
+                                                            $arr_EntryTerms[]=$arr_temp;
+
+                                                        }
+
+                                                    }
+                                                } elseif (
                                                     ((
                                                         $arr_Concept_and_Term[$key][$key1]['preferred_concept']=='Y' and 
                                                         $arr_Concept_and_Term[$key][$key1]['TermListQualif'][$key5]['record_preferred_term']=='N' and 
@@ -1490,7 +1608,7 @@ function choice_category($categ,$lang){
                                                         $arr_Concept_and_Term[$key][$key1]['TermListQualif'][$key5]['concept_preferred_term']=='N' and 
                                                         $arr_Concept_and_Term[$key][$key1]['TermListQualif'][$key5]['record_preferred_term']=='N' 
                                                     )) 
-                                                    and 
+                                                    and
                                                         $language_code == $lang_ths
                                                 ){
 
@@ -1500,16 +1618,16 @@ function choice_category($categ,$lang){
                                                     $arr_EntryTerms[]=$arr_temp;
 
                                                 }
-                                            }
+
+                                            } // foreach
 
                                             $arr_EntryTerms = array_filter($arr_EntryTerms); // Limpa array
                                             $arr_EntryTerms = phparraysort($arr_EntryTerms, array('language_code','term_string'));
-                                            // usort($arr_EntryTerms, "cmp"); 
 
-                                            $count=0;
+                                            $count=1;
                                             foreach ($arr_EntryTerms as $k5 => $v5) {
 
-                                                    if ($count==0){
+                                                    if ($count==1){
                                                         ?>
                                                         <?php
                                                     }
@@ -1554,7 +1672,7 @@ function choice_category($categ,$lang){
                         }
                         ?>
                 <?php
-                }
+                } // fecha if (!empty($has_qualifier)){
                 ?>
 
                 </div>
@@ -1563,9 +1681,9 @@ function choice_category($categ,$lang){
         </div>
     </section>
 
-            <?php
-            }
-            ?>
+<?php
+} // fecha if($has_descriptor or $has_qualifier){
+?>
 
 
 <?php get_footer(); ?>        
