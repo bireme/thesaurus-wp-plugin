@@ -17,7 +17,7 @@ $site_language = strtolower(get_bloginfo('language'));
 $lang = substr($site_language,0,2);
 
 // echo "[".$lang."]";
-
+// echo "<pre>"; print_r($response_json); echo "</pre>";
 
 // set query using default param q (query) or s (wordpress search) or newexpr (metaiah)
 $q = $_GET['q'];
@@ -127,7 +127,10 @@ if ($response){
         foreach ( $response_json->diaServerResponse[0]->response->docs as $position => $docs){
             if ($docs->ths_decs_code[0]) {
                 $arr_temp=array();
-                $arr_sym = array();
+                $arr_sym_en = array();
+                $arr_sym_es = array();
+                $arr_sym_pt = array();
+                $arr_sym_fr = array();
 
                 $arr_temp['ths_decs_code']=$docs->ths_decs_code;
 
@@ -158,132 +161,128 @@ if ($response){
                 //     array_push($arr_sym, $value);
                 // }
 
-                switch ($lang) {
-                    case 'en':
-
-                        // EN
-                        if ($docs->ths_mh_et_en) {
-                            foreach ($docs->ths_mh_et_en as $key => $value) {
-                                if (strpos(' '.$value,'?') != 1){
-                                    array_push($arr_sym, $value);
-                                }
-                            }
+                // EN
+                if ($docs->ths_mh_et_en) {
+                    foreach ($docs->ths_mh_et_en as $key => $value) {
+                        if (strpos(' '.$value,'?') != 1){
+                            array_push($arr_sym_en, $value);
                         }
-                        if ($docs->ths_pep_en) {
-                            foreach ($docs->ths_pep_en as $key => $value) {
-                                if (strpos(' '.$value,'?') != 1){
-                                    array_push($arr_sym, $value);
-                                }
-                            }
+                    }
+                }
+                if ($docs->ths_pep_en) {
+                    foreach ($docs->ths_pep_en as $key => $value) {
+                        if (strpos(' '.$value,'?') != 1){
+                            array_push($arr_sym_en, $value);
                         }
-                        if ($docs->ths_pep_et_en) {
-                            foreach ($docs->ths_pep_et_en as $key => $value) {
-                                if (strpos(' '.$value,'?') != 1){
-                                    array_push($arr_sym, $value);
-                                }
-                            }
+                    }
+                }
+                if ($docs->ths_pep_et_en) {
+                    foreach ($docs->ths_pep_et_en as $key => $value) {
+                        if (strpos(' '.$value,'?') != 1){
+                            array_push($arr_sym_en, $value);
                         }
-
-                    break;
-
-                    case 'es':
-                        // ES
-                        if ($docs->ths_mh_et_es) {
-                            foreach ($docs->ths_mh_et_es as $key => $value) {
-                                if (strpos(' '.$value,'?') != 1){
-                                    array_push($arr_sym, $value);
-                                }
-                            }
-                        }
-                        if ($docs->ths_pep_es) {
-                            foreach ($docs->ths_pep_es as $key => $value) {
-                                if (strpos(' '.$value,'?') != 1){
-                                    array_push($arr_sym, $value);
-                                }
-                            }
-                        }
-                        if ($docs->ths_pep_et_es) {
-                            foreach ($docs->ths_pep_et_es as $key => $value) {
-                                if (strpos(' '.$value,'?') != 1){
-                                    array_push($arr_sym, $value);
-                                }
-                            }
-                        }
-
-                    break;
-
-                    case 'pt':
-                        // PT
-                        if ($docs->ths_mh_et_pt) {
-                            foreach ($docs->ths_mh_et_pt as $key => $value) {
-                                if (strpos(' '.$value,'?') != 1){
-                                    array_push($arr_sym, $value);
-                                }
-                            }
-                        }
-
-                        if ($docs->ths_pep_pt) {
-                            foreach ($docs->ths_pep_pt as $key => $value) {
-                                if (strpos(' '.$value,'?') != 1){
-                                    array_push($arr_sym, $value);
-                                }
-                            }
-                        }
-                        if ($docs->ths_pep_et_pt) {
-                            foreach ($docs->ths_pep_et_pt as $key => $value) {
-                                if (strpos(' '.$value,'?') != 1){
-                                    array_push($arr_sym, $value);
-                                }
-                            }
-                        }
-
-                    break;
-
-                    case 'fr':
-                        // FR
-                        if ($docs->ths_mh_et_fr) {
-                            foreach ($docs->ths_mh_et_fr as $key => $value) {
-                                if (strpos(' '.$value,'?') != 1){
-                                    array_push($arr_sym, $value);
-                                }
-                            }
-                        }
-                        if ($docs->ths_pep_fr) {
-                            foreach ($docs->ths_pep_fr as $key => $value) {
-                                if (strpos(' '.$value,'?') != 1){
-                                    array_push($arr_sym, $value);
-                                }
-                            }
-                        }
-                        if ($docs->ths_pep_et_fr) {
-                            foreach ($docs->ths_pep_et_fr as $key => $value) {
-                                if (strpos(' '.$value,'?') != 1){
-                                    array_push($arr_sym, $value);
-                                }
-                            }
-                        }
-
-
-                    break;
-
-                    // default:
-                    // usort($arr_result, "cmp_en"); 
-                    // break;
+                    }
                 }
 
-                uasort($arr_sym,"SortET");
-                array_push($arr_temp, $arr_sym);
-                unset($arr_sym);
+                uasort($arr_sym_en,"SortET");
+                $arr_temp['arr_sym_en']=$arr_sym_en;
+                unset($arr_sym_en);
+
+
+                // ES
+                if ($docs->ths_mh_et_es) {
+                    foreach ($docs->ths_mh_et_es as $key => $value) {
+                        if (strpos(' '.$value,'?') != 1){
+                            array_push($arr_sym_es, $value);
+                        }
+                    }
+                }
+                if ($docs->ths_pep_es) {
+                    foreach ($docs->ths_pep_es as $key => $value) {
+                        if (strpos(' '.$value,'?') != 1){
+                            array_push($arr_sym_es, $value);
+                        }
+                    }
+                }
+                if ($docs->ths_pep_et_es) {
+                    foreach ($docs->ths_pep_et_es as $key => $value) {
+                        if (strpos(' '.$value,'?') != 1){
+                            array_push($arr_sym_es, $value);
+                        }
+                    }
+                }
+
+                uasort($arr_sym_es,"SortET");
+                $arr_temp['arr_sym_es']=$arr_sym_es;
+                unset($arr_sym_es);
+
+
+                // PT
+                if ($docs->ths_mh_et_pt) {
+                    foreach ($docs->ths_mh_et_pt as $key => $value) {
+                        if (strpos(' '.$value,'?') != 1){
+                            array_push($arr_sym_pt, $value);
+                        }
+                    }
+                }
+
+                if ($docs->ths_pep_pt) {
+                    foreach ($docs->ths_pep_pt as $key => $value) {
+                        if (strpos(' '.$value,'?') != 1){
+                            array_push($arr_sym_pt, $value);
+                        }
+                    }
+                }
+                if ($docs->ths_pep_et_pt) {
+                    foreach ($docs->ths_pep_et_pt as $key => $value) {
+                        if (strpos(' '.$value,'?') != 1){
+                            array_push($arr_sym_pt, $value);
+                        }
+                    }
+                }
+
+                uasort($arr_sym_pt,"SortET");
+                $arr_temp['arr_sym_pt']=$arr_sym_pt;
+                unset($arr_sym_pt);
+
+
+                // FR
+                if ($docs->ths_mh_et_fr) {
+                    foreach ($docs->ths_mh_et_fr as $key => $value) {
+                        if (strpos(' '.$value,'?') != 1){
+                            array_push($arr_sym_fr, $value);
+                        }
+                    }
+                }
+                if ($docs->ths_pep_fr) {
+                    foreach ($docs->ths_pep_fr as $key => $value) {
+                        if (strpos(' '.$value,'?') != 1){
+                            array_push($arr_sym_fr, $value);
+                        }
+                    }
+                }
+                if ($docs->ths_pep_et_fr) {
+                    foreach ($docs->ths_pep_et_fr as $key => $value) {
+                        if (strpos(' '.$value,'?') != 1){
+                            array_push($arr_sym_fr, $value);
+                        }
+                    }
+                }
+
+                uasort($arr_sym_fr,"SortET");
+                $arr_temp['arr_sym_fr']=$arr_sym_fr;
+                unset($arr_sym_fr);
+
+
 
                 $arr_result[]=$arr_temp;
 
                 unset($arr_temp);
 
 
-
-
             }
         }
+
 
     // Ordena o array por language_code
         function cmp_en($a, $b){
@@ -402,13 +401,17 @@ switch ($lang) {
 
 
 
-
-
-// echo "<hr>";
-
+// DEBUG
 // echo "<pre>"; print_r($arr_result); echo "</pre>";
 
+?>
 
+<!-- Função de highlight -->
+<?php
+function highlight($text, $words) {
+    $text = preg_replace("|($words)|Uui", "<span style=\"background-color: yellow\">$1</span>", $text);
+    return $text;
+}
 ?>
 
 <section class="container" id="main_container">
@@ -459,11 +462,84 @@ switch ($lang) {
                         $ths_mh_fr=$resultado[$key]['ths_mh_fr'];
                         $ths_mh_eses=$resultado[$key]['ths_mh_eses'];
 
-                        $ths_sym=$resultado[$key][0];
-
+                        $ths_sym_en=$resultado[$key]['arr_sym_en'];
+                        $ths_sym_es=$resultado[$key]['arr_sym_es'];
+                        $ths_sym_pt=$resultado[$key]['arr_sym_pt'];
+                        $ths_sym_fr=$resultado[$key]['arr_sym_fr'];
                         // print_r($resultado[$key]);
                         // print_r($resultado[$key][0]);
                         ?>
+
+
+<!--             <article class="col-12">
+                <div class="row">
+                    <div class="col-12 col-md-10">
+                        <div class="table-responsive">
+                            <span class="badge badge-descriptor">1 / 1</span>
+                            <table class="table table-bordered table-sm font12">
+                                <tr>
+                                    <td class="text-right badge-descriptor tableWidth">Descritor Português:</td>
+                                    <td>
+                                        <b>Cabelo</b>
+                                        <a class="float-right" data-toggle="collapse" href="#sym1"><i class="fas fa-angle-down"></i></a>
+                                        <div class="collapse show setaCollapse" id="sym1">
+                                            <div class="dropdown-divider"></div><b>Sinônimos:</b> <br>
+                                            Folículos do Cabelo<br>
+                                            Lanugo<br>
+                                            Pelo Fetal
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-right badge-descriptor tableWidth">Descritor Espanhol:</td>
+                                    <td>
+                                        <b>Cabello</b>
+                                        <a class="float-right" data-toggle="collapse" href="#sym2"><i class="fas fa-angle-down"></i></a>
+                                        <div class="collapse show setaCollapse" id="sym2">
+                                            <div class="dropdown-divider"></div><b>Sinônimos:</b> <br>
+                                            Folículos do Cabelo<br>
+                                            <mark><b>Lanugo</b></mark><br>
+                                            Pelo Fetal
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-right badge-descriptor tableWidth">Descritor Inglês:</td>
+                                    <td>
+                                        <b>Hair</b>
+                                        <a class="float-right" data-toggle="collapse" href="#sym3"><i class="fas fa-angle-down"></i></a>
+                                        <div class="collapse setaCollapse" id="sym3">
+                                            <div class="dropdown-divider"></div><b>Sinônimos:</b> <br>
+                                            Folículos do Cabelo<br>
+                                            Lanugo<br>
+                                            Pelo Fetal
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-right badge-descriptor tableWidth">Descritor Francês:</td>
+                                    <td>
+                                        <b>Cheveux</b>
+                                        <a class="float-right" data-toggle="collapse" href="#sym4"><i class="fas fa-angle-down"></i></a>
+                                        <div class="collapse setaCollapse" id="sym4">
+                                            <div class="dropdown-divider"></div><b>Sinônimos:</b> <br>
+                                            Folículos do Cabelo<br>
+                                            Lanugo<br>
+                                            Pelo Fetal
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-2 boxBtnSeeMore">
+                        <a href="resource.php" class="btn btn-success btn-sm btnSeeMore">Ver Detalhes</a>
+                    </div>
+                </div>
+                <br>
+            </article> -->
+
+
 
 
             <article class="col-12">
@@ -479,7 +555,7 @@ switch ($lang) {
                                     } else {
                                         $nkey = $key + 1;
                                     }
-                                    echo $nkey.'/'.$total; ?>
+                                    echo $nkey.' / '.$total; ?>
                                     
                             </span>
                             <table class="table table-bordered table-sm font12">
@@ -489,59 +565,264 @@ switch ($lang) {
                                     switch ($lang) {
                                         case 'en':
                                 ?>
-                                            <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor English'); ?>:</td><td><b><?php echo $ths_mh_en; ?></b></td></tr>
-                                            <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor Spanish'); ?>:</td><td><b><?php echo $ths_mh_es; ?></b></td></tr>
-                                            <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor Portuguese'); ?>:</td><td><b><?php echo $ths_mh_pt; ?></b></td></tr>
-                                            <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor French'); ?>:</td><td><b><?php echo $ths_mh_fr; ?></b></td></tr>
+                                            <tr>
+                                                <td class="text-right badge-descriptor tableWidth">
+                                                    <?php pll_e('Descriptor English'); ?>:
+                                                </td>
+                                                <td>
+                                                    <b><?php echo highlight($ths_mh_en, $q); ?></b>
+                                                    <?php if ( !empty($ths_sym_en) ) { ?>
+                                                        <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>en"><i class="fas fa-angle-down"></i></a>
+                                                        <div class="collapse show setaCollapse" id="sym<?php echo $nkey;?>en">
+                                                            <div class="dropdown-divider"></div><b><?php pll_e('Entry term(s)'); ?>:</b><br>
+                                                            <?php foreach ($ths_sym_en as $key => $value) { echo highlight($value, $q)."<br>"; } ?>
+                                                        </div>
+                                                    <?php } ?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-right badge-descriptor tableWidth">
+                                                    <?php pll_e('Descriptor Spanish'); ?>:
+                                                </td>
+                                                <td>
+                                                    <b><?php echo highlight($ths_mh_es, $q); ?></b>
+                                                    <?php if ( !empty($ths_sym_es) ) { ?>
+                                                        <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>es"><i class="fas fa-angle-down"></i></a>
+                                                        <div class="collapse setaCollapse" id="sym<?php echo $nkey;?>es">
+                                                            <div class="dropdown-divider"></div><b><?php pll_e('Entry term(s)'); ?>:</b><br>
+                                                            <?php foreach ($ths_sym_es as $key => $value) { echo highlight($value, $q)."<br>"; } ?>
+                                                        </div>
+                                                    <?php } ?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-right badge-descriptor tableWidth">
+                                                    <?php pll_e('Descriptor Portuguese'); ?>:
+                                                </td>
+                                                <td>
+                                                    <b><?php echo highlight($ths_mh_pt, $q); ?></b>
+                                                    <?php if ( !empty($ths_sym_pt) ) { ?>
+                                                        <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>pt"><i class="fas fa-angle-down"></i></a>
+                                                        <div class="collapse setaCollapse" id="sym<?php echo $nkey;?>pt">
+                                                            <div class="dropdown-divider"></div><b><?php pll_e('Entry term(s)'); ?>:</b><br>
+                                                            <?php foreach ($ths_sym_pt as $key => $value) { echo highlight($value, $q)."<br>"; } ?>
+                                                        </div>
+                                                    <?php } ?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-right badge-descriptor tableWidth">
+                                                    <?php pll_e('Descriptor French'); ?>:
+                                                </td>
+                                                <td>
+                                                    <b><?php echo highlight($ths_mh_fr, $q); ?></b>
+                                                    <?php if ( !empty($ths_sym_fr) ) { ?>
+                                                        <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>fr"><i class="fas fa-angle-down"></i></a>
+                                                        <div class="collapse setaCollapse" id="sym<?php echo $nkey;?>fr">
+                                                            <div class="dropdown-divider"></div><b><?php pll_e('Entry term(s)'); ?>:</b><br>
+                                                            <?php foreach ($ths_sym_fr as $key => $value) { echo highlight($value, $q)."<br>"; } ?>
+                                                        </div>
+                                                    <?php } ?>
+                                                </td>
+                                            </tr>
                                 <?php
                                             break;
                                         case 'es':
                                 ?>
-                                            <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor Spanish'); ?>:</td><td><b><?php echo $ths_mh_es; ?></b></td></tr>
-                                            <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor English'); ?>:</td><td><b><?php echo $ths_mh_en; ?></b></td></tr>
-                                            <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor Portuguese'); ?>:</td><td><b><?php echo $ths_mh_pt; ?></b></td></tr>
-                                            <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor French'); ?>:</td><td><b><?php echo $ths_mh_fr; ?></b></td></tr>
+                                            <tr>
+                                                <td class="text-right badge-descriptor tableWidth">
+                                                    <?php pll_e('Descriptor Spanish'); ?>:
+                                                </td>
+                                                <td>
+                                                    <b><?php echo highlight($ths_mh_es, $q); ?></b>
+                                                    <?php if ( !empty($ths_sym_es) ) { ?>
+                                                        <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>es"><i class="fas fa-angle-down"></i></a>
+                                                        <div class="collapse show setaCollapse" id="sym<?php echo $nkey;?>es">
+                                                            <div class="dropdown-divider"></div><b><?php pll_e('Entry term(s)'); ?>:</b><br>
+                                                            <?php foreach ($ths_sym_es as $key => $value) { echo highlight($value, $q)."<br>"; } ?>
+                                                        </div>
+                                                    <?php } ?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-right badge-descriptor tableWidth">
+                                                    <?php pll_e('Descriptor English'); ?>:
+                                                </td>
+                                                <td>
+                                                    <b><?php echo highlight($ths_mh_en, $q); ?></b>
+                                                    <?php if ( !empty($ths_sym_en) ) { ?>
+                                                        <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>en"><i class="fas fa-angle-down"></i></a>
+                                                        <div class="collapse setaCollapse" id="sym<?php echo $nkey;?>en">
+                                                            <div class="dropdown-divider"></div><b><?php pll_e('Entry term(s)'); ?>:</b><br>
+                                                            <?php foreach ($ths_sym_en as $key => $value) { echo highlight($value, $q)."<br>"; } ?>
+                                                        </div>
+                                                    <?php } ?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-right badge-descriptor tableWidth">
+                                                    <?php pll_e('Descriptor Portuguese'); ?>:
+                                                </td>
+                                                <td>
+                                                    <b><?php echo highlight($ths_mh_pt, $q); ?></b>
+                                                    <?php if ( !empty($ths_sym_pt) ) { ?>
+                                                        <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>pt"><i class="fas fa-angle-down"></i></a>
+                                                        <div class="collapse setaCollapse" id="sym<?php echo $nkey;?>pt">
+                                                            <div class="dropdown-divider"></div><b><?php pll_e('Entry term(s)'); ?>:</b><br>
+                                                            <?php foreach ($ths_sym_pt as $key => $value) { echo highlight($value, $q)."<br>"; } ?>
+                                                        </div>
+                                                    <?php } ?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-right badge-descriptor tableWidth">
+                                                    <?php pll_e('Descriptor French'); ?>:
+                                                </td>
+                                                <td>
+                                                    <b><?php echo highlight($ths_mh_fr, $q); ?></b>
+                                                    <?php if ( !empty($ths_sym_fr) ) { ?>
+                                                        <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>fr"><i class="fas fa-angle-down"></i></a>
+                                                        <div class="collapse setaCollapse" id="sym<?php echo $nkey;?>fr">
+                                                            <div class="dropdown-divider"></div><b><?php pll_e('Entry term(s)'); ?>:</b><br>
+                                                            <?php foreach ($ths_sym_fr as $key => $value) { echo highlight($value, $q)."<br>"; } ?>
+                                                        </div>
+                                                    <?php } ?>
+                                                </td>
+                                            </tr>
 
                                 <?php
                                             break;
                                         case 'pt':
                                 ?>
-                                            <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor Portuguese'); ?>:</td><td><b><?php echo $ths_mh_pt; ?></b></td></tr>
-                                            <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor English'); ?>:</td><td><b><?php echo $ths_mh_en; ?></b></td></tr>
-                                            <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor Spanish'); ?>:</td><td><b><?php echo $ths_mh_es; ?></b></td></tr>
-                                            <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor French'); ?>:</td><td><b><?php echo $ths_mh_fr; ?></b></td></tr>
+                                            <tr>
+                                                <td class="text-right badge-descriptor tableWidth">
+                                                    <?php pll_e('Descriptor Portuguese'); ?>:
+                                                </td>
+                                                <td>
+                                                    <b><?php echo highlight($ths_mh_pt, $q); ?></b>
+                                                    <?php if ( !empty($ths_sym_pt) ) { ?>
+                                                        <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>pt"><i class="fas fa-angle-down"></i></a>
+                                                        <div class="collapse show setaCollapse" id="sym<?php echo $nkey;?>pt">
+                                                            <div class="dropdown-divider"></div><b><?php pll_e('Entry term(s)'); ?>:</b><br>
+                                                            <?php foreach ($ths_sym_pt as $key => $value) { echo highlight($value, $q)."<br>"; } ?>
+                                                        </div>
+                                                    <?php } ?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-right badge-descriptor tableWidth">
+                                                    <?php pll_e('Descriptor English'); ?>:
+                                                </td>
+                                                <td>
+                                                    <b><?php echo highlight($ths_mh_en, $q); ?></b>
+                                                    <?php if ( !empty($ths_sym_en) ) { ?>
+                                                        <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>en"><i class="fas fa-angle-down"></i></a>
+                                                        <div class="collapse setaCollapse" id="sym<?php echo $nkey;?>en">
+                                                            <div class="dropdown-divider"></div><b><?php pll_e('Entry term(s)'); ?>:</b><br>
+                                                            <?php foreach ($ths_sym_en as $key => $value) { echo highlight($value, $q)."<br>"; } ?>
+                                                        </div>
+                                                    <?php } ?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-right badge-descriptor tableWidth">
+                                                    <?php pll_e('Descriptor Spanish'); ?>:
+                                                </td>
+                                                <td>
+                                                    <b><?php echo highlight($ths_mh_es, $q); ?></b>
+                                                    <?php if ( !empty($ths_sym_es) ) { ?>
+                                                        <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>es"><i class="fas fa-angle-down"></i></a>
+                                                        <div class="collapse setaCollapse" id="sym<?php echo $nkey;?>es">
+                                                            <div class="dropdown-divider"></div><b><?php pll_e('Entry term(s)'); ?>:</b><br>
+                                                            <?php foreach ($ths_sym_es as $key => $value) { echo highlight($value, $q)."<br>"; } ?>
+                                                        </div>
+                                                    <?php } ?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-right badge-descriptor tableWidth">
+                                                    <?php pll_e('Descriptor French'); ?>:
+                                                </td>
+                                                <td>
+                                                    <b><?php echo highlight($ths_mh_fr, $q); ?></b>
+                                                    <?php if ( !empty($ths_sym_fr) ) { ?>
+                                                        <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>fr"><i class="fas fa-angle-down"></i></a>
+                                                        <div class="collapse setaCollapse" id="sym<?php echo $nkey;?>fr">
+                                                            <div class="dropdown-divider"></div><b><?php pll_e('Entry term(s)'); ?>:</b><br>
+                                                            <?php foreach ($ths_sym_fr as $key => $value) { echo highlight($value, $q)."<br>"; } ?>
+                                                        </div>
+                                                    <?php } ?>
+                                                </td>
+                                            </tr>
                                 <?php
                                             break;
                                         case 'fr':
                                 ?>
-                                            <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor French'); ?>:</td><td><b><?php echo $ths_mh_fr; ?></b></td></tr>
-                                            <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor English'); ?>:</td><td><b><?php echo $ths_mh_en; ?></b></td></tr>
-                                            <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor Spanish'); ?>:</td><td><b><?php echo $ths_mh_es; ?></b></td></tr>
-                                            <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor Portuguese'); ?>:</td><td><b><?php echo $ths_mh_pt; ?></b></td></tr>
+                                            <tr>
+                                                <td class="text-right badge-descriptor tableWidth">
+                                                    <?php pll_e('Descriptor French'); ?>:
+                                                </td>
+                                                <td>
+                                                    <b><?php echo highlight($ths_mh_fr, $q); ?></b>
+                                                    <?php if ( !empty($ths_sym_fr) ) { ?>
+                                                        <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>fr"><i class="fas fa-angle-down"></i></a>
+                                                        <div class="collapse show setaCollapse" id="sym<?php echo $nkey;?>fr">
+                                                            <div class="dropdown-divider"></div><b><?php pll_e('Entry term(s)'); ?>:</b><br>
+                                                            <?php foreach ($ths_sym_fr as $key => $value) { echo highlight($value, $q)."<br>"; } ?>
+                                                        </div>
+                                                    <?php } ?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-right badge-descriptor tableWidth">
+                                                    <?php pll_e('Descriptor English'); ?>:
+                                                </td>
+                                                <td>
+                                                    <b><?php echo highlight($ths_mh_en, $q); ?></b>
+                                                    <?php if ( !empty($ths_sym_en) ) { ?>
+                                                        <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>en"><i class="fas fa-angle-down"></i></a>
+                                                        <div class="collapse setaCollapse" id="sym<?php echo $nkey;?>en">
+                                                            <div class="dropdown-divider"></div><b><?php pll_e('Entry term(s)'); ?>:</b><br>
+                                                            <?php foreach ($ths_sym_en as $key => $value) { echo highlight($value, $q)."<br>"; } ?>
+                                                        </div>
+                                                    <?php } ?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-right badge-descriptor tableWidth">
+                                                    <?php pll_e('Descriptor Spanish'); ?>:
+                                                </td>
+                                                <td>
+                                                    <b><?php echo highlight($ths_mh_es, $q); ?></b>
+                                                    <?php if ( !empty($ths_sym_es) ) { ?>
+                                                        <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>es"><i class="fas fa-angle-down"></i></a>
+                                                        <div class="collapse setaCollapse" id="sym<?php echo $nkey;?>es">
+                                                            <div class="dropdown-divider"></div><b><?php pll_e('Entry term(s)'); ?>:</b><br>
+                                                            <?php foreach ($ths_sym_es as $key => $value) { echo highlight($value, $q)."<br>"; } ?>
+                                                        </div>
+                                                    <?php } ?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-right badge-descriptor tableWidth">
+                                                    <?php pll_e('Descriptor Portuguese'); ?>:
+                                                </td>
+                                                <td>
+                                                    <b><?php echo highlight($ths_mh_pt, $q); ?></b>
+                                                    <?php if ( !empty($ths_sym_pt) ) { ?>
+                                                        <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>pt"><i class="fas fa-angle-down"></i></a>
+                                                        <div class="collapse setaCollapse" id="sym<?php echo $nkey;?>pt">
+                                                            <div class="dropdown-divider"></div><b><?php pll_e('Entry term(s)'); ?>:</b><br>
+                                                            <?php foreach ($ths_sym_pt as $key => $value) { echo highlight($value, $q)."<br>"; } ?>
+                                                        </div>
+                                                    <?php } ?>
+                                                </td>
+                                            </tr>
 
                                 <?php
                                             break;
                                     }
                                 ?>
-
-
-
-
-
-
-
-                                <?php if ($ths_sym) { ?>
-                                <tr>
-                                    <td class="text-right badge-light align-middle"><?php pll_e('Entry term(s)'); ?>:</td>
-                                    <td>
-                                        <?php
-                                            foreach ($ths_sym as $key => $value) {
-                                                echo $value."<br>";
-                                            }
-                                        ?>
-                                    </td>
-                                </tr>
-                                <?php } ?>
 
                             </table>
                         </div>
