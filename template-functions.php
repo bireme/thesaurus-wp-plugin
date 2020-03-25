@@ -103,4 +103,94 @@ if ( !function_exists('real_site_url') ) {
     }
 }
 
+
+
+
+// Função para ordenar corretamente o MH de acordo com o idioma escolhido
+function SortMHResultEN($name1,$name2){
+    $patterns = array(
+        'a' => '(á|à|â|ä|Á|À|Â|Ä)',
+        'e' => '(é|è|ê|ë|É|È|Ê|Ë)',
+        'i' => '(í|ì|î|ï|Í|Ì|Î|Ï)',
+        'o' => '(ó|ò|ô|ö|Ó|Ò|Ô|Ö)',
+        'u' => '(ú|ù|û|ü|Ú|Ù|Û|Ü)'
+    );
+    $name1 = preg_replace(array_values($patterns), array_keys($patterns), $name1["ths_mh_en"]);
+    $name2 = preg_replace(array_values($patterns), array_keys($patterns), $name2["ths_mh_en"]);
+    return strcasecmp($name1, $name2);
+}
+
+function SortMHResultES($name1,$name2){
+    $patterns = array(
+        'a' => '(á|à|â|ä|Á|À|Â|Ä)',
+        'e' => '(é|è|ê|ë|É|È|Ê|Ë)',
+        'i' => '(í|ì|î|ï|Í|Ì|Î|Ï)',
+        'o' => '(ó|ò|ô|ö|Ó|Ò|Ô|Ö)',
+        'u' => '(ú|ù|û|ü|Ú|Ù|Û|Ü)'
+    );
+    $name1 = preg_replace(array_values($patterns), array_keys($patterns), $name1["ths_mh_es"]);
+    $name2 = preg_replace(array_values($patterns), array_keys($patterns), $name2["ths_mh_es"]);
+    return strcasecmp($name1, $name2);
+}
+
+function SortMHResultPT($name1,$name2){
+    $patterns = array(
+        'a' => '(á|à|â|ä|Á|À|Â|Ä)',
+        'e' => '(é|è|ê|ë|É|È|Ê|Ë)',
+        'i' => '(í|ì|î|ï|Í|Ì|Î|Ï)',
+        'o' => '(ó|ò|ô|ö|Ó|Ò|Ô|Ö)',
+        'u' => '(ú|ù|û|ü|Ú|Ù|Û|Ü)'
+    );
+    $name1 = preg_replace(array_values($patterns), array_keys($patterns), $name1["ths_mh_pt"]);
+    $name2 = preg_replace(array_values($patterns), array_keys($patterns), $name2["ths_mh_pt"]);
+    return strcasecmp($name1, $name2);
+}
+
+function SortMHResultFR($name1,$name2){
+    $patterns = array(
+        'a' => '(á|à|â|ä|Á|À|Â|Ä)',
+        'e' => '(é|è|ê|ë|É|È|Ê|Ë)',
+        'i' => '(í|ì|î|ï|Í|Ì|Î|Ï)',
+        'o' => '(ó|ò|ô|ö|Ó|Ò|Ô|Ö)',
+        'u' => '(ú|ù|û|ü|Ú|Ù|Û|Ü)'
+    );
+    $name1 = preg_replace(array_values($patterns), array_keys($patterns), $name1["ths_mh_fr"]);
+    $name2 = preg_replace(array_values($patterns), array_keys($patterns), $name2["ths_mh_fr"]);
+    return strcasecmp($name1, $name2);
+}
+
+
+// Função para ordenar corretamente Entry Terms que tenham acento
+function SortET($name1,$name2){
+    $patterns = array(
+        'a' => '(á|à|â|ä|Á|À|Â|Ä)',
+        'e' => '(é|è|ê|ë|É|È|Ê|Ë)',
+        'i' => '(í|ì|î|ï|Í|Ì|Î|Ï)',
+        'o' => '(ó|ò|ô|ö|Ó|Ò|Ô|Ö)',
+        'u' => '(ú|ù|û|ü|Ú|Ù|Û|Ü)'
+    );
+    $name1 = preg_replace(array_values($patterns), array_keys($patterns), $name1);
+    $name2 = preg_replace(array_values($patterns), array_keys($patterns), $name2);
+    return strcasecmp($name1, $name2);
+}
+
+// Função para verificar se o valor de um array tem determinado texto
+function containsString($arr, $q){
+    foreach ($arr as $key => $value) {
+        $has=(FALSE === \stripos($value, $q)) ? FALSE : TRUE;
+        if ( $has == '1' ){
+            $open=$has;
+            // echo "$value: --> ".$open."<br>";
+        }
+    }   
+    return $open;
+}
+
+// Função de highlight
+function highlight($text, $words) {
+    $text = preg_replace("|($words)|Uui", "<span style=\"background-color: yellow\">$1</span>", $text);
+    return $text;
+}
+
+
 ?>

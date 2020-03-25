@@ -97,21 +97,6 @@ if ($tquery){
 // echo "---> ".$ths_service_request."<br>";
 
 
-// Função para ordenar Entry Terms que tenham acento
-function SortET($name1,$name2){
-    $patterns = array(
-        'a' => '(á|à|â|ä|Á|À|Â|Ä)',
-        'e' => '(é|è|ê|ë|É|È|Ê|Ë)',
-        'i' => '(í|ì|î|ï|Í|Ì|Î|Ï)',
-        'o' => '(ó|ò|ô|ö|Ó|Ò|Ô|Ö)',
-        'u' => '(ú|ù|û|ü|Ú|Ù|Û|Ü)'
-    );
-    $name1 = preg_replace(array_values($patterns), array_keys($patterns), $name1);
-    $name2 = preg_replace(array_values($patterns), array_keys($patterns), $name2);
-    return strcasecmp($name1, $name2);
-}
-
-
 $arr_docs_all = array();
 
 $response = @file_get_contents($ths_service_request);
@@ -327,59 +312,6 @@ if ($response){
 }
 
 
-// Função para ordenar corretamente o MH de acordo com o idioma escolhido
-function SortMHResultEN($name1,$name2){
-    $patterns = array(
-        'a' => '(á|à|â|ä|Á|À|Â|Ä)',
-        'e' => '(é|è|ê|ë|É|È|Ê|Ë)',
-        'i' => '(í|ì|î|ï|Í|Ì|Î|Ï)',
-        'o' => '(ó|ò|ô|ö|Ó|Ò|Ô|Ö)',
-        'u' => '(ú|ù|û|ü|Ú|Ù|Û|Ü)'
-    );
-    $name1 = preg_replace(array_values($patterns), array_keys($patterns), $name1["ths_mh_en"]);
-    $name2 = preg_replace(array_values($patterns), array_keys($patterns), $name2["ths_mh_en"]);
-    return strcasecmp($name1, $name2);
-}
-
-function SortMHResultES($name1,$name2){
-    $patterns = array(
-        'a' => '(á|à|â|ä|Á|À|Â|Ä)',
-        'e' => '(é|è|ê|ë|É|È|Ê|Ë)',
-        'i' => '(í|ì|î|ï|Í|Ì|Î|Ï)',
-        'o' => '(ó|ò|ô|ö|Ó|Ò|Ô|Ö)',
-        'u' => '(ú|ù|û|ü|Ú|Ù|Û|Ü)'
-    );
-    $name1 = preg_replace(array_values($patterns), array_keys($patterns), $name1["ths_mh_es"]);
-    $name2 = preg_replace(array_values($patterns), array_keys($patterns), $name2["ths_mh_es"]);
-    return strcasecmp($name1, $name2);
-}
-
-function SortMHResultPT($name1,$name2){
-    $patterns = array(
-        'a' => '(á|à|â|ä|Á|À|Â|Ä)',
-        'e' => '(é|è|ê|ë|É|È|Ê|Ë)',
-        'i' => '(í|ì|î|ï|Í|Ì|Î|Ï)',
-        'o' => '(ó|ò|ô|ö|Ó|Ò|Ô|Ö)',
-        'u' => '(ú|ù|û|ü|Ú|Ù|Û|Ü)'
-    );
-    $name1 = preg_replace(array_values($patterns), array_keys($patterns), $name1["ths_mh_pt"]);
-    $name2 = preg_replace(array_values($patterns), array_keys($patterns), $name2["ths_mh_pt"]);
-    return strcasecmp($name1, $name2);
-}
-
-function SortMHResultFR($name1,$name2){
-    $patterns = array(
-        'a' => '(á|à|â|ä|Á|À|Â|Ä)',
-        'e' => '(é|è|ê|ë|É|È|Ê|Ë)',
-        'i' => '(í|ì|î|ï|Í|Ì|Î|Ï)',
-        'o' => '(ó|ò|ô|ö|Ó|Ò|Ô|Ö)',
-        'u' => '(ú|ù|û|ü|Ú|Ù|Û|Ü)'
-    );
-    $name1 = preg_replace(array_values($patterns), array_keys($patterns), $name1["ths_mh_fr"]);
-    $name2 = preg_replace(array_values($patterns), array_keys($patterns), $name2["ths_mh_fr"]);
-    return strcasecmp($name1, $name2);
-}
-
 // Faz o ordenamento correto de acordo com o idioma escolhido para visualização no navegador
 switch ($lang) {
     case 'en':
@@ -401,18 +333,21 @@ switch ($lang) {
 
 
 
+
+
+
+// TESTE =====================================================================
+
 // DEBUG
 // echo "<pre>"; print_r($arr_result); echo "</pre>";
 
+// TESTE =====================================================================
+
+
+
 ?>
 
-<!-- Função de highlight -->
-<?php
-function highlight($text, $words) {
-    $text = preg_replace("|($words)|Uui", "<span style=\"background-color: yellow\">$1</span>", $text);
-    return $text;
-}
-?>
+
 
 <section class="container" id="main_container">
     <div class="padding1">
@@ -468,79 +403,14 @@ function highlight($text, $words) {
                         $ths_sym_fr=$resultado[$key]['arr_sym_fr'];
                         // print_r($resultado[$key]);
                         // print_r($resultado[$key][0]);
-                        ?>
+                        // echo "<pre>"; print_r($ths_sym_pt); echo "</pre>";
 
-
-<!--             <article class="col-12">
-                <div class="row">
-                    <div class="col-12 col-md-10">
-                        <div class="table-responsive">
-                            <span class="badge badge-descriptor">1 / 1</span>
-                            <table class="table table-bordered table-sm font12">
-                                <tr>
-                                    <td class="text-right badge-descriptor tableWidth">Descritor Português:</td>
-                                    <td>
-                                        <b>Cabelo</b>
-                                        <a class="float-right" data-toggle="collapse" href="#sym1"><i class="fas fa-angle-down"></i></a>
-                                        <div class="collapse show setaCollapse" id="sym1">
-                                            <div class="dropdown-divider"></div><b>Sinônimos:</b> <br>
-                                            Folículos do Cabelo<br>
-                                            Lanugo<br>
-                                            Pelo Fetal
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-right badge-descriptor tableWidth">Descritor Espanhol:</td>
-                                    <td>
-                                        <b>Cabello</b>
-                                        <a class="float-right" data-toggle="collapse" href="#sym2"><i class="fas fa-angle-down"></i></a>
-                                        <div class="collapse show setaCollapse" id="sym2">
-                                            <div class="dropdown-divider"></div><b>Sinônimos:</b> <br>
-                                            Folículos do Cabelo<br>
-                                            <mark><b>Lanugo</b></mark><br>
-                                            Pelo Fetal
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-right badge-descriptor tableWidth">Descritor Inglês:</td>
-                                    <td>
-                                        <b>Hair</b>
-                                        <a class="float-right" data-toggle="collapse" href="#sym3"><i class="fas fa-angle-down"></i></a>
-                                        <div class="collapse setaCollapse" id="sym3">
-                                            <div class="dropdown-divider"></div><b>Sinônimos:</b> <br>
-                                            Folículos do Cabelo<br>
-                                            Lanugo<br>
-                                            Pelo Fetal
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-right badge-descriptor tableWidth">Descritor Francês:</td>
-                                    <td>
-                                        <b>Cheveux</b>
-                                        <a class="float-right" data-toggle="collapse" href="#sym4"><i class="fas fa-angle-down"></i></a>
-                                        <div class="collapse setaCollapse" id="sym4">
-                                            <div class="dropdown-divider"></div><b>Sinônimos:</b> <br>
-                                            Folículos do Cabelo<br>
-                                            Lanugo<br>
-                                            Pelo Fetal
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-2 boxBtnSeeMore">
-                        <a href="resource.php" class="btn btn-success btn-sm btnSeeMore">Ver Detalhes</a>
-                    </div>
-                </div>
-                <br>
-            </article> -->
-
-
-
+                        // Define se o array dos Sinonimos aparecerá aberto
+                        $openDropdownEN=containsString($ths_sym_en,$q);
+                        $openDropdownES=containsString($ths_sym_es,$q);
+                        $openDropdownPT=containsString($ths_sym_pt,$q);                        
+                        $openDropdownFR=containsString($ths_sym_fr,$q);
+                    ?>
 
             <article class="col-12">
                 <div class="row">
@@ -588,7 +458,7 @@ function highlight($text, $words) {
                                                     <b><?php echo highlight($ths_mh_es, $q); ?></b>
                                                     <?php if ( !empty($ths_sym_es) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>es"><i class="fas fa-angle-down"></i></a>
-                                                        <div class="collapse setaCollapse" id="sym<?php echo $nkey;?>es">
+                                                        <div class="collapse <?php if ($openDropdownES == '1' ){ echo "show";} ?> setaCollapse" id="sym<?php echo $nkey;?>es">
                                                             <div class="dropdown-divider"></div><b><?php pll_e('Entry term(s)'); ?>:</b><br>
                                                             <?php foreach ($ths_sym_es as $key => $value) { echo highlight($value, $q)."<br>"; } ?>
                                                         </div>
@@ -603,7 +473,7 @@ function highlight($text, $words) {
                                                     <b><?php echo highlight($ths_mh_pt, $q); ?></b>
                                                     <?php if ( !empty($ths_sym_pt) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>pt"><i class="fas fa-angle-down"></i></a>
-                                                        <div class="collapse setaCollapse" id="sym<?php echo $nkey;?>pt">
+                                                        <div class="collapse <?php if ($openDropdownPT == '1' ){ echo "show";} ?> setaCollapse" id="sym<?php echo $nkey;?>pt">
                                                             <div class="dropdown-divider"></div><b><?php pll_e('Entry term(s)'); ?>:</b><br>
                                                             <?php foreach ($ths_sym_pt as $key => $value) { echo highlight($value, $q)."<br>"; } ?>
                                                         </div>
@@ -618,7 +488,7 @@ function highlight($text, $words) {
                                                     <b><?php echo highlight($ths_mh_fr, $q); ?></b>
                                                     <?php if ( !empty($ths_sym_fr) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>fr"><i class="fas fa-angle-down"></i></a>
-                                                        <div class="collapse setaCollapse" id="sym<?php echo $nkey;?>fr">
+                                                        <div class="collapse <?php if ($openDropdownFR == '1' ){ echo "show";} ?> setaCollapse" id="sym<?php echo $nkey;?>fr">
                                                             <div class="dropdown-divider"></div><b><?php pll_e('Entry term(s)'); ?>:</b><br>
                                                             <?php foreach ($ths_sym_fr as $key => $value) { echo highlight($value, $q)."<br>"; } ?>
                                                         </div>
@@ -652,7 +522,7 @@ function highlight($text, $words) {
                                                     <b><?php echo highlight($ths_mh_en, $q); ?></b>
                                                     <?php if ( !empty($ths_sym_en) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>en"><i class="fas fa-angle-down"></i></a>
-                                                        <div class="collapse setaCollapse" id="sym<?php echo $nkey;?>en">
+                                                        <div class="collapse <?php if ($openDropdownEN == '1' ){ echo "show";} ?> setaCollapse" id="sym<?php echo $nkey;?>en">
                                                             <div class="dropdown-divider"></div><b><?php pll_e('Entry term(s)'); ?>:</b><br>
                                                             <?php foreach ($ths_sym_en as $key => $value) { echo highlight($value, $q)."<br>"; } ?>
                                                         </div>
@@ -667,7 +537,7 @@ function highlight($text, $words) {
                                                     <b><?php echo highlight($ths_mh_pt, $q); ?></b>
                                                     <?php if ( !empty($ths_sym_pt) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>pt"><i class="fas fa-angle-down"></i></a>
-                                                        <div class="collapse setaCollapse" id="sym<?php echo $nkey;?>pt">
+                                                        <div class="collapse <?php if ($openDropdownPT == '1' ){ echo "show";} ?> setaCollapse" id="sym<?php echo $nkey;?>pt">
                                                             <div class="dropdown-divider"></div><b><?php pll_e('Entry term(s)'); ?>:</b><br>
                                                             <?php foreach ($ths_sym_pt as $key => $value) { echo highlight($value, $q)."<br>"; } ?>
                                                         </div>
@@ -682,7 +552,7 @@ function highlight($text, $words) {
                                                     <b><?php echo highlight($ths_mh_fr, $q); ?></b>
                                                     <?php if ( !empty($ths_sym_fr) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>fr"><i class="fas fa-angle-down"></i></a>
-                                                        <div class="collapse setaCollapse" id="sym<?php echo $nkey;?>fr">
+                                                        <div class="collapse <?php if ($openDropdownFR == '1' ){ echo "show";} ?> setaCollapse" id="sym<?php echo $nkey;?>fr">
                                                             <div class="dropdown-divider"></div><b><?php pll_e('Entry term(s)'); ?>:</b><br>
                                                             <?php foreach ($ths_sym_fr as $key => $value) { echo highlight($value, $q)."<br>"; } ?>
                                                         </div>
@@ -717,7 +587,7 @@ function highlight($text, $words) {
                                                     <b><?php echo highlight($ths_mh_en, $q); ?></b>
                                                     <?php if ( !empty($ths_sym_en) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>en"><i class="fas fa-angle-down"></i></a>
-                                                        <div class="collapse setaCollapse" id="sym<?php echo $nkey;?>en">
+                                                        <div class="collapse <?php if ($openDropdownEN == '1' ){ echo "show";} ?> setaCollapse" id="sym<?php echo $nkey;?>en">
                                                             <div class="dropdown-divider"></div><b><?php pll_e('Entry term(s)'); ?>:</b><br>
                                                             <?php foreach ($ths_sym_en as $key => $value) { echo highlight($value, $q)."<br>"; } ?>
                                                         </div>
@@ -732,7 +602,7 @@ function highlight($text, $words) {
                                                     <b><?php echo highlight($ths_mh_es, $q); ?></b>
                                                     <?php if ( !empty($ths_sym_es) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>es"><i class="fas fa-angle-down"></i></a>
-                                                        <div class="collapse setaCollapse" id="sym<?php echo $nkey;?>es">
+                                                        <div class="collapse <?php if ($openDropdownES == '1' ){ echo "show";} ?> setaCollapse" id="sym<?php echo $nkey;?>es">
                                                             <div class="dropdown-divider"></div><b><?php pll_e('Entry term(s)'); ?>:</b><br>
                                                             <?php foreach ($ths_sym_es as $key => $value) { echo highlight($value, $q)."<br>"; } ?>
                                                         </div>
@@ -747,7 +617,7 @@ function highlight($text, $words) {
                                                     <b><?php echo highlight($ths_mh_fr, $q); ?></b>
                                                     <?php if ( !empty($ths_sym_fr) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>fr"><i class="fas fa-angle-down"></i></a>
-                                                        <div class="collapse setaCollapse" id="sym<?php echo $nkey;?>fr">
+                                                        <div class="collapse <?php if ($openDropdownFR == '1' ){ echo "show";} ?> setaCollapse" id="sym<?php echo $nkey;?>fr">
                                                             <div class="dropdown-divider"></div><b><?php pll_e('Entry term(s)'); ?>:</b><br>
                                                             <?php foreach ($ths_sym_fr as $key => $value) { echo highlight($value, $q)."<br>"; } ?>
                                                         </div>
@@ -781,7 +651,7 @@ function highlight($text, $words) {
                                                     <b><?php echo highlight($ths_mh_en, $q); ?></b>
                                                     <?php if ( !empty($ths_sym_en) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>en"><i class="fas fa-angle-down"></i></a>
-                                                        <div class="collapse setaCollapse" id="sym<?php echo $nkey;?>en">
+                                                        <div class="collapse <?php if ($openDropdownEN == '1' ){ echo "show";} ?> setaCollapse" id="sym<?php echo $nkey;?>en">
                                                             <div class="dropdown-divider"></div><b><?php pll_e('Entry term(s)'); ?>:</b><br>
                                                             <?php foreach ($ths_sym_en as $key => $value) { echo highlight($value, $q)."<br>"; } ?>
                                                         </div>
@@ -796,7 +666,7 @@ function highlight($text, $words) {
                                                     <b><?php echo highlight($ths_mh_es, $q); ?></b>
                                                     <?php if ( !empty($ths_sym_es) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>es"><i class="fas fa-angle-down"></i></a>
-                                                        <div class="collapse setaCollapse" id="sym<?php echo $nkey;?>es">
+                                                        <div class="collapse <?php if ($openDropdownES == '1' ){ echo "show";} ?> setaCollapse" id="sym<?php echo $nkey;?>es">
                                                             <div class="dropdown-divider"></div><b><?php pll_e('Entry term(s)'); ?>:</b><br>
                                                             <?php foreach ($ths_sym_es as $key => $value) { echo highlight($value, $q)."<br>"; } ?>
                                                         </div>
@@ -811,7 +681,7 @@ function highlight($text, $words) {
                                                     <b><?php echo highlight($ths_mh_pt, $q); ?></b>
                                                     <?php if ( !empty($ths_sym_pt) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>pt"><i class="fas fa-angle-down"></i></a>
-                                                        <div class="collapse setaCollapse" id="sym<?php echo $nkey;?>pt">
+                                                        <div class="collapse <?php if ($openDropdownPT == '1' ){ echo "show";} ?> setaCollapse" id="sym<?php echo $nkey;?>pt">
                                                             <div class="dropdown-divider"></div><b><?php pll_e('Entry term(s)'); ?>:</b><br>
                                                             <?php foreach ($ths_sym_pt as $key => $value) { echo highlight($value, $q)."<br>"; } ?>
                                                         </div>
