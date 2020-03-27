@@ -577,6 +577,8 @@ if($has_descriptor or $has_qualifier){
 
                             <?php
 
+// echo "<pre>"; print_r($arr_HierarchicalTree); echo "</pre>";
+
                             $count=0;
                             foreach ($arr_HierarchicalTree as $key => $value) {
                             ?>
@@ -612,15 +614,32 @@ if($has_descriptor or $has_qualifier){
                                             foreach ($arr_HierarchicalTree[$key]['term_string_translations'] as $key1 => $value1) {
                                                 $language_code=convLang($arr_HierarchicalTree[$key]['term_string_translations'][$key1]['language_code']);
 
+                                                if ( $language_code == 'en' ){
+                                                    // $coringa=pll_e('Without translation').'['.$term_string=$arr_HierarchicalTree[$key]['term_string_translations'][$key1]['term_string'].']';
+                                                    $coringa=$term_string=$arr_HierarchicalTree[$key]['term_string_translations'][$key1]['term_string'];
+                                                }
+
                                                 if ( $lang_another ) {
                                                     if ( $language_code == $lang_another ) {
-                                                    $term_string=$arr_HierarchicalTree[$key]['term_string_translations'][$key1]['term_string'];
+                                                        if( !empty($arr_HierarchicalTree[$key]['term_string_translations'][$key1]['term_string']) ){
+                                                            $term_string=$arr_HierarchicalTree[$key]['term_string_translations'][$key1]['term_string'];
+                                                            unset($coringa);
+                                                        } else {
+                                                            $term_string=$coringa;
+                                                        }
                                                     }
                                                 } elseif ( $language_code == $lang_ths ){
-                                                    $term_string=$arr_HierarchicalTree[$key]['term_string_translations'][$key1]['term_string'];
+                                                    if( !empty($arr_HierarchicalTree[$key]['term_string_translations'][$key1]['term_string']) ){
+                                                        $term_string=$arr_HierarchicalTree[$key]['term_string_translations'][$key1]['term_string'];
+                                                        unset($coringa);
+                                                    } else {
+                                                        $term_string=$coringa;
+                                                    }
                                                 }
 
                                             }
+
+
 
                                             ?>
                                             <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $arr_HierarchicalTree[$key]['id'];?>">
@@ -628,7 +647,12 @@ if($has_descriptor or $has_qualifier){
 
                                             <?php 
                                             // Concatena string
-                                            $string= $term_string . ' [' . $tree_number . ']';
+                                            if (!empty($coringa)){
+                                                $string=' ** ' . $term_string .' ( in English ) ** [' . $tree_number . ']';
+                                            } else {
+                                                $string= $term_string . ' [' . $tree_number . ']';
+                                            }
+
 
                                             $tam_string=strlen($string);
                                             $tam=(intval($arr_HierarchicalTree[$key]['level'])*10)+$tam_string;
