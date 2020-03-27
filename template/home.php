@@ -440,7 +440,7 @@ switch ($lang) {
                                                     <?php pll_e('Descriptor English'); ?>:
                                                 </td>
                                                 <td>
-                                                    <b><?php echo highlight($ths_mh_en, $q); ?></b>
+                                                    <b><?php if ( !empty($ths_mh_en)){ echo highlight($ths_mh_en, $q); } else { echo pll_e('Without translation'); } ?></b>
                                                     <?php if ( !empty($ths_sym_en) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>en"><i class="fas fa-angle-down"></i></a>
                                                         <div class="collapse show setaCollapse" id="sym<?php echo $nkey;?>en">
@@ -455,7 +455,7 @@ switch ($lang) {
                                                     <?php pll_e('Descriptor Spanish'); ?>:
                                                 </td>
                                                 <td>
-                                                    <b><?php echo highlight($ths_mh_es, $q); ?></b>
+                                                    <b><?php if ( !empty($ths_mh_es)){ echo highlight($ths_mh_es, $q); } else { echo pll_e('Without translation'); } ?></b>
                                                     <?php if ( !empty($ths_sym_es) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>es"><i class="fas fa-angle-down"></i></a>
                                                         <div class="collapse <?php if ($openDropdownES == '1' ){ echo "show";} ?> setaCollapse" id="sym<?php echo $nkey;?>es">
@@ -470,7 +470,7 @@ switch ($lang) {
                                                     <?php pll_e('Descriptor Portuguese'); ?>:
                                                 </td>
                                                 <td>
-                                                    <b><?php echo highlight($ths_mh_pt, $q); ?></b>
+                                                    <b><?php if ( !empty($ths_mh_pt)){ echo highlight($ths_mh_pt, $q); } else { echo pll_e('Without translation'); } ?></b>
                                                     <?php if ( !empty($ths_sym_pt) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>pt"><i class="fas fa-angle-down"></i></a>
                                                         <div class="collapse <?php if ($openDropdownPT == '1' ){ echo "show";} ?> setaCollapse" id="sym<?php echo $nkey;?>pt">
@@ -485,7 +485,7 @@ switch ($lang) {
                                                     <?php pll_e('Descriptor French'); ?>:
                                                 </td>
                                                 <td>
-                                                    <b><?php echo highlight($ths_mh_fr, $q); ?></b>
+                                                    <b><?php if ( !empty($ths_mh_fr)){ echo highlight($ths_mh_fr, $q); } else { echo pll_e('Without translation'); } ?></b>
                                                     <?php if ( !empty($ths_sym_fr) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>fr"><i class="fas fa-angle-down"></i></a>
                                                         <div class="collapse <?php if ($openDropdownFR == '1' ){ echo "show";} ?> setaCollapse" id="sym<?php echo $nkey;?>fr">
@@ -504,7 +504,7 @@ switch ($lang) {
                                                     <?php pll_e('Descriptor Spanish'); ?>:
                                                 </td>
                                                 <td>
-                                                    <b><?php echo highlight($ths_mh_es, $q); ?></b>
+                                                    <b><?php if ( !empty($ths_mh_es)){ echo highlight($ths_mh_es, $q); } else { echo pll_e('Without translation'); } ?></b>
                                                     <?php if ( !empty($ths_sym_es) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>es"><i class="fas fa-angle-down"></i></a>
                                                         <div class="collapse show setaCollapse" id="sym<?php echo $nkey;?>es">
@@ -519,7 +519,7 @@ switch ($lang) {
                                                     <?php pll_e('Descriptor English'); ?>:
                                                 </td>
                                                 <td>
-                                                    <b><?php echo highlight($ths_mh_en, $q); ?></b>
+                                                    <b><?php if ( !empty($ths_mh_en)){ echo highlight($ths_mh_en, $q); } else { echo pll_e('Without translation'); } ?></b>
                                                     <?php if ( !empty($ths_sym_en) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>en"><i class="fas fa-angle-down"></i></a>
                                                         <div class="collapse <?php if ($openDropdownEN == '1' ){ echo "show";} ?> setaCollapse" id="sym<?php echo $nkey;?>en">
@@ -534,7 +534,7 @@ switch ($lang) {
                                                     <?php pll_e('Descriptor Portuguese'); ?>:
                                                 </td>
                                                 <td>
-                                                    <b><?php echo highlight($ths_mh_pt, $q); ?></b>
+                                                    <b><?php if ( !empty($ths_mh_pt)){ echo highlight($ths_mh_pt, $q); } else { echo pll_e('Without translation'); } ?></b>
                                                     <?php if ( !empty($ths_sym_pt) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>pt"><i class="fas fa-angle-down"></i></a>
                                                         <div class="collapse <?php if ($openDropdownPT == '1' ){ echo "show";} ?> setaCollapse" id="sym<?php echo $nkey;?>pt">
@@ -549,7 +549,7 @@ switch ($lang) {
                                                     <?php pll_e('Descriptor French'); ?>:
                                                 </td>
                                                 <td>
-                                                    <b><?php echo highlight($ths_mh_fr, $q); ?></b>
+                                                    <b><?php if ( !empty($ths_mh_fr)){ echo highlight($ths_mh_fr, $q); } else { echo pll_e('Without translation'); } ?></b>
                                                     <?php if ( !empty($ths_sym_fr) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>fr"><i class="fas fa-angle-down"></i></a>
                                                         <div class="collapse <?php if ($openDropdownFR == '1' ){ echo "show";} ?> setaCollapse" id="sym<?php echo $nkey;?>fr">
@@ -569,7 +569,7 @@ switch ($lang) {
                                                     <?php pll_e('Descriptor Portuguese'); ?>:
                                                 </td>
                                                 <td>
-                                                    <b><?php echo highlight($ths_mh_pt, $q); ?></b>
+                                                    <b><?php if ( !empty($ths_mh_pt)){ echo highlight($ths_mh_pt, $q); } else { echo pll_e('Without translation'); } ?></b>
                                                     <?php if ( !empty($ths_sym_pt) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>pt"><i class="fas fa-angle-down"></i></a>
                                                         <div class="collapse show setaCollapse" id="sym<?php echo $nkey;?>pt">
@@ -584,7 +584,7 @@ switch ($lang) {
                                                     <?php pll_e('Descriptor English'); ?>:
                                                 </td>
                                                 <td>
-                                                    <b><?php echo highlight($ths_mh_en, $q); ?></b>
+                                                    <b><?php if ( !empty($ths_mh_en)){ echo highlight($ths_mh_en, $q); } else { echo pll_e('Without translation'); } ?></b>
                                                     <?php if ( !empty($ths_sym_en) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>en"><i class="fas fa-angle-down"></i></a>
                                                         <div class="collapse <?php if ($openDropdownEN == '1' ){ echo "show";} ?> setaCollapse" id="sym<?php echo $nkey;?>en">
@@ -599,7 +599,7 @@ switch ($lang) {
                                                     <?php pll_e('Descriptor Spanish'); ?>:
                                                 </td>
                                                 <td>
-                                                    <b><?php echo highlight($ths_mh_es, $q); ?></b>
+                                                    <b><?php if ( !empty($ths_mh_es)){ echo highlight($ths_mh_es, $q); } else { echo pll_e('Without translation'); } ?></b>
                                                     <?php if ( !empty($ths_sym_es) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>es"><i class="fas fa-angle-down"></i></a>
                                                         <div class="collapse <?php if ($openDropdownES == '1' ){ echo "show";} ?> setaCollapse" id="sym<?php echo $nkey;?>es">
@@ -614,7 +614,7 @@ switch ($lang) {
                                                     <?php pll_e('Descriptor French'); ?>:
                                                 </td>
                                                 <td>
-                                                    <b><?php echo highlight($ths_mh_fr, $q); ?></b>
+                                                    <b><?php if ( !empty($ths_mh_fr)){ echo highlight($ths_mh_fr, $q); } else { echo pll_e('Without translation'); } ?></b>
                                                     <?php if ( !empty($ths_sym_fr) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>fr"><i class="fas fa-angle-down"></i></a>
                                                         <div class="collapse <?php if ($openDropdownFR == '1' ){ echo "show";} ?> setaCollapse" id="sym<?php echo $nkey;?>fr">
@@ -633,7 +633,7 @@ switch ($lang) {
                                                     <?php pll_e('Descriptor French'); ?>:
                                                 </td>
                                                 <td>
-                                                    <b><?php echo highlight($ths_mh_fr, $q); ?></b>
+                                                    <b><?php if ( !empty($ths_mh_fr)){ echo highlight($ths_mh_fr, $q); } else { echo pll_e('Without translation'); } ?></b>
                                                     <?php if ( !empty($ths_sym_fr) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>fr"><i class="fas fa-angle-down"></i></a>
                                                         <div class="collapse show setaCollapse" id="sym<?php echo $nkey;?>fr">
@@ -648,7 +648,7 @@ switch ($lang) {
                                                     <?php pll_e('Descriptor English'); ?>:
                                                 </td>
                                                 <td>
-                                                    <b><?php echo highlight($ths_mh_en, $q); ?></b>
+                                                    <b><?php if ( !empty($ths_mh_en)){ echo highlight($ths_mh_en, $q); } else { echo pll_e('Without translation'); } ?></b>
                                                     <?php if ( !empty($ths_sym_en) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>en"><i class="fas fa-angle-down"></i></a>
                                                         <div class="collapse <?php if ($openDropdownEN == '1' ){ echo "show";} ?> setaCollapse" id="sym<?php echo $nkey;?>en">
@@ -663,7 +663,7 @@ switch ($lang) {
                                                     <?php pll_e('Descriptor Spanish'); ?>:
                                                 </td>
                                                 <td>
-                                                    <b><?php echo highlight($ths_mh_es, $q); ?></b>
+                                                    <b><?php if ( !empty($ths_mh_es)){ echo highlight($ths_mh_es, $q); } else { echo pll_e('Without translation'); } ?></b>
                                                     <?php if ( !empty($ths_sym_es) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>es"><i class="fas fa-angle-down"></i></a>
                                                         <div class="collapse <?php if ($openDropdownES == '1' ){ echo "show";} ?> setaCollapse" id="sym<?php echo $nkey;?>es">
@@ -678,7 +678,7 @@ switch ($lang) {
                                                     <?php pll_e('Descriptor Portuguese'); ?>:
                                                 </td>
                                                 <td>
-                                                    <b><?php echo highlight($ths_mh_pt, $q); ?></b>
+                                                    <b><?php if ( !empty($ths_mh_pt)){ echo highlight($ths_mh_pt, $q); } else { echo pll_e('Without translation'); } ?></b>
                                                     <?php if ( !empty($ths_sym_pt) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>pt"><i class="fas fa-angle-down"></i></a>
                                                         <div class="collapse <?php if ($openDropdownPT == '1' ){ echo "show";} ?> setaCollapse" id="sym<?php echo $nkey;?>pt">
