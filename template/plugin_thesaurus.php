@@ -57,11 +57,7 @@ function cmp($a, $b)
 // Chamada
 // usort($arr_PreferredScopeNote, "cmp"); 
 
-
-
-// Utilizado apenas em teste
-// BETA
-$URL="http://fi-admin.beta.bvsalud.org/api/";
+$URL="http://fi-admin.data.bvsalud.org/api/";
 
 $decs_code = $_GET['id'];
 $ths = (isset($_GET['thesaurus'])) ? intval($_GET['thesaurus']) : 1;

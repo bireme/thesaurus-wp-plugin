@@ -85,13 +85,7 @@ if ($tquery){
 
 
 if ($tquery){
-    // Utilizado apenas em teste
-    $TMP_URL= "http://fi-admin.beta.bvsalud.org/";
-    $ths_service_request = $TMP_URL . 'api/desc/thesaurus/search/?q=' . urlencode($query) . '&count=' . $count;
-    // echo "---> ".$ths_service_request."<br>";
-
-    // Quando estiver OK a banco de dados
-    // $ths_service_request = $ths_service_url . 'api/desc/thesaurus/search/?q=' . urlencode($query) . '&count=' . $count;
+    $ths_service_request = $ths_service_url . 'api/desc/thesaurus/search/?q=' . urlencode($query) . '&count=' . $count;
 }
 
 // echo "---> ".$ths_service_request."<br>";
