@@ -765,7 +765,7 @@ if($has_descriptor or $has_qualifier){
                                 }
 
                             }
-                            // Se não tem a tradução para a linguagem pega a primeira que houver
+                            // Se não tem a tradução para a linguagem informa "Without translation"
                             if (!$has_term_in_language){
                                 foreach ($arr_Concept_and_Term[$key][$key1]['TermListDesc'] as $key6 => $value6) {
                             ?>
@@ -799,6 +799,7 @@ if($has_descriptor or $has_qualifier){
                                 </tr>
                         <?php
                         // Verifica a existência de Scope Note
+
                         foreach ($arr_Concept_and_Term[$key][$key1]['ConceptListDesc'] as $key3 => $value3) {
                             if($arr_Concept_and_Term[$key][$key1]['ConceptListDesc'][$key3]['scope_note']) {
                                 $has_scope_note=True;
@@ -806,148 +807,130 @@ if($has_descriptor or $has_qualifier){
                             }
                         }
                             if ($has_scope_note){
-                        ?>
-                                <tr>
-                                    <td width="25%" class="text-right"><small><b><?php pll_e('Scope note'); ?></b></small></td>
-                                    <td>
-                                        <small>
-                                        <?php
-                                        // Scope Note
-                                        foreach ($arr_Concept_and_Term[$key][$key1]['ConceptListDesc'] as $key3 => $value3) {
-                                        $language_code=convLang($arr_Concept_and_Term[$key][$key1]['ConceptListDesc'][$key3]['language_code']);
-
-                                            if ( $lang_another ) {
-                                                $lang_another=convLang($lang_another);
-                                                if ($language_code == $lang_another){
-                                                ?>
-                                                    <p>
-                                                        <?php
-                                                        echo $arr_Concept_and_Term[$key][$key1]['ConceptListDesc'][$key3]['scope_note'];
-                                                        ?>
-                                                    </p>
-                                                <?php
-                                                }
-                                            } elseif ($language_code == $lang_ths){
-                                            ?>
-                                                <p>
-                                                    <?php
-                                                    echo $arr_Concept_and_Term[$key][$key1]['ConceptListDesc'][$key3]['scope_note'];
-                                                    ?>
-                                                </p>
-                                            <?php
-                                            }
-                                        }
-                                        ?>
-                                        </small>
-                                    </td>
-                                </tr>
-                            <?php
-                                unset($has_scope_note);
-                            }
-                            ?>
-                                <tr>
-                                    <td width="25%" class="text-right"><small><b><?php pll_e('Preferred term'); ?></b></small></td>
-                                    <td>
-                                        <small>
-                                        <?php
-                                        foreach ($arr_Concept_and_Term[$key][$key1]['TermListDesc'] as $key4 => $value4) {
-
-                                            $language_code=convLang($arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key4]['language_code']);
-
-                                            if ( $lang_another ) {
-                                                $lang_another=convLang($lang_another);
-                                                if ($language_code == $lang_another){
-
-                                                    if (
-                                                        ((
-                                                            $arr_Concept_and_Term[$key][$key1]['preferred_concept']=='Y' and 
-                                                            $arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key4]['concept_preferred_term']=='Y' and 
-                                                            $arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key4]['record_preferred_term']=='Y' 
-                                                        )
-                                                        or 
-                                                        (
-                                                            $arr_Concept_and_Term[$key][$key1]['preferred_concept']=='N' and 
-                                                            $arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key4]['concept_preferred_term']=='Y' and 
-                                                            $arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key4]['record_preferred_term']=='N' 
-                                                        )) 
-                                                        and
-                                                        ( $language_code == $lang_another )
-                                                    ){
-                                                        $arr_temp=array();
-                                                        $arr_temp['term_string']=$arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key4]['term_string'];
-                                                        $arr_temp['language_code']=$arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key4]['language_code'];
-                                                        $arr_PreferredTerms[]=$arr_temp;
-                                                    }
-                                                }
-
-                                            } else {
-
-                                                if (
-                                                    ((
-                                                        $arr_Concept_and_Term[$key][$key1]['preferred_concept']=='Y' and 
-                                                        $arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key4]['concept_preferred_term']=='Y' and 
-                                                        $arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key4]['record_preferred_term']=='Y' 
-                                                    )
-                                                    or 
-                                                    (
-                                                        $arr_Concept_and_Term[$key][$key1]['preferred_concept']=='N' and 
-                                                        $arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key4]['concept_preferred_term']=='Y' and 
-                                                        $arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key4]['record_preferred_term']=='N' 
-                                                    )) 
-                                                    and
-                                                    ( $language_code == $lang_ths )
-                                                ){
-                                                    $arr_temp=array();
-                                                    $arr_temp['term_string']=$arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key4]['term_string'];
-                                                    $arr_temp['language_code']=$arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key4]['language_code'];
-                                                    $arr_PreferredTerms[]=$arr_temp;
-                                                }
-                                            }
-
-                                        }
-
-                                        $arr_PreferredTerms = array_filter($arr_PreferredTerms); // Limpa array
-                                        usort($arr_PreferredTerms, "cmp"); 
-                                        foreach ($arr_PreferredTerms as $k1 => $value) {
-                                            echo $arr_PreferredTerms[$k1]['term_string'];
-                                            ?>
-                                            <?php
-                                        }
-                                        unset($arr_PreferredTerms);
-                                        ?>
-                                        </small>
-                                    </td>
-                                </tr>
-                                <?php
-
-                                // Verifica a existência de Sinônimo
-                                foreach ($arr_Concept_and_Term[$key][$key1]['TermListDesc'] as $key5 => $value5) {
-                                    $language_code=convLang($arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key5]['language_code']);
-
+                                // Scope Note
+                                foreach ($arr_Concept_and_Term[$key][$key1]['ConceptListDesc'] as $key3 => $value3) {
+                                $language_code=convLang($arr_Concept_and_Term[$key][$key1]['ConceptListDesc'][$key3]['language_code']);
                                     if ( $lang_another ) {
                                         $lang_another=convLang($lang_another);
                                         if ($language_code == $lang_another){
-
-                                            if (
-                                                ((
-                                                    $arr_Concept_and_Term[$key][$key1]['preferred_concept']=='Y' and 
-                                                    $arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key5]['concept_preferred_term']=='N' and 
-                                                    $arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key5]['record_preferred_term']=='N' 
-                                                )
-                                                or 
-                                                (
-                                                    $arr_Concept_and_Term[$key][$key1]['preferred_concept']=='N' and 
-                                                    $arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key5]['concept_preferred_term']=='N' and 
-                                                    $arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key5]['record_preferred_term']=='N' 
-                                                )) 
-                                                and
-                                                $language_code == $lang_another
-                                            ){
-                                                $has_synonymous=True;
-                                            }
-
+                        ?>
+                                            <tr>
+                                                <td width="25%" class="text-right"><small><b><?php pll_e('Scope note'); ?></b></small></td>
+                                                <td>
+                                                    <small>
+                                                    <?php
+                                                    echo $arr_Concept_and_Term[$key][$key1]['ConceptListDesc'][$key3]['scope_note'];
+                                                    ?>
+                                                    </small>
+                                                </td>
+                                            </tr>
+                        <?php
                                         }
-                                    } elseif (
+                                    } elseif ($language_code == $lang_ths){
+                        ?>
+                                        <tr>
+                                            <td width="25%" class="text-right"><small><b><?php pll_e('Scope note'); ?></b></small></td>
+                                            <td>
+                                                <small>
+                                                <?php
+                                                echo $arr_Concept_and_Term[$key][$key1]['ConceptListDesc'][$key3]['scope_note'];
+                                                ?>
+                                                </small>
+                                            </td>
+                                        </tr>
+                        <?php
+                                    }
+                                }
+                                unset($has_scope_note);
+                            }
+
+                        foreach ($arr_Concept_and_Term[$key][$key1]['TermListDesc'] as $key4 => $value4) {
+
+                            $language_code=convLang($arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key4]['language_code']);
+
+                            if ( $lang_another ) {
+                                $lang_another=convLang($lang_another);
+                                if ($language_code == $lang_another){
+
+                                    if (
+                                        ((
+                                            $arr_Concept_and_Term[$key][$key1]['preferred_concept']=='Y' and 
+                                            $arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key4]['concept_preferred_term']=='Y' and 
+                                            $arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key4]['record_preferred_term']=='Y' 
+                                        )
+                                        or 
+                                        (
+                                            $arr_Concept_and_Term[$key][$key1]['preferred_concept']=='N' and 
+                                            $arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key4]['concept_preferred_term']=='Y' and 
+                                            $arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key4]['record_preferred_term']=='N' 
+                                        )) 
+                                        and
+                                        ( $language_code == $lang_another )
+                                    ){
+                                        $arr_temp=array();
+                                        $arr_temp['term_string']=$arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key4]['term_string'];
+                                        $arr_temp['language_code']=$arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key4]['language_code'];
+                                        $arr_PreferredTerms[]=$arr_temp;
+                                    }
+                                }
+
+                            } else {
+
+                                if (
+                                    ((
+                                        $arr_Concept_and_Term[$key][$key1]['preferred_concept']=='Y' and 
+                                        $arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key4]['concept_preferred_term']=='Y' and 
+                                        $arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key4]['record_preferred_term']=='Y' 
+                                    )
+                                    or 
+                                    (
+                                        $arr_Concept_and_Term[$key][$key1]['preferred_concept']=='N' and 
+                                        $arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key4]['concept_preferred_term']=='Y' and 
+                                        $arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key4]['record_preferred_term']=='N' 
+                                    )) 
+                                    and
+                                    ( $language_code == $lang_ths )
+                                ){
+                                    $arr_temp=array();
+                                    $arr_temp['term_string']=$arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key4]['term_string'];
+                                    $arr_temp['language_code']=$arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key4]['language_code'];
+                                    $arr_PreferredTerms[]=$arr_temp;
+                                }
+                            }
+
+                        }
+
+                        $arr_PreferredTerms = array_filter($arr_PreferredTerms); // Limpa array
+                        usort($arr_PreferredTerms, "cmp"); 
+
+                        foreach ($arr_PreferredTerms as $k1 => $value) {
+                        ?>
+                            <tr>
+                                <td width="25%" class="text-right"><small><b><?php pll_e('Preferred term'); ?></b></small></td>
+                                <td>
+                                    <small>
+                        <?php
+                                        echo $arr_PreferredTerms[$k1]['term_string'];
+                        ?>
+                                    </small>
+                                </td>
+                            </tr>
+                        <?php
+                        }
+                        unset($arr_PreferredTerms);
+                        ?>
+
+                        <?php
+
+                        // Verifica a existência de Sinônimo
+                        foreach ($arr_Concept_and_Term[$key][$key1]['TermListDesc'] as $key5 => $value5) {
+                            $language_code=convLang($arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key5]['language_code']);
+
+                            if ( $lang_another ) {
+                                $lang_another=convLang($lang_another);
+                                if ($language_code == $lang_another){
+
+                                    if (
                                         ((
                                             $arr_Concept_and_Term[$key][$key1]['preferred_concept']=='Y' and 
                                             $arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key5]['concept_preferred_term']=='N' and 
@@ -960,53 +943,48 @@ if($has_descriptor or $has_qualifier){
                                             $arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key5]['record_preferred_term']=='N' 
                                         )) 
                                         and
-                                        $language_code == $lang_ths
+                                        $language_code == $lang_another
                                     ){
                                         $has_synonymous=True;
                                     }
 
-                                } // foreach
+                                }
+                            } elseif (
+                                ((
+                                    $arr_Concept_and_Term[$key][$key1]['preferred_concept']=='Y' and 
+                                    $arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key5]['concept_preferred_term']=='N' and 
+                                    $arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key5]['record_preferred_term']=='N' 
+                                )
+                                or 
+                                (
+                                    $arr_Concept_and_Term[$key][$key1]['preferred_concept']=='N' and 
+                                    $arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key5]['concept_preferred_term']=='N' and 
+                                    $arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key5]['record_preferred_term']=='N' 
+                                )) 
+                                and
+                                $language_code == $lang_ths
+                            ){
+                                $has_synonymous=True;
+                            }
 
-                                if ($has_synonymous){
-                                ?>
-                                    <tr>
-                                        <td width="25%" class="text-right"><small><b><?php pll_e('Entry term(s)'); ?></b></small></td>
-                                        <td>
-                                            <small>
-                                            <?php
-                                            unset($arr_EntryTerms);
-                                            foreach ($arr_Concept_and_Term[$key][$key1]['TermListDesc'] as $key5 => $value5) {
-                                                $language_code=convLang($arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key5]['language_code']);
+                        } // foreach
 
-                                                if ( $lang_another ) {
-                                                    $lang_another=convLang($lang_another);
-                                                    if ($language_code == $lang_another){
+                        if ($has_synonymous){
+                        ?>
+                            <tr>
+                                <td width="25%" class="text-right"><small><b><?php pll_e('Entry term(s)'); ?></b></small></td>
+                                <td>
+                                    <small>
+                                    <?php
+                                    unset($arr_EntryTerms);
+                                    foreach ($arr_Concept_and_Term[$key][$key1]['TermListDesc'] as $key5 => $value5) {
+                                        $language_code=convLang($arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key5]['language_code']);
 
-                                                        if (
-                                                            ((
-                                                                $arr_Concept_and_Term[$key][$key1]['preferred_concept']=='Y' and 
-                                                                $arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key5]['record_preferred_term']=='N' and 
-                                                                $arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key5]['record_preferred_term']=='N' 
-                                                            )
-                                                            or 
-                                                            (
-                                                                $arr_Concept_and_Term[$key][$key1]['preferred_concept']=='N' and 
-                                                                $arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key5]['concept_preferred_term']=='N' and 
-                                                                $arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key5]['record_preferred_term']=='N' 
-                                                            )) 
-                                                            and
-                                                                $language_code == $lang_another
-                                                        ){
+                                        if ( $lang_another ) {
+                                            $lang_another=convLang($lang_another);
+                                            if ($language_code == $lang_another){
 
-                                                            $arr_temp=array();
-                                                            $arr_temp['term_string']=$arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key5]['term_string'];
-                                                            $arr_temp['language_code']=$arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key5]['language_code'];
-                                                            $arr_EntryTerms[]=$arr_temp;
-
-                                                        }
-
-                                                    }
-                                                } elseif (
+                                                if (
                                                     ((
                                                         $arr_Concept_and_Term[$key][$key1]['preferred_concept']=='Y' and 
                                                         $arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key5]['record_preferred_term']=='N' and 
@@ -1019,7 +997,7 @@ if($has_descriptor or $has_qualifier){
                                                         $arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key5]['record_preferred_term']=='N' 
                                                     )) 
                                                     and
-                                                        $language_code == $lang_ths
+                                                        $language_code == $lang_another
                                                 ){
 
                                                     $arr_temp=array();
@@ -1029,54 +1007,66 @@ if($has_descriptor or $has_qualifier){
 
                                                 }
 
-                                            } // foreach
-
-                                            $arr_EntryTerms = array_filter($arr_EntryTerms); // Limpa array
-                                            $arr_EntryTerms = phparraysort($arr_EntryTerms, array('language_code','term_string'));
-
-                                            $count=1;
-                                            foreach ($arr_EntryTerms as $k5 => $v5) {
-
-                                                    if ($count==1){
-                                                        ?>
-                                                        <?php
-                                                    }
-
-                                                    if ($count>1 and $lang_old!=$arr_EntryTerms[$k5]['language_code']){
-                                                        ?>
-                                                        <hr>
-                                                        <small class="badge badgeWarning">
-                                                            <?php
-                                                            echo $arr_EntryTerms[$k5]['language_code']; 
-                                                            ?>
-                                                        </small><br>
-                                                        <?php
-                                                    }
-
-                                                    echo $arr_EntryTerms[$k5]['term_string'];
-                                                    ?>
-                                                    <br>
-                                                    <?php
-                                                    $lang_old=$arr_EntryTerms[$k5]['language_code'];
-                                                    $count++;
                                             }
-                                            unset($arr_temp);
-                                            unset($arr_EntryTerms);
+                                        } elseif (
+                                            ((
+                                                $arr_Concept_and_Term[$key][$key1]['preferred_concept']=='Y' and 
+                                                $arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key5]['record_preferred_term']=='N' and 
+                                                $arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key5]['record_preferred_term']=='N' 
+                                            )
+                                            or 
+                                            (
+                                                $arr_Concept_and_Term[$key][$key1]['preferred_concept']=='N' and 
+                                                $arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key5]['concept_preferred_term']=='N' and 
+                                                $arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key5]['record_preferred_term']=='N' 
+                                            )) 
+                                            and
+                                                $language_code == $lang_ths
+                                        ){
 
+                                            $arr_temp=array();
+                                            $arr_temp['term_string']=$arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key5]['term_string'];
+                                            $arr_temp['language_code']=$arr_Concept_and_Term[$key][$key1]['TermListDesc'][$key5]['language_code'];
+                                            $arr_EntryTerms[]=$arr_temp;
+
+                                        }
+
+                                    } // foreach
+
+                                    $arr_EntryTerms = array_filter($arr_EntryTerms); // Limpa array
+                                    $arr_EntryTerms = phparraysort($arr_EntryTerms, array('language_code','term_string'));
+
+                                    $count=1;
+                                    foreach ($arr_EntryTerms as $k5 => $v5) {
+
+                                            if ($count==1){
+                                                ?>
+                                                <?php
+                                            }
+
+                                            echo $arr_EntryTerms[$k5]['term_string'];
                                             ?>
-                                            </small>
-                                        </td>
-                                    </tr>
-                                <?php
-                                }
-                                unset($has_synonymous);
-                                ?>
+                                            <br>
+                                            <?php
+                                            $count++;
+                                    }
+                                    unset($arr_temp);
+                                    unset($arr_EntryTerms);
 
-                            </table>
+                                    ?>
+                                    </small>
+                                </td>
+                            </tr>
+                        <?php
+                        }
+                        unset($has_synonymous);
+                        ?>
+
+                        </table>
                         <?php
 
-                                    break;
-                                }
+                        break;
+                            }
                             unset($has_term_in_language);
                             }
                         }
@@ -1156,7 +1146,7 @@ if($has_descriptor or $has_qualifier){
                                 }
 
                             }
-                            // Se não tem a tradução para a linguagem pega a primeira que houver
+                            // Se não tem a tradução para a linguagem informa "Without translation"
                             if (!$has_term_in_language){
                                 foreach ($arr_Concept_and_Term[$key][$key1]['TermListQualif'] as $key6 => $value6) {
                             ?>
@@ -1196,45 +1186,45 @@ if($has_descriptor or $has_qualifier){
                                 break;
                             }
                         }
-                            if ($has_scope_note){
-                        ?>
-                                <tr>
-                                    <td width="25%" class="text-right"><small><b><?php pll_e('Scope note'); ?></b></small></td>
-                                    <td>
-                                        <small>
-                                        <?php
-                                        // Scope Note
-                                        foreach ($arr_Concept_and_Term[$key][$key1]['ConceptListQualif'] as $key3 => $value3) {
-                                        $language_code=convLang($arr_Concept_and_Term[$key][$key1]['ConceptListQualif'][$key3]['language_code']);
 
-                                            if ( $lang_another ) {
-                                                $lang_another=convLang($lang_another);
-                                                if ($language_code == $lang_another){
-                                                ?>
-                                                    <p>
-                                                        <?php
-                                                        echo $arr_Concept_and_Term[$key][$key1]['ConceptListQualif'][$key3]['scope_note'];
-                                                        ?>
-                                                    </p>
-                                                <?php
-                                                }
-                                            } elseif ($language_code == $lang_ths){
-                                            ?>
-                                                <p>
+                            if ($has_scope_note){
+                                // Scope Note
+                                foreach ($arr_Concept_and_Term[$key][$key1]['ConceptListQualif'] as $key3 => $value3) {
+                                $language_code=convLang($arr_Concept_and_Term[$key][$key1]['ConceptListQualif'][$key3]['language_code']);
+                                    if ( $lang_another ) {
+                                        $lang_another=convLang($lang_another);
+                                        if ($language_code == $lang_another){
+                        ?>
+                                            <tr>
+                                                <td width="25%" class="text-right"><small><b><?php pll_e('Scope note'); ?></b></small></td>
+                                                <td>
+                                                    <small>
                                                     <?php
                                                     echo $arr_Concept_and_Term[$key][$key1]['ConceptListQualif'][$key3]['scope_note'];
                                                     ?>
-                                                </p>
-                                            <?php
-                                            }
+                                                    </small>
+                                                </td>
+                                            </tr>
+                        <?php
                                         }
-                                        ?>
-                                        </small>
-                                    </td>
-                                </tr>
-                            <?php
+                                    } elseif ($language_code == $lang_ths){
+                        ?>
+                                        <tr>
+                                            <td width="25%" class="text-right"><small><b><?php pll_e('Scope note'); ?></b></small></td>
+                                            <td>
+                                                <small>
+                                                <?php
+                                                echo $arr_Concept_and_Term[$key][$key1]['ConceptListQualif'][$key3]['scope_note'];
+                                                ?>
+                                                </small>
+                                            </td>
+                                        </tr>
+                        <?php
+                                    }
+                                }
                                 unset($has_scope_note);
                             }
+
                             ?>
                                 <tr>
                                     <td width="25%" class="text-right"><small><b><?php pll_e('Preferred term'); ?></b></small></td>
@@ -1488,4 +1478,4 @@ if($has_descriptor or $has_qualifier){
 ?>
 
 
-<?php get_footer(); ?>        
+<?php get_footer(); ?>
