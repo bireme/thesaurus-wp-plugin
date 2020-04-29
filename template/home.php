@@ -354,10 +354,10 @@ switch ($lang) {
                 ?>
                 |
                 <?php if ( isset($total) && strval($total) == 0 ) :?>
-                <?php _e('No results found','ths'); ?>
+                <?php pll_e('No results found'); ?>
                 <?php else :?>
                     <?php if ( ( $query != '' || $user_filter != '' ) && strval($total) > 0) :?>
-                    <?php _e('Results', 'ths'); echo ': ' . $total ?>
+                    <?php pll_e('Results'); echo ': ' . $total ?>
                 <?php endif; ?>
             <?php endif; ?>
         </div>
