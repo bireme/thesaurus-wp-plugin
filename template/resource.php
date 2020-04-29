@@ -493,7 +493,7 @@ if($has_descriptor or $has_qualifier){
                                 if(!empty($arr_IdentifierDesc)){
                                 ?>
                                 <tr>
-                                    <td class="text-right badge-light align-middle">Identificador Único:</td>
+                                    <td class="text-right badge-light align-middle"><?php pll_e('Unique ID'); ?>:</td>
                                     <td>
                                         <?php
                                         if ( !empty($arr_IdentifierDesc[0]['descriptor_ui']) ){
