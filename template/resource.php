@@ -48,8 +48,18 @@ if($has_descriptor or $has_qualifier){
     if ( $lang_another) {
     ?>
         <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
-            <?php pll_e('You have selected the view in'); ?>:
-            <?php echo $lang_another ?>
+            <?php pll_e('You have selected the view in'); ?>
+            <?php
+                if ($lang_another == 'en'){
+                    pll_e('English');
+                } elseif ($lang_another == 'es') {
+                    pll_e('Spanish');
+                } elseif ($lang_another == 'pt-br') {
+                    pll_e('Portuguese');
+                } elseif ($lang_another == 'fr') {
+                    pll_e('French');
+                }
+            ?>
            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">&times;</span>
            </button>
