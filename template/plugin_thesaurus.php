@@ -61,7 +61,7 @@ function ConceptRelationName($concept_relation_name, $lang_ths){
 
 function DateAdjust($date, $lang_ths){
 	if ($lang_ths == 'en'){
-		$ndate=date('Y/d/m', strtotime($date));
+		$ndate=date('Y/m/d', strtotime($date));
 	} else {
 		$ndate=date('d/m/Y', strtotime($date));
 	}
