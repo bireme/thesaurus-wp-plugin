@@ -569,9 +569,9 @@ if($has_descriptor or $has_qualifier){
                                     <td>
                                     <?php
                                     if ( !empty($arr_IdentifierDesc[0]['date_revised']) ){
-                                        $ndate=DateAdjust($arr_IdentifierDesc[0]['date_created'], $lang_ths );
+                                        $ndate=DateAdjust($arr_IdentifierDesc[0]['date_revised'], $lang_ths );
                                     } elseif ( !empty($arr_IdentifierQualif[0]['date_revised']) ){
-                                        $ndate=DateAdjust($arr_IdentifierQualif[0]['date_created'], $lang_ths );
+                                        $ndate=DateAdjust($arr_IdentifierQualif[0]['date_revised'], $lang_ths );
                                     }
                                     echo $ndate; unset($ndate);
                                     ?>
