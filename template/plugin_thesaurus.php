@@ -2,23 +2,71 @@
 
 ini_set('display_errors', '0');
 
-function ConceptRelationName($concept_relation_name){
+function ConceptRelationName($concept_relation_name, $lang_ths){
 	switch ($concept_relation_name) {
 		case 'NRW':
-			$concept_relation_name="Narrower";
+			if ($lang_ths == 'en'){
+				$concept_relation_name="Narrower";
+			} elseif ($lang_ths == 'es') {
+				$concept_relation_name="Más estrecho";
+			} elseif ($lang_ths == 'pt-br') {
+				$concept_relation_name="Mais específico";
+			} elseif ($lang_ths == 'fr') {
+				$concept_relation_name="Plus spécifique";
+			}
 			break;
+
 		case 'BRD':
-			$concept_relation_name="Broader";
+			if ($lang_ths == 'en'){
+				$concept_relation_name="Broader";
+			} elseif ($lang_ths == 'es') {
+				$concept_relation_name="Más amplio";
+			} elseif ($lang_ths == 'pt-br') {
+				$concept_relation_name="Mais amplo";
+			} elseif ($lang_ths == 'fr') {
+				$concept_relation_name="Plus large";
+			}
 			break;
+
 		case 'REL':
-			$concept_relation_name="Related but not broader or narrower";
+			if ($lang_ths == 'en'){
+				$concept_relation_name="Related but not broader or narrower";
+			} elseif ($lang_ths == 'es') {
+				$concept_relation_name="Relacionado pero no más amplio ni más estrecho";
+			} elseif ($lang_ths == 'pt-br') {
+				$concept_relation_name="Relacionado, mas não mais amplo ou mais específico";
+			} elseif ($lang_ths == 'fr') {
+				$concept_relation_name="Connexes mais pas plus larges ou plus étroites";
+			}
 			break;
+
+
 		default:
-			$concept_relation_name="Preferred";
+			if ($lang_ths == 'en'){
+				$concept_relation_name="Preferred";
+			} elseif ($lang_ths == 'es') {
+				$concept_relation_name="Concepto preferido";
+			} elseif ($lang_ths == 'pt-br') {
+				$concept_relation_name="Conceito preferido";
+			} elseif ($lang_ths == 'fr') {
+				$concept_relation_name="Concept préféré";
+			}
 			break;
+
 		}
 	
 	return $concept_relation_name;
+}
+
+
+function DateAdjust($date, $lang_ths){
+	if ($lang_ths == 'en'){
+		$ndate=date('Y/d/m', strtotime($date));
+	} else {
+		$ndate=date('d/m/Y', strtotime($date));
+	}
+	return $ndate;
+
 }
 
 

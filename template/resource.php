@@ -527,10 +527,11 @@ if($has_descriptor or $has_qualifier){
                                     <td>
                                     <?php
                                     if ( !empty($arr_IdentifierDesc[0]['date_established']) ){
-                                        echo $arr_IdentifierDesc[0]['date_established'];
+                                        $ndate=DateAdjust($arr_IdentifierDesc[0]['date_established'], $lang_ths );
                                     } elseif ( !empty($arr_IdentifierQualif[0]['date_established']) ){
-                                        echo $arr_IdentifierQualif[0]['date_established'];
+                                        $ndate=DateAdjust($arr_IdentifierQualif[0]['date_established'], $lang_ths );
                                     }
+                                    echo $ndate; unset($ndate);
                                     ?>
                                     </td>
                                 </tr>
@@ -547,10 +548,11 @@ if($has_descriptor or $has_qualifier){
                                     <td>
                                     <?php
                                     if ( !empty($arr_IdentifierDesc[0]['date_created']) ){
-                                        echo $arr_IdentifierDesc[0]['date_created'];
+                                        $ndate=DateAdjust($arr_IdentifierDesc[0]['date_created'], $lang_ths );
                                     } elseif ( !empty($arr_IdentifierQualif[0]['date_created']) ){
-                                        echo $arr_IdentifierQualif[0]['date_created'];
+                                        $ndate=DateAdjust($arr_IdentifierQualif[0]['date_created'], $lang_ths );
                                     }
+                                    echo $ndate; unset($ndate);
                                     ?>
                                     </td>
                                 </tr>
@@ -567,10 +569,11 @@ if($has_descriptor or $has_qualifier){
                                     <td>
                                     <?php
                                     if ( !empty($arr_IdentifierDesc[0]['date_revised']) ){
-                                        echo $arr_IdentifierDesc[0]['date_created'];
+                                        $ndate=DateAdjust($arr_IdentifierDesc[0]['date_created'], $lang_ths );
                                     } elseif ( !empty($arr_IdentifierQualif[0]['date_revised']) ){
-                                        echo $arr_IdentifierQualif[0]['date_revised'];
+                                        $ndate=DateAdjust($arr_IdentifierQualif[0]['date_created'], $lang_ths );
                                     }
+                                    echo $ndate; unset($ndate);
                                     ?>
                                     </td>
                                 </tr>
@@ -746,7 +749,7 @@ if($has_descriptor or $has_qualifier){
                                             </a>
 
                                         <?php 
-                                            $concept_relation_name=ConceptRelationName($arr_Concept_and_Term[$key][$key1]['concept_relation_name']);
+                                        $concept_relation_name=ConceptRelationName($arr_Concept_and_Term[$key][$key1]['concept_relation_name'], $lang_ths);
                                             echo "- <i>".$concept_relation_name."</i>";
                                         ?>
                                         <br>
@@ -764,7 +767,7 @@ if($has_descriptor or $has_qualifier){
                                             </a>
 
                                         <?php 
-                                            $concept_relation_name=ConceptRelationName($arr_Concept_and_Term[$key][$key1]['concept_relation_name']);
+                                            $concept_relation_name=ConceptRelationName($arr_Concept_and_Term[$key][$key1]['concept_relation_name'], $lang_ths);
                                             echo "- <i>".$concept_relation_name."</i>";
                                         ?>
                                         <br>
@@ -773,8 +776,8 @@ if($has_descriptor or $has_qualifier){
                                         }
                                     }
                                 }
-
                             }
+
                             // Se não tem a tradução para a linguagem informa "Without translation"
                             if (!$has_term_in_language){
                                 foreach ($arr_Concept_and_Term[$key][$key1]['TermListDesc'] as $key6 => $value6) {
@@ -786,7 +789,7 @@ if($has_descriptor or $has_qualifier){
                                 </b></a>
 
                                     <?php 
-                                        $concept_relation_name=ConceptRelationName($arr_Concept_and_Term[$key][$key1]['concept_relation_name']);
+                                        $concept_relation_name=ConceptRelationName($arr_Concept_and_Term[$key][$key1]['concept_relation_name'], $lang_ths);
                                         echo "<i>".$concept_relation_name."</i>";
                                     ?>
                                 <br>
@@ -1127,7 +1130,7 @@ if($has_descriptor or $has_qualifier){
                                             </a>
 
                                         <?php 
-                                            $concept_relation_name=ConceptRelationName($arr_Concept_and_Term[$key][$key1]['concept_relation_name']);
+                                            $concept_relation_name=ConceptRelationName($arr_Concept_and_Term[$key][$key1]['concept_relation_name'], $lang_ths);
                                             echo "- <i>".$concept_relation_name."</i>";
                                         ?>
                                         <br>
@@ -1145,7 +1148,7 @@ if($has_descriptor or $has_qualifier){
                                             </a>
 
                                         <?php 
-                                            $concept_relation_name=ConceptRelationName($arr_Concept_and_Term[$key][$key1]['concept_relation_name']);
+                                            $concept_relation_name=ConceptRelationName($arr_Concept_and_Term[$key][$key1]['concept_relation_name'], $lang_ths);
                                             echo "- <i>".$concept_relation_name."</i>";
                                         ?>
                                         <br>
@@ -1167,7 +1170,7 @@ if($has_descriptor or $has_qualifier){
                                 </b></a>
 
                                     <?php 
-                                        $concept_relation_name=ConceptRelationName($arr_Concept_and_Term[$key][$key1]['concept_relation_name']);
+                                        $concept_relation_name=ConceptRelationName($arr_Concept_and_Term[$key][$key1]['concept_relation_name'], $lang_ths);
                                         echo "<i>".$concept_relation_name."</i>";
                                     ?>
                                 <br>
