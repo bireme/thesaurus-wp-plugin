@@ -23,7 +23,9 @@ $lang = substr($site_language,0,2);
 $q = $_GET['q'];
 $tquery = stripslashes( trim($q) );
 $filter = $_GET['filter'];
-$count=300;
+
+// Quantidade máxima de documentos que retornarão
+$count=2000;
 
 // Possibilidade de uso futuro dependendo da solução no Solr, se for encontrada não será necessário
 // // Tenta deixar a primeira letra do texto maiúscula quando form selecionado ths_exact_term

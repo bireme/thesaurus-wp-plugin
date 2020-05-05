@@ -797,6 +797,8 @@ if($has_descriptor or $has_qualifier){
                                 break;
                             }
                         }
+
+                        
                         foreach ($arr_Concept_and_Term[$key][$key1]['TermListDesc'] as $key2 => $value2) {
                         ?>
                             <table id="<?php echo $id_concept_ui; ?>" class="table tabel-sm table-striped collapse">
