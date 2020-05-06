@@ -521,63 +521,69 @@ if($has_descriptor or $has_qualifier){
                                 <!-- Date Established -->
                                 <?php
                                 if(!empty($arr_IdentifierDesc)){
-                                ?>
-                                <tr>
-                                    <td class="text-right badge-light align-middle"><?php pll_e('Date Established'); ?>:</td>
-                                    <td>
-                                    <?php
                                     if ( !empty($arr_IdentifierDesc[0]['date_established']) ){
-                                        $ndate=DateAdjust($arr_IdentifierDesc[0]['date_established'], $lang_ths );
-                                    } elseif ( !empty($arr_IdentifierQualif[0]['date_established']) ){
-                                        $ndate=DateAdjust($arr_IdentifierQualif[0]['date_established'], $lang_ths );
-                                    }
-                                    echo $ndate; unset($ndate);
-                                    ?>
-                                    </td>
-                                </tr>
+                                ?>
+                                    <tr>
+                                        <td class="text-right badge-light align-middle"><?php pll_e('Date Established'); ?>:</td>
+                                        <td>
+                                        <?php
+                                        if ( !empty($arr_IdentifierDesc[0]['date_established']) ){
+                                            $ndate=DateAdjust($arr_IdentifierDesc[0]['date_established'], $lang_ths );
+                                        } elseif ( !empty($arr_IdentifierQualif[0]['date_established']) ){
+                                            $ndate=DateAdjust($arr_IdentifierQualif[0]['date_established'], $lang_ths );
+                                        }
+                                        echo $ndate; unset($ndate);
+                                        ?>
+                                        </td>
+                                    </tr>
                                 <?php
+                                    }
                                 }
                                 ?>
 
                                 <!-- Date of Entry -->
                                 <?php
                                 if(!empty($arr_IdentifierDesc)){
-                                ?>
-                                <tr>
-                                    <td class="text-right badge-light align-middle"><?php pll_e('Date of Entry'); ?>:</td>
-                                    <td>
-                                    <?php
                                     if ( !empty($arr_IdentifierDesc[0]['date_created']) ){
-                                        $ndate=DateAdjust($arr_IdentifierDesc[0]['date_created'], $lang_ths );
-                                    } elseif ( !empty($arr_IdentifierQualif[0]['date_created']) ){
-                                        $ndate=DateAdjust($arr_IdentifierQualif[0]['date_created'], $lang_ths );
-                                    }
-                                    echo $ndate; unset($ndate);
-                                    ?>
-                                    </td>
-                                </tr>
+                                ?>
+                                    <tr>
+                                        <td class="text-right badge-light align-middle"><?php pll_e('Date of Entry'); ?>:</td>
+                                        <td>
+                                        <?php
+                                        if ( !empty($arr_IdentifierDesc[0]['date_created']) ){
+                                            $ndate=DateAdjust($arr_IdentifierDesc[0]['date_created'], $lang_ths );
+                                        } elseif ( !empty($arr_IdentifierQualif[0]['date_created']) ){
+                                            $ndate=DateAdjust($arr_IdentifierQualif[0]['date_created'], $lang_ths );
+                                        }
+                                        echo $ndate; unset($ndate);
+                                        ?>
+                                        </td>
+                                    </tr>
                                 <?php
+                                    }
                                 }
                                 ?>
 
                                 <!-- Revision Date -->
                                 <?php
                                 if(!empty($arr_IdentifierDesc)){
-                                ?>
-                                <tr>
-                                    <td class="text-right badge-light align-middle"><?php pll_e('Revision Date'); ?>:</td>
-                                    <td>
-                                    <?php
                                     if ( !empty($arr_IdentifierDesc[0]['date_revised']) ){
-                                        $ndate=DateAdjust($arr_IdentifierDesc[0]['date_revised'], $lang_ths );
-                                    } elseif ( !empty($arr_IdentifierQualif[0]['date_revised']) ){
-                                        $ndate=DateAdjust($arr_IdentifierQualif[0]['date_revised'], $lang_ths );
-                                    }
-                                    echo $ndate; unset($ndate);
-                                    ?>
-                                    </td>
-                                </tr>
+                                ?>
+                                    <tr>
+                                        <td class="text-right badge-light align-middle"><?php pll_e('Revision Date'); ?>:</td>
+                                        <td>
+                                        <?php
+                                        if ( !empty($arr_IdentifierDesc[0]['date_revised']) ){
+                                            $ndate=DateAdjust($arr_IdentifierDesc[0]['date_revised'], $lang_ths );
+                                        } elseif ( !empty($arr_IdentifierQualif[0]['date_revised']) ){
+                                            $ndate=DateAdjust($arr_IdentifierQualif[0]['date_revised'], $lang_ths );
+                                        }
+                                        echo $ndate; unset($ndate);
+                                        ?>
+                                        </td>
+                                    </tr>
                                 <?php
+                                    }
                                 }
                                 ?>
 
