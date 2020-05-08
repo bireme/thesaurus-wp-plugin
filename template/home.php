@@ -27,14 +27,6 @@ $filter = $_GET['filter'];
 // Quantidade máxima de documentos que retornarão
 $count=2000;
 
-// Possibilidade de uso futuro dependendo da solução no Solr, se for encontrada não será necessário
-// // Tenta deixar a primeira letra do texto maiúscula quando form selecionado ths_exact_term
-// if ( $filter == 'ths_exact_term' ){
-//     $tquery = ucfirst($tquery);
-//     echo "[".$tquery."]";
-// }
-
-
 // NOVO
 // ths_termall - Palavra ou Termo do Descritor
 // ths_regid - ID do Registro
@@ -45,19 +37,7 @@ $count=2000;
 if ($tquery){
     switch ($filter) {
         case 'ths_termall':
-            // *** Não pesquisa:
-            // Educação
-            // Intervenção
-            // Proteção Civil
-            // Systèmes de retenue pour enfant
-            // santé
-
-            // *** Pesquisa:
-            // saúde
-            // Protection de l'enfance
-
             $query = 'ths_termall:' . '(' . $tquery . ' AND django_ct:"thesaurus.identifierdesc")';
-
             break;
 
         case 'ths_regid':
@@ -70,8 +50,6 @@ if ($tquery){
             break;
 
         case 'ths_exact_term':
-            // *** pesquisa ok:
-            // Réforme d'animaux
             $query = 'ths_exact_term:' . '"' . $tquery . '" AND django_ct:"thesaurus.identifierdesc"';
             break;
 

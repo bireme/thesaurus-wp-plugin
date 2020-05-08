@@ -238,27 +238,36 @@ if($has_descriptor or $has_qualifier){
                                 <!-- Entry Term -->
                                 <?php
                                 if(!empty($arr_EntryTerms)){
-                                ?>
-                                <tr>
-                                    <td class="text-right badge-light align-middle"><?php pll_e('Entry term(s)'); ?>:</td>
-                                    <td>
-                                        <?php
-                                            foreach ($arr_EntryTerms as $key => $value) {
-                                                $language_code=convLang($value['language_code']);
-                                                if ( $lang_another ) {
-                                                    if ( $language_code == $lang_another ) {
-                                                        echo $value['term_string'].'<br>';
-                                                    }
-                                                } elseif ( $language_code == $lang_ths ){
-                                                    echo $value['term_string'].'<br>';
-                                                }
+                                    $arr_HasEntryTerms = array();
+                                    foreach ($arr_EntryTerms as $key => $value) {
+                                        $language_code=convLang($value['language_code']);
+                                        if ( $lang_another ) {
+                                            if ( $language_code == $lang_another ) {
+                                                array_push($arr_HasEntryTerms, $value['term_string']);
                                             }
-                                        ?>
-                                    </td>
-                                </tr>
+                                        } elseif ( $language_code == $lang_ths ){
+                                            array_push($arr_HasEntryTerms, $value['term_string']);
+                                        }
+                                    }
+
+                                }
+                                if (!empty($arr_HasEntryTerms)) {
+                                ?>
+                                        <tr>
+                                            <td class="text-right badge-light align-middle"><?php pll_e('Entry term(s)'); ?>:</td>
+                                            <td>
+                                <?php
+                                        foreach ($arr_HasEntryTerms as $key => $value) {
+                                            echo $value."<br>";
+                                        }
+                                ?>
+                                            </td>   
+                                        </tr>
                                 <?php
                                 }
+                                unset($arr_HasEntryTerms);
                                 ?>
+
 
                                 <!-- Tree Number(s) -->
                                 <?php
