@@ -96,10 +96,10 @@ if($has_descriptor or $has_qualifier){
                             <i class="fas fa-globe-americas"></i>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php if ( $arr_IdentifierDesc[0]['decs_code']) { echo $arr_IdentifierDesc[0]['decs_code'].'&filter='.$filter.'&q='.stripslashes($q); } elseif ( $arr_IdentifierQualif[0]['decs_code'] ) { echo $arr_IdentifierQualif[0]['decs_code']; } ?>&lang_another=en"><?php pll_e('English'); ?></a>
-                            <a class="dropdown-item" href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php if ( $arr_IdentifierDesc[0]['decs_code']) { echo $arr_IdentifierDesc[0]['decs_code'].'&filter='.$filter.'&q='.stripslashes($q); } elseif ( $arr_IdentifierQualif[0]['decs_code'] ) { echo $arr_IdentifierQualif[0]['decs_code']; } ?>&lang_another=es"><?php pll_e('Spanish'); ?></a>
-                            <a class="dropdown-item" href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php if ( $arr_IdentifierDesc[0]['decs_code']) { echo $arr_IdentifierDesc[0]['decs_code'].'&filter='.$filter.'&q='.stripslashes($q); } elseif ( $arr_IdentifierQualif[0]['decs_code'] ) { echo $arr_IdentifierQualif[0]['decs_code']; } ?>&lang_another=pt-br"><?php pll_e('Portuguese'); ?></a>
-                            <a class="dropdown-item" href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php if ( $arr_IdentifierDesc[0]['decs_code']) { echo $arr_IdentifierDesc[0]['decs_code'].'&filter='.$filter.'&q='.stripslashes($q); } elseif ( $arr_IdentifierQualif[0]['decs_code'] ) { echo $arr_IdentifierQualif[0]['decs_code']; } ?>&lang_another=fr"><?php pll_e('French'); ?></a>
+                            <a class="dropdown-item" href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?filter=ths_qualifall&q=<?php echo $q; ?>&id=<?php if ( $arr_IdentifierDesc[0]['decs_code']) { echo $arr_IdentifierDesc[0]['decs_code'].'&filter='.$filter.'&q='.stripslashes($q); } elseif ( $arr_IdentifierQualif[0]['decs_code'] ) { echo $arr_IdentifierQualif[0]['decs_code']; } ?>&lang_another=en"><?php pll_e('English'); ?></a>
+                            <a class="dropdown-item" href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?filter=ths_qualifall&q=<?php echo $q; ?>&id=<?php if ( $arr_IdentifierDesc[0]['decs_code']) { echo $arr_IdentifierDesc[0]['decs_code'].'&filter='.$filter.'&q='.stripslashes($q); } elseif ( $arr_IdentifierQualif[0]['decs_code'] ) { echo $arr_IdentifierQualif[0]['decs_code']; } ?>&lang_another=es"><?php pll_e('Spanish'); ?></a>
+                            <a class="dropdown-item" href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?filter=ths_qualifall&q=<?php echo $q; ?>&id=<?php if ( $arr_IdentifierDesc[0]['decs_code']) { echo $arr_IdentifierDesc[0]['decs_code'].'&filter='.$filter.'&q='.stripslashes($q); } elseif ( $arr_IdentifierQualif[0]['decs_code'] ) { echo $arr_IdentifierQualif[0]['decs_code']; } ?>&lang_another=pt-br"><?php pll_e('Portuguese'); ?></a>
+                            <a class="dropdown-item" href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?filter=ths_qualifall&q=<?php echo $q; ?>&id=<?php if ( $arr_IdentifierDesc[0]['decs_code']) { echo $arr_IdentifierDesc[0]['decs_code'].'&filter='.$filter.'&q='.stripslashes($q); } elseif ( $arr_IdentifierQualif[0]['decs_code'] ) { echo $arr_IdentifierQualif[0]['decs_code']; } ?>&lang_another=fr"><?php pll_e('French'); ?></a>
                         </div>
                     </li>
                 </ul>
@@ -449,7 +449,7 @@ if($has_descriptor or $has_qualifier){
                                 <?php
                                 if ($has_qualifier){ 
 
-                                    if (!empty($arr_PreferredDescriptors)) {
+                                    if (!empty($arr_PreferredDescriptors[0])) {
                                         ?>
                                             <tr><td class="text-right badge-light align-middle"><?php pll_e('Entry Version'); ?>:</td><td>
                                         <?php
