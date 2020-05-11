@@ -155,7 +155,8 @@ if ($has_descriptor){
 
 				case 'TreeNumbersListDesc':
 				$arr_TreeNumbersListDesc=$value1;
-				asort($arr_TreeNumbersListDesc);
+                $arr_TreeNumbersListDesc = phparraysort($arr_TreeNumbersListDesc, array('tree_number','id'));
+				// asort($arr_TreeNumbersListDesc);
 				break;
 
 				case 'HierarchicalTree':
