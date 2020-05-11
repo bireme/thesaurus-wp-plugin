@@ -366,13 +366,13 @@ if($has_descriptor or $has_qualifier){
                                                         if ( $language_code == $lang_another ) {
                                                             echo $arr_AllowableQualifiers[$key][$key1]['abbreviation'];
                                                             ?>
-                                                            <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $arr_AllowableQualifiers[$key][$key1]['decs_code'];?>" target="_blank"><?php echo $arr_AllowableQualifiers[$key][$key1]['term_string']; ?></a><br>
+                                                            <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?filter=ths_qualifall&q=<?php echo $q; ?>&id=<?php echo $arr_AllowableQualifiers[$key][$key1]['decs_code'];?>" target="_blank"><?php echo $arr_AllowableQualifiers[$key][$key1]['term_string']; ?></a><br>
                                                             <?php
                                                         }
                                                     } elseif ( $language_code == $lang_ths ){
                                                         echo $arr_AllowableQualifiers[$key][$key1]['abbreviation'];
                                                         ?>
-                                                        <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $arr_AllowableQualifiers[$key][$key1]['decs_code'];?>" target="_blank"><?php echo $arr_AllowableQualifiers[$key][$key1]['term_string']; ?></a><br>
+                                                            <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?filter=ths_qualifall&q=<?php echo $q; ?>&id=<?php echo $arr_AllowableQualifiers[$key][$key1]['decs_code'];?>" target="_blank"><?php echo $arr_AllowableQualifiers[$key][$key1]['term_string']; ?></a><br>
                                                         <?php
                                                     }
                                                 }
