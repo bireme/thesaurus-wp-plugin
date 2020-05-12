@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This plugin creates a search interface for the Portal DeCS ( https://decs.bvs.br ) thsaurus record information source.
+This plugin creates a search interface for the Portal DeCS ( https://decs.bvs.br ) thesaurus record information source.
 
 ## Requirements
 
