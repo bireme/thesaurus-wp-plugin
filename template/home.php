@@ -57,7 +57,7 @@ if ($tquery){
             break;
 
         default:
-            $query = 'ths_termall:' . '"' . $tquery . '" AND django_ct:"thesaurus.identifierdesc"';
+            $query = 'ths_termall:' . '(*' . $tquery . '* AND django_ct:"thesaurus.identifierdesc")';
             break;
     }
 }
