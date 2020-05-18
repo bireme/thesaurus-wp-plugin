@@ -70,6 +70,7 @@ function DateAdjust($date, $lang_ths){
 }
 
 
+
 // Ordena por mais de um campo
 function phparraysort($Array, $SortBy=array(), $Sort = SORT_REGULAR) {
 	if (is_array($Array) && count($Array) > 0 && !empty($SortBy)) {
