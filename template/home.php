@@ -36,7 +36,7 @@ $count=2000;
 if ($tquery){
     switch ($filter) {
         case 'ths_termall':
-            $query = 'ths_termall:' . '(' . $tquery . ' AND django_ct:"thesaurus.identifierdesc")';
+            $query = 'ths_termall:' . '(*' . $tquery . '* AND django_ct:"thesaurus.identifierdesc")';
             break;
 
         case 'ths_regid':
