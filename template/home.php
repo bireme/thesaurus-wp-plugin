@@ -40,13 +40,18 @@ if ($tquery){
             $query = 'ths_termall:' . '((' . $tquery . ') AND django_ct:"thesaurus.identifierdesc")';
             // Search for: fisiol | No results found
             // Search for: fisiol* | Results: 61
+            // Pesquisado: fisiol$ | Resultados: 61
+            // Pesquisado: $fisiol$ | Resultados: 76
+
             // Search for: Arterivirus Aedes | No results found
             // Search for: Arterivirus OR Aedes | Results: 4 
             // Search for: Achyranthes calea OR Anemia Infecciosa Equina | No results found
             // Search for: "Achyranthes calea" OR "Anemia Infecciosa Equina" | Results: 3
             // Search for: saude | Results: 524
+            // Pesquisado: "Achyranthes calea" AND "Anemia Infecciosa Equina" | Nenhum resultado foi encontrado
 
-            // teste
+
+            // teste1 - Não OK
             // $query = 'ths_termall:' . '(' . $tquery . '* AND django_ct:"thesaurus.identifierdesc")';
             // Search for: fisiol | Results: 61 
             // Search for: Arterivirus Aedes | No results found
@@ -54,21 +59,21 @@ if ($tquery){
             // Search for: Achyranthes calea OR Anemia Infecciosa Equina | No results found
             // Search for: saude | Results: 524 
 
-            // teste
+            // teste2 - Não OK
             // $query = 'ths_termall:' . '(*' . $tquery . '* AND django_ct:"thesaurus.identifierdesc")';
             // Search for: Arterivirus Aedes | No results found 
             // Search for: fisiol | Results: 76
             // Search for: Arterivirus OR Aedes | Results: 2
             // Search for: Achyranthes calea OR Anemia Infecciosa Equina | No results found
 
-            // teste
+            // teste3 - Não OK
             // $query = 'ths_termall:' . '(' . $tquery . ' AND django_ct:"thesaurus.identifierdesc")';
             // Search for: fisiol | No results found
             // Search for: Arterivirus Aedes | No results found
             // Search for: Arterivirus OR Aedes | Results: 2 
             // Search for: Achyranthes calea OR Anemia Infecciosa Equina | No results found
 
-            // teste
+            // teste4 - Não OK
             // $query = 'ths_termall:' . '((*' . $tquery . '*) AND django_ct:"thesaurus.identifierdesc")';
             // Search for: fisiol | Results: 76 
             // Search for: Arterivirus Aedes | No results found
@@ -82,6 +87,7 @@ if ($tquery){
 
         case 'ths_regid':
             $query = 'ths_regid:' . '"' . $tquery . '" AND django_ct:"thesaurus.identifierdesc"';
+            // Pesquisado: D000005 | Resultados: 1 
             break;
 
 
@@ -92,8 +98,6 @@ if ($tquery){
             // Search for: fisiol* | Results: 1
             // Search for: fisiol$ | Results: 1
             // Search for: $fisiol$ | Results: 2 
-
-            // BUG - mostra 2 resutados porém não mostra descritores
             // Search for: *fisiol* | Results: 2
             // Search for: *fisiol$ | Results: 2 
 
@@ -105,7 +109,7 @@ if ($tquery){
             // Search for: "efectos adversos" AND "líquido cefalorraquídeo" | No results found 
             // Search for: "administración & dosificación" AND "líquido cefalorraquídeo" | No results found
 
-            // teste
+            // teste - Não OK
             // $query = 'ths_termall:' . '(*' . $tquery . '* AND django_ct:"thesaurus.identifierqualif")';
             // Search for: fisiol | Results: 2 
             // Search for: "administración & dosificación" AND "líquido cefalorraquídeo" | No results found
@@ -116,10 +120,19 @@ if ($tquery){
 
         case 'ths_exact_term':
             $query = 'ths_exact_term:' . '"' . $tquery . '" AND django_ct:"thesaurus.identifierdesc"';
+            // Search for: Temefos | Results: 1 
+            // Search for: Insecticida Abate | Results: 1
+            // Search for: Mosquito del Dengue | Results: 1 
+            // Search for: Mosquito-da-Febre-Amarela | Results: 1 
             break;
 
         case 'ths_treenumber':
-            $query = 'ths_treenumber:' . '(' . $tquery . '* AND django_ct:"thesaurus.identifierdesc")';
+            $query = 'ths_treenumber:' . '((' . $tquery . ') AND django_ct:"thesaurus.identifierdesc")';
+            // Search for: D02 | No results found
+            // Search for: D02* | Results: 2128 
+            // Search for: D02.705.400.625.800 | No results found
+            // Search for: D02.705.400* | No results found
+
             break;
 
     }
@@ -388,10 +401,6 @@ if (empty($lang_another)) {
         break;
     }
 }
-
-
-
-
 
 
 

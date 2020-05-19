@@ -186,8 +186,11 @@ function containsString($arr, $q){
     return $open;
 }
 
+
 // Função de highlight
 function highlight($text, $words) {
+    $words = str_replace("$","",$words);
+    $words = str_replace("*","",$words);
     $text = preg_replace("|($words)|Uui", "<span style=\"background-color: yellow\">$1</span>", $text);
     return $text;
 }
