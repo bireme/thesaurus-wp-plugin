@@ -36,16 +36,82 @@ $count=2000;
 if ($tquery){
     switch ($filter) {
         case 'ths_termall':
-            $query = 'ths_termall:' . '(*' . $tquery . '* AND django_ct:"thesaurus.identifierdesc")';
+
+            $query = 'ths_termall:' . '((' . $tquery . ') AND django_ct:"thesaurus.identifierdesc")';
+            // Search for: fisiol | No results found
+            // Search for: fisiol* | Results: 61
+            // Search for: Arterivirus Aedes | No results found
+            // Search for: Arterivirus OR Aedes | Results: 4 
+            // Search for: Achyranthes calea OR Anemia Infecciosa Equina | No results found
+            // Search for: "Achyranthes calea" OR "Anemia Infecciosa Equina" | Results: 3
+            // Search for: saude | Results: 524
+
+            // teste
+            // $query = 'ths_termall:' . '(' . $tquery . '* AND django_ct:"thesaurus.identifierdesc")';
+            // Search for: fisiol | Results: 61 
+            // Search for: Arterivirus Aedes | No results found
+            // Search for: Arterivirus OR Aedes | Results: 2 
+            // Search for: Achyranthes calea OR Anemia Infecciosa Equina | No results found
+            // Search for: saude | Results: 524 
+
+            // teste
+            // $query = 'ths_termall:' . '(*' . $tquery . '* AND django_ct:"thesaurus.identifierdesc")';
+            // Search for: Arterivirus Aedes | No results found 
+            // Search for: fisiol | Results: 76
+            // Search for: Arterivirus OR Aedes | Results: 2
+            // Search for: Achyranthes calea OR Anemia Infecciosa Equina | No results found
+
+            // teste
+            // $query = 'ths_termall:' . '(' . $tquery . ' AND django_ct:"thesaurus.identifierdesc")';
+            // Search for: fisiol | No results found
+            // Search for: Arterivirus Aedes | No results found
+            // Search for: Arterivirus OR Aedes | Results: 2 
+            // Search for: Achyranthes calea OR Anemia Infecciosa Equina | No results found
+
+            // teste
+            // $query = 'ths_termall:' . '((*' . $tquery . '*) AND django_ct:"thesaurus.identifierdesc")';
+            // Search for: fisiol | Results: 76 
+            // Search for: Arterivirus Aedes | No results found
+            // Search for: Arterivirus OR Aedes | Results: 4
+            // Search for: Achyranthes calea OR Anemia Infecciosa Equina | No results found 
+            // Search for: "'Achyranthes calea" OR "Anemia Infecciosa Equina" | Results: 34041
+            // Search for: Achyranthes calea Anemia Infecciosa Equina | No results found 
+            // Search for: Achyranthes OR calea OR Anemia OR Infecciosa OR Equina | Results: 110
+
             break;
 
         case 'ths_regid':
             $query = 'ths_regid:' . '"' . $tquery . '" AND django_ct:"thesaurus.identifierdesc"';
             break;
 
+
         // Qualifiers
         case 'ths_qualifall':
-            $query = 'ths_termall:' . '(*' . $tquery . '* AND django_ct:"thesaurus.identifierqualif")';
+            $query = 'ths_termall:' . '((' . $tquery . ') AND django_ct:"thesaurus.identifierqualif")';
+            // Search for: fisiol | No results found 
+            // Search for: fisiol* | Results: 1
+            // Search for: fisiol$ | Results: 1
+            // Search for: $fisiol$ | Results: 2 
+
+            // BUG - mostra 2 resutados porém não mostra descritores
+            // Search for: *fisiol* | Results: 2
+            // Search for: *fisiol$ | Results: 2 
+
+            // Search for: efectos adversos OR líquido cefalorraquídeo | No results found 
+            // Search for: "efectos adversos" OR "líquido cefalorraquídeo" | Results: 2 
+            // Search for: "administración & dosificación" OR "líquido cefalorraquídeo" | Results: 2 
+
+            // Search for: efectos adversos AND líquido cefalorraquídeo | No results found 
+            // Search for: "efectos adversos" AND "líquido cefalorraquídeo" | No results found 
+            // Search for: "administración & dosificación" AND "líquido cefalorraquídeo" | No results found
+
+            // teste
+            // $query = 'ths_termall:' . '(*' . $tquery . '* AND django_ct:"thesaurus.identifierqualif")';
+            // Search for: fisiol | Results: 2 
+            // Search for: "administración & dosificación" AND "líquido cefalorraquídeo" | No results found
+            // Search for: administración & dosificación | Results: 1
+
+
             break;
 
         case 'ths_exact_term':
@@ -53,12 +119,9 @@ if ($tquery){
             break;
 
         case 'ths_treenumber':
-            $query = 'ths_treenumber:' . '(*' . $tquery . '* AND django_ct:"thesaurus.identifierdesc")';
+            $query = 'ths_treenumber:' . '(' . $tquery . '* AND django_ct:"thesaurus.identifierdesc")';
             break;
 
-        default:
-            $query = 'ths_termall:' . '(*' . $tquery . '* AND django_ct:"thesaurus.identifierdesc")';
-            break;
     }
 }
 
