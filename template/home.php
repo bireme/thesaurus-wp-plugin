@@ -518,7 +518,7 @@ if ( $lang_another) {
                 if ( empty($pmt) and $filter == 'ths_termall' ){
                     $qtd = 10;
                 } else {
-                    $qtd = 50;
+                    $qtd = 200;
                 }
 
 
