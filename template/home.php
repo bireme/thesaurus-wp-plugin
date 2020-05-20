@@ -170,6 +170,8 @@ if ($response){
 
                 $arr_temp['ths_decs_code']=$docs->ths_decs_code;
 
+                $arr_temp['ths_treenumber']=$docs->ths_treenumber;
+
                 if ($docs->ths_mh_en[0]) {
                     $arr_temp['ths_mh_en']=$docs->ths_mh_en[0];
                 }
@@ -355,7 +357,6 @@ if ($response){
             break;
         }
 
-
     }
 
 } else {
@@ -476,6 +477,7 @@ if ( $lang_another) {
             
             <!-- Permutado -->
 
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <a href="<?php echo real_site_url($ths_plugin_slug); ?>?filter=<?php echo $filter; ?>&q=<?php echo stripslashes($q); ?>" class="btn btn-success btn-sm"><?php pll_e('View in more languages'); ?></a>
 
                 <a class="btn btn-success btn-sm" data-aos="fade-right" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -511,7 +513,16 @@ if ( $lang_another) {
         <?php else :?>
 
             <?php
-                $qtd = 10; // Quantidade de linhas para mostrar
+
+                // Quantidade de linhas para mostrar
+                if ( empty($pmt) and $filter == 'ths_termall' ){
+                    $qtd = 10;
+                } else {
+                    $qtd = 50;
+                }
+
+
+
                 $atual = (isset($_GET['pg'])) ? intval($_GET['pg']) : 1;
                 $pagArr = array_chunk($arr_result, $qtd);
                 $contar = count($pagArr);
@@ -545,6 +556,8 @@ if ( $lang_another) {
                         $openDropdownES=containsString($ths_sym_es,$q);
                         $openDropdownPT=containsString($ths_sym_pt,$q);                        
                         $openDropdownFR=containsString($ths_sym_fr,$q);
+
+                        $arr_treenumber = $resultado[$key]['ths_treenumber'];
                     ?>
 
         <?php
@@ -567,6 +580,26 @@ if ( $lang_another) {
                                     
                             </span>
                             <table class="table table-bordered table-sm font12">
+
+                                <?php
+                                if ( !empty($arr_treenumber) and $filter == 'ths_treenumber'){
+                                ?>
+                                    <tr>
+                                        <td class="text-right badge-descriptor tableWidth">
+                                            <?php pll_e('Tree number(s)'); ?>:
+                                        </td>
+                                        <td>
+                                            <?php foreach ($arr_treenumber as $key => $value) { echo highlight($value, $q)."<br>"; } ?>
+                                        </td>
+                                    </tr>
+                                    
+                                <?php
+                                }
+                                ?>
+
+
+
+
 
                                 <?php
                                     // Acompanha o idioma escolhido no portal
