@@ -488,7 +488,7 @@ function selectedLanguage($lang_another){
                                                 // echo "URL -->".$u ."<br>";
                                             ?>
                                             <input type="checkbox" class="custom-control-input" id="customSwitch1" onClick="redirect('<?php echo $u; ?>')" checked>
-                                            <label class="custom-control-label" for="customSwitch1">List result</label>
+                                            <label class="custom-control-label" for="customSwitch1"><?php pll_e('List format');?></label>
 
                                         </span>
 
@@ -509,7 +509,7 @@ function selectedLanguage($lang_another){
                                                 // echo "URL -->".$u ."<br>";
                                             ?>
                                             <input type="checkbox" class="custom-control-input" id="customSwitch1" onClick="redirect('<?php echo $u; ?>')">
-                                            <label class="custom-control-label" for="customSwitch1">List result</label>
+                                            <label class="custom-control-label" for="customSwitch1"><?php pll_e('List format');?></label>
                                         </div>
                                     </div>
                         <?php
