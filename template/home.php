@@ -120,7 +120,6 @@ if ($tquery){
 // URL chamada
 // echo "---> ".$ths_service_request."<br>";
 
-
 $arr_docs_all = array();
 
 $response = @file_get_contents($ths_service_request);
@@ -129,7 +128,15 @@ if ($response){
 
     // echo "<pre>"; print_r($response_json); echo "</pre>";
 
+    // Se o Lucene estiver sendo atualizado no momento não enviará dados para a interface
+    // Envia mensagem informativa
+    $nolinks = $response_json->diaServerResponse[1];
+    if ( empty($nolinks)) {
+        echo "<center>We are sorry, we are performing preventive maintenance at this moment. In a few moments we will be back, Thanks for that Greetings!</center>";
+    }
+
     $total = $response_json->diaServerResponse[0]->response->numFound;
+
     if ($total>0){
         $arr_result = array();
         
