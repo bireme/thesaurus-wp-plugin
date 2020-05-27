@@ -529,7 +529,7 @@ function selectedLanguage($lang_another){
             <?php
 
                 // Quantidade de linhas para mostrar
-                if ( empty($pmt) and $filter == 'ths_termall' ){
+                if ( empty($pmt) ){
                     $qtd = 10;
                 } else {
                     $qtd = 200;
