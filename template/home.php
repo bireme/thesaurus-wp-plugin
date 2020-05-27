@@ -911,25 +911,21 @@ function selectedLanguage($lang_another){
                                 <div class="col-12 col-md-12 font12">
                                     <?php if ( !empty($ths_mh_en)){ echo highlight($ths_mh_en, $q); } else { echo pll_e('Without translation'); } ?>
                                     <?php if ( !empty($ths_sym_en) ) { ?>
-
                                         <div class="float-right btn-group" data-toggle="collapse" role="group" aria-label="Basic example">
                                             <a class="btn btn-sm btn-outline-success" data-toggle="collapse" href="#sym<?php echo $nkey;?>en"><i class="fas fa-angle-down"></i></a>
                                             <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.stripslashes($q); ?>" class="btn btn-sm btn-success"><i class="fas fa-search"></i></a>
                                         </div>
+                                        <div class="clearfix"></div>
                                         <div class="collapse setaCollapse" style="padding-left: 15px;" id="sym<?php echo $nkey;?>en">
                                                 <ul><b><?php pll_e('Entry term(s)'); ?>:</b><br>
                                                 <?php foreach ($ths_sym_en as $key => $value) { echo highlight($value, $q)."<br>"; } ?></ul>
                                         </div>
-
                                     <?php } else { ?>
-
                                         <div class="float-right" aria-label="Basic example">
                                             <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.stripslashes($q); ?>" class="btn btn-sm btn-success"><i class="fas fa-search"></i></a>
                                         </div>
-
                                     <?php
                                     } ?>
-                                    <hr>
                                 </div>
                     <?php
                                 break;
@@ -938,27 +934,22 @@ function selectedLanguage($lang_another){
                                 <div class="col-12 col-md-12 font12">
                                     <?php if ( !empty($ths_mh_es)){ echo highlight($ths_mh_es, $q); } else { echo pll_e('Without translation'); } ?>
                                     <?php if ( !empty($ths_sym_es) ) { ?>
-
                                         <div class="float-right btn-group" data-toggle="collapse" role="group" aria-label="Basic example">
                                             <a class="btn btn-sm btn-outline-success" data-toggle="collapse" href="#sym<?php echo $nkey;?>es"><i class="fas fa-angle-down"></i></a>
                                             <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.stripslashes($q); ?>" class="btn btn-sm btn-success"><i class="fas fa-search"></i></a>
                                         </div>
+                                        <div class="clearfix"></div>
                                         <div class="collapse setaCollapse" style="padding-left: 15px;" id="sym<?php echo $nkey;?>es">
                                                 <ul><b><?php pll_e('Entry term(s)'); ?>:</b><br>
                                                 <?php foreach ($ths_sym_es as $key => $value) { echo highlight($value, $q)."<br>"; } ?></ul>
                                         </div>
-
                                     <?php } else { ?>
-
                                         <div class="float-right" aria-label="Basic example">
                                             <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.stripslashes($q); ?>" class="btn btn-sm btn-success"><i class="fas fa-search"></i></a>
                                         </div>
-
                                     <?php
                                     } ?>
-                                    <hr>
                                 </div>
-
                     <?php
                                 break;
                             case 'pt':
@@ -966,25 +957,21 @@ function selectedLanguage($lang_another){
                                 <div class="col-12 col-md-12 font12">
                                     <?php if ( !empty($ths_mh_pt)){ echo highlight($ths_mh_pt, $q); } else { echo pll_e('Without translation'); } ?>
                                     <?php if ( !empty($ths_sym_pt) ) { ?>
-
                                         <div class="float-right btn-group" data-toggle="collapse" role="group" aria-label="Basic example">
                                             <a class="btn btn-sm btn-outline-success" data-toggle="collapse" href="#sym<?php echo $nkey;?>pt"><i class="fas fa-angle-down"></i></a>
                                             <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.stripslashes($q); ?>" class="btn btn-sm btn-success"><i class="fas fa-search"></i></a>
                                         </div>
+                                        <div class="clearfix"></div>
                                         <div class="collapse setaCollapse" style="padding-left: 15px;" id="sym<?php echo $nkey;?>pt">
                                                 <ul><b><?php pll_e('Entry term(s)'); ?>:</b><br>
                                                 <?php foreach ($ths_sym_pt as $key => $value) { echo highlight($value, $q)."<br>"; } ?></ul>
                                         </div>
-
                                     <?php } else { ?>
-
                                         <div class="float-right" aria-label="Basic example">
                                             <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.stripslashes($q); ?>" class="btn btn-sm btn-success"><i class="fas fa-search"></i></a>
                                         </div>
-
                                     <?php
                                     } ?>
-                                    <hr>
                                 </div>
                     <?php
                                 break;
@@ -993,25 +980,21 @@ function selectedLanguage($lang_another){
                                 <div class="col-12 col-md-12 font12">
                                     <?php if ( !empty($ths_mh_fr)){ echo highlight($ths_mh_fr, $q); } else { echo pll_e('Without translation'); } ?>
                                     <?php if ( !empty($ths_sym_fr) ) { ?>
-
                                         <div class="float-right btn-group" data-toggle="collapse" role="group" aria-label="Basic example">
                                             <a class="btn btn-sm btn-outline-success" data-toggle="collapse" href="#sym<?php echo $nkey;?>fr"><i class="fas fa-angle-down"></i></a>
                                             <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.stripslashes($q); ?>" class="btn btn-sm btn-success"><i class="fas fa-search"></i></a>
                                         </div>
+                                        <div class="clearfix"></div>
                                         <div class="collapse setaCollapse" style="padding-left: 15px;" id="sym<?php echo $nkey;?>fr">
                                                 <ul><b><?php pll_e('Entry term(s)'); ?>:</b><br>
                                                 <?php foreach ($ths_sym_fr as $key => $value) { echo highlight($value, $q)."<br>"; } ?></ul>
                                         </div>
-
                                     <?php } else { ?>
-
                                         <div class="float-right" aria-label="Basic example">
                                             <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.stripslashes($q); ?>" class="btn btn-sm btn-success"><i class="fas fa-search"></i></a>
                                         </div>
-
                                     <?php
                                     } ?>
-                                    <hr>
                                 </div>
                     <?php
                                 break;
@@ -1036,6 +1019,7 @@ function selectedLanguage($lang_another){
                                             <a class="btn btn-sm btn-outline-success" data-toggle="collapse" href="#sym<?php echo $nkey;?>en"><i class="fas fa-angle-down"></i></a>
                                             <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.stripslashes($q); ?>" class="btn btn-sm btn-success"><i class="fas fa-search"></i></a>
                                         </div>
+                                        <div class="clearfix"></div>
                                         <div class="collapse setaCollapse" style="padding-left: 15px;" id="sym<?php echo $nkey;?>en">
                                             <ul><b><?php pll_e('Entry term(s)'); ?>:</b><br>
                                             <?php foreach ($ths_sym_en as $key => $value) { echo highlight($value, $q)."<br>"; } ?></ul>
@@ -1048,7 +1032,7 @@ function selectedLanguage($lang_another){
 
                                     <?php
                                     } ?>
-                                    <hr>
+
                                 </div>
                     <?php
                                 break;
@@ -1069,6 +1053,7 @@ function selectedLanguage($lang_another){
                                             <a class="btn btn-sm btn-outline-success" data-toggle="collapse" href="#sym<?php echo $nkey;?>es"><i class="fas fa-angle-down"></i></a>
                                             <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.stripslashes($q); ?>" class="btn btn-sm btn-success"><i class="fas fa-search"></i></a>
                                         </div>
+                                        <div class="clearfix"></div>
                                         <div class="collapse setaCollapse" style="padding-left: 15px;" id="sym<?php echo $nkey;?>es">
                                             <ul><b><?php pll_e('Entry term(s)'); ?>:</b><br>
                                             <?php foreach ($ths_sym_es as $key => $value) { echo highlight($value, $q)."<br>"; } ?></ul>
@@ -1081,7 +1066,7 @@ function selectedLanguage($lang_another){
 
                                     <?php
                                     } ?>
-                                    <hr>
+
                                 </div>
                     <?php
                                 break;
@@ -1102,6 +1087,7 @@ function selectedLanguage($lang_another){
                                             <a class="btn btn-sm btn-outline-success" data-toggle="collapse" href="#sym<?php echo $nkey;?>pt"><i class="fas fa-angle-down"></i></a>
                                             <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.stripslashes($q); ?>" class="btn btn-sm btn-success"><i class="fas fa-search"></i></a>
                                         </div>
+                                        <div class="clearfix"></div>
                                         <div class="collapse setaCollapse" style="padding-left: 15px;" id="sym<?php echo $nkey;?>pt">
                                             <ul><b><?php pll_e('Entry term(s)'); ?>:</b><br>
                                             <?php foreach ($ths_sym_pt as $key => $value) { echo highlight($value, $q)."<br>"; } ?></ul>
@@ -1114,7 +1100,7 @@ function selectedLanguage($lang_another){
 
                                     <?php
                                     } ?>
-                                    <hr>
+
                                 </div>
                     <?php
                                 break;
@@ -1135,8 +1121,8 @@ function selectedLanguage($lang_another){
                                             <a class="btn btn-sm btn-outline-success" data-toggle="collapse" href="#sym<?php echo $nkey;?>fr"><i class="fas fa-angle-down"></i></a>
                                             <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.stripslashes($q); ?>" class="btn btn-sm btn-success"><i class="fas fa-search"></i></a>
                                         </div>
-                                        <!-- <div class="collapse setaCollapse" style="padding-left: 15px;" id="sym<?php echo $nkey;?>fr"> -->
-                                        <div class="collapse setaCollapse" id="sym<?php echo $nkey;?>fr">
+                                        <div class="clearfix"></div>
+                                        <div class="collapse setaCollapse" style="padding-left: 15px;" id="sym<?php echo $nkey;?>fr">
                                             <ul><b><?php pll_e('Entry term(s)'); ?>:</b><br>
                                             <?php foreach ($ths_sym_fr as $key => $value) { echo highlight($value, $q)."<br>"; } ?></ul>
                                         </div>
@@ -1148,7 +1134,6 @@ function selectedLanguage($lang_another){
 
                                     <?php
                                     } ?>
-                                    <hr>
                                 </div>
                     <?php
                                 break;
