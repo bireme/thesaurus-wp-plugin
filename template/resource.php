@@ -2276,6 +2276,7 @@ if($has_descriptor or $has_qualifier){
                 <br>
             </div>
         </div>
+        <div><br><br></div>
     </section>
 
 <?php

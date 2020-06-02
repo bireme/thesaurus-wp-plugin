@@ -1218,6 +1218,7 @@ function selectedLanguage($lang_another){
         <?php endif; ?> <!-- END if ( isset($total) && strval($total) == 0 ) -->
 
     </div> 
+    <div><br><br></div>
 </section>
 
 <?php get_footer(); ?>
