@@ -602,7 +602,7 @@ function selectedLanguage($lang_another){
                                 ?>
                                             <tr>
                                                 <td class="text-right badge-descriptor tableWidth">
-                                                    <?php pll_e('Descriptor English'); ?>:
+                                                    <?php if ( $filter == 'ths_qualifall'){ pll_e('Qualifier English'); } else { pll_e('Descriptor English'); } ?>:
                                                 </td>
                                                 <td>
                                                     <b><?php if ( !empty($ths_mh_en)){ echo highlight($ths_mh_en, $q); } else { echo pll_e('Without translation'); } ?></b>
@@ -617,7 +617,7 @@ function selectedLanguage($lang_another){
                                             </tr>
                                             <tr>
                                                 <td class="text-right badge-descriptor tableWidth">
-                                                    <?php pll_e('Descriptor Spanish'); ?>:
+                                                    <?php if ( $filter == 'ths_qualifall'){ pll_e('Qualifier Spanish'); } else { pll_e('Descriptor Spanish'); } ?>:
                                                 </td>
                                                 <td>
                                                     <b><?php if ( !empty($ths_mh_es)){ echo highlight($ths_mh_es, $q); } else { echo pll_e('Without translation'); } ?></b>
@@ -632,7 +632,7 @@ function selectedLanguage($lang_another){
                                             </tr>
                                             <tr>
                                                 <td class="text-right badge-descriptor tableWidth">
-                                                    <?php pll_e('Descriptor Portuguese'); ?>:
+                                                    <?php if ( $filter == 'ths_qualifall'){ pll_e('Qualifier Portuguese'); } else { pll_e('Descriptor Portuguese'); } ?>:
                                                 </td>
                                                 <td>
                                                     <b><?php if ( !empty($ths_mh_pt)){ echo highlight($ths_mh_pt, $q); } else { echo pll_e('Without translation'); } ?></b>
@@ -647,7 +647,7 @@ function selectedLanguage($lang_another){
                                             </tr>
                                             <tr>
                                                 <td class="text-right badge-descriptor tableWidth">
-                                                    <?php pll_e('Descriptor French'); ?>:
+                                                    <?php if ( $filter == 'ths_qualifall'){ pll_e('Qualifier French'); } else { pll_e('Descriptor French'); } ?>:
                                                 </td>
                                                 <td>
                                                     <b><?php if ( !empty($ths_mh_fr)){ echo highlight($ths_mh_fr, $q); } else { echo pll_e('Without translation'); } ?></b>
@@ -666,7 +666,7 @@ function selectedLanguage($lang_another){
                                 ?>
                                             <tr>
                                                 <td class="text-right badge-descriptor tableWidth">
-                                                    <?php pll_e('Descriptor Spanish'); ?>:
+                                                    <?php if ( $filter == 'ths_qualifall'){ pll_e('Qualifier Spanish'); } else { pll_e('Descriptor Spanish'); } ?>:
                                                 </td>
                                                 <td>
                                                     <b><?php if ( !empty($ths_mh_es)){ echo highlight($ths_mh_es, $q); } else { echo pll_e('Without translation'); } ?></b>
@@ -681,7 +681,7 @@ function selectedLanguage($lang_another){
                                             </tr>
                                             <tr>
                                                 <td class="text-right badge-descriptor tableWidth">
-                                                    <?php pll_e('Descriptor English'); ?>:
+                                                    <?php if ( $filter == 'ths_qualifall'){ pll_e('Qualifier English'); } else { pll_e('Descriptor English'); } ?>:
                                                 </td>
                                                 <td>
                                                     <b><?php if ( !empty($ths_mh_en)){ echo highlight($ths_mh_en, $q); } else { echo pll_e('Without translation'); } ?></b>
@@ -696,7 +696,7 @@ function selectedLanguage($lang_another){
                                             </tr>
                                             <tr>
                                                 <td class="text-right badge-descriptor tableWidth">
-                                                    <?php pll_e('Descriptor Portuguese'); ?>:
+                                                    <?php if ( $filter == 'ths_qualifall'){ pll_e('Qualifier Portuguese'); } else { pll_e('Descriptor Portuguese'); } ?>:
                                                 </td>
                                                 <td>
                                                     <b><?php if ( !empty($ths_mh_pt)){ echo highlight($ths_mh_pt, $q); } else { echo pll_e('Without translation'); } ?></b>
@@ -711,7 +711,7 @@ function selectedLanguage($lang_another){
                                             </tr>
                                             <tr>
                                                 <td class="text-right badge-descriptor tableWidth">
-                                                    <?php pll_e('Descriptor French'); ?>:
+                                                    <?php if ( $filter == 'ths_qualifall'){ pll_e('Qualifier French'); } else { pll_e('Descriptor French'); } ?>:
                                                 </td>
                                                 <td>
                                                     <b><?php if ( !empty($ths_mh_fr)){ echo highlight($ths_mh_fr, $q); } else { echo pll_e('Without translation'); } ?></b>
@@ -731,7 +731,7 @@ function selectedLanguage($lang_another){
                                 ?>
                                             <tr>
                                                 <td class="text-right badge-descriptor tableWidth">
-                                                    <?php pll_e('Descriptor Portuguese'); ?>:
+                                                    <?php if ( $filter == 'ths_qualifall'){ pll_e('Qualifier Portuguese'); } else { pll_e('Descriptor Portuguese'); } ?>:
                                                 </td>
                                                 <td>
                                                     <b><?php if ( !empty($ths_mh_pt)){ echo highlight($ths_mh_pt, $q); } else { echo pll_e('Without translation'); } ?></b>
@@ -746,7 +746,7 @@ function selectedLanguage($lang_another){
                                             </tr>
                                             <tr>
                                                 <td class="text-right badge-descriptor tableWidth">
-                                                    <?php pll_e('Descriptor English'); ?>:
+                                                    <?php if ( $filter == 'ths_qualifall'){ pll_e('Qualifier English'); } else { pll_e('Descriptor English'); } ?>:
                                                 </td>
                                                 <td>
                                                     <b><?php if ( !empty($ths_mh_en)){ echo highlight($ths_mh_en, $q); } else { echo pll_e('Without translation'); } ?></b>
@@ -761,7 +761,7 @@ function selectedLanguage($lang_another){
                                             </tr>
                                             <tr>
                                                 <td class="text-right badge-descriptor tableWidth">
-                                                    <?php pll_e('Descriptor Spanish'); ?>:
+                                                    <?php if ( $filter == 'ths_qualifall'){ pll_e('Qualifier Spanish'); } else { pll_e('Descriptor Spanish'); } ?>:
                                                 </td>
                                                 <td>
                                                     <b><?php if ( !empty($ths_mh_es)){ echo highlight($ths_mh_es, $q); } else { echo pll_e('Without translation'); } ?></b>
@@ -776,7 +776,7 @@ function selectedLanguage($lang_another){
                                             </tr>
                                             <tr>
                                                 <td class="text-right badge-descriptor tableWidth">
-                                                    <?php pll_e('Descriptor French'); ?>:
+                                                    <?php if ( $filter == 'ths_qualifall'){ pll_e('Qualifier French'); } else { pll_e('Descriptor French'); } ?>:
                                                 </td>
                                                 <td>
                                                     <b><?php if ( !empty($ths_mh_fr)){ echo highlight($ths_mh_fr, $q); } else { echo pll_e('Without translation'); } ?></b>
@@ -795,7 +795,7 @@ function selectedLanguage($lang_another){
                                 ?>
                                             <tr>
                                                 <td class="text-right badge-descriptor tableWidth">
-                                                    <?php pll_e('Descriptor French'); ?>:
+                                                    <?php if ( $filter == 'ths_qualifall'){ pll_e('Qualifier French'); } else { pll_e('Descriptor French'); } ?>:
                                                 </td>
                                                 <td>
                                                     <b><?php if ( !empty($ths_mh_fr)){ echo highlight($ths_mh_fr, $q); } else { echo pll_e('Without translation'); } ?></b>
@@ -810,7 +810,7 @@ function selectedLanguage($lang_another){
                                             </tr>
                                             <tr>
                                                 <td class="text-right badge-descriptor tableWidth">
-                                                    <?php pll_e('Descriptor English'); ?>:
+                                                    <?php if ( $filter == 'ths_qualifall'){ pll_e('Qualifier English'); } else { pll_e('Descriptor English'); } ?>:
                                                 </td>
                                                 <td>
                                                     <b><?php if ( !empty($ths_mh_en)){ echo highlight($ths_mh_en, $q); } else { echo pll_e('Without translation'); } ?></b>
@@ -825,7 +825,7 @@ function selectedLanguage($lang_another){
                                             </tr>
                                             <tr>
                                                 <td class="text-right badge-descriptor tableWidth">
-                                                    <?php pll_e('Descriptor Spanish'); ?>:
+                                                    <?php if ( $filter == 'ths_qualifall'){ pll_e('Qualifier Spanish'); } else { pll_e('Descriptor Spanish'); } ?>:
                                                 </td>
                                                 <td>
                                                     <b><?php if ( !empty($ths_mh_es)){ echo highlight($ths_mh_es, $q); } else { echo pll_e('Without translation'); } ?></b>
@@ -840,7 +840,7 @@ function selectedLanguage($lang_another){
                                             </tr>
                                             <tr>
                                                 <td class="text-right badge-descriptor tableWidth">
-                                                    <?php pll_e('Descriptor Portuguese'); ?>:
+                                                    <?php if ( $filter == 'ths_qualifall'){ pll_e('Qualifier Portuguese'); } else { pll_e('Descriptor Portuguese'); } ?>:
                                                 </td>
                                                 <td>
                                                     <b><?php if ( !empty($ths_mh_pt)){ echo highlight($ths_mh_pt, $q); } else { echo pll_e('Without translation'); } ?></b>
