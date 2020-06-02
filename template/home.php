@@ -460,7 +460,7 @@ function selectedLanguage($lang_another){
 
                         <?php
                             if (strval($total) > 0) {
-                                if ( !empty($pmt) and $filter == 'ths_termall' ) {
+                                if ( !empty($pmt) ) {
                         ?>
                                     <div class="col-md-6 text-right alignM1">
 
@@ -494,7 +494,7 @@ function selectedLanguage($lang_another){
 
                                     </div>
                         <?php
-                                } elseif ( empty($pmt) and $filter == 'ths_termall' ) {
+                                } elseif ( empty($pmt) ) {
                         ?>
                                     <div class="col-md-6 text-right alignM1">
                                         <div class="custom-control custom-switch">
