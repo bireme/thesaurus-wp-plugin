@@ -596,26 +596,6 @@ function selectedLanguage($lang_another){
                             <table class="table table-bordered table-sm font12">
 
                                 <?php
-                                if ( !empty($arr_treenumber) and $filter == 'ths_treenumber'){
-                                ?>
-                                    <tr>
-                                        <td class="text-right badge-descriptor tableWidth">
-                                            <?php pll_e('Tree number(s)'); ?>:
-                                        </td>
-                                        <td>
-                                            <?php foreach ($arr_treenumber as $key => $value) { echo highlight($value, $q)."<br>"; } ?>
-                                        </td>
-                                    </tr>
-                                    
-                                <?php
-                                }
-                                ?>
-
-
-
-
-
-                                <?php
                                     // Acompanha o idioma escolhido no portal
                                     switch ($lang) {
                                         case 'en':
@@ -877,6 +857,22 @@ function selectedLanguage($lang_another){
                                 <?php
                                             break;
                                     }
+                                ?>
+
+                                <?php
+                                if ( !empty($arr_treenumber) and $filter == 'ths_treenumber'){
+                                ?>
+                                    <tr>
+                                        <td class="text-right badge-descriptor tableWidth">
+                                            <?php pll_e('Tree number(s)'); ?>:
+                                        </td>
+                                        <td>
+                                            <?php foreach ($arr_treenumber as $key => $value) { echo highlight($value, $q)."<br>"; } ?>
+                                        </td>
+                                    </tr>
+                                    
+                                <?php
+                                }
                                 ?>
 
                             </table>
