@@ -113,25 +113,33 @@ if($has_descriptor or $has_qualifier){
                                 switch ($lang) {
                                     case 'en':
                                 ?>
-                                        <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor English'); ?>:</td><td><b>
+                                        <tr><td class="text-right badge-descriptor tableWidth">
+                                            <?php if ( $filter == 'ths_qualifall'){ pll_e('Qualifier English'); } else { pll_e('Descriptor English'); } ?>:
+                                        </td><td><b>
                                 <?php
                                     foreach ($arr_PreferredDescriptors as $key => $value) { if ( $arr_PreferredDescriptors[$key]['language_code'] == 'en' ){ echo $arr_PreferredDescriptors[$key]['term_string']; $has_mh=TRUE; break; }}
                                     if (!$has_mh){ echo pll_e('Without translation');}; unset($has_mh);
                                 ?>
                                         </b></td></tr>
-                                        <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor Spanish'); ?>:</td><td><b>
+                                        <tr><td class="text-right badge-descriptor tableWidth">
+                                            <?php if ( $filter == 'ths_qualifall'){ pll_e('Qualifier Spanish'); } else { pll_e('Descriptor Spanish'); } ?>:
+                                        </td><td><b>
                                 <?php
                                     foreach ($arr_PreferredDescriptors as $key => $value) { if ( $arr_PreferredDescriptors[$key]['language_code'] == 'es' ){ echo $arr_PreferredDescriptors[$key]['term_string']; $has_mh=TRUE; break; }}
                                     if (!$has_mh){ echo pll_e('Without translation');}; unset($has_mh);
                                 ?>
                                         </b></td></tr>
-                                        <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor Portuguese'); ?>:</td><td><b>
+                                        <tr><td class="text-right badge-descriptor tableWidth">
+                                            <?php if ( $filter == 'ths_qualifall'){ pll_e('Qualifier Portuguese'); } else { pll_e('Descriptor Portuguese'); } ?>:
+                                        </td><td><b>
                                 <?php
                                     foreach ($arr_PreferredDescriptors as $key => $value) { if ( $arr_PreferredDescriptors[$key]['language_code'] == 'pt-br' ){ echo $arr_PreferredDescriptors[$key]['term_string']; $has_mh=TRUE; break; }}
                                     if (!$has_mh){ echo pll_e('Without translation');}; unset($has_mh);
                                 ?>
                                         </b></td></tr>
-                                        <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor French'); ?>:</td><td><b>
+                                        <tr><td class="text-right badge-descriptor tableWidth">
+                                            <?php if ( $filter == 'ths_qualifall'){ pll_e('Qualifier French'); } else { pll_e('Descriptor French'); } ?>:
+                                        </td><td><b>
 
                                 <?php
                                     foreach ($arr_PreferredDescriptors as $key => $value) { if ( $arr_PreferredDescriptors[$key]['language_code'] == 'fr' ){ echo $arr_PreferredDescriptors[$key]['term_string']; $has_mh=TRUE; break; }}
@@ -143,27 +151,35 @@ if($has_descriptor or $has_qualifier){
 
                                     case 'es':
                                 ?>
-                                        <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor Spanish'); ?>:</td><td><b>
+                                        <tr><td class="text-right badge-descriptor tableWidth">
+                                            <?php if ( $filter == 'ths_qualifall'){ pll_e('Qualifier Spanish'); } else { pll_e('Descriptor Spanish'); } ?>:
+                                        </td><td><b>
                                 <?php
                                     foreach ($arr_PreferredDescriptors as $key => $value) { if ( $arr_PreferredDescriptors[$key]['language_code'] == 'es' ){ echo $arr_PreferredDescriptors[$key]['term_string']; $has_mh=TRUE; break; }}
                                     if (!$has_mh){ echo pll_e('Without translation');}; unset($has_mh);
 
                                 ?>
                                         </b></td></tr>
-                                        <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor English'); ?>:</td><td><b>
+                                        <tr><td class="text-right badge-descriptor tableWidth">
+                                            <?php if ( $filter == 'ths_qualifall'){ pll_e('Qualifier English'); } else { pll_e('Descriptor English'); } ?>:
+                                        </td><td><b>
                                 <?php
                                     foreach ($arr_PreferredDescriptors as $key => $value) { if ( $arr_PreferredDescriptors[$key]['language_code'] == 'en' ){ echo $arr_PreferredDescriptors[$key]['term_string']; $has_mh=TRUE; break; }}
                                     if (!$has_mh){ echo pll_e('Without translation');}; unset($has_mh);
 
                                 ?>
                                         </b></td></tr>
-                                        <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor Portuguese'); ?>:</td><td><b>
+                                        <tr><td class="text-right badge-descriptor tableWidth">
+                                            <?php if ( $filter == 'ths_qualifall'){ pll_e('Qualifier Portuguese'); } else { pll_e('Descriptor Portuguese'); } ?>:
+                                        </td><td><b>
                                 <?php
                                     foreach ($arr_PreferredDescriptors as $key => $value) { if ( $arr_PreferredDescriptors[$key]['language_code'] == 'pt-br' ){ echo $arr_PreferredDescriptors[$key]['term_string']; $has_mh=TRUE; break; }}
                                     if (!$has_mh){ echo pll_e('Without translation');}; unset($has_mh);
                                 ?>
                                         </b></td></tr>
-                                        <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor French'); ?>:</td><td><b>
+                                        <tr><td class="text-right badge-descriptor tableWidth">
+                                            <?php if ( $filter == 'ths_qualifall'){ pll_e('Qualifier French'); } else { pll_e('Descriptor French'); } ?>:
+                                        </td><td><b>
 
                                 <?php
                                     foreach ($arr_PreferredDescriptors as $key => $value) { if ( $arr_PreferredDescriptors[$key]['language_code'] == 'fr' ){ echo $arr_PreferredDescriptors[$key]['term_string']; $has_mh=TRUE; break; }}
@@ -175,25 +191,33 @@ if($has_descriptor or $has_qualifier){
 
                                     case 'pt':
                                 ?>
-                                        <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor Portuguese'); ?>:</td><td><b>
+                                        <tr><td class="text-right badge-descriptor tableWidth">
+                                            <?php if ( $filter == 'ths_qualifall'){ pll_e('Qualifier Portuguese'); } else { pll_e('Descriptor Portuguese'); } ?>:
+                                        </td><td><b>
                                 <?php
                                     foreach ($arr_PreferredDescriptors as $key => $value) { if ( $arr_PreferredDescriptors[$key]['language_code'] == 'pt-br' ){ echo $arr_PreferredDescriptors[$key]['term_string']; $has_mh=TRUE; break; }}
                                     if (!$has_mh){ echo pll_e('Without translation');}; unset($has_mh);
                                 ?>
                                         </b></td></tr>
-                                        <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor English'); ?>:</td><td><b>
+                                        <tr><td class="text-right badge-descriptor tableWidth">
+                                            <?php if ( $filter == 'ths_qualifall'){ pll_e('Qualifier English'); } else { pll_e('Descriptor English'); } ?>:
+                                        </td><td><b>
                                 <?php
                                     foreach ($arr_PreferredDescriptors as $key => $value) { if ( $arr_PreferredDescriptors[$key]['language_code'] == 'en' ){ echo $arr_PreferredDescriptors[$key]['term_string']; $has_mh=TRUE; break; }}
                                     if (!$has_mh){ echo pll_e('Without translation');}; unset($has_mh);
                                 ?>
                                         </b></td></tr>
-                                        <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor Spanish'); ?>:</td><td><b>
+                                        <tr><td class="text-right badge-descriptor tableWidth">
+                                            <?php if ( $filter == 'ths_qualifall'){ pll_e('Qualifier Spanish'); } else { pll_e('Descriptor Spanish'); } ?>:
+                                        </td><td><b>
                                 <?php
                                     foreach ($arr_PreferredDescriptors as $key => $value) { if ( $arr_PreferredDescriptors[$key]['language_code'] == 'es' ){ echo $arr_PreferredDescriptors[$key]['term_string']; $has_mh=TRUE; break; }}
                                     if (!$has_mh){ echo pll_e('Without translation');}; unset($has_mh);
                                 ?>
                                         </b></td></tr>
-                                        <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor French'); ?>:</td><td><b>
+                                        <tr><td class="text-right badge-descriptor tableWidth">
+                                            <?php if ( $filter == 'ths_qualifall'){ pll_e('Qualifier French'); } else { pll_e('Descriptor French'); } ?>:
+                                        </td><td><b>
 
                                 <?php
                                     foreach ($arr_PreferredDescriptors as $key => $value) { if ( $arr_PreferredDescriptors[$key]['language_code'] == 'fr' ){ echo $arr_PreferredDescriptors[$key]['term_string']; $has_mh=TRUE; break; }}
@@ -205,25 +229,33 @@ if($has_descriptor or $has_qualifier){
 
                                     case 'fr':
                                 ?>
-                                        <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor French'); ?>:</td><td><b>
+                                        <tr><td class="text-right badge-descriptor tableWidth">
+                                            <?php if ( $filter == 'ths_qualifall'){ pll_e('Qualifier French'); } else { pll_e('Descriptor French'); } ?>:
+                                        </td><td><b>
                                 <?php
                                     foreach ($arr_PreferredDescriptors as $key => $value) { if ( $arr_PreferredDescriptors[$key]['language_code'] == 'fr' ){ echo $arr_PreferredDescriptors[$key]['term_string']; $has_mh=TRUE; break; }}
                                     if (!$has_mh){ echo pll_e('Without translation');}; unset($has_mh);
                                 ?>
                                         </b></td></tr>
-                                        <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor English'); ?>:</td><td><b>
+                                        <tr><td class="text-right badge-descriptor tableWidth">
+                                            <?php if ( $filter == 'ths_qualifall'){ pll_e('Qualifier English'); } else { pll_e('Descriptor English'); } ?>:
+                                        </td><td><b>
                                 <?php
                                     foreach ($arr_PreferredDescriptors as $key => $value) { if ( $arr_PreferredDescriptors[$key]['language_code'] == 'en' ){ echo $arr_PreferredDescriptors[$key]['term_string']; $has_mh=TRUE; break; }}
                                     if (!$has_mh){ echo pll_e('Without translation');}; unset($has_mh);
                                 ?>
                                         </b></td></tr>
-                                        <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor Spanish'); ?>:</td><td><b>
+                                        <tr><td class="text-right badge-descriptor tableWidth">
+                                            <?php if ( $filter == 'ths_qualifall'){ pll_e('Qualifier Spanish'); } else { pll_e('Descriptor Spanish'); } ?>:
+                                        </td><td><b>
                                 <?php
                                     foreach ($arr_PreferredDescriptors as $key => $value) { if ( $arr_PreferredDescriptors[$key]['language_code'] == 'es' ){ echo $arr_PreferredDescriptors[$key]['term_string']; $has_mh=TRUE; break; }}
                                     if (!$has_mh){ echo pll_e('Without translation');}; unset($has_mh);
                                 ?>
                                         </b></td></tr>
-                                        <tr><td class="text-right badge-descriptor tableWidth"><?php pll_e('Descriptor Portuguese'); ?>:</td><td><b>
+                                        <tr><td class="text-right badge-descriptor tableWidth">
+                                            <?php if ( $filter == 'ths_qualifall'){ pll_e('Qualifier Portuguese'); } else { pll_e('Descriptor Portuguese'); } ?>:
+                                        </td><td><b>
                                 <?php
                                     foreach ($arr_PreferredDescriptors as $key => $value) { if ( $arr_PreferredDescriptors[$key]['language_code'] == 'pt-br' ){ echo $arr_PreferredDescriptors[$key]['term_string']; $has_mh=TRUE; break; }}
                                     if (!$has_mh){ echo pll_e('Without translation');}; unset($has_mh);
