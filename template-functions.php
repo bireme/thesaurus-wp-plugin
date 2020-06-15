@@ -187,13 +187,28 @@ function containsString($arr, $q){
 }
 
 
+// --------------------------------------------------
 // Função de highlight
-function highlight($text, $words) {
-    $words = str_replace("$","",$words);
-    $words = str_replace("*","",$words);
-    $text = preg_replace("|($words)|Uui", "<span style=\"background-color: yellow\">$1</span>", $text);
-    return $text;
+// --------------------------------------------------
+function prepare_search_term($str,$delim='#') {
+    $search = preg_quote($str,$delim);
+
+    $search = preg_replace('/[aàáâãåäæ]/iu', '[aàáâãåäæ]', $search);
+    $search = preg_replace('/[eèéêë]/iu', '[eèéêë]', $search);
+    $search = preg_replace('/[iìíîï]/iu', '[iìíîï]', $search);
+    $search = preg_replace('/[oòóôõöø]/iu', '[oòóôõöø]', $search);
+    $search = preg_replace('/[uùúûü]/iu', '[uùúûü]', $search);
+    $search = preg_replace('/[cçnñ]/iu', '[cçnñ]', $search);
+    // add more characters...
+
+    return $search;
 }
+
+function highlight($text,$searchtext) {
+    $search = prepare_search_term($searchtext);
+    return preg_replace('#' . $search . '#iu', '<span style="background-color:yellow">$0</span>', $text);
+}
+// --------------------------------------------------
 
 
 
