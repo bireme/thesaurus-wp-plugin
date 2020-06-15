@@ -1,6 +1,3 @@
-<?php get_header(); ?>
-
-<?php get_template_part('includes/navInter') ?>
 
 <?php 
 $lang = pll_current_language();
@@ -35,80 +32,25 @@ $count=2000;
 if ($tquery){
     switch ($filter) {
         case 'ths_termall':
-
             $query = 'ths_termall:' . '(' . $tquery . ') AND django_ct:"thesaurus.identifierdesc"';
-            // Search for: fisiol | No results found
-            // Search for: fisiol* | Results: 61
-            // Pesquisado: fisiol$ | Resultados: 61
-            // Pesquisado: $fisiol$ | Resultados: 76
-
-            // Search for: Arterivirus Aedes | No results found
-            // Search for: Arterivirus OR Aedes | Results: 4 
-            // Search for: Achyranthes calea OR Anemia Infecciosa Equina | No results found
-            // Search for: "Achyranthes calea" OR "Anemia Infecciosa Equina" | Results: 3
-            // Search for: saude | Results: 524
-            // Pesquisado: "Achyranthes calea" AND "Anemia Infecciosa Equina" | Nenhum resultado foi encontrado
             break;
 
         case 'ths_regid':
             $query = 'ths_regid:' . '"' . $tquery . '" AND django_ct:"thesaurus.identifierdesc"';
-            // Pesquisado: D000005 | Resultados: 1 
             break;
-
 
         // Qualifiers
         case 'ths_qualifall':
             $query = 'ths_termall:' . '(' . $tquery . ') AND django_ct:"thesaurus.identifierqualif"';
-            // Search for: fisiol | No results found 
-            // Search for: fisiol* | Results: 1
-            // Search for: fisiol$ | Results: 1
-            // Search for: $fisiol$ | Results: 2 
-            // Search for: *fisiol* | Results: 2
-            // Search for: *fisiol$ | Results: 2 
-
-            // Search for: efectos adversos OR líquido cefalorraquídeo | No results found 
-            // Search for: "efectos adversos" OR "líquido cefalorraquídeo" | Results: 2 
-            // Search for: "administración & dosificación" OR "líquido cefalorraquídeo" | Results: 2 
-
-            // Search for: efectos adversos AND líquido cefalorraquídeo | No results found 
-            // Search for: "efectos adversos" AND "líquido cefalorraquídeo" | No results found 
-            // Search for: "administración & dosificación" AND "líquido cefalorraquídeo" | No results found
             break;
 
         case 'ths_exact_term':
             $query = 'ths_exact_term:' . '"' . $tquery . '" AND django_ct:"thesaurus.identifierdesc"';
-            // Search for: Temefos | Results: 1 
-            // Search for: Insecticida Abate | Results: 1
-            // Search for: Mosquito del Dengue | Results: 1 
-            // Search for: Mosquito-da-Febre-Amarela | Results: 1 
             break;
 
         case 'ths_treenumber':
             $query = 'ths_treenumber:' . '(' . $tquery . ') AND django_ct:"thesaurus.identifierdesc"';
-            // NOK
-
-            // $query = 'ths_treenumber:' . '"' . $tquery . '" AND django_ct:"thesaurus.identifierdesc"';
-            // Search for: D02 | Results: 1 
-
-            // $query = 'ths_treenumber:' . '(' . $tquery . ' AND django_ct:"thesaurus.identifierdesc")';
-            // NOK
-
-            // $query = 'ths_treenumber:' . $tquery . ' AND django_ct:"thesaurus.identifierdesc"';
-            // NOK
-
-            // $query = '(ths_treenumber:' . $tquery . ' AND django_ct:"thesaurus.identifierdesc")';
-
-            // ths_treenumber:D02* AND django_ct:"thesaurus.identifierdesc"
-
-
-
-            // Search for: D02 | No results found
-            // Search for: D02* | Results: 2128 
-            // Search for: D02.705.400.625.800 | No results found
-            // Search for: D02.705.400* | No results found
-
             break;
-
     }
 }
 
@@ -383,15 +325,9 @@ if (empty($lang_another)) {
     }
 }
 
-
-
-
-
 // TESTE =====================================================================
-
 // DEBUG
 // echo "<pre>"; print_r($arr_result); echo "</pre>";
-
 // TESTE =====================================================================
 
 
@@ -413,6 +349,21 @@ function selectedLanguage($lang_another){
 ?>
 
 
+<?php
+
+if ( strval($total) == 1) {
+    // Redirects the page when only one result
+    foreach ( $arr_result as $key => $value) { $ths_decs_code=$arr_result[$key]['ths_decs_code']; }
+    $urlx = real_site_url($ths_plugin_slug) . 'resource/?id=' . $ths_decs_code .'&filter=' . $filter . '&q=' . stripslashes($q);
+    header('Location: '.$urlx);
+    die();
+
+} else {
+
+?>
+
+<?php get_header(); ?>
+<?php get_template_part('includes/navInter') ?>
 
 <section class="container containerAos" id="main_container">
 
@@ -432,8 +383,6 @@ function selectedLanguage($lang_another){
     <?php
     }
     ?>
-
-
 
     <div class="padding1">
 
@@ -1222,3 +1171,8 @@ function selectedLanguage($lang_another){
 </section>
 
 <?php get_footer(); ?>
+
+<?php
+} // if ( strval($total) == 1) {
+?>
+
