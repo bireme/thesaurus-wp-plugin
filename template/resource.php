@@ -664,6 +664,7 @@ if($has_descriptor or $has_qualifier){
                                             }
 
 
+                                            if (!empty($term_string) and !empty($tree_number)) {
 
                                             ?>
                                             <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $arr_HierarchicalTree[$key]['id'];?>">
@@ -703,6 +704,8 @@ if($has_descriptor or $has_qualifier){
 
                                             <?php 
 
+                                            }
+
 
                                         ?>
 
@@ -712,6 +715,9 @@ if($has_descriptor or $has_qualifier){
 
                                 $tree_number_original_old=$tree_number_original;
                                 $count++;
+
+                            unset($term_string);
+                            unset($tree_number);
 
                             }
                             ?>
