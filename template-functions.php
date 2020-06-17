@@ -198,7 +198,8 @@ function prepare_search_term($str,$delim='#') {
     $search = preg_replace('/[iìíîï]/iu', '[iìíîï]', $search);
     $search = preg_replace('/[oòóôõöø]/iu', '[oòóôõöø]', $search);
     $search = preg_replace('/[uùúûü]/iu', '[uùúûü]', $search);
-    $search = preg_replace('/[cçnñ]/iu', '[cçnñ]', $search);
+    $search = preg_replace('/[cç]/iu', '[cç]', $search);
+    $search = preg_replace('/[nñ]/iu', '[nñ]', $search);
     // add more characters...
 
     return $search;
