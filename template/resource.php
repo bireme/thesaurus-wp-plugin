@@ -601,7 +601,7 @@ if($has_descriptor or $has_qualifier){
 
                             <?php
 
-// echo "<pre>"; print_r($arr_HierarchicalTree); echo "</pre>";
+                            // echo "<pre>"; print_r($arr_HierarchicalTree); echo "</pre>";
 
                             $count=0;
                             foreach ($arr_HierarchicalTree as $key => $value) {
