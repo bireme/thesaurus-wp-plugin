@@ -599,6 +599,10 @@ if($has_descriptor or $has_qualifier){
                     <div class="tab-pane fade boxTree" id="Tree_Structures" role="tabpanel" aria-labelledby="Tree_Structures-tab">
                         <ul class="listTree">
 
+                            <table width="1024px">
+                                <tr>
+                                    <td>
+                                        
                             <?php
 
                             // echo "<pre>"; print_r($arr_HierarchicalTree); echo "</pre>";
@@ -679,24 +683,52 @@ if($has_descriptor or $has_qualifier){
                                             }
 
 
+                                            if (!empty($coringa)){
+                                                $string2=' ** ' . $term_string .' ( in English ) **';
+                                            } else {
+                                                $string2= $term_string;
+                                            }
+
+
                                             $tam_string=strlen($string);
-                                            $tam=(intval($arr_HierarchicalTree[$key]['level'])*10)+$tam_string;
+                                            $tam=(intval($arr_HierarchicalTree[$key]['level'])*5)+$tam_string;
+
+                                            $tam_string2=strlen($string2);
+                                            $tam2=(intval($arr_HierarchicalTree[$key]['level'])*5)+$tam_string2;
+
 
                                             if (!empty($arr_HierarchicalTree[$key]['tree_number_registry'])){
 
+                                            // Esconde em telas menores que lg
+                                            // d-none d-sm-block
+
+                                            // Esconde em telas maiores que lg
+                                            // d-sm-none
+
                                             ?>
                                                 <font color="red">
-                                                <?php echo str_replace("-", "&nbsp;",str_pad($string,$tam,"-",STR_PAD_LEFT)); ?>
+                                                    <div class="d-none d-sm-block">
+                                                        <?php echo str_replace("-", "&nbsp;",str_pad($string,$tam,"-",STR_PAD_LEFT)); ?>
+                                                        <?php if (!empty($arr_HierarchicalTree[$key]['leaf'])) { echo " +"; } ?>
+                                                    </div>
+                                                    <div class="d-sm-none">
+                                                        <?php echo str_replace("-", "&nbsp;",str_pad($string2,$tam2,"-",STR_PAD_LEFT)); ?>
+                                                        <?php if (!empty($arr_HierarchicalTree[$key]['leaf'])) { echo " +"; } ?>
+                                                    </div>
                                                 </font>
 
                                             <?php
                                             } else {
                                             ?>
-                                                <?php echo str_replace("-", "&nbsp;",str_pad($string,$tam,"-",STR_PAD_LEFT)); ?>
+                                                <div class="d-none d-sm-block">
+                                                    <?php echo str_replace("-", "&nbsp;",str_pad($string,$tam,"-",STR_PAD_LEFT)); ?>
+                                                    <?php if (!empty($arr_HierarchicalTree[$key]['leaf'])) { echo " +"; } ?>
+                                                </div>
+                                                <div class="d-sm-none">
+                                                    <?php echo str_replace("-", "&nbsp;",str_pad($string2,$tam2,"-",STR_PAD_LEFT)); ?>
+                                                    <?php if (!empty($arr_HierarchicalTree[$key]['leaf'])) { echo " +"; } ?>
+                                                </div>
                                             <?php
-                                            }
-                                            if (!empty($arr_HierarchicalTree[$key]['leaf'])) {
-                                                echo " +";
                                             }
                                             ?>
 
@@ -721,6 +753,12 @@ if($has_descriptor or $has_qualifier){
 
                             }
                             ?>
+
+                                    </td>
+                                </tr>
+                            </table>
+
+
 
                         </ul>
                     </div>
