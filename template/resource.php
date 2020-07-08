@@ -39,6 +39,8 @@ switch ($lang) {
 }
 
 
+
+
 if($has_descriptor or $has_qualifier){
 ?>
 
@@ -71,9 +73,12 @@ if($has_descriptor or $has_qualifier){
         <div class="row padding1">
             <div class="col-12">
                 <ul class="nav nav-tabs" id="myTab" role="tablist" style="position: relative;">
+
+
                     <li class="nav-item" data-aos="fade-left" data-aos-delay="300">
                         <a class="nav-link active" id="Details-tab" data-toggle="tab" href="#Details" role="tab" aria-controls="Details" aria-selected="true"><?php pll_e('Details'); ?></a>
                     </li>
+
 
                     <?php
                     if ($has_descriptor){
@@ -87,9 +92,12 @@ if($has_descriptor or $has_qualifier){
                     }
                     ?>
 
+
                     <li class="nav-item" data-aos="fade-left" data-aos-delay="500">
                         <a class="nav-link" id="Concepts-tab" data-toggle="tab" href="#Concepts" role="tab" aria-controls="Concepts" aria-selected="false"><?php pll_e('Concepts'); ?></a>
                     </li>
+
+
                     <li class="nav-item dropdownLang" data-aos="fade-right" data-aos-delay="600">
                         <a class="" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <?php pll_e('See in another language'); ?>
@@ -103,8 +111,10 @@ if($has_descriptor or $has_qualifier){
                         </div>
                     </li>
                 </ul>
+
                 <div class="tab-content" id="myTabContent" data-aos="fade-up">
-                    <div class="tab-pane fade show active" id="Details" role="tabpanel" aria-labelledby="Details-tab">
+
+                    <div class="tab-pane fade active show" id="Details" role="tabpanel" aria-labelledby="Details-tab">
                         <div class="table-responsive">
                             <table class="table table-bordered table-sm font12">
 
@@ -883,26 +893,26 @@ if($has_descriptor or $has_qualifier){
                         </ul>
                     </div>
 
-                <?php                               
-                if ($has_descriptor){
+                    <?php                               
+                    if ($has_descriptor){
 
-                    // Cria array do conceito preferido e dos conceitos não preferidos
-                    foreach ($arr_Concept_and_Term as $key => $value) { // Abre foreach teste
-                        foreach ($arr_Concept_and_Term[$key] as $key1 => $value1) {
-                            if ( $arr_Concept_and_Term[$key][$key1]['preferred_concept'] == 'Y' ) {
-                                // Armazena info somente do registro principal
-                                $arr_Principal[]=$arr_Concept_and_Term[$key][$key1];
-                            } else {
-                                // Armazena info dos registros não principais
-                                $arr_NPrincipal[]=$arr_Concept_and_Term[$key][$key1];
+                        // Cria array do conceito preferido e dos conceitos não preferidos
+                        foreach ($arr_Concept_and_Term as $key => $value) { // Abre foreach teste
+                            foreach ($arr_Concept_and_Term[$key] as $key1 => $value1) {
+                                if ( $arr_Concept_and_Term[$key][$key1]['preferred_concept'] == 'Y' ) {
+                                    // Armazena info somente do registro principal
+                                    $arr_Principal[]=$arr_Concept_and_Term[$key][$key1];
+                                } else {
+                                    // Armazena info dos registros não principais
+                                    $arr_NPrincipal[]=$arr_Concept_and_Term[$key][$key1];
+                                }
                             }
                         }
-                    }
-               ?>
+                   ?>
 
                     <div class="tab-pane fade boxTree" id="Concepts" role="tabpanel" aria-labelledby="Concepts-tab">
 
-<!-- PRINCIPAL Descritor -------------------------------------------------- -->
+                        <!-- PRINCIPAL Descritor -------------------------------------------------- -->
                         <?php
                         foreach ($arr_Principal as $key => $value) {
 
@@ -1276,9 +1286,9 @@ if($has_descriptor or $has_qualifier){
                         } // fecha foreach ($arr_Principal[$key]['TermListDesc'] as $key2 => $value2) {
                         ?>
 
-<!-- PRINCIPAL Descritor -------------------------------------------------- -->
+                        <!-- PRINCIPAL Descritor -------------------------------------------------- -->
 
-<!-- NÃO PRINCIPAL Descritor ---------------------------------------------- -->
+                        <!-- NÃO PRINCIPAL Descritor ---------------------------------------------- -->
 
                         <?php
                         foreach ($arr_NPrincipal as $key => $value) {
@@ -1653,32 +1663,32 @@ if($has_descriptor or $has_qualifier){
                         } // fecha foreach ($arr_NPrincipal[$key]['TermListDesc'] as $key2 => $value2) {
                         ?>
 
-<!-- NÃO PRINCIPAL Descritor ---------------------------------------------- -->
+                        <!-- NÃO PRINCIPAL Descritor ---------------------------------------------- -->
 
-                <?php
-                } // fecha if (!empty($has_descriptor)){
-                ?>
+                    <?php
+                    } // fecha if (!empty($has_descriptor)){
+                    ?>
 
 
-                <?php                               
-                if (!empty($has_qualifier)){
-                    // Cria array do conceito preferido e dos conceitos não preferidos
-                    foreach ($arr_Concept_and_Term as $key => $value) { // Abre foreach teste
-                        foreach ($arr_Concept_and_Term[$key] as $key1 => $value1) {
-                            if ( $arr_Concept_and_Term[$key][$key1]['preferred_concept'] == 'Y' ) {
-                                // Armazena info somente do registro principal
-                                $arr_Principal[]=$arr_Concept_and_Term[$key][$key1];
-                            } else {
-                                // Armazena info dos registros não principais
-                                $arr_NPrincipal[]=$arr_Concept_and_Term[$key][$key1];
+                    <?php                               
+                    if (!empty($has_qualifier)){
+                        // Cria array do conceito preferido e dos conceitos não preferidos
+                        foreach ($arr_Concept_and_Term as $key => $value) { // Abre foreach teste
+                            foreach ($arr_Concept_and_Term[$key] as $key1 => $value1) {
+                                if ( $arr_Concept_and_Term[$key][$key1]['preferred_concept'] == 'Y' ) {
+                                    // Armazena info somente do registro principal
+                                    $arr_Principal[]=$arr_Concept_and_Term[$key][$key1];
+                                } else {
+                                    // Armazena info dos registros não principais
+                                    $arr_NPrincipal[]=$arr_Concept_and_Term[$key][$key1];
+                                }
                             }
                         }
-                    }
-               ?>
+                   ?>
 
                     <div class="tab-pane fade boxTree" id="Concepts" role="tabpanel" aria-labelledby="Concepts-tab">
 
-<!-- PRINCIPAL qualificador -------------------------------------------------- -->
+                        <!-- PRINCIPAL qualificador -------------------------------------------------- -->
 
                         <?php
                         foreach ($arr_Principal as $key => $value) {
@@ -2053,9 +2063,9 @@ if($has_descriptor or $has_qualifier){
                         } // fecha foreach ($arr_Principal[$key]['TermListQualif'] as $key2 => $value2) {
                         ?>
 
-<!-- PRINCIPAL qualificador -------------------------------------------------- -->
+                        <!-- PRINCIPAL qualificador -------------------------------------------------- -->
 
-<!-- NÃO PRINCIPAL qualificador ---------------------------------------------- -->
+                        <!-- NÃO PRINCIPAL qualificador ---------------------------------------------- -->
 
                         <?php
                         foreach ($arr_NPrincipal as $key => $value) {
@@ -2430,17 +2440,18 @@ if($has_descriptor or $has_qualifier){
                         } // fecha foreach ($arr_NPrincipal[$key]['TermListQualif'] as $key2 => $value2) {
                         ?>
 
-<!-- NÃO PRINCIPAL qualificador ---------------------------------------------- -->
+                        <!-- NÃO PRINCIPAL qualificador ---------------------------------------------- -->
 
-                <?php
-                } // fecha if (!empty($has_qualifier)){
-                ?>
+                    <?php
+                    } // fecha if (!empty($has_qualifier)){
+                    ?>
 
                 </div>
                 <br>
             </div>
         </div>
         <div><br><br></div>
+
     </section>
 
 <?php
@@ -2449,3 +2460,5 @@ if($has_descriptor or $has_qualifier){
 
 
 <?php get_footer(); ?>
+
+
