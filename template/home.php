@@ -487,6 +487,9 @@ if ( strval($total) == 1) {
 
 
                 $atual = (isset($_GET['pg'])) ? intval($_GET['pg']) : 1;
+                $Previous = $atual - 1;
+                $Next = $atual + 1;
+
                 $pagArr = array_chunk($arr_result, $qtd);
                 $contar = count($pagArr);
                 $resultado = $pagArr[$atual-1];
@@ -1111,46 +1114,119 @@ if ( strval($total) == 1) {
                 <?php
 
                     if ($total > $qtd){
-                        ?>
+
+                        // Estabelece valores para o loop - proporcionando páginas antes e depois
+                        if ($atual <= 5){
+                         $limite_inferior=$atual-($atual-1);
+                        } else {
+                         $limite_inferior=$atual-5;
+                        }
+                        if( $atual < ($contar - 5) ){
+                            $limite_superior=$atual+5;
+                        } else {
+                            $limite_superior=$atual+($contar-$atual);
+                        }
+
+                ?>
                         <div class="row-fluid">
 
                             <br>
-                            <font size="2"><?php pll_e('Page'); ?>:</font>
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination justify-content-center">
+                                    <?php
+                                        if ($Previous != 0){
+                                    ?>
+                                            <li class="page-item">
+                                                <a class="page-link" href="<?php echo real_site_url($ths_plugin_slug); ?>?filter=<?php echo $filter; ?>&q=<?php echo $q; ?><?php if (!empty($pmt)) { echo "&pmt=swapped"; } ?><?php if (!empty($lang_another)) { echo "&lang_another=$lang_another"; } ?>&pg=1">&lt;</a>
+                                            </li>
+
+                                            <li class="page-item">
+                                                <a class="page-link" aria-label="Previous" href="<?php echo real_site_url($ths_plugin_slug); ?>?filter=<?php echo $filter; ?>&q=<?php echo $q; ?><?php if (!empty($pmt)) { echo "&pmt=swapped"; } ?><?php if (!empty($lang_another)) { echo "&lang_another=$lang_another"; } ?>&pg=<?php if ($Previous) { echo $Previous; } ?>">
+                                                    <span aria-hidden="true">&lt;&lt;</span>
+                                                    <span class="sr-only">&lt;&lt;</span>
+                                                </a>
+                                            </li>
+                                    <?php
+                                        } else {
+                                    ?>
+                                            <li class="page-item disabled">
+                                                <a class="page-link">&lt;</a>
+                                            </li>
+                                            <li class="page-item disabled">
+                                                <a class="page-link" aria-label="Previous">
+                                                    <span aria-hidden="true">&lt;&lt;</span>
+                                                    <span class="sr-only">Previous</span>
+                                                </a>
+                                            </li>
+                                    <?php
+                                        }
+                                    ?>
+
+
                             <?php 
-                            for($i = 1; $i <= $contar; $i++){
 
-                                if (empty($pmt)){
+                            for($i = $limite_inferior; $i <= $limite_superior; $i++){
 
-                                    if($i == $atual){
-                                        printf('<font size="2"><b><a href="%s?filter=%s&q=%s">( %s )</a></b></font>', real_site_url($ths_plugin_slug), $filter, $q, $i);
-                                    } else {
-                                        printf('<font size="2"><a href="%s?filter=%s&q=%s&pg=%s"> %s </a></font>', real_site_url($ths_plugin_slug), $filter, $q, $i, $i);
-                                    }
+
+                                if($i == $atual){
+                            ?>
+                                    <li class="page-item active">
+                                        <a class="page-link" href="<?php echo real_site_url($ths_plugin_slug); ?>?filter=<?php echo $filter; ?>&q=<?php echo $q; ?><?php if (!empty($pmt)) { echo "&pmt=swapped"; } ?><?php if (!empty($lang_another)) { echo "&lang_another=$lang_another"; } ?>&pg=<?php echo $i; ?>"><?php echo $i; ?></a>
+                                    </li>
+                            <?php
 
                                 } else {
-
-                                    if (empty($lang_another)) {
-
-                                        if($i == $atual){
-                                            printf('<font size="2"><b><a href="%s?pmt=swapped&filter=%s&q=%s">( %s )</a></b></font>', real_site_url($ths_plugin_slug), $filter, $q, $i);
-                                        } else {
-                                            printf('<font size="2"><a href="%s?pmt=swapped&filter=%s&q=%s&pg=%s"> %s </a></font>', real_site_url($ths_plugin_slug), $filter, $q, $i, $i);
-                                        }
-
-                                    } else {
-
-                                        if($i == $atual){
-                                            printf('<font size="2"><b><a href="%s?pmt=swapped&filter=%s&q=%s&lang_another=%s">( %s )</a></b></font>', real_site_url($ths_plugin_slug), $filter, $q, $lang_another, $i );
-                                        } else {
-                                            printf('<font size="2"><a href="%s?pmt=swapped&filter=%s&q=%s&lang_another=%s&pg=%s"> %s </a></font>', real_site_url($ths_plugin_slug), $filter, $q, $lang_another, $i, $i );
-                                        }
-
-                                    }
-
+                            ?>
+                                    <li class="page-item">
+                                        <a class="page-link" href="<?php echo real_site_url($ths_plugin_slug); ?>?filter=<?php echo $filter; ?>&q=<?php echo $q; ?><?php if (!empty($pmt)) { echo "&pmt=swapped"; } ?><?php if (!empty($lang_another)) { echo "&lang_another=$lang_another"; } ?>&pg=<?php echo $i; ?>"><?php echo $i; ?></a>
+                                    </li>
+                            <?php
                                 }
+                            ?>
 
+
+                            <?php 
                             }
                             ?>
+
+                                <?php
+                                if ( $Next < $contar ){
+                                ?>
+                                    <li class="page-item">
+                                        <a class="page-link" aria-label="Next" href="<?php echo real_site_url($ths_plugin_slug); ?>?filter=<?php echo $filter; ?>&q=<?php echo $q; ?><?php if (!empty($pmt)) { echo "&pmt=swapped"; } ?><?php if (!empty($lang_another)) { echo "&lang_another=$lang_another"; } ?>&pg=<?php if ($Next) { echo $Next; } ?>">
+                                            <span aria-hidden="true">&gt;&gt;</span>
+                                            <span class="sr-only">&gt;&gt;</span>
+                                        </a>
+                                    </li>
+
+                                <?php
+                                } else {
+                                ?>
+                                    <li class="page-item disabled">
+                                        <a class="page-link" aria-label="Next">
+                                            <span aria-hidden="true">&gt;&gt;</span>
+                                            <span class="sr-only">&gt;&gt;</span>
+                                        </a>
+                                    </li>
+                                <?php
+                                }
+
+                                if ( $Next < $contar ){
+                                ?>
+                                    <li class="page-item">
+                                        <a class="page-link" href="<?php echo real_site_url($ths_plugin_slug); ?>?filter=<?php echo $filter; ?>&q=<?php echo $q; ?><?php if (!empty($pmt)) { echo "&pmt=swapped"; } ?><?php if (!empty($lang_another)) { echo "&lang_another=$lang_another"; } ?>&pg=<?php if ($contar) { echo $contar; } ?>">&gt;</a>
+                                    </li>
+                                <?php
+                                } else {
+                                ?>
+                                    <li class="page-item disabled"><a class="page-link">&gt;</a></li>
+                                <?php
+                                }
+
+                                ?>
+
+                                </ul>
+                            </nav>
 
                         </div>
 
