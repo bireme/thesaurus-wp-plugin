@@ -19,8 +19,6 @@ $lang_another = $_GET[lang_another];
 // echo "<pre>"; print_r($arr_SeeRelatedListDesc); echo "</pre>";
 ?>
 
-
-
 <?php
 switch ($lang) {
     case 'en':
@@ -37,9 +35,6 @@ switch ($lang) {
     break;
 
 }
-
-
-
 
 if($has_descriptor or $has_qualifier){
 ?>
@@ -782,19 +777,16 @@ if($has_descriptor or $has_qualifier){
                                                         if( !empty($arr_HierarchicalTree[$key]['term_string_translations'][$key1]['term_string']) ){
                                                             $term_string=$arr_HierarchicalTree[$key]['term_string_translations'][$key1]['term_string'];
                                                             unset($coringa);
-                                                        } else {
-                                                            $term_string=$coringa;
+                                                            break;
                                                         }
                                                     }
                                                 } elseif ( $language_code == $lang_ths ){
                                                     if( !empty($arr_HierarchicalTree[$key]['term_string_translations'][$key1]['term_string']) ){
                                                         $term_string=$arr_HierarchicalTree[$key]['term_string_translations'][$key1]['term_string'];
                                                         unset($coringa);
-                                                    } else {
-                                                        $term_string=$coringa;
+                                                        break;
                                                     }
                                                 }
-
                                             }
 
 
