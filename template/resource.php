@@ -751,6 +751,7 @@ if($has_descriptor or $has_qualifier){
                                                 $categ=$char1.$char2;
                                             }
 
+                                            if ( $lang_another ) { $lang = substr($lang_another,0,2); }
                                             $categ_string=choice_category($categ,$lang);
 
                                             if ( strlen($tree_number) == 3 and $count == 0 ) {
