@@ -11,6 +11,8 @@ $url = $_SERVER['REQUEST_URI'];
 # idioma da ferramenta
 $i1= Explode('/', $url);
 
+print_r($i1);
+
 if ($i1[3] == 'ths' and ( $i1[2] == 'es' or $i1[2] == 'en' or $i1[2] == 'pt' or $i1[2] == 'fr' )) {
 	$idioma = $i1[2];
 } else {
