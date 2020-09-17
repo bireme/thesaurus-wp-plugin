@@ -6,34 +6,13 @@ $home_path = get_home_path();
 # Recupera url solicitada
 $url = $_SERVER['REQUEST_URI'];
 
-echo "<br>URL - $url";
-
 # idioma da ferramenta
 $i1= Explode('/', $url);
-
-# https://decs.teste.bvs.br/ths/resource/?id=16792&filter=ths_termall&q=bireme
-# https:  /  /decs.teste.bvs.br  /ths  /resource  /?id=16792&filter=ths_termall&q=bireme
-
-# https://decs.teste.bvs.br/en/ths/resource/?id=16792&filter=ths_termall&q=bireme
-print_r($i1);
-
-// if ($i1[3] == 'ths' and ( $i1[2] == 'es' or $i1[2] == 'en' or $i1[2] == 'pt' or $i1[2] == 'fr' )) {
-// 	$idioma = $i1[2];
-// } elseif ( $i1[2] == 'ths' ) {
-// 	# A interface padrão é a pt então não crava idioma
-// 	$idioma = '';
-// }
-
 foreach ($i1 as $key => $value) {
-
-	echo "valor - $value<br>";
 	if ( substr($value, 0, 2) == 'es' or substr($value, 0, 2) == 'en' or substr($value, 0, 2) == 'fr' ){
 		$idioma=$value;
 	}
 }
-
-echo "<br>Idioma: ",$idioma;
-
 
 # id decs_code e visualização outro idioma
 $b1= Explode('?', $url);
@@ -52,8 +31,6 @@ foreach ($b2 as $key => $value) {
 	}
 
 }
-
-echo "<br>lang_another: ",$lang_another;
 
 # Monta nome do arquivo
 if ( $lang_another ){
