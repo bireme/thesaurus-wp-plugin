@@ -3,8 +3,6 @@
 require_once(ABSPATH . 'wp-admin/includes/file.php');
 $home_path = get_home_path();
 
-echo "PATH ",$home_path;
-
 # Recupera url solicitada
 $url = $_SERVER['REQUEST_URI'];
 
@@ -47,7 +45,8 @@ if ( $lang_another ){
 $TMP_DIR = $home_path . 'ths_cache';
 $cachefile = $TMP_DIR . '/' . 'cached-'. $file .'.html';
 
-echo "<br>ARQ. ",$cachefile;
+// echo "PATH ",$home_path;
+// echo "<br>ARQ. ",$cachefile;
 
 # Tempo de armazenamento
 $cachetime = 3600 * 168; # Uma semana de armazenamento
