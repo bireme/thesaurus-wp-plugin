@@ -15,12 +15,22 @@ $i1= Explode('/', $url);
 # https://decs.teste.bvs.br/en/ths/resource/?id=16792&filter=ths_termall&q=bireme
 print_r($i1);
 
-if ($i1[3] == 'ths' and ( $i1[2] == 'es' or $i1[2] == 'en' or $i1[2] == 'pt' or $i1[2] == 'fr' )) {
-	$idioma = $i1[2];
-} elseif ( $i1[2] == 'ths' ) {
-	# A interface padrão é a pt então não crava idioma
+// if ($i1[3] == 'ths' and ( $i1[2] == 'es' or $i1[2] == 'en' or $i1[2] == 'pt' or $i1[2] == 'fr' )) {
+// 	$idioma = $i1[2];
+// } elseif ( $i1[2] == 'ths' ) {
+// 	# A interface padrão é a pt então não crava idioma
+// 	$idioma = '';
+// }
+
+if ($i1[2] == 'ths' ) {
 	$idioma = '';
+} else {
+	$idioma = $i1[2];
+	# A interface padrão é a pt então não crava idioma
+
 }
+
+
 	echo "<br>Idioma: ",$idioma;
 
 
