@@ -22,16 +22,15 @@ print_r($i1);
 // 	$idioma = '';
 // }
 
-if ($i1[2] == 'ths' ) {
-	$idioma = '';
-} else {
-	$idioma = $i1[2];
-	# A interface padrão é a pt então não crava idioma
-
+foreach ($i1 as $key => $value) {
+	if ( substr($value, 0, 2) == 'es' or substr($value, 0, 2) == 'en'  or substr($value, 0, 2) == 'fr' ){
+		$idioma=$value;
+	} else {
+		$idioma='';
+	}
 }
 
-
-	echo "<br>Idioma: ",$idioma;
+echo "<br>Idioma: ",$idioma;
 
 
 # id decs_code e visualização outro idioma
