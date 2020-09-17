@@ -1,4 +1,4 @@
-<?php include 'plugin_thesaurus.php' ?>
+
 
 <!-- Garante que o valor pequisado passe adiante -->
 <?php
@@ -35,7 +35,13 @@ switch ($lang) {
     break;
 
 }
+?>
 
+<?php include 'cachestart.php' ?>
+
+<?php include 'plugin_thesaurus.php' ?>
+
+<?php
 if($has_descriptor or $has_qualifier){
 ?>
 
@@ -2447,11 +2453,12 @@ if($has_descriptor or $has_qualifier){
 
     </section>
 
+
+
 <?php
 } // fecha if($has_descriptor or $has_qualifier){
 ?>
 
-
 <?php get_footer(); ?>
 
-
+<?php include 'cacheend.php' ?>

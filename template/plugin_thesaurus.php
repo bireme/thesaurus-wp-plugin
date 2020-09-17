@@ -106,7 +106,8 @@ function cmp($a, $b)
 // Chamada
 // usort($arr_PreferredScopeNote, "cmp"); 
 
-$URL="http://fi-admin-api.bvsalud.org/api/";
+// $URL="http://fi-admin-api.bvsalud.org/api/";
+$URL="http://fi-admin.beta.bvsalud.org/api/";
 
 $decs_code = $_GET['id'];
 $ths = (isset($_GET['thesaurus'])) ? intval($_GET['thesaurus']) : 1;
