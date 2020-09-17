@@ -6,7 +6,7 @@ $home_path = get_home_path();
 # Recupera url solicitada
 $url = $_SERVER['REQUEST_URI'];
 
-echo "<br>$url";
+echo "<br>URL - $url";
 
 # idioma da ferramenta
 $i1= Explode('/', $url);
