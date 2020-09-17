@@ -13,6 +13,7 @@ $i1= Explode('/', $url);
 # https:  /  /decs.teste.bvs.br  /ths  /resource  /?id=16792&filter=ths_termall&q=bireme
 
 # https://decs.teste.bvs.br/en/ths/resource/?id=16792&filter=ths_termall&q=bireme
+print_r($i1);
 
 if ($i1[3] == 'ths' and ( $i1[2] == 'es' or $i1[2] == 'en' or $i1[2] == 'pt' or $i1[2] == 'fr' )) {
 	$idioma = $i1[2];
@@ -20,6 +21,8 @@ if ($i1[3] == 'ths' and ( $i1[2] == 'es' or $i1[2] == 'en' or $i1[2] == 'pt' or 
 	# A interface padrão é a pt então não crava idioma
 	$idioma = '';
 }
+	echo "<br>Idioma: ",$idioma;
+
 
 # id decs_code e visualização outro idioma
 $b1= Explode('?', $url);
@@ -38,6 +41,8 @@ foreach ($b2 as $key => $value) {
 	}
 
 }
+
+echo "<br>lang_another: ",$lang_another;
 
 # Monta nome do arquivo
 if ( $lang_another ){
