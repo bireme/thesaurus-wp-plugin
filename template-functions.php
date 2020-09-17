@@ -207,7 +207,7 @@ function prepare_search_term($str,$delim='#') {
 
 function highlight($text,$searchtext) {
     $search = prepare_search_term($searchtext);
-    return preg_replace('#' . $search . '#iu', '<span style="background-color:#F5F5DC">$0</span>', $text);
+    return preg_replace('#' . $search . '#iu', '<span class="highlight">$0</span>', $text);
 }
 // --------------------------------------------------
 
