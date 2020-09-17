@@ -9,9 +9,14 @@ $url = $_SERVER['REQUEST_URI'];
 # idioma da ferramenta
 $i1= Explode('/', $url);
 
+# https://decs.teste.bvs.br/ths/resource/?id=16792&filter=ths_termall&q=bireme
+# https:  /  /decs.teste.bvs.br  /ths  /resource  /?id=16792&filter=ths_termall&q=bireme
+
+# https://decs.teste.bvs.br/en/ths/resource/?id=16792&filter=ths_termall&q=bireme
+
 if ($i1[3] == 'ths' and ( $i1[2] == 'es' or $i1[2] == 'en' or $i1[2] == 'pt' or $i1[2] == 'fr' )) {
 	$idioma = $i1[2];
-} else {
+} elseif ( $i1[2] == 'ths' ) {
 	# A interface padrão é a pt então não crava idioma
 	$idioma = '';
 }
