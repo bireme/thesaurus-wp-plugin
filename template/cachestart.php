@@ -43,8 +43,8 @@ if ( $lang_another ){
 $TMP_DIR = $home_path . 'ths_cache';
 $cachefile = $TMP_DIR . '/' . 'cached-'. $file .'.html';
 
-// echo "PATH ",$home_path;
-// echo "<br>ARQ. ",$cachefile;
+echo "PATH ",$home_path;
+echo "<br>ARQ. ",$cachefile;
 
 # Tempo de armazenamento
 $cachetime = 3600 * 168; # Uma semana de armazenamento
