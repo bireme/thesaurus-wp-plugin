@@ -397,7 +397,7 @@ if ( strval($total) == 1) {
                             ?>
                             |
                             <?php
-                                if ( isset($total) || strval($total) == 0 ){
+                                if ( !$total || strval($total) == 0 ){
                                     echo pll_e('No results found');
                                 } elseif (  ( $query != '' || $user_filter != '' ) && strval($total) > 0  ) {
                                     pll_e('Results'); echo ': ' . $total;
