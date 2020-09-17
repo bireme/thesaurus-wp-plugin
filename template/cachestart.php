@@ -25,6 +25,8 @@ print_r($i1);
 // }
 
 foreach ($i1 as $key => $value) {
+	
+	echo "valor - $value<br>";
 	if ( substr($value, 0, 2) == 'es' or substr($value, 0, 2) == 'en'  or substr($value, 0, 2) == 'fr' ){
 		$idioma=$value;
 	} else {
