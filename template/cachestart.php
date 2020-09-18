@@ -49,6 +49,15 @@ $cachefile = $TMP_DIR . '/' . 'cached-'. $file .'.html';
 # Tempo de armazenamento
 $cachetime = 3600 * 168; # Uma semana de armazenamento
 
+# Apaga arquivo que supostamente foi gravado com erro
+if (file_exists($cachefile)){
+	$TAM=filesize($cachefile);
+	# 5000 bytes tamanho medio de um arquivo com problema
+	if ($TAM < 5000 ){
+		unlink($cachefile);
+	}
+}
+
 // Serve from the cache if it is younger than $cachetime
 if (file_exists($cachefile) && time() - $cachetime < filemtime($cachefile)) {
     echo "<!-- Cached copy, generated ".date('H:i', filemtime($cachefile))." -->\n";
