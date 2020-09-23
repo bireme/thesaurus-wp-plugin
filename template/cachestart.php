@@ -47,7 +47,8 @@ $cachefile = $TMP_DIR . '/' . 'cached-'. $file .'.html';
 // echo "<br>ARQ. ",$cachefile;
 
 # Tempo de armazenamento
-$cachetime = 3600 * 168; # Uma semana de armazenamento
+// $cachetime = 3600 * 168; # Uma semana de armazenamento - 24 x 7 = 168
+$cachetime = 3600 * 720; # Um mes de armazenamento - 24 x 30 = 720
 
 # Apaga arquivo que supostamente foi gravado com erro
 if (file_exists($cachefile)){
