@@ -51,6 +51,15 @@ if ($tquery){
         case 'ths_treenumber':
             $query = 'ths_treenumber:' . '(' . $tquery . ') AND django_ct:"thesaurus.identifierdesc"';
             break;
+
+        // Em testes - utilizado para trazer resultado para a interface FI-Admin
+        // http://localhost/wordpress/pt/ths?filter=ths_exact_term_bool&q="revisão"+or+"Relatos+de+Casos"
+        case 'ths_exact_term_bool':
+            $query = 'ths_exact_term:' . '(' . $tquery . ') AND django_ct:"thesaurus.identifierdesc"';
+            break;
+
+
+
     }
 }
 
