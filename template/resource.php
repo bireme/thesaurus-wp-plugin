@@ -99,6 +99,10 @@ if($has_descriptor or $has_qualifier){
                     </li>
 
 
+                    <?php
+                        if ( $q ) {
+                    ?>
+
                     <li class="nav-item dropdownLang" data-aos="fade-right" data-aos-delay="600">
                         <a class="" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <?php pll_e('See in another language'); ?>
@@ -116,6 +120,11 @@ if($has_descriptor or $has_qualifier){
 
                         </div>
                     </li>
+
+                    <?php
+                        }
+                    ?>
+
                 </ul>
 
                 <div class="tab-content" id="myTabContent" data-aos="fade-up">
