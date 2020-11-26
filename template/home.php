@@ -846,7 +846,19 @@ if ( strval($total) == 1) {
                         </div>
                     </div>
                     <div class="col-12 col-md-2 boxBtnSeeMore">
-                        <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.stripslashes($q); ?>" class="btn btn-success btn-sm btnSeeMore"><?php pll_e('See details'); ?></a>
+                        <?php
+                            if ( $filter != "ths_exact_term_bool" ) {
+                        ?>
+                                <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.stripslashes($q); ?>" class="btn btn-success btn-sm btnSeeMore"><?php pll_e('See details'); ?></a>
+                        <?php
+                            } else {
+                        ?>
+                                <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code; ?>" class="btn btn-success btn-sm btnSeeMore"><?php pll_e('See details'); ?></a>
+                        <?php
+                            }
+                        ?>
+
+
                     </div>
                 </div>
                 <br>
