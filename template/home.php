@@ -853,7 +853,8 @@ if ( strval($total) == 1) {
                         <?php
                             } else {
                         ?>
-                                <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter=ths_termall&q='.stripslashes($q); ?>" class="btn btn-success btn-sm btnSeeMore"><?php pll_e('See details'); ?></a>
+                                <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code; ?>" class="btn btn-success btn-sm btnSeeMore"><?php pll_e('See details'); ?></a>
+
 
                         <?php
                             }
