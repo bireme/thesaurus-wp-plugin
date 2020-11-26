@@ -5,6 +5,9 @@
     $id = $_GET['id'];
     $q = $_GET['q'];
     $filter = $_GET['filter'];
+
+    echo "--> Q: ".$q;
+    echo "<br>--> FILTER: ".$filter;
 ?>
 
 <?php get_header(); ?>
@@ -107,11 +110,9 @@ if($has_descriptor or $has_qualifier){
 
                             <a class="dropdown-item" href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php if ( $arr_IdentifierDesc[0]['decs_code']) { echo $arr_IdentifierDesc[0]['decs_code']; } elseif ( $arr_IdentifierQualif[0]['decs_code'] ) { echo $arr_IdentifierQualif[0]['decs_code']; } ?>&filter=<?php echo $filter; ?>&q=<?php echo $q; ?>&lang_another=es"><?php pll_e('Spanish'); ?></a>
 
-                            <a class="dropdown-item" href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php if ( $arr_IdentifierDesc[0]['decs_code']) { echo $arr_IdentifierDesc[0]['decs_code']; } elseif ( $arr_IdentifierQualif[0]['decs_code'] ) { echo $arr_IdentifierQualif[0]['decs_code']; } ?>&filter=<?php echo $filter; ?>&q=<?php echo $q; ?>&lang_another=pt-br"><?php pll_e('Portuguese'); ?></a>
-
-                            <a class="dropdown-item" href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php if ( $arr_IdentifierDesc[0]['decs_code']) { echo $arr_IdentifierDesc[0]['decs_code']; } elseif ( $arr_IdentifierQualif[0]['decs_code'] ) { echo $arr_IdentifierQualif[0]['decs_code']; } ?>&filter=<?php echo $filter; ?>&q=<?php echo $q; ?>&lang_another=fr"><?php pll_e('French'); ?></a>
 
                         </div>
+
                     </li>
 
                 </ul>
