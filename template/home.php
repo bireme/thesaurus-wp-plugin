@@ -17,13 +17,11 @@ $ths_config = get_option('ths_config');
 $site_language = strtolower(get_bloginfo('language'));
 $lang = substr($site_language,0,2);
 
-// echo "[".$lang."]";
-// echo "<pre>"; print_r($response_json); echo "</pre>";
-
 $q = $_GET['q'];
 $tquery = stripslashes( trim($q) );
 $filter = $_GET['filter'];
 $pmt =  $_GET['pmt'];
+
 
 // Quantidade máxima de documentos que retornarão
 $count=2000;
@@ -53,7 +51,7 @@ if ($tquery){
             break;
 
         // Em testes - utilizado para trazer resultado para a interface FI-Admin
-        // http://localhost/wordpress/pt/ths?filter=ths_exact_term_bool&q="revisão"+or+"Relatos+de+Casos"
+        // http://localhost/wordpress/pt/ths?filter=ths_exact_term_bool&q="Relatos de Casos" OR "Revisão Sistemática"
         case 'ths_exact_term_bool':
             $query = 'ths_exact_term:' . '(' . $tquery . ') AND django_ct:"thesaurus.identifierdesc"';
             break;
@@ -443,7 +441,7 @@ if ( strval($total) == 1) {
                                             </script>
                                             <?php
                                                 $u=real_site_url($ths_plugin_slug) . '?filter=' . $filter . '&q=' . stripslashes($q);
-                                                // echo "URL -->".$u ."<br>";
+                                                echo "URL -->".$u ."<br>";
                                             ?>
                                             <input type="checkbox" class="custom-control-input" id="customSwitch1" onClick="redirect('<?php echo $u; ?>')" checked>
                                             <label class="custom-control-label" for="customSwitch1"><?php pll_e('List format');?></label>
@@ -456,18 +454,26 @@ if ( strval($total) == 1) {
                         ?>
                                     <div class="col-md-6 text-right alignM1">
                                         <div class="custom-control custom-switch">
+                        <?php
+                                            // Quando ths_exact_term_bool o formato de lista não funciona
+                                            if ( $filter != "ths_exact_term_bool" ) {
+                        ?>
+                                                <script type="text/javascript">
+                                                    function redirect(url) {
+                                                        window.location.href = url;
+                                                    }
+                                                </script>
+                                                <?php
+                                                    $u=real_site_url($ths_plugin_slug) . '?pmt=swapped&filter=' . $filter . '&q=' . stripslashes($q);
+                                                    echo "URL -->".$u ."<br>";
+                                                ?>
+                                                <input type="checkbox" class="custom-control-input" id="customSwitch1" onClick="redirect('<?php echo $u; ?>')">
+                                                <label class="custom-control-label" for="customSwitch1"><?php pll_e('List format');?></label>
+                        <?php
 
-                                            <script type="text/javascript">
-                                                function redirect(url) {
-                                                    window.location.href = url;
-                                                }
-                                            </script>
-                                            <?php
-                                                $u=real_site_url($ths_plugin_slug) . '?pmt=swapped&filter=' . $filter . '&q=' . stripslashes($q);
-                                                // echo "URL -->".$u ."<br>";
-                                            ?>
-                                            <input type="checkbox" class="custom-control-input" id="customSwitch1" onClick="redirect('<?php echo $u; ?>')">
-                                            <label class="custom-control-label" for="customSwitch1"><?php pll_e('List format');?></label>
+                                            }
+                        ?>
+
                                         </div>
                                     </div>
                         <?php
