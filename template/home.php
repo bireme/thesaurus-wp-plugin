@@ -441,7 +441,7 @@ if ( strval($total) == 1) {
                                             </script>
                                             <?php
                                                 $u=real_site_url($ths_plugin_slug) . '?filter=' . $filter . '&q=' . stripslashes($q);
-                                                echo "URL -->".$u ."<br>";
+                                                // echo "URL -->".$u ."<br>";
                                             ?>
                                             <input type="checkbox" class="custom-control-input" id="customSwitch1" onClick="redirect('<?php echo $u; ?>')" checked>
                                             <label class="custom-control-label" for="customSwitch1"><?php pll_e('List format');?></label>
@@ -465,7 +465,7 @@ if ( strval($total) == 1) {
                                                 </script>
                                                 <?php
                                                     $u=real_site_url($ths_plugin_slug) . '?pmt=swapped&filter=' . $filter . '&q=' . stripslashes($q);
-                                                    echo "URL -->".$u ."<br>";
+                                                    // echo "URL -->".$u ."<br>";
                                                 ?>
                                                 <input type="checkbox" class="custom-control-input" id="customSwitch1" onClick="redirect('<?php echo $u; ?>')">
                                                 <label class="custom-control-label" for="customSwitch1"><?php pll_e('List format');?></label>
