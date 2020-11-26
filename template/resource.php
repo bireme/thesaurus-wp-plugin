@@ -80,7 +80,6 @@ if($has_descriptor or $has_qualifier){
                         <a class="nav-link active" id="Details-tab" data-toggle="tab" href="#Details" role="tab" aria-controls="Details" aria-selected="true"><?php pll_e('Details'); ?></a>
                     </li>
 
-
                     <?php
                     if ($has_descriptor){
                     ?>
@@ -93,15 +92,9 @@ if($has_descriptor or $has_qualifier){
                     }
                     ?>
 
-
                     <li class="nav-item" data-aos="fade-left" data-aos-delay="500">
                         <a class="nav-link" id="Concepts-tab" data-toggle="tab" href="#Concepts" role="tab" aria-controls="Concepts" aria-selected="false"><?php pll_e('Concepts'); ?></a>
                     </li>
-
-
-                    <?php
-                        if ( $q ) {
-                    ?>
 
                     <li class="nav-item dropdownLang" data-aos="fade-right" data-aos-delay="600">
                         <a class="" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -120,10 +113,6 @@ if($has_descriptor or $has_qualifier){
 
                         </div>
                     </li>
-
-                    <?php
-                        }
-                    ?>
 
                 </ul>
 
