@@ -509,3 +509,20 @@ a{
 .highlight{
 	background: #F5F5DC;
 }
+
+.load-spinner {
+	display: inline-flex;
+    align-items: center;
+}
+
+.tree-nodes {
+	padding: 0;
+	list-style: none;
+}
+
+.treeViewDropdownLang {
+	position: absolute;
+    bottom: 0;
+    right: 0;
+    padding-right: 10px;
+}

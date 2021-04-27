@@ -32,7 +32,8 @@ if(!class_exists('Thesaurus_Plugin')) {
     class Thesaurus_Plugin {
 
         private $plugin_slug = 'thesaurus';
-        private $service_url = 'http://fi-admin.bvsalud.org/';
+        private $service_url = 'https://fi-admin-api.bvsalud.org';
+        private $vhl_portal_url = 'https://pesquisa.bvsalud.org/portal';
 
         /**
          * Construct the plugin object
@@ -46,6 +47,9 @@ if(!class_exists('Thesaurus_Plugin')) {
             add_action( 'wp_head', array(&$this, 'google_analytics_code'));
             add_action( 'template_redirect', array(&$this, 'template_redirect'));
             add_action( 'widgets_init', array(&$this, 'register_sidebars'));
+            add_action( 'wp_ajax_show_tree_leaf', array($this, 'show_tree_leaf'));
+            add_action( 'wp_ajax_nopriv_show_tree_leaf', array($this, 'show_tree_leaf'));
+
             add_filter( 'get_search_form', array(&$this, 'search_form'));
             add_filter( 'document_title_parts', array(&$this, 'theme_slug_render_title'));
 
@@ -100,7 +104,7 @@ if(!class_exists('Thesaurus_Plugin')) {
         }
 
         function template_redirect() {
-            global $wp, $ths_service_url, $ths_plugin_slug;
+            global $wp, $vhl_portal_url, $ths_service_url, $ths_plugin_slug;
             $pagename = '';
 
             // check if request contains plugin slug string
@@ -113,16 +117,20 @@ if(!class_exists('Thesaurus_Plugin')) {
 
                 $ths_service_url = $this->service_url;
                 $ths_plugin_slug = $this->plugin_slug;
+                $vhl_portal_url  = $this->vhl_portal_url;
 
-                if ($pagename == $this->plugin_slug || $pagename == $this->plugin_slug . '/resource') {
+                if ($pagename == $this->plugin_slug || $pagename == $this->plugin_slug . '/resource' || $pagename == $this->plugin_slug . '/treeView') {
 
                     add_action( 'wp_enqueue_scripts', array(&$this, 'page_template_styles_scripts'));
 
-                    if ($pagename == $this->plugin_slug){
+                    if ($pagename == $this->plugin_slug) {
                         $template = THESAURUS_PLUGIN_PATH . '/template/home.php';
-                    }else{
+                    } elseif ($pagename == $this->plugin_slug . '/treeView') {
+                        $template = THESAURUS_PLUGIN_PATH . '/template/treeview.php';
+                    } else {
                         $template = THESAURUS_PLUGIN_PATH . '/template/resource.php';
                     }
+
                     // force status to 200 - OK
                     status_header(200);
 
@@ -185,7 +193,7 @@ if(!class_exists('Thesaurus_Plugin')) {
             global $wp;
             $pagename = $wp->query_vars["pagename"];
 
-            if ($pagename == $this->plugin_slug || $pagename == $this->plugin_slug .'/resource') {
+            if ($pagename == $this->plugin_slug || $pagename == $this->plugin_slug .'/resource' || $pagename == $this->plugin_slug .'/treeView') {
                 $form = preg_replace('/action="([^"]*)"(.*)/','action="' . home_url($this->plugin_slug) . '"',$form);
             }
 
@@ -193,7 +201,15 @@ if(!class_exists('Thesaurus_Plugin')) {
         }
 
         function page_template_styles_scripts(){
-            wp_enqueue_style ('ths-tooltipster',  THESAURUS_PLUGIN_URL . 'template/css/tooltipster.css');
+            wp_enqueue_style('ths-page', THESAURUS_PLUGIN_URL . 'template/css/style.css');
+            wp_enqueue_style('ths-tooltipster', THESAURUS_PLUGIN_URL . 'template/css/tooltipster.css');
+
+            wp_enqueue_script('jquery');
+            wp_localize_script('jquery', 'ths_script_vars', array(
+                    'ajaxurl' => admin_url( 'admin-ajax.php' ),
+                    'ajaxnonce' => wp_create_nonce( 'ajax_post_validation' )
+                )
+            );
         }
 
 
@@ -234,6 +250,25 @@ if(!class_exists('Thesaurus_Plugin')) {
             } //endif
         }
 
+        function show_tree_leaf() {
+            global $ths_service_url, $ths_plugin_slug;
+
+            $ths_service_url = $this->service_url;
+            $ths_plugin_slug = $this->plugin_slug;
+
+            ob_start();
+            include THESAURUS_PLUGIN_PATH . '/template/treenode.php';
+            $contents = ob_get_contents();
+            ob_end_clean();
+
+            if ( $contents ) {
+                echo $contents;
+            } else {
+                echo 0;
+            }
+
+            die();
+        }
 
     } // END class Thesaurus_Plugin
 } // END if(!class_exists('Thesaurus_Plugin'))
