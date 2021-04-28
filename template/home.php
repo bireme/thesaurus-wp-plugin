@@ -408,7 +408,6 @@ if ( strval($total) == 1) {
 
                         </div>
 
-
                         <?php
                             if (strval($total) > 0) {
                                 if ( !empty($pmt) ) {
@@ -481,9 +480,11 @@ if ( strval($total) == 1) {
             </div>
 
 
-        <?php if ( isset($total) && strval($total) == 0 ) :?>
-        
-        <?php else :?>
+        <?php if ( isset($total) && strval($total) == 0 ) : ?>
+
+            <?php include 'treeview.php'; ?>
+
+        <?php else : ?>
 
             <?php
 
