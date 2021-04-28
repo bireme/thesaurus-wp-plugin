@@ -1,0 +1,431 @@
+# Copyright (C) 2017 Bibliographic
+# This file is distributed under the same license as the Bibliographic package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Bibliographic 0.1\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/bibliographic\n"
+"POT-Creation-Date: 2021-04-28 14:57-0300\n"
+"PO-Revision-Date: 2021-04-28 20:08-0300\n"
+"Last-Translator: Vinicius de Andrade <antoniov@paho.org>\n"
+"Language-Team: \n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+
+#: lib/Paginator.php:35 lib/Paginator.php:36 lib/Paginator.php:47
+#: lib/Paginator.php:53 lib/Paginator.php:62 lib/Paginator.php:63
+#: lib/Paginator.php:69 lib/Paginator.php:70
+msgid "go to page"
+msgstr "ir a la página"
+
+#: settings.php:9 thesaurus.php:100
+msgid "Thesaurus record settings"
+msgstr "Configuración Tesauro"
+
+#: settings.php:18
+msgid "Plugin page"
+msgstr "Pagina del plugin"
+
+#: settings.php:22
+msgid "Filter query"
+msgstr "Filtro de búsqueda"
+
+#: settings.php:26
+msgid "AddThis profile ID"
+msgstr "ID de AddThis"
+
+#: settings.php:30
+msgid "Google Analytics code"
+msgstr "Código de Google Analytics"
+
+#: settings.php:34
+msgid "Fulltext"
+msgstr "Texto completo"
+
+#: settings.php:38
+msgid "Present alternative fulltext links"
+msgstr "Presentar enlaces alternativo del  texto completo"
+
+#: settings.php:53
+msgid "Home URL"
+msgstr "Inicio"
+
+#: settings.php:58 settings.php:65
+msgid "Page title"
+msgstr "Título de la página"
+
+#: settings.php:72
+msgid "Search filters"
+msgstr "Filtros de búsqueda"
+
+#: settings.php:89
+msgid "Available"
+msgstr "Disponible"
+
+#: settings.php:123
+msgid "Selected"
+msgstr "Seleccionados"
+
+#: settings.php:144
+msgid "Save changes"
+msgstr "Guardar cambios"
+
+#: template/home.php:339 template/home.php:422 template/resource.php:56
+#: template/resource.php:106 template/treeview.php:36
+msgid "English"
+msgstr "Inglés"
+
+#: template/home.php:341 template/home.php:423 template/resource.php:58
+#: template/resource.php:108 template/treeview.php:37
+msgid "Spanish"
+msgstr "Español"
+
+#: template/home.php:343 template/home.php:424 template/resource.php:60
+#: template/resource.php:110 template/treeview.php:38
+msgid "Portuguese"
+msgstr "Portugués"
+
+#: template/home.php:345 template/home.php:425 template/resource.php:62
+#: template/resource.php:112 template/treeview.php:39
+msgid "French"
+msgstr "Francés"
+
+#: template/home.php:376 template/resource.php:53
+msgid "You have selected the view in"
+msgstr "Ha seleccionado la visión en"
+
+#: template/home.php:397
+msgid "Search for"
+msgstr "Buscado"
+
+#: template/home.php:403
+msgid "No results found"
+msgstr "No se han encontrado resultados"
+
+#: template/home.php:405
+msgid "Results"
+msgstr "Resultados"
+
+#: template/home.php:419 template/resource.php:101 template/treeview.php:32
+msgid "See in another language"
+msgstr "Ver en otro idioma"
+
+#: template/home.php:442 template/home.php:466
+msgid "List format"
+msgstr "Formato de lista"
+
+#: template/home.php:567 template/home.php:646 template/home.php:711
+#: template/home.php:775 template/resource.php:132 template/resource.php:179
+#: template/resource.php:218 template/resource.php:256
+msgid "Qualifier English"
+msgstr "Calificador en inglés"
+
+#: template/home.php:567 template/home.php:646 template/home.php:711
+#: template/home.php:775 template/resource.php:132 template/resource.php:179
+#: template/resource.php:218 template/resource.php:256
+msgid "Descriptor English"
+msgstr "Descriptor en inglés"
+
+#: template/home.php:570 template/home.php:585 template/home.php:600
+#: template/home.php:615 template/home.php:634 template/home.php:649
+#: template/home.php:664 template/home.php:679 template/home.php:699
+#: template/home.php:714 template/home.php:729 template/home.php:744
+#: template/home.php:763 template/home.php:778 template/home.php:793
+#: template/home.php:808 template/home.php:891 template/home.php:914
+#: template/home.php:937 template/home.php:960 template/home.php:991
+#: template/home.php:1026 template/home.php:1060 template/home.php:1094
+#: template/resource.php:136 template/resource.php:144
+#: template/resource.php:152 template/resource.php:161
+#: template/resource.php:174 template/resource.php:183
+#: template/resource.php:192 template/resource.php:201
+#: template/resource.php:214 template/resource.php:222
+#: template/resource.php:230 template/resource.php:239
+#: template/resource.php:252 template/resource.php:260
+#: template/resource.php:268 template/resource.php:276
+#: template/resource.php:1198 template/resource.php:1575
+#: template/resource.php:1975 template/resource.php:2352
+msgid "Without translation"
+msgstr "Sin traducción"
+
+#: template/home.php:574 template/home.php:589 template/home.php:604
+#: template/home.php:619 template/home.php:638 template/home.php:653
+#: template/home.php:668 template/home.php:683 template/home.php:703
+#: template/home.php:718 template/home.php:733 template/home.php:748
+#: template/home.php:767 template/home.php:782 template/home.php:797
+#: template/home.php:812 template/home.php:899 template/home.php:922
+#: template/home.php:945 template/home.php:968 template/home.php:1003
+#: template/home.php:1037 template/home.php:1071 template/home.php:1105
+#: template/resource.php:304 template/resource.php:1401
+#: template/resource.php:1778 template/resource.php:2178
+#: template/resource.php:2555
+msgid "Entry term(s)"
+msgstr "Término(s) alternativo(s)"
+
+#: template/home.php:582 template/home.php:631 template/home.php:726
+#: template/home.php:790 template/resource.php:140 template/resource.php:170
+#: template/resource.php:226 template/resource.php:264
+msgid "Qualifier Spanish"
+msgstr "Calificador en español"
+
+#: template/home.php:582 template/home.php:631 template/home.php:726
+#: template/home.php:790 template/resource.php:140 template/resource.php:170
+#: template/resource.php:226 template/resource.php:264
+msgid "Descriptor Spanish"
+msgstr "Descriptor en español"
+
+#: template/home.php:597 template/home.php:661 template/home.php:696
+#: template/home.php:805 template/resource.php:148 template/resource.php:188
+#: template/resource.php:210 template/resource.php:272
+msgid "Qualifier Portuguese"
+msgstr "Calificador en portugués"
+
+#: template/home.php:597 template/home.php:661 template/home.php:696
+#: template/home.php:805 template/resource.php:148 template/resource.php:188
+#: template/resource.php:210 template/resource.php:272
+msgid "Descriptor Portuguese"
+msgstr "Descriptor en portugués"
+
+#: template/home.php:612 template/home.php:676 template/home.php:741
+#: template/home.php:760 template/resource.php:156 template/resource.php:196
+#: template/resource.php:234 template/resource.php:248
+msgid "Qualifier French"
+msgstr "Calificador en francés"
+
+#: template/home.php:612 template/home.php:676 template/home.php:741
+#: template/home.php:760 template/resource.php:156 template/resource.php:196
+#: template/resource.php:234 template/resource.php:248
+msgid "Descriptor French"
+msgstr "Descriptor en francés"
+
+#: template/home.php:829 template/resource.php:324
+msgid "Tree number(s)"
+msgstr "Código(s) jeráquico(s)"
+
+#: template/home.php:847 template/home.php:851
+msgid "See details"
+msgstr "Vea detalles"
+
+#: template/resource.php:79
+msgid "Details"
+msgstr "Detalles"
+
+#: template/resource.php:87
+msgid "Tree Structures"
+msgstr "Estructura jeráquica"
+
+#: template/resource.php:95
+msgid "Concepts"
+msgstr "Conceptos"
+
+#: template/resource.php:339
+msgid "RDF Unique Identifier"
+msgstr "Identificador Único RDF"
+
+#: template/resource.php:365 template/resource.php:373
+#: template/resource.php:1244 template/resource.php:1258
+#: template/resource.php:1621 template/resource.php:1635
+#: template/resource.php:2021 template/resource.php:2035
+#: template/resource.php:2398 template/resource.php:2412
+msgid "Scope note"
+msgstr "Nota de alcance"
+
+#: template/resource.php:392 template/resource.php:400
+msgid "Annotation"
+msgstr "Nota de indización"
+
+#: template/resource.php:417
+msgid "Allowable Qualifiers"
+msgstr "Calificadores permitidos"
+
+#: template/resource.php:464
+msgid "Entry Combination"
+msgstr "Combinación alternativa"
+
+#: template/resource.php:491 template/resource.php:507
+msgid "Pharm Action"
+msgstr "Acción Farmacológica"
+
+#: template/resource.php:528
+msgid "Registry Number"
+msgstr "Número de registro"
+
+#: template/resource.php:544
+msgid "CAS Type 1 Name"
+msgstr "Nombre CAS Tipo 1"
+
+#: template/resource.php:563 template/resource.php:577
+msgid "Previous Indexing"
+msgstr "Indexación anterior"
+
+#: template/resource.php:600 template/resource.php:608
+msgid "Public MeSH Note"
+msgstr "Nota Pública de MeSH"
+
+#: template/resource.php:626 template/resource.php:634
+msgid "Online Note"
+msgstr "Nota Online"
+
+#: template/resource.php:652 template/resource.php:660
+msgid "History Note"
+msgstr "Nota de historia"
+
+#: template/resource.php:678 template/resource.php:686
+msgid "Consider Also"
+msgstr "Ver también"
+
+#: template/resource.php:704 template/resource.php:712
+msgid "Entry Version"
+msgstr "Versión alternativa"
+
+#: template/resource.php:726
+msgid "Abbreviation"
+msgstr "Abreviatura"
+
+#: template/resource.php:762
+msgid "Related"
+msgstr "Vea también los descriptores"
+
+#: template/resource.php:786
+msgid "DeCS ID"
+msgstr "Identificador de DeCS"
+
+#: template/resource.php:800
+msgid "Unique ID"
+msgstr "ID del Descriptor"
+
+#: template/resource.php:815
+msgid "Documents indexed in the Virtual Health Library (VHL)"
+msgstr "Documentos indizados en la Biblioteca Virtual de Salud (BVS)"
+
+#: template/resource.php:817
+msgid "Click here to access the VHL documents"
+msgstr "Haga clic aquí para acceder a los documentos de la BVS"
+
+#: template/resource.php:827 template/resource.php:845
+msgid "Date Established"
+msgstr "Fecha de establecimiento"
+
+#: template/resource.php:867 template/resource.php:885
+msgid "Date of Entry"
+msgstr "Fecha de entrada"
+
+#: template/resource.php:906 template/resource.php:924
+msgid "Revision Date"
+msgstr "Fecha de revisión"
+
+#: template/resource.php:1217 template/resource.php:1594
+#: template/resource.php:1994 template/resource.php:2371
+msgid "Concept UI"
+msgstr "UI del concepto"
+
+#: template/resource.php:1335 template/resource.php:1712
+#: template/resource.php:2112 template/resource.php:2489
+msgid "Preferred term"
+msgstr "Término preferido"
+
+#: template/rss.php:52
+msgid "Bibliographic records"
+msgstr "Registro bibliográfico"
+
+#: template/treeview.php:27
+msgid "DeCS/MeSH Tree View"
+msgstr "Visión Jerárquica DeCS/MeSH"
+
+#: template/treeview.php:95
+msgid "Loading..."
+msgstr "Cargando..."
+
+#: thesaurus.php:100
+msgid "Thesaurus records"
+msgstr "Registros Tesauro"
+
+#: thesaurus.php:146
+msgid "Thesaurus sidebar"
+msgstr "Tesauro sidebar"
+
+#: thesaurus.php:156
+msgid "Thesaurus header"
+msgstr "Tesauro header"
+
+#~ msgid "Bibliographic sidebar"
+#~ msgstr "Barra latereal registros bibliograficos"
+
+#~ msgid "Bibliographic header"
+#~ msgstr "Encabezado del registro bibliográfico "
+
+#~ msgid "Home"
+#~ msgstr "Inicio"
+
+#~ msgid "Search result"
+#~ msgstr "Resultado de la búsqueda"
+
+#~ msgid "Enter one or more words"
+#~ msgstr "Ingrese una o más palabras"
+
+#~ msgid "Search"
+#~ msgstr "Buscar"
+
+#~ msgid "Tip! You can do your search using boolean operators."
+#~ msgstr "Puedes realizar la búsqueda utilizando operadores booleanos."
+
+#~ msgid "Total"
+#~ msgstr "Total"
+
+#~ msgid "Fulltext (primary link)"
+#~ msgstr "Texto completo (enlace principal)"
+
+#~ msgid "Fulltext (alternative link)"
+#~ msgstr "Texto completo (enlace alternativo)"
+
+#~ msgid "Filters"
+#~ msgstr "Filtros"
+
+#~ msgid "Selected filters"
+#~ msgstr "Filtros seleccionados"
+
+#~ msgid "Publication year"
+#~ msgstr "Año de publicación"
+
+#~ msgid "Bibliographic"
+#~ msgstr "Bibliográfico"
+
+#~ msgid "Search bibliographic records from FI-ADMIN."
+#~ msgstr "Búsqueda de registros bibliográficos de FI-ADMIN."
+
+#~ msgid "Display filters"
+#~ msgstr "Mostrar filtros"
+
+#~ msgid "Main subject"
+#~ msgstr "Asunto principal"
+
+#~ msgid "Publication type"
+#~ msgstr "Tipo de publicación"
+
+#~ msgid "Database"
+#~ msgstr "Base de datos"
+
+#~ msgid "Publication country"
+#~ msgstr "País de publicación"
+
+#~ msgid "Limits"
+#~ msgstr "Límites"
+
+#~ msgid "Language"
+#~ msgstr "Idioma"
+
+#~ msgid "Journal"
+#~ msgstr "Revista"
+
+#~ msgid "Year"
+#~ msgstr "Año"
+
+#~ msgid "Abstract"
+#~ msgstr "Resumen"
+
+#~ msgid "Records"
+#~ msgstr "Registros"
+
+#~ msgid " in "
+#~ msgstr "en"
