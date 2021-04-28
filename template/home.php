@@ -1,21 +1,17 @@
-
-<?php 
-$lang = pll_current_language();
-$lang_another = $_GET[lang_another];
-?>
-
 <?php
 /*
 Template Name: Thesaurus Home
 */
-global $ths_service_url, $ths_plugin_slug;
 
 ini_set('display_errors', '0');
+
+global $ths_service_url, $ths_plugin_slug;
 
 $ths_config = get_option('ths_config');
 
 $site_language = strtolower(get_bloginfo('language'));
 $lang = substr($site_language,0,2);
+$lang_another = $_GET['lang_another'];
 
 $q = $_GET['q'];
 $tquery = stripslashes( trim($q) );
@@ -55,15 +51,12 @@ if ($tquery){
         case 'ths_exact_term_bool':
             $query = 'ths_exact_term:' . '(' . $tquery . ') AND django_ct:"thesaurus.identifierdesc"';
             break;
-
-
-
     }
 }
 
 // Aplica pesquisa na API e armazena resultado
 if ($tquery){
-    $ths_service_request = $ths_service_url . 'api/desc/thesaurus/search/?q=' . urlencode($query) . '&count=' . $count;
+    $ths_service_request = $ths_service_url . '/api/desc/thesaurus/search/?q=' . urlencode($query) . '&count=' . $count;
 }
 
 // URL chamada
@@ -75,7 +68,7 @@ $response = @file_get_contents($ths_service_request);
 if ($response){
     $response_json = json_decode($response);
 
-    // echo "<pre>"; print_r($response_json); echo "</pre>";
+    // echo "<pre>"; print_r($response_json); echo "</pre>"; die();
 
     // Se o Lucene estiver sendo atualizado no momento não enviará dados para a interface
     // Envia mensagem informativa
@@ -85,11 +78,14 @@ if ($response){
     }
 
     $total = $response_json->diaServerResponse[0]->response->numFound;
+    $documents = $response_json->diaServerResponse[0]->response->docs;
+
+    // echo "<pre>"; print_r($documents); echo "</pre>"; die();
 
     if ($total>0){
         $arr_result = array();
         
-        foreach ( $response_json->diaServerResponse[0]->response->docs as $position => $docs){
+        foreach ( $documents as $position => $docs){
             if ($docs->ths_decs_code[0]) {
                 $arr_temp=array();
                 $arr_sym_en = array();
@@ -340,13 +336,13 @@ if (empty($lang_another)) {
 
 function selectedLanguage($lang_another){
     if ($lang_another == 'en'){
-        $Language=pll_e('English');
+        $Language=__('English','ths');
     } elseif ($lang_another == 'es') {
-        $Language=pll_e('Spanish');
+        $Language=__('Spanish','ths');
     } elseif ($lang_another == 'pt-br') {
-        $Language=pll_e('Portuguese');
+        $Language=__('Portuguese','ths');
     } elseif ($lang_another == 'fr') {
-        $Language=pll_e('French');
+        $Language=__('French','ths');
     }
 
     return $Language;
@@ -370,7 +366,6 @@ if ( strval($total) == 1) {
 ?>
 
 <?php get_header(); ?>
-<?php get_template_part('includes/navInter') ?>
 
 <section class="container containerAos" id="main_container">
 
@@ -378,7 +373,7 @@ if ( strval($total) == 1) {
     if ( $lang_another) {
     ?>
         <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
-            <?php pll_e('You have selected the view in'); ?>
+            <?php _e('You have selected the view in','ths'); ?>
             <?php
                 $Language = selectedLanguage($lang_another);
                 echo "$Language";
@@ -399,15 +394,15 @@ if ( strval($total) == 1) {
                         <div class="col-md-6">
 
                             <?php
-                            pll_e('Search for');
+                            _e('Search for','ths');
                             echo ":<b> ".stripslashes($q)." </b>";
                             ?>
                             |
                             <?php
                                 if ( !$total || strval($total) == 0 ){
-                                    echo pll_e('No results found');
+                                    echo _e('No results found','ths');
                                 } elseif (  ( $query != '' || $user_filter != '' ) && strval($total) > 0  ) {
-                                    pll_e('Results'); echo ': ' . $total;
+                                    _e('Results','ths'); echo ': ' . $total;
                                 }
                             ?>
 
@@ -421,13 +416,13 @@ if ( strval($total) == 1) {
                                     <div class="col-md-6 text-right alignM1">
 
                                         <span class="">
-                                            <a class="" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php pll_e('See in another language'); ?>&nbsp;<i class="fas fa-globe-americas"></i>
+                                            <a class="" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php _e('See in another language','ths'); ?>&nbsp;<i class="fas fa-globe-americas"></i>
                                             </a>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <a class="dropdown-item" href="<?php echo real_site_url($ths_plugin_slug); ?>?pmt=swapped&filter=<?php echo $filter; ?>&q=<?php echo stripslashes($q); ?>&lang_another=en"><?php pll_e('English'); ?></a>
-                                                <a class="dropdown-item" href="<?php echo real_site_url($ths_plugin_slug); ?>?pmt=swapped&filter=<?php echo $filter; ?>&q=<?php echo stripslashes($q); ?>&lang_another=es"><?php pll_e('Spanish'); ?></a>
-                                                <a class="dropdown-item" href="<?php echo real_site_url($ths_plugin_slug); ?>?pmt=swapped&filter=<?php echo $filter; ?>&q=<?php echo stripslashes($q); ?>&lang_another=pt-br"><?php pll_e('Portuguese'); ?></a>
-                                                <a class="dropdown-item" href="<?php echo real_site_url($ths_plugin_slug); ?>?pmt=swapped&filter=<?php echo $filter; ?>&q=<?php echo stripslashes($q); ?>&lang_another=fr"><?php pll_e('French');?></a>
+                                                <a class="dropdown-item" href="<?php echo real_site_url($ths_plugin_slug); ?>?pmt=swapped&filter=<?php echo $filter; ?>&q=<?php echo stripslashes($q); ?>&lang_another=en"><?php _e('English','ths'); ?></a>
+                                                <a class="dropdown-item" href="<?php echo real_site_url($ths_plugin_slug); ?>?pmt=swapped&filter=<?php echo $filter; ?>&q=<?php echo stripslashes($q); ?>&lang_another=es"><?php _e('Spanish','ths'); ?></a>
+                                                <a class="dropdown-item" href="<?php echo real_site_url($ths_plugin_slug); ?>?pmt=swapped&filter=<?php echo $filter; ?>&q=<?php echo stripslashes($q); ?>&lang_another=pt-br"><?php _e('Portuguese','ths'); ?></a>
+                                                <a class="dropdown-item" href="<?php echo real_site_url($ths_plugin_slug); ?>?pmt=swapped&filter=<?php echo $filter; ?>&q=<?php echo stripslashes($q); ?>&lang_another=fr"><?php _e('French','ths');?></a>
 
                                             </div>
                                         </span>
@@ -444,7 +439,7 @@ if ( strval($total) == 1) {
                                                 // echo "URL -->".$u ."<br>";
                                             ?>
                                             <input type="checkbox" class="custom-control-input" id="customSwitch1" onClick="redirect('<?php echo $u; ?>')" checked>
-                                            <label class="custom-control-label" for="customSwitch1"><?php pll_e('List format');?></label>
+                                            <label class="custom-control-label" for="customSwitch1"><?php _e('List format','ths');?></label>
 
                                         </span>
 
@@ -468,7 +463,7 @@ if ( strval($total) == 1) {
                                                     // echo "URL -->".$u ."<br>";
                                                 ?>
                                                 <input type="checkbox" class="custom-control-input" id="customSwitch1" onClick="redirect('<?php echo $u; ?>')">
-                                                <label class="custom-control-label" for="customSwitch1"><?php pll_e('List format');?></label>
+                                                <label class="custom-control-label" for="customSwitch1"><?php _e('List format','ths');?></label>
                         <?php
 
                                             }
@@ -569,14 +564,14 @@ if ( strval($total) == 1) {
                                 ?>
                                             <tr>
                                                 <td class="text-right badge-descriptor tableWidth">
-                                                    <?php if ( $filter == 'ths_qualifall'){ pll_e('Qualifier English'); } else { pll_e('Descriptor English'); } ?>:
+                                                    <?php if ( $filter == 'ths_qualifall'){ _e('Qualifier English','ths'); } else { _e('Descriptor English','ths'); } ?>:
                                                 </td>
                                                 <td>
-                                                    <b><?php if ( !empty($ths_mh_en)){ echo highlight($ths_mh_en, $q); } else { echo pll_e('Without translation'); } ?></b>
+                                                    <b><?php if ( !empty($ths_mh_en)){ echo highlight($ths_mh_en, $q); } else { echo _e('Without translation','ths'); } ?></b>
                                                     <?php if ( !empty($ths_sym_en) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>en"><i class="fas fa-angle-down"></i></a>
                                                         <div class="collapse show setaCollapse" id="sym<?php echo $nkey;?>en">
-                                                            <div class="dropdown-divider"></div><b><?php pll_e('Entry term(s)'); ?>:</b><br>
+                                                            <div class="dropdown-divider"></div><b><?php _e('Entry term(s)','ths'); ?>:</b><br>
                                                             <?php foreach ($ths_sym_en as $key => $value) { echo highlight($value, $q)."<br>"; } ?>
                                                         </div>
                                                     <?php } ?>
@@ -584,14 +579,14 @@ if ( strval($total) == 1) {
                                             </tr>
                                             <tr>
                                                 <td class="text-right badge-descriptor tableWidth">
-                                                    <?php if ( $filter == 'ths_qualifall'){ pll_e('Qualifier Spanish'); } else { pll_e('Descriptor Spanish'); } ?>:
+                                                    <?php if ( $filter == 'ths_qualifall'){ _e('Qualifier Spanish','ths'); } else { _e('Descriptor Spanish','ths'); } ?>:
                                                 </td>
                                                 <td>
-                                                    <b><?php if ( !empty($ths_mh_es)){ echo highlight($ths_mh_es, $q); } else { echo pll_e('Without translation'); } ?></b>
+                                                    <b><?php if ( !empty($ths_mh_es)){ echo highlight($ths_mh_es, $q); } else { echo _e('Without translation','ths'); } ?></b>
                                                     <?php if ( !empty($ths_sym_es) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>es"><i class="fas fa-angle-down"></i></a>
                                                         <div class="collapse <?php if ($openDropdownES == '1' ){ echo "show";} ?> setaCollapse" id="sym<?php echo $nkey;?>es">
-                                                            <div class="dropdown-divider"></div><b><?php pll_e('Entry term(s)'); ?>:</b><br>
+                                                            <div class="dropdown-divider"></div><b><?php _e('Entry term(s)','ths'); ?>:</b><br>
                                                             <?php foreach ($ths_sym_es as $key => $value) { echo highlight($value, $q)."<br>"; } ?>
                                                         </div>
                                                     <?php } ?>
@@ -599,14 +594,14 @@ if ( strval($total) == 1) {
                                             </tr>
                                             <tr>
                                                 <td class="text-right badge-descriptor tableWidth">
-                                                    <?php if ( $filter == 'ths_qualifall'){ pll_e('Qualifier Portuguese'); } else { pll_e('Descriptor Portuguese'); } ?>:
+                                                    <?php if ( $filter == 'ths_qualifall'){ _e('Qualifier Portuguese','ths'); } else { _e('Descriptor Portuguese','ths'); } ?>:
                                                 </td>
                                                 <td>
-                                                    <b><?php if ( !empty($ths_mh_pt)){ echo highlight($ths_mh_pt, $q); } else { echo pll_e('Without translation'); } ?></b>
+                                                    <b><?php if ( !empty($ths_mh_pt)){ echo highlight($ths_mh_pt, $q); } else { echo _e('Without translation','ths'); } ?></b>
                                                     <?php if ( !empty($ths_sym_pt) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>pt"><i class="fas fa-angle-down"></i></a>
                                                         <div class="collapse <?php if ($openDropdownPT == '1' ){ echo "show";} ?> setaCollapse" id="sym<?php echo $nkey;?>pt">
-                                                            <div class="dropdown-divider"></div><b><?php pll_e('Entry term(s)'); ?>:</b><br>
+                                                            <div class="dropdown-divider"></div><b><?php _e('Entry term(s)','ths'); ?>:</b><br>
                                                             <?php foreach ($ths_sym_pt as $key => $value) { echo highlight($value, $q)."<br>"; } ?>
                                                         </div>
                                                     <?php } ?>
@@ -614,14 +609,14 @@ if ( strval($total) == 1) {
                                             </tr>
                                             <tr>
                                                 <td class="text-right badge-descriptor tableWidth">
-                                                    <?php if ( $filter == 'ths_qualifall'){ pll_e('Qualifier French'); } else { pll_e('Descriptor French'); } ?>:
+                                                    <?php if ( $filter == 'ths_qualifall'){ _e('Qualifier French','ths'); } else { _e('Descriptor French','ths'); } ?>:
                                                 </td>
                                                 <td>
-                                                    <b><?php if ( !empty($ths_mh_fr)){ echo highlight($ths_mh_fr, $q); } else { echo pll_e('Without translation'); } ?></b>
+                                                    <b><?php if ( !empty($ths_mh_fr)){ echo highlight($ths_mh_fr, $q); } else { echo _e('Without translation','ths'); } ?></b>
                                                     <?php if ( !empty($ths_sym_fr) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>fr"><i class="fas fa-angle-down"></i></a>
                                                         <div class="collapse <?php if ($openDropdownFR == '1' ){ echo "show";} ?> setaCollapse" id="sym<?php echo $nkey;?>fr">
-                                                            <div class="dropdown-divider"></div><b><?php pll_e('Entry term(s)'); ?>:</b><br>
+                                                            <div class="dropdown-divider"></div><b><?php _e('Entry term(s)','ths'); ?>:</b><br>
                                                             <?php foreach ($ths_sym_fr as $key => $value) { echo highlight($value, $q)."<br>"; } ?>
                                                         </div>
                                                     <?php } ?>
@@ -633,14 +628,14 @@ if ( strval($total) == 1) {
                                 ?>
                                             <tr>
                                                 <td class="text-right badge-descriptor tableWidth">
-                                                    <?php if ( $filter == 'ths_qualifall'){ pll_e('Qualifier Spanish'); } else { pll_e('Descriptor Spanish'); } ?>:
+                                                    <?php if ( $filter == 'ths_qualifall'){ _e('Qualifier Spanish','ths'); } else { _e('Descriptor Spanish','ths'); } ?>:
                                                 </td>
                                                 <td>
-                                                    <b><?php if ( !empty($ths_mh_es)){ echo highlight($ths_mh_es, $q); } else { echo pll_e('Without translation'); } ?></b>
+                                                    <b><?php if ( !empty($ths_mh_es)){ echo highlight($ths_mh_es, $q); } else { echo _e('Without translation','ths'); } ?></b>
                                                     <?php if ( !empty($ths_sym_es) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>es"><i class="fas fa-angle-down"></i></a>
                                                         <div class="collapse show setaCollapse" id="sym<?php echo $nkey;?>es">
-                                                            <div class="dropdown-divider"></div><b><?php pll_e('Entry term(s)'); ?>:</b><br>
+                                                            <div class="dropdown-divider"></div><b><?php _e('Entry term(s)','ths'); ?>:</b><br>
                                                             <?php foreach ($ths_sym_es as $key => $value) { echo highlight($value, $q)."<br>"; } ?>
                                                         </div>
                                                     <?php } ?>
@@ -648,14 +643,14 @@ if ( strval($total) == 1) {
                                             </tr>
                                             <tr>
                                                 <td class="text-right badge-descriptor tableWidth">
-                                                    <?php if ( $filter == 'ths_qualifall'){ pll_e('Qualifier English'); } else { pll_e('Descriptor English'); } ?>:
+                                                    <?php if ( $filter == 'ths_qualifall'){ _e('Qualifier English','ths'); } else { _e('Descriptor English','ths'); } ?>:
                                                 </td>
                                                 <td>
-                                                    <b><?php if ( !empty($ths_mh_en)){ echo highlight($ths_mh_en, $q); } else { echo pll_e('Without translation'); } ?></b>
+                                                    <b><?php if ( !empty($ths_mh_en)){ echo highlight($ths_mh_en, $q); } else { echo _e('Without translation','ths'); } ?></b>
                                                     <?php if ( !empty($ths_sym_en) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>en"><i class="fas fa-angle-down"></i></a>
                                                         <div class="collapse <?php if ($openDropdownEN == '1' ){ echo "show";} ?> setaCollapse" id="sym<?php echo $nkey;?>en">
-                                                            <div class="dropdown-divider"></div><b><?php pll_e('Entry term(s)'); ?>:</b><br>
+                                                            <div class="dropdown-divider"></div><b><?php _e('Entry term(s)','ths'); ?>:</b><br>
                                                             <?php foreach ($ths_sym_en as $key => $value) { echo highlight($value, $q)."<br>"; } ?>
                                                         </div>
                                                     <?php } ?>
@@ -663,14 +658,14 @@ if ( strval($total) == 1) {
                                             </tr>
                                             <tr>
                                                 <td class="text-right badge-descriptor tableWidth">
-                                                    <?php if ( $filter == 'ths_qualifall'){ pll_e('Qualifier Portuguese'); } else { pll_e('Descriptor Portuguese'); } ?>:
+                                                    <?php if ( $filter == 'ths_qualifall'){ _e('Qualifier Portuguese','ths'); } else { _e('Descriptor Portuguese','ths'); } ?>:
                                                 </td>
                                                 <td>
-                                                    <b><?php if ( !empty($ths_mh_pt)){ echo highlight($ths_mh_pt, $q); } else { echo pll_e('Without translation'); } ?></b>
+                                                    <b><?php if ( !empty($ths_mh_pt)){ echo highlight($ths_mh_pt, $q); } else { echo _e('Without translation','ths'); } ?></b>
                                                     <?php if ( !empty($ths_sym_pt) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>pt"><i class="fas fa-angle-down"></i></a>
                                                         <div class="collapse <?php if ($openDropdownPT == '1' ){ echo "show";} ?> setaCollapse" id="sym<?php echo $nkey;?>pt">
-                                                            <div class="dropdown-divider"></div><b><?php pll_e('Entry term(s)'); ?>:</b><br>
+                                                            <div class="dropdown-divider"></div><b><?php _e('Entry term(s)','ths'); ?>:</b><br>
                                                             <?php foreach ($ths_sym_pt as $key => $value) { echo highlight($value, $q)."<br>"; } ?>
                                                         </div>
                                                     <?php } ?>
@@ -678,14 +673,14 @@ if ( strval($total) == 1) {
                                             </tr>
                                             <tr>
                                                 <td class="text-right badge-descriptor tableWidth">
-                                                    <?php if ( $filter == 'ths_qualifall'){ pll_e('Qualifier French'); } else { pll_e('Descriptor French'); } ?>:
+                                                    <?php if ( $filter == 'ths_qualifall'){ _e('Qualifier French','ths'); } else { _e('Descriptor French','ths'); } ?>:
                                                 </td>
                                                 <td>
-                                                    <b><?php if ( !empty($ths_mh_fr)){ echo highlight($ths_mh_fr, $q); } else { echo pll_e('Without translation'); } ?></b>
+                                                    <b><?php if ( !empty($ths_mh_fr)){ echo highlight($ths_mh_fr, $q); } else { echo _e('Without translation','ths'); } ?></b>
                                                     <?php if ( !empty($ths_sym_fr) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>fr"><i class="fas fa-angle-down"></i></a>
                                                         <div class="collapse <?php if ($openDropdownFR == '1' ){ echo "show";} ?> setaCollapse" id="sym<?php echo $nkey;?>fr">
-                                                            <div class="dropdown-divider"></div><b><?php pll_e('Entry term(s)'); ?>:</b><br>
+                                                            <div class="dropdown-divider"></div><b><?php _e('Entry term(s)','ths'); ?>:</b><br>
                                                             <?php foreach ($ths_sym_fr as $key => $value) { echo highlight($value, $q)."<br>"; } ?>
                                                         </div>
                                                     <?php } ?>
@@ -698,14 +693,14 @@ if ( strval($total) == 1) {
                                 ?>
                                             <tr>
                                                 <td class="text-right badge-descriptor tableWidth">
-                                                    <?php if ( $filter == 'ths_qualifall'){ pll_e('Qualifier Portuguese'); } else { pll_e('Descriptor Portuguese'); } ?>:
+                                                    <?php if ( $filter == 'ths_qualifall'){ _e('Qualifier Portuguese','ths'); } else { _e('Descriptor Portuguese','ths'); } ?>:
                                                 </td>
                                                 <td>
-                                                    <b><?php if ( !empty($ths_mh_pt)){ echo highlight($ths_mh_pt, $q); } else { echo pll_e('Without translation'); } ?></b>
+                                                    <b><?php if ( !empty($ths_mh_pt)){ echo highlight($ths_mh_pt, $q); } else { echo _e('Without translation','ths'); } ?></b>
                                                     <?php if ( !empty($ths_sym_pt) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>pt"><i class="fas fa-angle-down"></i></a>
                                                         <div class="collapse show setaCollapse" id="sym<?php echo $nkey;?>pt">
-                                                            <div class="dropdown-divider"></div><b><?php pll_e('Entry term(s)'); ?>:</b><br>
+                                                            <div class="dropdown-divider"></div><b><?php _e('Entry term(s)','ths'); ?>:</b><br>
                                                             <?php foreach ($ths_sym_pt as $key => $value) { echo highlight($value, $q)."<br>"; } ?>
                                                         </div>
                                                     <?php } ?>
@@ -713,14 +708,14 @@ if ( strval($total) == 1) {
                                             </tr>
                                             <tr>
                                                 <td class="text-right badge-descriptor tableWidth">
-                                                    <?php if ( $filter == 'ths_qualifall'){ pll_e('Qualifier English'); } else { pll_e('Descriptor English'); } ?>:
+                                                    <?php if ( $filter == 'ths_qualifall'){ _e('Qualifier English','ths'); } else { _e('Descriptor English','ths'); } ?>:
                                                 </td>
                                                 <td>
-                                                    <b><?php if ( !empty($ths_mh_en)){ echo highlight($ths_mh_en, $q); } else { echo pll_e('Without translation'); } ?></b>
+                                                    <b><?php if ( !empty($ths_mh_en)){ echo highlight($ths_mh_en, $q); } else { echo _e('Without translation','ths'); } ?></b>
                                                     <?php if ( !empty($ths_sym_en) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>en"><i class="fas fa-angle-down"></i></a>
                                                         <div class="collapse <?php if ($openDropdownEN == '1' ){ echo "show";} ?> setaCollapse" id="sym<?php echo $nkey;?>en">
-                                                            <div class="dropdown-divider"></div><b><?php pll_e('Entry term(s)'); ?>:</b><br>
+                                                            <div class="dropdown-divider"></div><b><?php _e('Entry term(s)','ths'); ?>:</b><br>
                                                             <?php foreach ($ths_sym_en as $key => $value) { echo highlight($value, $q)."<br>"; } ?>
                                                         </div>
                                                     <?php } ?>
@@ -728,14 +723,14 @@ if ( strval($total) == 1) {
                                             </tr>
                                             <tr>
                                                 <td class="text-right badge-descriptor tableWidth">
-                                                    <?php if ( $filter == 'ths_qualifall'){ pll_e('Qualifier Spanish'); } else { pll_e('Descriptor Spanish'); } ?>:
+                                                    <?php if ( $filter == 'ths_qualifall'){ _e('Qualifier Spanish','ths'); } else { _e('Descriptor Spanish','ths'); } ?>:
                                                 </td>
                                                 <td>
-                                                    <b><?php if ( !empty($ths_mh_es)){ echo highlight($ths_mh_es, $q); } else { echo pll_e('Without translation'); } ?></b>
+                                                    <b><?php if ( !empty($ths_mh_es)){ echo highlight($ths_mh_es, $q); } else { echo _e('Without translation','ths'); } ?></b>
                                                     <?php if ( !empty($ths_sym_es) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>es"><i class="fas fa-angle-down"></i></a>
                                                         <div class="collapse <?php if ($openDropdownES == '1' ){ echo "show";} ?> setaCollapse" id="sym<?php echo $nkey;?>es">
-                                                            <div class="dropdown-divider"></div><b><?php pll_e('Entry term(s)'); ?>:</b><br>
+                                                            <div class="dropdown-divider"></div><b><?php _e('Entry term(s)','ths'); ?>:</b><br>
                                                             <?php foreach ($ths_sym_es as $key => $value) { echo highlight($value, $q)."<br>"; } ?>
                                                         </div>
                                                     <?php } ?>
@@ -743,14 +738,14 @@ if ( strval($total) == 1) {
                                             </tr>
                                             <tr>
                                                 <td class="text-right badge-descriptor tableWidth">
-                                                    <?php if ( $filter == 'ths_qualifall'){ pll_e('Qualifier French'); } else { pll_e('Descriptor French'); } ?>:
+                                                    <?php if ( $filter == 'ths_qualifall'){ _e('Qualifier French','ths'); } else { _e('Descriptor French','ths'); } ?>:
                                                 </td>
                                                 <td>
-                                                    <b><?php if ( !empty($ths_mh_fr)){ echo highlight($ths_mh_fr, $q); } else { echo pll_e('Without translation'); } ?></b>
+                                                    <b><?php if ( !empty($ths_mh_fr)){ echo highlight($ths_mh_fr, $q); } else { echo _e('Without translation','ths'); } ?></b>
                                                     <?php if ( !empty($ths_sym_fr) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>fr"><i class="fas fa-angle-down"></i></a>
                                                         <div class="collapse <?php if ($openDropdownFR == '1' ){ echo "show";} ?> setaCollapse" id="sym<?php echo $nkey;?>fr">
-                                                            <div class="dropdown-divider"></div><b><?php pll_e('Entry term(s)'); ?>:</b><br>
+                                                            <div class="dropdown-divider"></div><b><?php _e('Entry term(s)','ths'); ?>:</b><br>
                                                             <?php foreach ($ths_sym_fr as $key => $value) { echo highlight($value, $q)."<br>"; } ?>
                                                         </div>
                                                     <?php } ?>
@@ -762,14 +757,14 @@ if ( strval($total) == 1) {
                                 ?>
                                             <tr>
                                                 <td class="text-right badge-descriptor tableWidth">
-                                                    <?php if ( $filter == 'ths_qualifall'){ pll_e('Qualifier French'); } else { pll_e('Descriptor French'); } ?>:
+                                                    <?php if ( $filter == 'ths_qualifall'){ _e('Qualifier French','ths'); } else { _e('Descriptor French','ths'); } ?>:
                                                 </td>
                                                 <td>
-                                                    <b><?php if ( !empty($ths_mh_fr)){ echo highlight($ths_mh_fr, $q); } else { echo pll_e('Without translation'); } ?></b>
+                                                    <b><?php if ( !empty($ths_mh_fr)){ echo highlight($ths_mh_fr, $q); } else { echo _e('Without translation','ths'); } ?></b>
                                                     <?php if ( !empty($ths_sym_fr) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>fr"><i class="fas fa-angle-down"></i></a>
                                                         <div class="collapse show setaCollapse" id="sym<?php echo $nkey;?>fr">
-                                                            <div class="dropdown-divider"></div><b><?php pll_e('Entry term(s)'); ?>:</b><br>
+                                                            <div class="dropdown-divider"></div><b><?php _e('Entry term(s)','ths'); ?>:</b><br>
                                                             <?php foreach ($ths_sym_fr as $key => $value) { echo highlight($value, $q)."<br>"; } ?>
                                                         </div>
                                                     <?php } ?>
@@ -777,14 +772,14 @@ if ( strval($total) == 1) {
                                             </tr>
                                             <tr>
                                                 <td class="text-right badge-descriptor tableWidth">
-                                                    <?php if ( $filter == 'ths_qualifall'){ pll_e('Qualifier English'); } else { pll_e('Descriptor English'); } ?>:
+                                                    <?php if ( $filter == 'ths_qualifall'){ _e('Qualifier English','ths'); } else { _e('Descriptor English','ths'); } ?>:
                                                 </td>
                                                 <td>
-                                                    <b><?php if ( !empty($ths_mh_en)){ echo highlight($ths_mh_en, $q); } else { echo pll_e('Without translation'); } ?></b>
+                                                    <b><?php if ( !empty($ths_mh_en)){ echo highlight($ths_mh_en, $q); } else { echo _e('Without translation','ths'); } ?></b>
                                                     <?php if ( !empty($ths_sym_en) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>en"><i class="fas fa-angle-down"></i></a>
                                                         <div class="collapse <?php if ($openDropdownEN == '1' ){ echo "show";} ?> setaCollapse" id="sym<?php echo $nkey;?>en">
-                                                            <div class="dropdown-divider"></div><b><?php pll_e('Entry term(s)'); ?>:</b><br>
+                                                            <div class="dropdown-divider"></div><b><?php _e('Entry term(s)','ths'); ?>:</b><br>
                                                             <?php foreach ($ths_sym_en as $key => $value) { echo highlight($value, $q)."<br>"; } ?>
                                                         </div>
                                                     <?php } ?>
@@ -792,14 +787,14 @@ if ( strval($total) == 1) {
                                             </tr>
                                             <tr>
                                                 <td class="text-right badge-descriptor tableWidth">
-                                                    <?php if ( $filter == 'ths_qualifall'){ pll_e('Qualifier Spanish'); } else { pll_e('Descriptor Spanish'); } ?>:
+                                                    <?php if ( $filter == 'ths_qualifall'){ _e('Qualifier Spanish','ths'); } else { _e('Descriptor Spanish','ths'); } ?>:
                                                 </td>
                                                 <td>
-                                                    <b><?php if ( !empty($ths_mh_es)){ echo highlight($ths_mh_es, $q); } else { echo pll_e('Without translation'); } ?></b>
+                                                    <b><?php if ( !empty($ths_mh_es)){ echo highlight($ths_mh_es, $q); } else { echo _e('Without translation','ths'); } ?></b>
                                                     <?php if ( !empty($ths_sym_es) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>es"><i class="fas fa-angle-down"></i></a>
                                                         <div class="collapse <?php if ($openDropdownES == '1' ){ echo "show";} ?> setaCollapse" id="sym<?php echo $nkey;?>es">
-                                                            <div class="dropdown-divider"></div><b><?php pll_e('Entry term(s)'); ?>:</b><br>
+                                                            <div class="dropdown-divider"></div><b><?php _e('Entry term(s)','ths'); ?>:</b><br>
                                                             <?php foreach ($ths_sym_es as $key => $value) { echo highlight($value, $q)."<br>"; } ?>
                                                         </div>
                                                     <?php } ?>
@@ -807,14 +802,14 @@ if ( strval($total) == 1) {
                                             </tr>
                                             <tr>
                                                 <td class="text-right badge-descriptor tableWidth">
-                                                    <?php if ( $filter == 'ths_qualifall'){ pll_e('Qualifier Portuguese'); } else { pll_e('Descriptor Portuguese'); } ?>:
+                                                    <?php if ( $filter == 'ths_qualifall'){ _e('Qualifier Portuguese','ths'); } else { _e('Descriptor Portuguese','ths'); } ?>:
                                                 </td>
                                                 <td>
-                                                    <b><?php if ( !empty($ths_mh_pt)){ echo highlight($ths_mh_pt, $q); } else { echo pll_e('Without translation'); } ?></b>
+                                                    <b><?php if ( !empty($ths_mh_pt)){ echo highlight($ths_mh_pt, $q); } else { echo _e('Without translation','ths'); } ?></b>
                                                     <?php if ( !empty($ths_sym_pt) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>pt"><i class="fas fa-angle-down"></i></a>
                                                         <div class="collapse <?php if ($openDropdownPT == '1' ){ echo "show";} ?> setaCollapse" id="sym<?php echo $nkey;?>pt">
-                                                            <div class="dropdown-divider"></div><b><?php pll_e('Entry term(s)'); ?>:</b><br>
+                                                            <div class="dropdown-divider"></div><b><?php _e('Entry term(s)','ths'); ?>:</b><br>
                                                             <?php foreach ($ths_sym_pt as $key => $value) { echo highlight($value, $q)."<br>"; } ?>
                                                         </div>
                                                     <?php } ?>
@@ -831,7 +826,7 @@ if ( strval($total) == 1) {
                                 ?>
                                     <tr>
                                         <td class="text-right badge-descriptor tableWidth">
-                                            <?php pll_e('Tree number(s)'); ?>:
+                                            <?php _e('Tree number(s)','ths'); ?>:
                                         </td>
                                         <td>
                                             <?php foreach ($arr_treenumber as $key => $value) { echo highlight($value, $q)."<br>"; } ?>
@@ -849,11 +844,11 @@ if ( strval($total) == 1) {
                         <?php
                             if ( $filter != "ths_exact_term_bool" ) {
                         ?>
-                                <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.stripslashes($q); ?>" class="btn btn-success btn-sm btnSeeMore"><?php pll_e('See details'); ?></a>
+                                <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.stripslashes($q); ?>" class="btn btn-success btn-sm btnSeeMore"><?php _e('See details','ths'); ?></a>
                         <?php
                             } else {
                         ?>
-                                <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code; ?>" class="btn btn-success btn-sm btnSeeMore"><?php pll_e('See details'); ?></a>
+                                <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code; ?>" class="btn btn-success btn-sm btnSeeMore"><?php _e('See details','ths'); ?></a>
 
 
                         <?php
@@ -893,7 +888,7 @@ if ( strval($total) == 1) {
                             case 'en':
                     ?>
                                 <div class="col-12 col-md-12 font12">
-                                    <?php if ( !empty($ths_mh_en)){ echo highlight($ths_mh_en, $q); } else { echo pll_e('Without translation'); } ?>
+                                    <?php if ( !empty($ths_mh_en)){ echo highlight($ths_mh_en, $q); } else { echo _e('Without translation','ths'); } ?>
                                     <?php if ( !empty($ths_sym_en) ) { ?>
                                         <div class="float-right btn-group" data-toggle="collapse" role="group" aria-label="Basic example">
                                             <a class="btn btn-sm btn-outline-success" data-toggle="collapse" href="#sym<?php echo $nkey;?>en"><i class="fas fa-angle-down"></i></a>
@@ -901,7 +896,7 @@ if ( strval($total) == 1) {
                                         </div>
                                         <div class="clearfix"></div>
                                         <div class="collapse setaCollapse" style="padding-left: 15px;" id="sym<?php echo $nkey;?>en">
-                                                <ul><b><?php pll_e('Entry term(s)'); ?>:</b><br>
+                                                <ul><b><?php _e('Entry term(s)','ths'); ?>:</b><br>
                                                 <?php foreach ($ths_sym_en as $key => $value) { echo highlight($value, $q)."<br>"; } ?></ul>
                                         </div>
                                     <?php } else { ?>
@@ -916,7 +911,7 @@ if ( strval($total) == 1) {
                             case 'es':
                     ?>
                                 <div class="col-12 col-md-12 font12">
-                                    <?php if ( !empty($ths_mh_es)){ echo highlight($ths_mh_es, $q); } else { echo pll_e('Without translation'); } ?>
+                                    <?php if ( !empty($ths_mh_es)){ echo highlight($ths_mh_es, $q); } else { echo _e('Without translation','ths'); } ?>
                                     <?php if ( !empty($ths_sym_es) ) { ?>
                                         <div class="float-right btn-group" data-toggle="collapse" role="group" aria-label="Basic example">
                                             <a class="btn btn-sm btn-outline-success" data-toggle="collapse" href="#sym<?php echo $nkey;?>es"><i class="fas fa-angle-down"></i></a>
@@ -924,7 +919,7 @@ if ( strval($total) == 1) {
                                         </div>
                                         <div class="clearfix"></div>
                                         <div class="collapse setaCollapse" style="padding-left: 15px;" id="sym<?php echo $nkey;?>es">
-                                                <ul><b><?php pll_e('Entry term(s)'); ?>:</b><br>
+                                                <ul><b><?php _e('Entry term(s)','ths'); ?>:</b><br>
                                                 <?php foreach ($ths_sym_es as $key => $value) { echo highlight($value, $q)."<br>"; } ?></ul>
                                         </div>
                                     <?php } else { ?>
@@ -939,7 +934,7 @@ if ( strval($total) == 1) {
                             case 'pt':
                     ?>
                                 <div class="col-12 col-md-12 font12">
-                                    <?php if ( !empty($ths_mh_pt)){ echo highlight($ths_mh_pt, $q); } else { echo pll_e('Without translation'); } ?>
+                                    <?php if ( !empty($ths_mh_pt)){ echo highlight($ths_mh_pt, $q); } else { echo _e('Without translation','ths'); } ?>
                                     <?php if ( !empty($ths_sym_pt) ) { ?>
                                         <div class="float-right btn-group" data-toggle="collapse" role="group" aria-label="Basic example">
                                             <a class="btn btn-sm btn-outline-success" data-toggle="collapse" href="#sym<?php echo $nkey;?>pt"><i class="fas fa-angle-down"></i></a>
@@ -947,7 +942,7 @@ if ( strval($total) == 1) {
                                         </div>
                                         <div class="clearfix"></div>
                                         <div class="collapse setaCollapse" style="padding-left: 15px;" id="sym<?php echo $nkey;?>pt">
-                                                <ul><b><?php pll_e('Entry term(s)'); ?>:</b><br>
+                                                <ul><b><?php _e('Entry term(s)','ths'); ?>:</b><br>
                                                 <?php foreach ($ths_sym_pt as $key => $value) { echo highlight($value, $q)."<br>"; } ?></ul>
                                         </div>
                                     <?php } else { ?>
@@ -962,7 +957,7 @@ if ( strval($total) == 1) {
                             case 'fr':
                     ?>
                                 <div class="col-12 col-md-12 font12">
-                                    <?php if ( !empty($ths_mh_fr)){ echo highlight($ths_mh_fr, $q); } else { echo pll_e('Without translation'); } ?>
+                                    <?php if ( !empty($ths_mh_fr)){ echo highlight($ths_mh_fr, $q); } else { echo _e('Without translation','ths'); } ?>
                                     <?php if ( !empty($ths_sym_fr) ) { ?>
                                         <div class="float-right btn-group" data-toggle="collapse" role="group" aria-label="Basic example">
                                             <a class="btn btn-sm btn-outline-success" data-toggle="collapse" href="#sym<?php echo $nkey;?>fr"><i class="fas fa-angle-down"></i></a>
@@ -970,7 +965,7 @@ if ( strval($total) == 1) {
                                         </div>
                                         <div class="clearfix"></div>
                                         <div class="collapse setaCollapse" style="padding-left: 15px;" id="sym<?php echo $nkey;?>fr">
-                                                <ul><b><?php pll_e('Entry term(s)'); ?>:</b><br>
+                                                <ul><b><?php _e('Entry term(s)','ths'); ?>:</b><br>
                                                 <?php foreach ($ths_sym_fr as $key => $value) { echo highlight($value, $q)."<br>"; } ?></ul>
                                         </div>
                                     <?php } else { ?>
@@ -993,7 +988,7 @@ if ( strval($total) == 1) {
                                         if ( !empty($ths_mh_en)) {
                                             echo highlight($ths_mh_en, $q);
                                         } else {
-                                            echo "&nbsp;**&nbsp;"; echo pll_e('Without translation');echo "&nbsp;-&nbsp;";
+                                            echo "&nbsp;**&nbsp;"; echo _e('Without translation','ths');echo "&nbsp;-&nbsp;";
                                             $Language = selectedLanguage($lang_another);echo "$Language";
                                         }
                                     ?>
@@ -1005,7 +1000,7 @@ if ( strval($total) == 1) {
                                         </div>
                                         <div class="clearfix"></div>
                                         <div class="collapse setaCollapse" style="padding-left: 15px;" id="sym<?php echo $nkey;?>en">
-                                            <ul><b><?php pll_e('Entry term(s)'); ?>:</b><br>
+                                            <ul><b><?php _e('Entry term(s)','ths'); ?>:</b><br>
                                             <?php foreach ($ths_sym_en as $key => $value) { echo highlight($value, $q)."<br>"; } ?></ul>
                                         </div>
                                     <?php } else { ?>
@@ -1028,7 +1023,7 @@ if ( strval($total) == 1) {
                                             echo highlight($ths_mh_es, $q);
                                         } else {
                                             if ( !empty($ths_mh_en)){ echo highlight($ths_mh_en, $q); echo "[en]"; }
-                                            echo "&nbsp;**&nbsp;"; echo pll_e('Without translation');echo "&nbsp;-&nbsp;";
+                                            echo "&nbsp;**&nbsp;"; echo _e('Without translation','ths');echo "&nbsp;-&nbsp;";
                                             $Language = selectedLanguage($lang_another);echo "$Language";
                                         }
                                     ?>
@@ -1039,7 +1034,7 @@ if ( strval($total) == 1) {
                                         </div>
                                         <div class="clearfix"></div>
                                         <div class="collapse setaCollapse" style="padding-left: 15px;" id="sym<?php echo $nkey;?>es">
-                                            <ul><b><?php pll_e('Entry term(s)'); ?>:</b><br>
+                                            <ul><b><?php _e('Entry term(s)','ths'); ?>:</b><br>
                                             <?php foreach ($ths_sym_es as $key => $value) { echo highlight($value, $q)."<br>"; } ?></ul>
                                         </div>
                                     <?php } else { ?>
@@ -1062,7 +1057,7 @@ if ( strval($total) == 1) {
                                             echo highlight($ths_mh_pt, $q);
                                         } else {
                                             if ( !empty($ths_mh_en)){ echo highlight($ths_mh_en, $q); echo "[en]"; }
-                                            echo "&nbsp;**&nbsp;"; echo pll_e('Without translation');echo "&nbsp;-&nbsp;";
+                                            echo "&nbsp;**&nbsp;"; echo _e('Without translation','ths');echo "&nbsp;-&nbsp;";
                                             $Language = selectedLanguage($lang_another);echo "$Language";
                                         }
                                     ?>
@@ -1073,7 +1068,7 @@ if ( strval($total) == 1) {
                                         </div>
                                         <div class="clearfix"></div>
                                         <div class="collapse setaCollapse" style="padding-left: 15px;" id="sym<?php echo $nkey;?>pt">
-                                            <ul><b><?php pll_e('Entry term(s)'); ?>:</b><br>
+                                            <ul><b><?php _e('Entry term(s)','ths'); ?>:</b><br>
                                             <?php foreach ($ths_sym_pt as $key => $value) { echo highlight($value, $q)."<br>"; } ?></ul>
                                         </div>
                                     <?php } else { ?>
@@ -1096,7 +1091,7 @@ if ( strval($total) == 1) {
                                             echo highlight($ths_mh_fr, $q);
                                         } else {
                                             if ( !empty($ths_mh_en)){ echo highlight($ths_mh_en, $q); echo "[en]"; }
-                                            echo "&nbsp;**&nbsp;"; echo pll_e('Without translation');echo "&nbsp;-&nbsp;";
+                                            echo "&nbsp;**&nbsp;"; echo _e('Without translation','ths');echo "&nbsp;-&nbsp;";
                                             $Language = selectedLanguage($lang_another);echo "$Language";
                                         }
                                     ?>
@@ -1107,7 +1102,7 @@ if ( strval($total) == 1) {
                                         </div>
                                         <div class="clearfix"></div>
                                         <div class="collapse setaCollapse" style="padding-left: 15px;" id="sym<?php echo $nkey;?>fr">
-                                            <ul><b><?php pll_e('Entry term(s)'); ?>:</b><br>
+                                            <ul><b><?php _e('Entry term(s)','ths'); ?>:</b><br>
                                             <?php foreach ($ths_sym_fr as $key => $value) { echo highlight($value, $q)."<br>"; } ?></ul>
                                         </div>
                                     <?php } else { ?>

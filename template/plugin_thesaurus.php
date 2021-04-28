@@ -2,119 +2,13 @@
 
 ini_set('display_errors', '0');
 
-function ConceptRelationName($concept_relation_name, $lang_ths){
-	switch ($concept_relation_name) {
-		case 'NRW':
-			if ($lang_ths == 'en'){
-				$concept_relation_name="Narrower";
-			} elseif ($lang_ths == 'es') {
-				$concept_relation_name="Más estrecho";
-			} elseif ($lang_ths == 'pt-br') {
-				$concept_relation_name="Mais específico";
-			} elseif ($lang_ths == 'fr') {
-				$concept_relation_name="Plus spécifique";
-			}
-			break;
-
-		case 'BRD':
-			if ($lang_ths == 'en'){
-				$concept_relation_name="Broader";
-			} elseif ($lang_ths == 'es') {
-				$concept_relation_name="Más amplio";
-			} elseif ($lang_ths == 'pt-br') {
-				$concept_relation_name="Mais amplo";
-			} elseif ($lang_ths == 'fr') {
-				$concept_relation_name="Plus large";
-			}
-			break;
-
-		case 'REL':
-			if ($lang_ths == 'en'){
-				$concept_relation_name="Related but not broader or narrower";
-			} elseif ($lang_ths == 'es') {
-				$concept_relation_name="Relacionado pero no más amplio ni más estrecho";
-			} elseif ($lang_ths == 'pt-br') {
-				$concept_relation_name="Relacionado, mas não mais amplo ou mais específico";
-			} elseif ($lang_ths == 'fr') {
-				$concept_relation_name="Connexes mais pas plus larges ou plus étroites";
-			}
-			break;
-
-
-		default:
-			if ($lang_ths == 'en'){
-				$concept_relation_name="Preferred";
-			} elseif ($lang_ths == 'es') {
-				$concept_relation_name="Concepto preferido";
-			} elseif ($lang_ths == 'pt-br') {
-				$concept_relation_name="Conceito preferido";
-			} elseif ($lang_ths == 'fr') {
-				$concept_relation_name="Concept préféré";
-			}
-			break;
-
-		}
-	
-	return $concept_relation_name;
-}
-
-
-function DateAdjust($date, $lang_ths){
-	if ($lang_ths == 'en'){
-		$ndate=date('Y/m/d', strtotime($date));
-	} else {
-		$ndate=date('d/m/Y', strtotime($date));
-	}
-	return $ndate;
-
-}
-
-
-
-// Ordena por mais de um campo
-function phparraysort($Array, $SortBy=array(), $Sort = SORT_REGULAR) {
-	if (is_array($Array) && count($Array) > 0 && !empty($SortBy)) {
-		$Map = array();
-		foreach ($Array as $Key => $Val) {
-			$Sort_key = '';
-			foreach ($SortBy as $Key_key) {
-				if(!empty($Val[$Key_key])){
-					$Sort_key .= $Val[$Key_key];
-				}
-			}                
-			$Map[$Key] = $Sort_key;
-		}
-		asort($Map, $Sort);
-		$Sorted = array();
-		foreach ($Map as $Key => $Val) {
-			$Sorted[] = $Array[$Key];
-		}
-		// return array_reverse($Sorted);
-		return $Sorted;
-	}
-	return $Array;
-}
-// Chamada
-// $arr_EntryTerms = phparraysort($arr_EntryTerms, array('language_code','term_string'));
-
-
-// Ordena o array por language_code
-function cmp($a, $b)
-{
-    return strcmp($a["language_code"], $b["language_code"]);
-} 
-// Chamada
-// usort($arr_PreferredScopeNote, "cmp"); 
-
-$URL="http://fi-admin-api.bvsalud.org/api/";
-// $URL="http://fi-admin.beta.bvsalud.org/api/";
-
 $decs_code = $_GET['id'];
 $ths = (isset($_GET['thesaurus'])) ? intval($_GET['thesaurus']) : 1;
 
-$json = file_get_contents($URL."desc/thesaurus/?format=json&ths=$ths&decs_code=$decs_code");
+$json = file_get_contents($ths_service_url."/api/desc/thesaurus/?format=json&ths=$ths&decs_code=$decs_code");
 $json_data = json_decode($json, true);
 
+// echo "<pre>"; print_r($json_data); echo "</pre>"; die();
 
 // Verifica se existe elemento para descritor
 $has_descriptor=$json_data["objects"][0]["IdentifierDesc"][0]["decs_code"];
@@ -187,13 +81,14 @@ if ($has_descriptor){
 					$arr_temp=array();
 					$arr_temp['term_string']=$arr_TermListDesc[$key]['term_string'];
 					$arr_temp['language_code']=$arr_TermListDesc[$key]['language_code'];
+					$arr_temp['entry_version']=$arr_TermListDesc[$key]['entry_version'];
 					$arr_PreferredDescriptors[]=$arr_temp;
 				}
 			}
 		}
 		unset($arr_temp);
 	}
-	usort($arr_PreferredDescriptors, "cmp"); 
+	usort($arr_PreferredDescriptors, "cmp");
 
 	// ---------------------------------------------------------------------------------------------------------------------------------------
 	// Description
@@ -249,7 +144,7 @@ if ($has_descriptor){
 	// Registry number
 	$arr_PreferredRegistryNumber = array();
 	foreach ($arr_IdentifierConceptListDesc as $key => $value) {
-		if ($arr_IdentifierConceptListDesc[$key]['preferred_concept']=='Y' and ($arr_IdentifierConceptListDesc[$key]['registry_number']!='' || $arr_IdentifierConceptListDesc[$key]['registry_number']!='0')) {
+		if ($arr_IdentifierConceptListDesc[$key]['preferred_concept']=='Y' and ($arr_IdentifierConceptListDesc[$key]['registry_number']!='' and $arr_IdentifierConceptListDesc[$key]['registry_number']!='0')) {
 			$arr_temp=array();
 			$arr_temp['registry_number']=$arr_IdentifierConceptListDesc[$key]['registry_number'];
 			$arr_PreferredRegistryNumber[]=$arr_temp;
@@ -262,11 +157,13 @@ if ($has_descriptor){
 	$arr_CASN1_PreferredRegistryNumber = array();
 	foreach ($arr_IdentifierConceptListDesc as $key => $value) {
 		$arr_temp=array();
-		if ($arr_IdentifierConceptListDesc[$key]['preferred_concept']=='Y' and ($arr_IdentifierConceptListDesc[$key]['registry_number']!='' || $arr_IdentifierConceptListDesc[$key]['registry_number']!='0')) {
-			$arr_temp['registry_number']=$arr_IdentifierConceptListDesc[$key]['registry_number'];
-		}
 		if ($arr_IdentifierConceptListDesc[$key]['preferred_concept']=='Y' and $arr_IdentifierConceptListDesc[$key]['casn1_name']!='') {
 			$arr_temp['casn1_name']=$arr_IdentifierConceptListDesc[$key]['casn1_name'];
+		}
+		if ( $arr_temp['casn1_name'] ) {
+			if ($arr_IdentifierConceptListDesc[$key]['preferred_concept']=='Y' and ($arr_IdentifierConceptListDesc[$key]['registry_number']!='' and $arr_IdentifierConceptListDesc[$key]['registry_number']!='0')) {
+				$arr_temp['registry_number']=$arr_IdentifierConceptListDesc[$key]['registry_number'];
+			}
 		}
 		$arr_CASN1_PreferredRegistryNumber[]=$arr_temp;
 		unset($arr_temp);
@@ -285,7 +182,7 @@ if ($has_descriptor){
 		$arr_PreviousIndexingList[]=$arr_temp;
 		unset($arr_temp);
 	}
-	sort($arr_PreviousIndexingList); 
+	sort($arr_PreviousIndexingList);
 
 	// ---------------------------------------------------------------------------------------------------------------------------------------
 	// EntryCombinationList
@@ -416,8 +313,7 @@ if ($has_descriptor){
 				}
 			}
 		}
-		usort($arr_PreferredDescriptors, "cmp"); 
-
+		usort($arr_PreferredDescriptors, "cmp");
 
 		// ---------------------------------------------------------------------------------------------------------------------------------------
 		// Description

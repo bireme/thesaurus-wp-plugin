@@ -7,7 +7,7 @@ $home_path = get_home_path();
 $url = $_SERVER['REQUEST_URI'];
 
 # idioma da ferramenta
-$i1= Explode('/', $url);
+$i1= explode('/', $url);
 foreach ($i1 as $key => $value) {
 	if ( substr($value, 0, 2) == 'es' or substr($value, 0, 2) == 'en' or substr($value, 0, 2) == 'fr' ){
 		$idioma=$value;
@@ -15,8 +15,8 @@ foreach ($i1 as $key => $value) {
 }
 
 # id decs_code e visualização outro idioma
-$b1= Explode('?', $url);
-$b2 = Explode('&', $b1[1]);
+$b1 = explode('?', $url);
+$b2 = explode('&', $b1[1]);
 
 foreach ($b2 as $key => $value) {
 

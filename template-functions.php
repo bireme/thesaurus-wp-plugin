@@ -37,7 +37,6 @@ if ( !function_exists('get_lang_value') ) {
     }
 }
 
-
 if ( !function_exists('print_formated_date') ) {
     function print_formated_date($string){
         echo substr($string,6,2)  . '/' . substr($string,4,2) . '/' . substr($string,0,4);
@@ -103,9 +102,6 @@ if ( !function_exists('real_site_url') ) {
     }
 }
 
-
-
-
 // Função para ordenar corretamente o MH de acordo com o idioma escolhido
 function SortMHResultEN($name1,$name2){
     $patterns = array(
@@ -159,7 +155,6 @@ function SortMHResultFR($name1,$name2){
     return strcasecmp($name1, $name2);
 }
 
-
 // Função para ordenar corretamente Entry Terms que tenham acento
 function SortET($name1,$name2){
     $patterns = array(
@@ -186,7 +181,6 @@ function containsString($arr, $q){
     return $open;
 }
 
-
 // --------------------------------------------------
 // Função de highlight
 // --------------------------------------------------
@@ -210,8 +204,6 @@ function highlight($text,$searchtext) {
     return preg_replace('#' . $search . '#iu', '<span class="highlight">$0</span>', $text);
 }
 // --------------------------------------------------
-
-
 
 // Categorias
 function choice_category($categ,$lang){
@@ -380,7 +372,7 @@ function choice_category($categ,$lang){
                 $categ_string='TECNOLOGIA, INDÚSTRIA E AGRICULTURA';
                 break;
             case 'K':
-                $categ_string='HUMANITIES';
+                $categ_string='CIÊNCIAS HUMANAS';
                 break;
             case 'L':
                 $categ_string='CIÊNCIA DA INFORMAÇÃO';
@@ -483,13 +475,111 @@ function choice_category($categ,$lang){
 
 }
 
-
-Function convLang($language_code){
+function convLang($language_code){
     $language_code = htmlentities($language_code, null, 'utf-8');
     $language_code = str_replace("&lt;br&gt;","",$language_code);
 
     return $language_code;
 }
 
+function ConceptRelationName($concept_relation_name, $lang_ths){
+    switch ($concept_relation_name) {
+        case 'NRW':
+            if ($lang_ths == 'en'){
+                $concept_relation_name="Narrower";
+            } elseif ($lang_ths == 'es') {
+                $concept_relation_name="Más estrecho";
+            } elseif ($lang_ths == 'pt-br') {
+                $concept_relation_name="Mais específico";
+            } elseif ($lang_ths == 'fr') {
+                $concept_relation_name="Plus spécifique";
+            }
+            break;
+
+        case 'BRD':
+            if ($lang_ths == 'en'){
+                $concept_relation_name="Broader";
+            } elseif ($lang_ths == 'es') {
+                $concept_relation_name="Más amplio";
+            } elseif ($lang_ths == 'pt-br') {
+                $concept_relation_name="Mais amplo";
+            } elseif ($lang_ths == 'fr') {
+                $concept_relation_name="Plus large";
+            }
+            break;
+
+        case 'REL':
+            if ($lang_ths == 'en'){
+                $concept_relation_name="Related but not broader or narrower";
+            } elseif ($lang_ths == 'es') {
+                $concept_relation_name="Relacionado pero no más amplio ni más estrecho";
+            } elseif ($lang_ths == 'pt-br') {
+                $concept_relation_name="Relacionado, mas não mais amplo ou mais específico";
+            } elseif ($lang_ths == 'fr') {
+                $concept_relation_name="Connexes mais pas plus larges ou plus étroites";
+            }
+            break;
+
+
+        default:
+            if ($lang_ths == 'en'){
+                $concept_relation_name="Preferred";
+            } elseif ($lang_ths == 'es') {
+                $concept_relation_name="Concepto preferido";
+            } elseif ($lang_ths == 'pt-br') {
+                $concept_relation_name="Conceito preferido";
+            } elseif ($lang_ths == 'fr') {
+                $concept_relation_name="Concept préféré";
+            }
+            break;
+
+        }
+    
+    return $concept_relation_name;
+}
+
+function DateAdjust($date, $lang_ths){
+    if ($lang_ths == 'en'){
+        $ndate=date('Y/m/d', strtotime($date));
+    } else {
+        $ndate=date('d/m/Y', strtotime($date));
+    }
+    return $ndate;
+
+}
+
+// Ordena por mais de um campo
+function phparraysort($Array, $SortBy=array(), $Sort = SORT_REGULAR) {
+    if (is_array($Array) && count($Array) > 0 && !empty($SortBy)) {
+        $Map = array();
+        foreach ($Array as $Key => $Val) {
+            $Sort_key = '';
+            foreach ($SortBy as $Key_key) {
+                if(!empty($Val[$Key_key])){
+                    $Sort_key .= $Val[$Key_key];
+                }
+            }                
+            $Map[$Key] = $Sort_key;
+        }
+        asort($Map, $Sort);
+        $Sorted = array();
+        foreach ($Map as $Key => $Val) {
+            $Sorted[] = $Array[$Key];
+        }
+        // return array_reverse($Sorted);
+        return $Sorted;
+    }
+    return $Array;
+}
+// Chamada
+// $arr_EntryTerms = phparraysort($arr_EntryTerms, array('language_code','term_string'));
+
+// Ordena o array por language_code
+function cmp($a, $b)
+{
+    return strcmp($a["language_code"], $b["language_code"]);
+}
+// Chamada
+// usort($arr_PreferredScopeNote, "cmp");
 
 ?>
