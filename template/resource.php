@@ -133,7 +133,7 @@ if($has_descriptor or $has_qualifier){
                                         </td><td><b>
                                 <?php
                                     foreach ($arr_PreferredDescriptors as $key => $value) { if ( $arr_PreferredDescriptors[$key]['language_code'] == 'en' ){ echo $arr_PreferredDescriptors[$key]['term_string']; $has_mh=TRUE; break; }}
-                                    if (!$has_mh){ echo _e('Without translation','ths');}; unset($has_mh);
+                                    if (!$has_mh){ _e('Without translation','ths');}; unset($has_mh);
                                 ?>
                                         </b></td></tr>
                                         <tr><td class="text-right badge-descriptor tableWidth">
@@ -141,7 +141,7 @@ if($has_descriptor or $has_qualifier){
                                         </td><td><b>
                                 <?php
                                     foreach ($arr_PreferredDescriptors as $key => $value) { if ( $arr_PreferredDescriptors[$key]['language_code'] == 'es' ){ echo $arr_PreferredDescriptors[$key]['term_string']; $has_mh=TRUE; break; }}
-                                    if (!$has_mh){ echo _e('Without translation','ths');}; unset($has_mh);
+                                    if (!$has_mh){ _e('Without translation','ths');}; unset($has_mh);
                                 ?>
                                         </b></td></tr>
                                         <tr><td class="text-right badge-descriptor tableWidth">
@@ -149,7 +149,7 @@ if($has_descriptor or $has_qualifier){
                                         </td><td><b>
                                 <?php
                                     foreach ($arr_PreferredDescriptors as $key => $value) { if ( $arr_PreferredDescriptors[$key]['language_code'] == 'pt-br' ){ echo $arr_PreferredDescriptors[$key]['term_string']; $has_mh=TRUE; break; }}
-                                    if (!$has_mh){ echo _e('Without translation','ths');}; unset($has_mh);
+                                    if (!$has_mh){ _e('Without translation','ths');}; unset($has_mh);
                                 ?>
                                         </b></td></tr>
                                         <tr><td class="text-right badge-descriptor tableWidth">
@@ -158,7 +158,7 @@ if($has_descriptor or $has_qualifier){
 
                                 <?php
                                     foreach ($arr_PreferredDescriptors as $key => $value) { if ( $arr_PreferredDescriptors[$key]['language_code'] == 'fr' ){ echo $arr_PreferredDescriptors[$key]['term_string']; $has_mh=TRUE; break; }}
-                                    if (!$has_mh){ echo _e('Without translation','ths');}; unset($has_mh);
+                                    if (!$has_mh){ _e('Without translation','ths');}; unset($has_mh);
                                 ?>
                                         </b></td></tr>
                                 <?php
@@ -171,7 +171,7 @@ if($has_descriptor or $has_qualifier){
                                         </td><td><b>
                                 <?php
                                     foreach ($arr_PreferredDescriptors as $key => $value) { if ( $arr_PreferredDescriptors[$key]['language_code'] == 'es' ){ echo $arr_PreferredDescriptors[$key]['term_string']; $has_mh=TRUE; break; }}
-                                    if (!$has_mh){ echo _e('Without translation','ths');}; unset($has_mh);
+                                    if (!$has_mh){ _e('Without translation','ths');}; unset($has_mh);
 
                                 ?>
                                         </b></td></tr>
@@ -180,7 +180,7 @@ if($has_descriptor or $has_qualifier){
                                         </td><td><b>
                                 <?php
                                     foreach ($arr_PreferredDescriptors as $key => $value) { if ( $arr_PreferredDescriptors[$key]['language_code'] == 'en' ){ echo $arr_PreferredDescriptors[$key]['term_string']; $has_mh=TRUE; break; }}
-                                    if (!$has_mh){ echo _e('Without translation','ths');}; unset($has_mh);
+                                    if (!$has_mh){ _e('Without translation','ths');}; unset($has_mh);
 
                                 ?>
                                         </b></td></tr>
@@ -189,7 +189,7 @@ if($has_descriptor or $has_qualifier){
                                         </td><td><b>
                                 <?php
                                     foreach ($arr_PreferredDescriptors as $key => $value) { if ( $arr_PreferredDescriptors[$key]['language_code'] == 'pt-br' ){ echo $arr_PreferredDescriptors[$key]['term_string']; $has_mh=TRUE; break; }}
-                                    if (!$has_mh){ echo _e('Without translation','ths');}; unset($has_mh);
+                                    if (!$has_mh){ _e('Without translation','ths');}; unset($has_mh);
                                 ?>
                                         </b></td></tr>
                                         <tr><td class="text-right badge-descriptor tableWidth">
@@ -198,7 +198,7 @@ if($has_descriptor or $has_qualifier){
 
                                 <?php
                                     foreach ($arr_PreferredDescriptors as $key => $value) { if ( $arr_PreferredDescriptors[$key]['language_code'] == 'fr' ){ echo $arr_PreferredDescriptors[$key]['term_string']; $has_mh=TRUE; break; }}
-                                    if (!$has_mh){ echo _e('Without translation','ths');}; unset($has_mh);
+                                    if (!$has_mh){ _e('Without translation','ths');}; unset($has_mh);
                                 ?>
                                         </b></td></tr>
                                 <?php
@@ -211,7 +211,7 @@ if($has_descriptor or $has_qualifier){
                                         </td><td><b>
                                 <?php
                                     foreach ($arr_PreferredDescriptors as $key => $value) { if ( $arr_PreferredDescriptors[$key]['language_code'] == 'pt-br' ){ echo $arr_PreferredDescriptors[$key]['term_string']; $has_mh=TRUE; break; }}
-                                    if (!$has_mh){ echo _e('Without translation','ths');}; unset($has_mh);
+                                    if (!$has_mh){ _e('Without translation','ths');}; unset($has_mh);
                                 ?>
                                         </b></td></tr>
                                         <tr><td class="text-right badge-descriptor tableWidth">
@@ -219,7 +219,7 @@ if($has_descriptor or $has_qualifier){
                                         </td><td><b>
                                 <?php
                                     foreach ($arr_PreferredDescriptors as $key => $value) { if ( $arr_PreferredDescriptors[$key]['language_code'] == 'en' ){ echo $arr_PreferredDescriptors[$key]['term_string']; $has_mh=TRUE; break; }}
-                                    if (!$has_mh){ echo _e('Without translation','ths');}; unset($has_mh);
+                                    if (!$has_mh){ _e('Without translation','ths');}; unset($has_mh);
                                 ?>
                                         </b></td></tr>
                                         <tr><td class="text-right badge-descriptor tableWidth">
@@ -227,7 +227,7 @@ if($has_descriptor or $has_qualifier){
                                         </td><td><b>
                                 <?php
                                     foreach ($arr_PreferredDescriptors as $key => $value) { if ( $arr_PreferredDescriptors[$key]['language_code'] == 'es' ){ echo $arr_PreferredDescriptors[$key]['term_string']; $has_mh=TRUE; break; }}
-                                    if (!$has_mh){ echo _e('Without translation','ths');}; unset($has_mh);
+                                    if (!$has_mh){ _e('Without translation','ths');}; unset($has_mh);
                                 ?>
                                         </b></td></tr>
                                         <tr><td class="text-right badge-descriptor tableWidth">
@@ -236,7 +236,7 @@ if($has_descriptor or $has_qualifier){
 
                                 <?php
                                     foreach ($arr_PreferredDescriptors as $key => $value) { if ( $arr_PreferredDescriptors[$key]['language_code'] == 'fr' ){ echo $arr_PreferredDescriptors[$key]['term_string']; $has_mh=TRUE; break; }}
-                                    if (!$has_mh){ echo _e('Without translation','ths');}; unset($has_mh);
+                                    if (!$has_mh){ _e('Without translation','ths');}; unset($has_mh);
                                 ?>
                                         </b></td></tr>
                                 <?php
@@ -249,7 +249,7 @@ if($has_descriptor or $has_qualifier){
                                         </td><td><b>
                                 <?php
                                     foreach ($arr_PreferredDescriptors as $key => $value) { if ( $arr_PreferredDescriptors[$key]['language_code'] == 'fr' ){ echo $arr_PreferredDescriptors[$key]['term_string']; $has_mh=TRUE; break; }}
-                                    if (!$has_mh){ echo _e('Without translation','ths');}; unset($has_mh);
+                                    if (!$has_mh){ _e('Without translation','ths');}; unset($has_mh);
                                 ?>
                                         </b></td></tr>
                                         <tr><td class="text-right badge-descriptor tableWidth">
@@ -257,7 +257,7 @@ if($has_descriptor or $has_qualifier){
                                         </td><td><b>
                                 <?php
                                     foreach ($arr_PreferredDescriptors as $key => $value) { if ( $arr_PreferredDescriptors[$key]['language_code'] == 'en' ){ echo $arr_PreferredDescriptors[$key]['term_string']; $has_mh=TRUE; break; }}
-                                    if (!$has_mh){ echo _e('Without translation','ths');}; unset($has_mh);
+                                    if (!$has_mh){ _e('Without translation','ths');}; unset($has_mh);
                                 ?>
                                         </b></td></tr>
                                         <tr><td class="text-right badge-descriptor tableWidth">
@@ -265,7 +265,7 @@ if($has_descriptor or $has_qualifier){
                                         </td><td><b>
                                 <?php
                                     foreach ($arr_PreferredDescriptors as $key => $value) { if ( $arr_PreferredDescriptors[$key]['language_code'] == 'es' ){ echo $arr_PreferredDescriptors[$key]['term_string']; $has_mh=TRUE; break; }}
-                                    if (!$has_mh){ echo _e('Without translation','ths');}; unset($has_mh);
+                                    if (!$has_mh){ _e('Without translation','ths');}; unset($has_mh);
                                 ?>
                                         </b></td></tr>
                                         <tr><td class="text-right badge-descriptor tableWidth">
@@ -273,7 +273,7 @@ if($has_descriptor or $has_qualifier){
                                         </td><td><b>
                                 <?php
                                     foreach ($arr_PreferredDescriptors as $key => $value) { if ( $arr_PreferredDescriptors[$key]['language_code'] == 'pt-br' ){ echo $arr_PreferredDescriptors[$key]['term_string']; $has_mh=TRUE; break; }}
-                                    if (!$has_mh){ echo _e('Without translation','ths');}; unset($has_mh);
+                                    if (!$has_mh){ _e('Without translation','ths');}; unset($has_mh);
                                 ?>
                                         </b></td></tr>
                                 <?php
@@ -1195,7 +1195,7 @@ if($has_descriptor or $has_qualifier){
                             ?>
                                     <a href="#<?php echo $arr_Principal[$key]['concept_ui']; ?>" data-toggle="collapse"><b>
                             <?php
-                                    echo _e('Without translation','ths');
+                                    _e('Without translation','ths');
                             ?>
                                 </b></a>
 
@@ -1572,7 +1572,7 @@ if($has_descriptor or $has_qualifier){
                             ?>
                                     <a href="#<?php echo $arr_NPrincipal[$key]['concept_ui']; ?>" data-toggle="collapse"><b>
                             <?php
-                                    echo _e('Without translation','ths');
+                                    _e('Without translation','ths');
                             ?>
                                 </b></a>
 
@@ -1972,7 +1972,7 @@ if($has_descriptor or $has_qualifier){
                             ?>
                                     <a href="#<?php echo $arr_Principal[$key]['concept_ui']; ?>" data-toggle="collapse"><b>
                             <?php
-                                    echo _e('Without translation','ths');
+                                    _e('Without translation','ths');
                             ?>
                                 </b></a>
 
@@ -2349,7 +2349,7 @@ if($has_descriptor or $has_qualifier){
                             ?>
                                     <a href="#<?php echo $arr_NPrincipal[$key]['concept_ui']; ?>" data-toggle="collapse"><b>
                             <?php
-                                    echo _e('Without translation','ths');
+                                    _e('Without translation','ths');
                             ?>
                                 </b></a>
 

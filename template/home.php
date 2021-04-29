@@ -400,7 +400,7 @@ if ( strval($total) == 1) {
                             |
                             <?php
                                 if ( !$total || strval($total) == 0 ){
-                                    echo _e('No results found','ths');
+                                    _e('No results found','ths');
                                 } elseif (  ( $query != '' || $user_filter != '' ) && strval($total) > 0  ) {
                                     _e('Results','ths'); echo ': ' . $total;
                                 }
@@ -568,7 +568,7 @@ if ( strval($total) == 1) {
                                                     <?php if ( $filter == 'ths_qualifall'){ _e('Qualifier English','ths'); } else { _e('Descriptor English','ths'); } ?>:
                                                 </td>
                                                 <td>
-                                                    <b><?php if ( !empty($ths_mh_en)){ echo highlight($ths_mh_en, $q); } else { echo _e('Without translation','ths'); } ?></b>
+                                                    <b><?php if ( !empty($ths_mh_en)){ echo highlight($ths_mh_en, $q); } else { _e('Without translation','ths'); } ?></b>
                                                     <?php if ( !empty($ths_sym_en) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>en"><i class="fas fa-angle-down"></i></a>
                                                         <div class="collapse show setaCollapse" id="sym<?php echo $nkey;?>en">
@@ -583,7 +583,7 @@ if ( strval($total) == 1) {
                                                     <?php if ( $filter == 'ths_qualifall'){ _e('Qualifier Spanish','ths'); } else { _e('Descriptor Spanish','ths'); } ?>:
                                                 </td>
                                                 <td>
-                                                    <b><?php if ( !empty($ths_mh_es)){ echo highlight($ths_mh_es, $q); } else { echo _e('Without translation','ths'); } ?></b>
+                                                    <b><?php if ( !empty($ths_mh_es)){ echo highlight($ths_mh_es, $q); } else { _e('Without translation','ths'); } ?></b>
                                                     <?php if ( !empty($ths_sym_es) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>es"><i class="fas fa-angle-down"></i></a>
                                                         <div class="collapse <?php if ($openDropdownES == '1' ){ echo "show";} ?> setaCollapse" id="sym<?php echo $nkey;?>es">
@@ -598,7 +598,7 @@ if ( strval($total) == 1) {
                                                     <?php if ( $filter == 'ths_qualifall'){ _e('Qualifier Portuguese','ths'); } else { _e('Descriptor Portuguese','ths'); } ?>:
                                                 </td>
                                                 <td>
-                                                    <b><?php if ( !empty($ths_mh_pt)){ echo highlight($ths_mh_pt, $q); } else { echo _e('Without translation','ths'); } ?></b>
+                                                    <b><?php if ( !empty($ths_mh_pt)){ echo highlight($ths_mh_pt, $q); } else { _e('Without translation','ths'); } ?></b>
                                                     <?php if ( !empty($ths_sym_pt) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>pt"><i class="fas fa-angle-down"></i></a>
                                                         <div class="collapse <?php if ($openDropdownPT == '1' ){ echo "show";} ?> setaCollapse" id="sym<?php echo $nkey;?>pt">
@@ -613,7 +613,7 @@ if ( strval($total) == 1) {
                                                     <?php if ( $filter == 'ths_qualifall'){ _e('Qualifier French','ths'); } else { _e('Descriptor French','ths'); } ?>:
                                                 </td>
                                                 <td>
-                                                    <b><?php if ( !empty($ths_mh_fr)){ echo highlight($ths_mh_fr, $q); } else { echo _e('Without translation','ths'); } ?></b>
+                                                    <b><?php if ( !empty($ths_mh_fr)){ echo highlight($ths_mh_fr, $q); } else { _e('Without translation','ths'); } ?></b>
                                                     <?php if ( !empty($ths_sym_fr) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>fr"><i class="fas fa-angle-down"></i></a>
                                                         <div class="collapse <?php if ($openDropdownFR == '1' ){ echo "show";} ?> setaCollapse" id="sym<?php echo $nkey;?>fr">
@@ -632,7 +632,7 @@ if ( strval($total) == 1) {
                                                     <?php if ( $filter == 'ths_qualifall'){ _e('Qualifier Spanish','ths'); } else { _e('Descriptor Spanish','ths'); } ?>:
                                                 </td>
                                                 <td>
-                                                    <b><?php if ( !empty($ths_mh_es)){ echo highlight($ths_mh_es, $q); } else { echo _e('Without translation','ths'); } ?></b>
+                                                    <b><?php if ( !empty($ths_mh_es)){ echo highlight($ths_mh_es, $q); } else { _e('Without translation','ths'); } ?></b>
                                                     <?php if ( !empty($ths_sym_es) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>es"><i class="fas fa-angle-down"></i></a>
                                                         <div class="collapse show setaCollapse" id="sym<?php echo $nkey;?>es">
@@ -647,7 +647,7 @@ if ( strval($total) == 1) {
                                                     <?php if ( $filter == 'ths_qualifall'){ _e('Qualifier English','ths'); } else { _e('Descriptor English','ths'); } ?>:
                                                 </td>
                                                 <td>
-                                                    <b><?php if ( !empty($ths_mh_en)){ echo highlight($ths_mh_en, $q); } else { echo _e('Without translation','ths'); } ?></b>
+                                                    <b><?php if ( !empty($ths_mh_en)){ echo highlight($ths_mh_en, $q); } else { _e('Without translation','ths'); } ?></b>
                                                     <?php if ( !empty($ths_sym_en) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>en"><i class="fas fa-angle-down"></i></a>
                                                         <div class="collapse <?php if ($openDropdownEN == '1' ){ echo "show";} ?> setaCollapse" id="sym<?php echo $nkey;?>en">
@@ -662,7 +662,7 @@ if ( strval($total) == 1) {
                                                     <?php if ( $filter == 'ths_qualifall'){ _e('Qualifier Portuguese','ths'); } else { _e('Descriptor Portuguese','ths'); } ?>:
                                                 </td>
                                                 <td>
-                                                    <b><?php if ( !empty($ths_mh_pt)){ echo highlight($ths_mh_pt, $q); } else { echo _e('Without translation','ths'); } ?></b>
+                                                    <b><?php if ( !empty($ths_mh_pt)){ echo highlight($ths_mh_pt, $q); } else { _e('Without translation','ths'); } ?></b>
                                                     <?php if ( !empty($ths_sym_pt) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>pt"><i class="fas fa-angle-down"></i></a>
                                                         <div class="collapse <?php if ($openDropdownPT == '1' ){ echo "show";} ?> setaCollapse" id="sym<?php echo $nkey;?>pt">
@@ -677,7 +677,7 @@ if ( strval($total) == 1) {
                                                     <?php if ( $filter == 'ths_qualifall'){ _e('Qualifier French','ths'); } else { _e('Descriptor French','ths'); } ?>:
                                                 </td>
                                                 <td>
-                                                    <b><?php if ( !empty($ths_mh_fr)){ echo highlight($ths_mh_fr, $q); } else { echo _e('Without translation','ths'); } ?></b>
+                                                    <b><?php if ( !empty($ths_mh_fr)){ echo highlight($ths_mh_fr, $q); } else { _e('Without translation','ths'); } ?></b>
                                                     <?php if ( !empty($ths_sym_fr) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>fr"><i class="fas fa-angle-down"></i></a>
                                                         <div class="collapse <?php if ($openDropdownFR == '1' ){ echo "show";} ?> setaCollapse" id="sym<?php echo $nkey;?>fr">
@@ -697,7 +697,7 @@ if ( strval($total) == 1) {
                                                     <?php if ( $filter == 'ths_qualifall'){ _e('Qualifier Portuguese','ths'); } else { _e('Descriptor Portuguese','ths'); } ?>:
                                                 </td>
                                                 <td>
-                                                    <b><?php if ( !empty($ths_mh_pt)){ echo highlight($ths_mh_pt, $q); } else { echo _e('Without translation','ths'); } ?></b>
+                                                    <b><?php if ( !empty($ths_mh_pt)){ echo highlight($ths_mh_pt, $q); } else { _e('Without translation','ths'); } ?></b>
                                                     <?php if ( !empty($ths_sym_pt) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>pt"><i class="fas fa-angle-down"></i></a>
                                                         <div class="collapse show setaCollapse" id="sym<?php echo $nkey;?>pt">
@@ -712,7 +712,7 @@ if ( strval($total) == 1) {
                                                     <?php if ( $filter == 'ths_qualifall'){ _e('Qualifier English','ths'); } else { _e('Descriptor English','ths'); } ?>:
                                                 </td>
                                                 <td>
-                                                    <b><?php if ( !empty($ths_mh_en)){ echo highlight($ths_mh_en, $q); } else { echo _e('Without translation','ths'); } ?></b>
+                                                    <b><?php if ( !empty($ths_mh_en)){ echo highlight($ths_mh_en, $q); } else { _e('Without translation','ths'); } ?></b>
                                                     <?php if ( !empty($ths_sym_en) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>en"><i class="fas fa-angle-down"></i></a>
                                                         <div class="collapse <?php if ($openDropdownEN == '1' ){ echo "show";} ?> setaCollapse" id="sym<?php echo $nkey;?>en">
@@ -727,7 +727,7 @@ if ( strval($total) == 1) {
                                                     <?php if ( $filter == 'ths_qualifall'){ _e('Qualifier Spanish','ths'); } else { _e('Descriptor Spanish','ths'); } ?>:
                                                 </td>
                                                 <td>
-                                                    <b><?php if ( !empty($ths_mh_es)){ echo highlight($ths_mh_es, $q); } else { echo _e('Without translation','ths'); } ?></b>
+                                                    <b><?php if ( !empty($ths_mh_es)){ echo highlight($ths_mh_es, $q); } else { _e('Without translation','ths'); } ?></b>
                                                     <?php if ( !empty($ths_sym_es) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>es"><i class="fas fa-angle-down"></i></a>
                                                         <div class="collapse <?php if ($openDropdownES == '1' ){ echo "show";} ?> setaCollapse" id="sym<?php echo $nkey;?>es">
@@ -742,7 +742,7 @@ if ( strval($total) == 1) {
                                                     <?php if ( $filter == 'ths_qualifall'){ _e('Qualifier French','ths'); } else { _e('Descriptor French','ths'); } ?>:
                                                 </td>
                                                 <td>
-                                                    <b><?php if ( !empty($ths_mh_fr)){ echo highlight($ths_mh_fr, $q); } else { echo _e('Without translation','ths'); } ?></b>
+                                                    <b><?php if ( !empty($ths_mh_fr)){ echo highlight($ths_mh_fr, $q); } else { _e('Without translation','ths'); } ?></b>
                                                     <?php if ( !empty($ths_sym_fr) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>fr"><i class="fas fa-angle-down"></i></a>
                                                         <div class="collapse <?php if ($openDropdownFR == '1' ){ echo "show";} ?> setaCollapse" id="sym<?php echo $nkey;?>fr">
@@ -761,7 +761,7 @@ if ( strval($total) == 1) {
                                                     <?php if ( $filter == 'ths_qualifall'){ _e('Qualifier French','ths'); } else { _e('Descriptor French','ths'); } ?>:
                                                 </td>
                                                 <td>
-                                                    <b><?php if ( !empty($ths_mh_fr)){ echo highlight($ths_mh_fr, $q); } else { echo _e('Without translation','ths'); } ?></b>
+                                                    <b><?php if ( !empty($ths_mh_fr)){ echo highlight($ths_mh_fr, $q); } else { _e('Without translation','ths'); } ?></b>
                                                     <?php if ( !empty($ths_sym_fr) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>fr"><i class="fas fa-angle-down"></i></a>
                                                         <div class="collapse show setaCollapse" id="sym<?php echo $nkey;?>fr">
@@ -776,7 +776,7 @@ if ( strval($total) == 1) {
                                                     <?php if ( $filter == 'ths_qualifall'){ _e('Qualifier English','ths'); } else { _e('Descriptor English','ths'); } ?>:
                                                 </td>
                                                 <td>
-                                                    <b><?php if ( !empty($ths_mh_en)){ echo highlight($ths_mh_en, $q); } else { echo _e('Without translation','ths'); } ?></b>
+                                                    <b><?php if ( !empty($ths_mh_en)){ echo highlight($ths_mh_en, $q); } else { _e('Without translation','ths'); } ?></b>
                                                     <?php if ( !empty($ths_sym_en) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>en"><i class="fas fa-angle-down"></i></a>
                                                         <div class="collapse <?php if ($openDropdownEN == '1' ){ echo "show";} ?> setaCollapse" id="sym<?php echo $nkey;?>en">
@@ -791,7 +791,7 @@ if ( strval($total) == 1) {
                                                     <?php if ( $filter == 'ths_qualifall'){ _e('Qualifier Spanish','ths'); } else { _e('Descriptor Spanish','ths'); } ?>:
                                                 </td>
                                                 <td>
-                                                    <b><?php if ( !empty($ths_mh_es)){ echo highlight($ths_mh_es, $q); } else { echo _e('Without translation','ths'); } ?></b>
+                                                    <b><?php if ( !empty($ths_mh_es)){ echo highlight($ths_mh_es, $q); } else { _e('Without translation','ths'); } ?></b>
                                                     <?php if ( !empty($ths_sym_es) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>es"><i class="fas fa-angle-down"></i></a>
                                                         <div class="collapse <?php if ($openDropdownES == '1' ){ echo "show";} ?> setaCollapse" id="sym<?php echo $nkey;?>es">
@@ -806,7 +806,7 @@ if ( strval($total) == 1) {
                                                     <?php if ( $filter == 'ths_qualifall'){ _e('Qualifier Portuguese','ths'); } else { _e('Descriptor Portuguese','ths'); } ?>:
                                                 </td>
                                                 <td>
-                                                    <b><?php if ( !empty($ths_mh_pt)){ echo highlight($ths_mh_pt, $q); } else { echo _e('Without translation','ths'); } ?></b>
+                                                    <b><?php if ( !empty($ths_mh_pt)){ echo highlight($ths_mh_pt, $q); } else { _e('Without translation','ths'); } ?></b>
                                                     <?php if ( !empty($ths_sym_pt) ) { ?>
                                                         <a class="float-right" data-toggle="collapse" href="#sym<?php echo $nkey;?>pt"><i class="fas fa-angle-down"></i></a>
                                                         <div class="collapse <?php if ($openDropdownPT == '1' ){ echo "show";} ?> setaCollapse" id="sym<?php echo $nkey;?>pt">
@@ -889,7 +889,7 @@ if ( strval($total) == 1) {
                             case 'en':
                     ?>
                                 <div class="col-12 col-md-12 font12">
-                                    <?php if ( !empty($ths_mh_en)){ echo highlight($ths_mh_en, $q); } else { echo _e('Without translation','ths'); } ?>
+                                    <?php if ( !empty($ths_mh_en)){ echo highlight($ths_mh_en, $q); } else { _e('Without translation','ths'); } ?>
                                     <?php if ( !empty($ths_sym_en) ) { ?>
                                         <div class="float-right btn-group" data-toggle="collapse" role="group" aria-label="Basic example">
                                             <a class="btn btn-sm btn-outline-success" data-toggle="collapse" href="#sym<?php echo $nkey;?>en"><i class="fas fa-angle-down"></i></a>
@@ -912,7 +912,7 @@ if ( strval($total) == 1) {
                             case 'es':
                     ?>
                                 <div class="col-12 col-md-12 font12">
-                                    <?php if ( !empty($ths_mh_es)){ echo highlight($ths_mh_es, $q); } else { echo _e('Without translation','ths'); } ?>
+                                    <?php if ( !empty($ths_mh_es)){ echo highlight($ths_mh_es, $q); } else { _e('Without translation','ths'); } ?>
                                     <?php if ( !empty($ths_sym_es) ) { ?>
                                         <div class="float-right btn-group" data-toggle="collapse" role="group" aria-label="Basic example">
                                             <a class="btn btn-sm btn-outline-success" data-toggle="collapse" href="#sym<?php echo $nkey;?>es"><i class="fas fa-angle-down"></i></a>
@@ -935,7 +935,7 @@ if ( strval($total) == 1) {
                             case 'pt':
                     ?>
                                 <div class="col-12 col-md-12 font12">
-                                    <?php if ( !empty($ths_mh_pt)){ echo highlight($ths_mh_pt, $q); } else { echo _e('Without translation','ths'); } ?>
+                                    <?php if ( !empty($ths_mh_pt)){ echo highlight($ths_mh_pt, $q); } else { _e('Without translation','ths'); } ?>
                                     <?php if ( !empty($ths_sym_pt) ) { ?>
                                         <div class="float-right btn-group" data-toggle="collapse" role="group" aria-label="Basic example">
                                             <a class="btn btn-sm btn-outline-success" data-toggle="collapse" href="#sym<?php echo $nkey;?>pt"><i class="fas fa-angle-down"></i></a>
@@ -958,7 +958,7 @@ if ( strval($total) == 1) {
                             case 'fr':
                     ?>
                                 <div class="col-12 col-md-12 font12">
-                                    <?php if ( !empty($ths_mh_fr)){ echo highlight($ths_mh_fr, $q); } else { echo _e('Without translation','ths'); } ?>
+                                    <?php if ( !empty($ths_mh_fr)){ echo highlight($ths_mh_fr, $q); } else { _e('Without translation','ths'); } ?>
                                     <?php if ( !empty($ths_sym_fr) ) { ?>
                                         <div class="float-right btn-group" data-toggle="collapse" role="group" aria-label="Basic example">
                                             <a class="btn btn-sm btn-outline-success" data-toggle="collapse" href="#sym<?php echo $nkey;?>fr"><i class="fas fa-angle-down"></i></a>
@@ -989,7 +989,7 @@ if ( strval($total) == 1) {
                                         if ( !empty($ths_mh_en)) {
                                             echo highlight($ths_mh_en, $q);
                                         } else {
-                                            echo "&nbsp;**&nbsp;"; echo _e('Without translation','ths');echo "&nbsp;-&nbsp;";
+                                            echo "&nbsp;**&nbsp;"; _e('Without translation','ths');echo "&nbsp;-&nbsp;";
                                             $Language = selectedLanguage($lang_another);echo "$Language";
                                         }
                                     ?>
@@ -1024,7 +1024,7 @@ if ( strval($total) == 1) {
                                             echo highlight($ths_mh_es, $q);
                                         } else {
                                             if ( !empty($ths_mh_en)){ echo highlight($ths_mh_en, $q); echo "[en]"; }
-                                            echo "&nbsp;**&nbsp;"; echo _e('Without translation','ths');echo "&nbsp;-&nbsp;";
+                                            echo "&nbsp;**&nbsp;"; _e('Without translation','ths');echo "&nbsp;-&nbsp;";
                                             $Language = selectedLanguage($lang_another);echo "$Language";
                                         }
                                     ?>
@@ -1058,7 +1058,7 @@ if ( strval($total) == 1) {
                                             echo highlight($ths_mh_pt, $q);
                                         } else {
                                             if ( !empty($ths_mh_en)){ echo highlight($ths_mh_en, $q); echo "[en]"; }
-                                            echo "&nbsp;**&nbsp;"; echo _e('Without translation','ths');echo "&nbsp;-&nbsp;";
+                                            echo "&nbsp;**&nbsp;"; _e('Without translation','ths');echo "&nbsp;-&nbsp;";
                                             $Language = selectedLanguage($lang_another);echo "$Language";
                                         }
                                     ?>
@@ -1092,7 +1092,7 @@ if ( strval($total) == 1) {
                                             echo highlight($ths_mh_fr, $q);
                                         } else {
                                             if ( !empty($ths_mh_en)){ echo highlight($ths_mh_en, $q); echo "[en]"; }
-                                            echo "&nbsp;**&nbsp;"; echo _e('Without translation','ths');echo "&nbsp;-&nbsp;";
+                                            echo "&nbsp;**&nbsp;"; _e('Without translation','ths');echo "&nbsp;-&nbsp;";
                                             $Language = selectedLanguage($lang_another);echo "$Language";
                                         }
                                     ?>
