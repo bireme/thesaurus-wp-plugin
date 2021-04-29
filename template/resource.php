@@ -76,7 +76,7 @@ if($has_descriptor or $has_qualifier){
 
 
                     <li class="nav-item" data-aos="fade-left" data-aos-delay="300">
-                        <a class="nav-link active" id="Details-tab" data-toggle="tab" href="#Details" role="tab" aria-controls="Details" aria-selected="true"><?php _e('Details','ths'); ?></a>
+                        <a class="nav-link" id="Details-tab" data-toggle="tab" href="#Details" role="tab" aria-controls="Details" aria-selected="true"><?php _e('Details','ths'); ?></a>
                     </li>
 
                     <?php
@@ -119,7 +119,7 @@ if($has_descriptor or $has_qualifier){
 
                 <div class="tab-content" id="myTabContent" data-aos="fade-up">
 
-                    <div class="tab-pane fade active show" id="Details" role="tabpanel" aria-labelledby="Details-tab">
+                    <div class="tab-pane fade" id="Details" role="tabpanel" aria-labelledby="Details-tab">
                         <div class="table-responsive">
                             <table class="table table-bordered table-sm font12">
 

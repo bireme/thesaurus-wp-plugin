@@ -73,7 +73,7 @@ jQuery('.sliderParceiros').slick({
 });
 AOS.init();
 
-
+/*
 // Faz com que a aba seja selecionada após refresh
 // -------------------------------------------------------------------------------
 jQuery('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
@@ -95,3 +95,17 @@ if (activeTab) {
 
 }
 // -------------------------------------------------------------------------------
+*/
+
+$(function(){
+  var hash = window.location.hash;
+  var _hash = ( hash ) ? hash : "#Details";
+  $('ul.nav a[href="' + _hash + '"]').tab('show');
+
+  $('.nav-tabs a').click(function (e) {
+    $(this).tab('show');
+    var scrollmem = $('body').scrollTop() || $('html').scrollTop();
+    window.location.hash = this.hash;
+    $('html,body').scrollTop(scrollmem);
+  });
+});
