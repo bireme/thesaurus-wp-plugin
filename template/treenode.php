@@ -59,7 +59,7 @@ if ($response){
 <?php if ( preg_match("/[A-Z][A-Z?]\?/", $tquery_tokens[0]) ) : ?>
     <?php foreach ($documents as $k => $v) : $v = (array) $v; ?>
         <?php $xurl = real_site_url($ths_plugin_slug) . 'resource/?id=' . $v['ths_decs_code']; ?>
-        <li class="pl-5"><a href="<?php echo $xurl; ?>"><?php echo $v['ths_mh_'.$lang][0] ?> [<?php echo $v['ths_tn'][0]; ?>]</a> <a href="#" class="btn-ajax" data-query="<?php echo $v['ths_decs_code']; ?>" data-ancestor="<?php echo $v['ths_tn'][0]; ?>"><i class="fas fa-plus-circle"></i></a></li>
+        <li class="pl-5"><a href="<?php echo $xurl; ?>"><?php echo $v['ths_mh_'.$lang][0]; ?> [<?php echo $v['ths_tn'][0]; ?>]</a> <a href="#" class="btn-ajax" data-query="<?php echo $v['ths_decs_code']; ?>" data-ancestor="<?php echo $v['ths_tn'][0]; ?>"><i class="fas fa-plus-circle" onclick="__gaTracker('send','event','Tree View','Expand','<?php echo $v['ths_mh_'.$lang][0]; ?>');"></i></a></li>
     <?php endforeach; ?>
 <?php else : ?>
     <?php $term_lang = ( 'pt' == $lang ) ? 'pt-br' : $lang; ?>
@@ -73,7 +73,7 @@ if ($response){
             <li style="padding-left: <?php echo $offset; ?>em">
                 <a href="<?php echo $xurl; ?>"><?php echo $term_string[$term_lang]; ?> [<?php echo $v['tree_number']; ?>]</a>
                 <?php if ( $v['leaf'] ) : ?>
-                <a href="#" class="btn-ajax" data-query="<?php echo $v['id']; ?>" data-ancestor="<?php echo $v['tree_number']; ?>"><i class="fas fa-plus-circle"></i></a>
+                <a href="#" class="btn-ajax" data-query="<?php echo $v['id']; ?>" data-ancestor="<?php echo $v['tree_number']; ?>"><i class="fas fa-plus-circle" onclick="__gaTracker('send','event','Tree View','Expand','<?php echo $term_string[$term_lang]; ?>');"></i></a>
                 <?php endif; ?>
             </li>
         <?php endif; ?>
