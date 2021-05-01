@@ -285,36 +285,32 @@ if($has_descriptor or $has_qualifier){
                                 <!-- Entry Term -->
                                 <?php
                                 if(!empty($arr_EntryTerms)){
-                                    $arr_HasEntryTerms = array();
-                                    foreach ($arr_EntryTerms as $key => $value) {
-                                        $language_code=convLang($value['language_code']);
-                                        if ( $lang_another ) {
-                                            if ( $language_code == $lang_another ) {
-                                                array_push($arr_HasEntryTerms, $value['term_string']);
+                                    $lang_map = ( $lang_another ) ? $lang_another : $lang_ths;
+                                    $arr_HasEntryTerms = array_map(function($term) use ($lang_map) {
+                                        if ( $lang_map == strip_tags($term['language_code']) )
+                                            return $term['term_string'];
+                                    }, $arr_EntryTerms);
+
+                                    $arr_HasEntryTerms = array_values(array_filter($arr_HasEntryTerms));
+
+                                    if (!empty($arr_HasEntryTerms)) {
+                                    ?>
+                                            <tr>
+                                                <td class="text-right badge-light align-middle"><?php _e('Entry term(s)','ths'); ?>:</td>
+                                                <td>
+                                    <?php
+                                            foreach ($arr_HasEntryTerms as $key => $value) {
+                                                echo $value."<br />";
                                             }
-                                        } elseif ( $language_code == $lang_ths ){
-                                            array_push($arr_HasEntryTerms, $value['term_string']);
-                                        }
+                                    ?>
+                                                </td>   
+                                            </tr>
+                                    <?php
                                     }
 
+                                    unset($arr_HasEntryTerms);
                                 }
-                                if (!empty($arr_HasEntryTerms)) {
                                 ?>
-                                        <tr>
-                                            <td class="text-right badge-light align-middle"><?php _e('Entry term(s)','ths'); ?>:</td>
-                                            <td>
-                                <?php
-                                        foreach ($arr_HasEntryTerms as $key => $value) {
-                                            echo $value."<br>";
-                                        }
-                                ?>
-                                            </td>   
-                                        </tr>
-                                <?php
-                                }
-                                unset($arr_HasEntryTerms);
-                                ?>
-
 
                                 <!-- Tree Number(s) -->
                                 <?php
@@ -356,54 +352,34 @@ if($has_descriptor or $has_qualifier){
                                 <!-- Definição -->
                                 <?php
                                 if(!empty($arr_PreferredScopeNote)){
-                                    foreach ($arr_PreferredScopeNote as $key => $value) {
-                                        $language_code=convLang($value['language_code']);
-                                        if ( $lang_another and $value['scope_note'] ) {
-                                            if ( $language_code == $lang_another ) {
+                                    $scope_note = wp_list_pluck( $arr_PreferredScopeNote, 'scope_note', 'language_code' );
+                                    $scope_note = sanitize_array_keys($scope_note);
+                                    $sp = ( $lang_another ) ? $scope_note[$lang_another] : $scope_note[$lang_ths];
+                                    $sp = ( $sp ) ? $sp : $scope_note['en'];
                                 ?>
-                                                <tr>
-                                                    <td class="text-right badge-light align-middle"><?php _e('Scope note','ths'); ?>:</td>
-                                                    <td><?php echo $value['scope_note'].'<br>'; ?></td>
-                                                </tr>
+                                    <tr>
+                                        <td class="text-right badge-light align-middle"><?php _e('Scope note','ths'); ?>:</td>
+                                        <td><?php echo $sp.'<br />'; ?></td>
+                                    </tr>
                                 <?php
-                                            }
-                                        } elseif ( ($language_code == $lang_ths) and $value['scope_note'] ){
-                                ?>
-                                                <tr>
-                                                    <td class="text-right badge-light align-middle"><?php _e('Scope note','ths'); ?>:</td>
-                                                    <td><?php echo $value['scope_note'].'<br>'; ?></td>
-                                                </tr>
-                                <?php
-                                        }
-                                    } // foreach
-                                } // if
+                                }
                                 ?>
 
                                 <!-- Annotation -->
                                 <!-- Nota de Indexação -->
                                 <?php
                                 if(!empty($arr_Description)){
-                                    foreach ($arr_Description as $key => $value) {
-                                        $language_code=convLang($value['language_code']);
-                                        if ( $lang_another and $value['annotation'] ) {
-                                            if ( $language_code == $lang_another ) {
+                                    $annotation = wp_list_pluck( $arr_Description, 'annotation', 'language_code' );
+                                    $annotation = sanitize_array_keys($annotation);
+                                    $ann = ( $lang_another ) ? $annotation[$lang_another] : $annotation[$lang_ths];
+                                    $ann = ( $ann ) ? $ann : $annotation['en'];
                                 ?>
-                                                <tr>
-                                                    <td class="text-right badge-light align-middle"><?php _e('Annotation','ths'); ?>:</td>
-                                                    <td><?php echo $value['annotation'].'<br>'; ?></td>
-                                                </tr>
+                                    <tr>
+                                        <td class="text-right badge-light align-middle"><?php _e('Annotation','ths'); ?>:</td>
+                                        <td><?php echo $ann.'<br />'; ?></td>
+                                    </tr>
                                 <?php
-                                            }
-                                        } elseif ( ($language_code == $lang_ths) and $value['annotation'] ){
-                                ?>
-                                                <tr>
-                                                    <td class="text-right badge-light align-middle"><?php _e('Annotation','ths'); ?>:</td>
-                                                    <td><?php echo $value['annotation'].'<br>'; ?></td>
-                                                </tr>
-                                <?php
-                                        }
-                                    } // foreach
-                                } // if
+                                }
                                 ?>
 
 

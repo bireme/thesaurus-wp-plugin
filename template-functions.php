@@ -582,4 +582,12 @@ function cmp($a, $b)
 // Chamada
 // usort($arr_PreferredScopeNote, "cmp");
 
+function sanitize_array_keys($arr)
+{
+    $k = array_map('strip_tags', array_keys($arr));
+    $v = array_values($arr);
+    $data = array_combine($k, $v);
+    return $data;
+}
+
 ?>
