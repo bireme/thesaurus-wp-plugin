@@ -6,9 +6,9 @@ Template Name: Thesaurus Home
 
 <!-- Garante que o valor pequisado passe adiante -->
 <?php
-    $id = $_GET['id'];
-    $q = $_GET['q'];
-    $filter = $_GET['filter'];
+    $id = sanitize_text_field($_GET['id']);
+    $q = sanitize_text_field($_GET['q']);
+    $filter = sanitize_text_field($_GET['filter']);
 ?>
 
 <?php get_header(); ?>
@@ -103,13 +103,13 @@ if($has_descriptor or $has_qualifier){
                         </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 
-                            <a class="dropdown-item" href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php if ( $arr_IdentifierDesc[0]['decs_code']) { echo $arr_IdentifierDesc[0]['decs_code']; } elseif ( $arr_IdentifierQualif[0]['decs_code'] ) { echo $arr_IdentifierQualif[0]['decs_code']; } ?>&filter=<?php echo $filter; ?>&q=<?php echo stripslashes($q); ?>&lang_another=en"><?php _e('English','ths'); ?></a>
+                            <a class="dropdown-item" href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php if ( $arr_IdentifierDesc[0]['decs_code']) { echo $arr_IdentifierDesc[0]['decs_code']; } elseif ( $arr_IdentifierQualif[0]['decs_code'] ) { echo $arr_IdentifierQualif[0]['decs_code']; } ?>&filter=<?php echo $filter; ?>&q=<?php echo $q; ?>&lang_another=en"><?php _e('English','ths'); ?></a>
 
-                            <a class="dropdown-item" href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php if ( $arr_IdentifierDesc[0]['decs_code']) { echo $arr_IdentifierDesc[0]['decs_code']; } elseif ( $arr_IdentifierQualif[0]['decs_code'] ) { echo $arr_IdentifierQualif[0]['decs_code']; } ?>&filter=<?php echo $filter; ?>&q=<?php echo stripslashes($q); ?>&lang_another=es"><?php _e('Spanish','ths'); ?></a>
+                            <a class="dropdown-item" href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php if ( $arr_IdentifierDesc[0]['decs_code']) { echo $arr_IdentifierDesc[0]['decs_code']; } elseif ( $arr_IdentifierQualif[0]['decs_code'] ) { echo $arr_IdentifierQualif[0]['decs_code']; } ?>&filter=<?php echo $filter; ?>&q=<?php echo $q; ?>&lang_another=es"><?php _e('Spanish','ths'); ?></a>
 
-                            <a class="dropdown-item" href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php if ( $arr_IdentifierDesc[0]['decs_code']) { echo $arr_IdentifierDesc[0]['decs_code']; } elseif ( $arr_IdentifierQualif[0]['decs_code'] ) { echo $arr_IdentifierQualif[0]['decs_code']; } ?>&filter=<?php echo $filter; ?>&q=<?php echo stripslashes($q); ?>&lang_another=pt-br"><?php _e('Portuguese','ths'); ?></a>
+                            <a class="dropdown-item" href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php if ( $arr_IdentifierDesc[0]['decs_code']) { echo $arr_IdentifierDesc[0]['decs_code']; } elseif ( $arr_IdentifierQualif[0]['decs_code'] ) { echo $arr_IdentifierQualif[0]['decs_code']; } ?>&filter=<?php echo $filter; ?>&q=<?php echo $q; ?>&lang_another=pt-br"><?php _e('Portuguese','ths'); ?></a>
 
-                            <a class="dropdown-item" href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php if ( $arr_IdentifierDesc[0]['decs_code']) { echo $arr_IdentifierDesc[0]['decs_code']; } elseif ( $arr_IdentifierQualif[0]['decs_code'] ) { echo $arr_IdentifierQualif[0]['decs_code']; } ?>&filter=<?php echo $filter; ?>&q=<?php echo stripslashes($q); ?>&lang_another=fr"><?php _e('French','ths'); ?></a>
+                            <a class="dropdown-item" href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php if ( $arr_IdentifierDesc[0]['decs_code']) { echo $arr_IdentifierDesc[0]['decs_code']; } elseif ( $arr_IdentifierQualif[0]['decs_code'] ) { echo $arr_IdentifierQualif[0]['decs_code']; } ?>&filter=<?php echo $filter; ?>&q=<?php echo $q; ?>&lang_another=fr"><?php _e('French','ths'); ?></a>
 
                         </div>
                     </li>

@@ -2,8 +2,9 @@
 
 ini_set('display_errors', '0');
 
-$decs_code = $_GET['id'];
-$ths = (isset($_GET['thesaurus'])) ? intval($_GET['thesaurus']) : 1;
+$decs_code = sanitize_text_field($_GET['id']);
+$ths = sanitize_text_field($_GET['thesaurus'])
+$ths = (isset($ths)) ? intval($ths) : 1;
 
 $json = file_get_contents($ths_service_url."/api/desc/thesaurus/?format=json&ths=$ths&decs_code=$decs_code");
 $json_data = json_decode($json, true);

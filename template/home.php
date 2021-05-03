@@ -11,12 +11,12 @@ $ths_config = get_option('ths_config');
 
 $site_language = strtolower(get_bloginfo('language'));
 $lang = substr($site_language,0,2);
-$lang_another = $_GET['lang_another'];
+$lang_another = sanitize_text_field($_GET['lang_another']);
 
-$q = $_GET['q'];
-$tquery = stripslashes( trim($q) );
-$filter = $_GET['filter'];
-$pmt =  $_GET['pmt'];
+$q = sanitize_text_field($_GET['q']);
+$tquery = stripslashes(trim($q));
+$filter = sanitize_text_field($_GET['filter']);
+$pmt = sanitize_text_field($_GET['pmt']);
 
 
 // Quantidade máxima de documentos que retornarão
@@ -357,7 +357,7 @@ function selectedLanguage($lang_another){
 if ( strval($total) == 1) {
     // Redirects the page when only one result
     foreach ( $arr_result as $key => $value) { $ths_decs_code=$arr_result[$key]['ths_decs_code']; }
-    $urlx = real_site_url($ths_plugin_slug) . 'resource/?id=' . $ths_decs_code .'&filter=' . $filter . '&q=' . stripslashes($q);
+    $urlx = real_site_url($ths_plugin_slug) . 'resource/?id=' . $ths_decs_code .'&filter=' . $filter . '&q=' . $q;
     header('Location: '.$urlx);
     die();
 
@@ -395,7 +395,7 @@ if ( strval($total) == 1) {
 
                             <?php
                             _e('Search for','ths');
-                            echo ":<b> ".stripslashes($q)." </b>";
+                            echo ":<b> ".$q." </b>";
                             ?>
                             |
                             <?php
@@ -418,10 +418,10 @@ if ( strval($total) == 1) {
                                             <a class="" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php _e('See in another language','ths'); ?>&nbsp;<i class="fas fa-globe-americas"></i>
                                             </a>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <a class="dropdown-item" href="<?php echo real_site_url($ths_plugin_slug); ?>?pmt=swapped&filter=<?php echo $filter; ?>&q=<?php echo stripslashes($q); ?>&lang_another=en"><?php _e('English','ths'); ?></a>
-                                                <a class="dropdown-item" href="<?php echo real_site_url($ths_plugin_slug); ?>?pmt=swapped&filter=<?php echo $filter; ?>&q=<?php echo stripslashes($q); ?>&lang_another=es"><?php _e('Spanish','ths'); ?></a>
-                                                <a class="dropdown-item" href="<?php echo real_site_url($ths_plugin_slug); ?>?pmt=swapped&filter=<?php echo $filter; ?>&q=<?php echo stripslashes($q); ?>&lang_another=pt-br"><?php _e('Portuguese','ths'); ?></a>
-                                                <a class="dropdown-item" href="<?php echo real_site_url($ths_plugin_slug); ?>?pmt=swapped&filter=<?php echo $filter; ?>&q=<?php echo stripslashes($q); ?>&lang_another=fr"><?php _e('French','ths');?></a>
+                                                <a class="dropdown-item" href="<?php echo real_site_url($ths_plugin_slug); ?>?pmt=swapped&filter=<?php echo $filter; ?>&q=<?php echo $q; ?>&lang_another=en"><?php _e('English','ths'); ?></a>
+                                                <a class="dropdown-item" href="<?php echo real_site_url($ths_plugin_slug); ?>?pmt=swapped&filter=<?php echo $filter; ?>&q=<?php echo $q; ?>&lang_another=es"><?php _e('Spanish','ths'); ?></a>
+                                                <a class="dropdown-item" href="<?php echo real_site_url($ths_plugin_slug); ?>?pmt=swapped&filter=<?php echo $filter; ?>&q=<?php echo $q; ?>&lang_another=pt-br"><?php _e('Portuguese','ths'); ?></a>
+                                                <a class="dropdown-item" href="<?php echo real_site_url($ths_plugin_slug); ?>?pmt=swapped&filter=<?php echo $filter; ?>&q=<?php echo $q; ?>&lang_another=fr"><?php _e('French','ths');?></a>
 
                                             </div>
                                         </span>
@@ -434,7 +434,7 @@ if ( strval($total) == 1) {
                                                 }
                                             </script>
                                             <?php
-                                                $u=real_site_url($ths_plugin_slug) . '?filter=' . $filter . '&q=' . stripslashes($q);
+                                                $u=real_site_url($ths_plugin_slug) . '?filter=' . $filter . '&q=' . $q;
                                                 // echo "URL -->".$u ."<br>";
                                             ?>
                                             <input type="checkbox" class="custom-control-input" id="customSwitch1" onClick="redirect('<?php echo $u; ?>')" checked>
@@ -458,7 +458,7 @@ if ( strval($total) == 1) {
                                                     }
                                                 </script>
                                                 <?php
-                                                    $u=real_site_url($ths_plugin_slug) . '?pmt=swapped&filter=' . $filter . '&q=' . stripslashes($q);
+                                                    $u=real_site_url($ths_plugin_slug) . '?pmt=swapped&filter=' . $filter . '&q=' . $q;
                                                     // echo "URL -->".$u ."<br>";
                                                 ?>
                                                 <input type="checkbox" class="custom-control-input" id="customSwitch1" onClick="redirect('<?php echo $u; ?>')">
@@ -480,7 +480,7 @@ if ( strval($total) == 1) {
             </div>
 
 
-        <?php if ( isset($total) && strval($total) == 0 ) : ?>
+        <?php if ( ( isset($total) && strval($total) == 0 ) || empty($arr_result) ) : ?>
 
             <?php include 'treeview.php'; ?>
 
@@ -845,7 +845,7 @@ if ( strval($total) == 1) {
                         <?php
                             if ( $filter != "ths_exact_term_bool" ) {
                         ?>
-                                <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.stripslashes($q); ?>" class="btn btn-success btn-sm btnSeeMore"><?php _e('See details','ths'); ?></a>
+                                <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.$q; ?>" class="btn btn-success btn-sm btnSeeMore"><?php _e('See details','ths'); ?></a>
                         <?php
                             } else {
                         ?>
@@ -893,7 +893,7 @@ if ( strval($total) == 1) {
                                     <?php if ( !empty($ths_sym_en) ) { ?>
                                         <div class="float-right btn-group" data-toggle="collapse" role="group" aria-label="Basic example">
                                             <a class="btn btn-sm btn-outline-success" data-toggle="collapse" href="#sym<?php echo $nkey;?>en"><i class="fas fa-angle-down"></i></a>
-                                            <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.stripslashes($q); ?>" class="btn btn-sm btn-success"><i class="fas fa-search"></i></a>
+                                            <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.$q; ?>" class="btn btn-sm btn-success"><i class="fas fa-search"></i></a>
                                         </div>
                                         <div class="clearfix"></div>
                                         <div class="collapse setaCollapse" style="padding-left: 15px;" id="sym<?php echo $nkey;?>en">
@@ -902,7 +902,7 @@ if ( strval($total) == 1) {
                                         </div>
                                     <?php } else { ?>
                                         <div class="float-right" aria-label="Basic example">
-                                            <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.stripslashes($q); ?>" class="btn btn-sm btn-success"><i class="fas fa-search"></i></a>
+                                            <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.$q; ?>" class="btn btn-sm btn-success"><i class="fas fa-search"></i></a>
                                         </div>
                                     <?php
                                     } ?>
@@ -916,7 +916,7 @@ if ( strval($total) == 1) {
                                     <?php if ( !empty($ths_sym_es) ) { ?>
                                         <div class="float-right btn-group" data-toggle="collapse" role="group" aria-label="Basic example">
                                             <a class="btn btn-sm btn-outline-success" data-toggle="collapse" href="#sym<?php echo $nkey;?>es"><i class="fas fa-angle-down"></i></a>
-                                            <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.stripslashes($q); ?>" class="btn btn-sm btn-success"><i class="fas fa-search"></i></a>
+                                            <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.$q; ?>" class="btn btn-sm btn-success"><i class="fas fa-search"></i></a>
                                         </div>
                                         <div class="clearfix"></div>
                                         <div class="collapse setaCollapse" style="padding-left: 15px;" id="sym<?php echo $nkey;?>es">
@@ -925,7 +925,7 @@ if ( strval($total) == 1) {
                                         </div>
                                     <?php } else { ?>
                                         <div class="float-right" aria-label="Basic example">
-                                            <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.stripslashes($q); ?>" class="btn btn-sm btn-success"><i class="fas fa-search"></i></a>
+                                            <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.$q; ?>" class="btn btn-sm btn-success"><i class="fas fa-search"></i></a>
                                         </div>
                                     <?php
                                     } ?>
@@ -939,7 +939,7 @@ if ( strval($total) == 1) {
                                     <?php if ( !empty($ths_sym_pt) ) { ?>
                                         <div class="float-right btn-group" data-toggle="collapse" role="group" aria-label="Basic example">
                                             <a class="btn btn-sm btn-outline-success" data-toggle="collapse" href="#sym<?php echo $nkey;?>pt"><i class="fas fa-angle-down"></i></a>
-                                            <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.stripslashes($q); ?>" class="btn btn-sm btn-success"><i class="fas fa-search"></i></a>
+                                            <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.$q; ?>" class="btn btn-sm btn-success"><i class="fas fa-search"></i></a>
                                         </div>
                                         <div class="clearfix"></div>
                                         <div class="collapse setaCollapse" style="padding-left: 15px;" id="sym<?php echo $nkey;?>pt">
@@ -948,7 +948,7 @@ if ( strval($total) == 1) {
                                         </div>
                                     <?php } else { ?>
                                         <div class="float-right" aria-label="Basic example">
-                                            <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.stripslashes($q); ?>" class="btn btn-sm btn-success"><i class="fas fa-search"></i></a>
+                                            <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.$q; ?>" class="btn btn-sm btn-success"><i class="fas fa-search"></i></a>
                                         </div>
                                     <?php
                                     } ?>
@@ -962,7 +962,7 @@ if ( strval($total) == 1) {
                                     <?php if ( !empty($ths_sym_fr) ) { ?>
                                         <div class="float-right btn-group" data-toggle="collapse" role="group" aria-label="Basic example">
                                             <a class="btn btn-sm btn-outline-success" data-toggle="collapse" href="#sym<?php echo $nkey;?>fr"><i class="fas fa-angle-down"></i></a>
-                                            <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.stripslashes($q); ?>" class="btn btn-sm btn-success"><i class="fas fa-search"></i></a>
+                                            <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.$q; ?>" class="btn btn-sm btn-success"><i class="fas fa-search"></i></a>
                                         </div>
                                         <div class="clearfix"></div>
                                         <div class="collapse setaCollapse" style="padding-left: 15px;" id="sym<?php echo $nkey;?>fr">
@@ -971,7 +971,7 @@ if ( strval($total) == 1) {
                                         </div>
                                     <?php } else { ?>
                                         <div class="float-right" aria-label="Basic example">
-                                            <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.stripslashes($q); ?>" class="btn btn-sm btn-success"><i class="fas fa-search"></i></a>
+                                            <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.$q; ?>" class="btn btn-sm btn-success"><i class="fas fa-search"></i></a>
                                         </div>
                                     <?php
                                     } ?>
@@ -997,7 +997,7 @@ if ( strval($total) == 1) {
                                     <?php if ( !empty($ths_sym_en) ) { ?>
                                         <div class="float-right btn-group" data-toggle="collapse" role="group" aria-label="Basic example">
                                             <a class="btn btn-sm btn-outline-success" data-toggle="collapse" href="#sym<?php echo $nkey;?>en"><i class="fas fa-angle-down"></i></a>
-                                            <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.stripslashes($q); ?>" class="btn btn-sm btn-success"><i class="fas fa-search"></i></a>
+                                            <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.$q; ?>" class="btn btn-sm btn-success"><i class="fas fa-search"></i></a>
                                         </div>
                                         <div class="clearfix"></div>
                                         <div class="collapse setaCollapse" style="padding-left: 15px;" id="sym<?php echo $nkey;?>en">
@@ -1007,7 +1007,7 @@ if ( strval($total) == 1) {
                                     <?php } else { ?>
 
                                         <div class="float-right" aria-label="Basic example">
-                                            <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.stripslashes($q); ?>" class="btn btn-sm btn-success"><i class="fas fa-search"></i></a>
+                                            <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.$q; ?>" class="btn btn-sm btn-success"><i class="fas fa-search"></i></a>
                                         </div>
 
                                     <?php
@@ -1031,7 +1031,7 @@ if ( strval($total) == 1) {
                                     <?php if ( !empty($ths_sym_es) ) { ?>
                                         <div class="float-right btn-group" data-toggle="collapse" role="group" aria-label="Basic example">
                                             <a class="btn btn-sm btn-outline-success" data-toggle="collapse" href="#sym<?php echo $nkey;?>es"><i class="fas fa-angle-down"></i></a>
-                                            <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.stripslashes($q); ?>" class="btn btn-sm btn-success"><i class="fas fa-search"></i></a>
+                                            <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.$q; ?>" class="btn btn-sm btn-success"><i class="fas fa-search"></i></a>
                                         </div>
                                         <div class="clearfix"></div>
                                         <div class="collapse setaCollapse" style="padding-left: 15px;" id="sym<?php echo $nkey;?>es">
@@ -1041,7 +1041,7 @@ if ( strval($total) == 1) {
                                     <?php } else { ?>
 
                                         <div class="float-right" aria-label="Basic example">
-                                            <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.stripslashes($q); ?>" class="btn btn-sm btn-success"><i class="fas fa-search"></i></a>
+                                            <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.$q; ?>" class="btn btn-sm btn-success"><i class="fas fa-search"></i></a>
                                         </div>
 
                                     <?php
@@ -1065,7 +1065,7 @@ if ( strval($total) == 1) {
                                     <?php if ( !empty($ths_sym_pt) ) { ?>
                                         <div class="float-right btn-group" data-toggle="collapse" role="group" aria-label="Basic example">
                                             <a class="btn btn-sm btn-outline-success" data-toggle="collapse" href="#sym<?php echo $nkey;?>pt"><i class="fas fa-angle-down"></i></a>
-                                            <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.stripslashes($q); ?>" class="btn btn-sm btn-success"><i class="fas fa-search"></i></a>
+                                            <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.$q; ?>" class="btn btn-sm btn-success"><i class="fas fa-search"></i></a>
                                         </div>
                                         <div class="clearfix"></div>
                                         <div class="collapse setaCollapse" style="padding-left: 15px;" id="sym<?php echo $nkey;?>pt">
@@ -1075,7 +1075,7 @@ if ( strval($total) == 1) {
                                     <?php } else { ?>
 
                                         <div class="float-right" aria-label="Basic example">
-                                            <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.stripslashes($q); ?>" class="btn btn-sm btn-success"><i class="fas fa-search"></i></a>
+                                            <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.$q; ?>" class="btn btn-sm btn-success"><i class="fas fa-search"></i></a>
                                         </div>
 
                                     <?php
@@ -1099,7 +1099,7 @@ if ( strval($total) == 1) {
                                     <?php if ( !empty($ths_sym_fr) ) { ?>
                                         <div class="float-right btn-group" data-toggle="collapse" role="group" aria-label="Basic example">
                                             <a class="btn btn-sm btn-outline-success" data-toggle="collapse" href="#sym<?php echo $nkey;?>fr"><i class="fas fa-angle-down"></i></a>
-                                            <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.stripslashes($q); ?>" class="btn btn-sm btn-success"><i class="fas fa-search"></i></a>
+                                            <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.$q; ?>" class="btn btn-sm btn-success"><i class="fas fa-search"></i></a>
                                         </div>
                                         <div class="clearfix"></div>
                                         <div class="collapse setaCollapse" style="padding-left: 15px;" id="sym<?php echo $nkey;?>fr">
@@ -1109,7 +1109,7 @@ if ( strval($total) == 1) {
                                     <?php } else { ?>
 
                                         <div class="float-right" aria-label="Basic example">
-                                            <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.stripslashes($q); ?>" class="btn btn-sm btn-success"><i class="fas fa-search"></i></a>
+                                            <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.$q; ?>" class="btn btn-sm btn-success"><i class="fas fa-search"></i></a>
                                         </div>
 
                                     <?php
