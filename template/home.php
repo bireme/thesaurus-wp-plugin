@@ -146,6 +146,13 @@ if ($response){
                         }
                     }
                 }
+                if ($docs->ths_permuted_en) {
+                    foreach ($docs->ths_permuted_en as $key => $value) {
+                        if (strpos(' '.$value,'?') != 1){
+                            array_push($arr_sym_en, $value);
+                        }
+                    }
+                }
 
                 uasort($arr_sym_en,"SortET");
                 $arr_temp['arr_sym_en']=$arr_sym_en;
@@ -174,6 +181,13 @@ if ($response){
                         }
                     }
                 }
+                if ($docs->ths_permuted_es) {
+                    foreach ($docs->ths_permuted_es as $key => $value) {
+                        if (strpos(' '.$value,'?') != 1){
+                            array_push($arr_sym_es, $value);
+                        }
+                    }
+                }
 
                 uasort($arr_sym_es,"SortET");
                 $arr_temp['arr_sym_es']=$arr_sym_es;
@@ -188,7 +202,6 @@ if ($response){
                         }
                     }
                 }
-
                 if ($docs->ths_pep_pt) {
                     foreach ($docs->ths_pep_pt as $key => $value) {
                         if (strpos(' '.$value,'?') != 1){
@@ -198,6 +211,13 @@ if ($response){
                 }
                 if ($docs->ths_pep_et_pt) {
                     foreach ($docs->ths_pep_et_pt as $key => $value) {
+                        if (strpos(' '.$value,'?') != 1){
+                            array_push($arr_sym_pt, $value);
+                        }
+                    }
+                }
+                if ($docs->ths_permuted_pt) {
+                    foreach ($docs->ths_permuted_pt as $key => $value) {
                         if (strpos(' '.$value,'?') != 1){
                             array_push($arr_sym_pt, $value);
                         }
@@ -231,23 +251,25 @@ if ($response){
                         }
                     }
                 }
+                if ($docs->ths_permuted_fr) {
+                    foreach ($docs->ths_permuted_fr as $key => $value) {
+                        if (strpos(' '.$value,'?') != 1){
+                            array_push($arr_sym_fr, $value);
+                        }
+                    }
+                }
 
                 uasort($arr_sym_fr,"SortET");
                 $arr_temp['arr_sym_fr']=$arr_sym_fr;
                 unset($arr_sym_fr);
-
-
-
                 $arr_result[]=$arr_temp;
-
                 unset($arr_temp);
-
 
             }
         }
 
 
-    // Ordena o array por language_code
+        // Ordena o array por language_code
         function cmp_en($a, $b){
             return strcmp($a["ths_mh_en"], $b["ths_mh_en"]);
         }
