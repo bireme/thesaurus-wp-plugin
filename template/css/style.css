@@ -507,7 +507,7 @@ a{
 }
 
 .highlight{
-	background: #F5F5DC;
+	background: #FFFF00;
 }
 
 .load-spinner {
@@ -529,4 +529,12 @@ a{
 
 div#Concepts > :not(table) {
     font-size: 14px;
+}
+
+.badge-decs {
+	font-size: 12px;
+}
+
+.sym-list {
+	list-style: none;
 }

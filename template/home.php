@@ -546,9 +546,6 @@ if ( strval($total) == 1) {
                         $ths_sym_es=$resultado[$key]['arr_sym_es'];
                         $ths_sym_pt=$resultado[$key]['arr_sym_pt'];
                         $ths_sym_fr=$resultado[$key]['arr_sym_fr'];
-                        // print_r($resultado[$key]);
-                        // print_r($resultado[$key][0]);
-                        // echo "<pre>"; print_r($ths_sym_pt); echo "</pre>";
 
                         // Define se o array dos Sinonimos aparecerá aberto
                         $openDropdownEN=containsString($ths_sym_en,$q);
@@ -911,7 +908,9 @@ if ( strval($total) == 1) {
                             case 'en':
                     ?>
                                 <div class="col-12 col-md-12 font12">
-                                    <?php if ( !empty($ths_mh_en)){ echo highlight($ths_mh_en, $q); } else { _e('Without translation','ths'); } ?>
+                                    <?php if ( !empty($ths_mh_en)) { ?>
+                                        <?php echo highlight($ths_mh_en, $q); ?> <span class="badge badge-primary badge-decs"><?php _e('Descriptor','ths'); ?></span>
+                                    <?php } else { _e('Without translation','ths'); } ?>
                                     <?php if ( !empty($ths_sym_en) ) { ?>
                                         <div class="float-right btn-group" data-toggle="collapse" role="group" aria-label="Basic example">
                                             <a class="btn btn-sm btn-outline-success" data-toggle="collapse" href="#sym<?php echo $nkey;?>en"><i class="fas fa-angle-down"></i></a>
@@ -919,8 +918,9 @@ if ( strval($total) == 1) {
                                         </div>
                                         <div class="clearfix"></div>
                                         <div class="collapse setaCollapse" style="padding-left: 15px;" id="sym<?php echo $nkey;?>en">
-                                                <ul><b><?php _e('Entry term(s)','ths'); ?>:</b><br>
-                                                <?php foreach ($ths_sym_en as $key => $value) { echo highlight($value, $q)."<br>"; } ?></ul>
+                                            <ul class="sym-list">
+                                                <?php foreach ($ths_sym_en as $key => $value) { echo '<li>'.highlight($value, $q).'</li>'; } ?>
+                                            </ul>
                                         </div>
                                     <?php } else { ?>
                                         <div class="float-right" aria-label="Basic example">
@@ -934,7 +934,9 @@ if ( strval($total) == 1) {
                             case 'es':
                     ?>
                                 <div class="col-12 col-md-12 font12">
-                                    <?php if ( !empty($ths_mh_es)){ echo highlight($ths_mh_es, $q); } else { _e('Without translation','ths'); } ?>
+                                    <?php if ( !empty($ths_mh_es)) { ?>
+                                        <?php echo highlight($ths_mh_es, $q); ?> <span class="badge badge-primary badge-decs"><?php _e('Descriptor','ths'); ?></span>
+                                    <?php } else { _e('Without translation','ths'); } ?>
                                     <?php if ( !empty($ths_sym_es) ) { ?>
                                         <div class="float-right btn-group" data-toggle="collapse" role="group" aria-label="Basic example">
                                             <a class="btn btn-sm btn-outline-success" data-toggle="collapse" href="#sym<?php echo $nkey;?>es"><i class="fas fa-angle-down"></i></a>
@@ -942,8 +944,9 @@ if ( strval($total) == 1) {
                                         </div>
                                         <div class="clearfix"></div>
                                         <div class="collapse setaCollapse" style="padding-left: 15px;" id="sym<?php echo $nkey;?>es">
-                                                <ul><b><?php _e('Entry term(s)','ths'); ?>:</b><br>
-                                                <?php foreach ($ths_sym_es as $key => $value) { echo highlight($value, $q)."<br>"; } ?></ul>
+                                            <ul class="sym-list">
+                                                <?php foreach ($ths_sym_es as $key => $value) { echo '<li>'.highlight($value, $q).'</li>'; } ?>
+                                            </ul>
                                         </div>
                                     <?php } else { ?>
                                         <div class="float-right" aria-label="Basic example">
@@ -957,7 +960,9 @@ if ( strval($total) == 1) {
                             case 'pt':
                     ?>
                                 <div class="col-12 col-md-12 font12">
-                                    <?php if ( !empty($ths_mh_pt)){ echo highlight($ths_mh_pt, $q); } else { _e('Without translation','ths'); } ?>
+                                    <?php if ( !empty($ths_mh_pt)) { ?>
+                                        <?php echo highlight($ths_mh_pt, $q); ?> <span class="badge badge-primary badge-decs"><?php _e('Descriptor','ths'); ?></span>
+                                    <?php } else { _e('Without translation','ths'); } ?>
                                     <?php if ( !empty($ths_sym_pt) ) { ?>
                                         <div class="float-right btn-group" data-toggle="collapse" role="group" aria-label="Basic example">
                                             <a class="btn btn-sm btn-outline-success" data-toggle="collapse" href="#sym<?php echo $nkey;?>pt"><i class="fas fa-angle-down"></i></a>
@@ -965,8 +970,9 @@ if ( strval($total) == 1) {
                                         </div>
                                         <div class="clearfix"></div>
                                         <div class="collapse setaCollapse" style="padding-left: 15px;" id="sym<?php echo $nkey;?>pt">
-                                                <ul><b><?php _e('Entry term(s)','ths'); ?>:</b><br>
-                                                <?php foreach ($ths_sym_pt as $key => $value) { echo highlight($value, $q)."<br>"; } ?></ul>
+                                            <ul class="sym-list">
+                                                <?php foreach ($ths_sym_pt as $key => $value) { echo '<li>'.highlight($value, $q).'</li>'; } ?>
+                                            </ul>
                                         </div>
                                     <?php } else { ?>
                                         <div class="float-right" aria-label="Basic example">
@@ -980,7 +986,9 @@ if ( strval($total) == 1) {
                             case 'fr':
                     ?>
                                 <div class="col-12 col-md-12 font12">
-                                    <?php if ( !empty($ths_mh_fr)){ echo highlight($ths_mh_fr, $q); } else { _e('Without translation','ths'); } ?>
+                                    <?php if ( !empty($ths_mh_fr)) { ?>
+                                        <?php echo highlight($ths_mh_fr, $q); ?> <span class="badge badge-primary badge-decs"><?php _e('Descriptor','ths'); ?></span>
+                                    <?php } else { _e('Without translation','ths'); } ?>
                                     <?php if ( !empty($ths_sym_fr) ) { ?>
                                         <div class="float-right btn-group" data-toggle="collapse" role="group" aria-label="Basic example">
                                             <a class="btn btn-sm btn-outline-success" data-toggle="collapse" href="#sym<?php echo $nkey;?>fr"><i class="fas fa-angle-down"></i></a>
@@ -988,8 +996,9 @@ if ( strval($total) == 1) {
                                         </div>
                                         <div class="clearfix"></div>
                                         <div class="collapse setaCollapse" style="padding-left: 15px;" id="sym<?php echo $nkey;?>fr">
-                                                <ul><b><?php _e('Entry term(s)','ths'); ?>:</b><br>
-                                                <?php foreach ($ths_sym_fr as $key => $value) { echo highlight($value, $q)."<br>"; } ?></ul>
+                                            <ul class="sym-list">
+                                                <?php foreach ($ths_sym_fr as $key => $value) { echo '<li>'.highlight($value, $q).'</li>'; } ?>
+                                            </ul>
                                         </div>
                                     <?php } else { ?>
                                         <div class="float-right" aria-label="Basic example">
@@ -1007,14 +1016,12 @@ if ( strval($total) == 1) {
                             case 'en':
                     ?>
                                 <div class="col-12 col-md-12 font12">
-                                    <?php
-                                        if ( !empty($ths_mh_en)) {
-                                            echo highlight($ths_mh_en, $q);
-                                        } else {
-                                            echo "&nbsp;**&nbsp;"; _e('Without translation','ths');echo "&nbsp;-&nbsp;";
-                                            $Language = selectedLanguage($lang_another);echo "$Language";
-                                        }
-                                    ?>
+                                    <?php if ( !empty($ths_mh_en)) { ?>
+                                        <?php echo highlight($ths_mh_en, $q); ?> <span class="badge badge-primary badge-decs"><?php _e('Descriptor','ths'); ?></span>
+                                    <?php } else {
+                                        echo "&nbsp;**&nbsp;"; _e('Without translation','ths'); echo "&nbsp;-&nbsp;";
+                                        $Language = selectedLanguage($lang_another); echo "$Language";
+                                    } ?>
 
                                     <?php if ( !empty($ths_sym_en) ) { ?>
                                         <div class="float-right btn-group" data-toggle="collapse" role="group" aria-label="Basic example">
@@ -1023,15 +1030,14 @@ if ( strval($total) == 1) {
                                         </div>
                                         <div class="clearfix"></div>
                                         <div class="collapse setaCollapse" style="padding-left: 15px;" id="sym<?php echo $nkey;?>en">
-                                            <ul><b><?php _e('Entry term(s)','ths'); ?>:</b><br>
-                                            <?php foreach ($ths_sym_en as $key => $value) { echo highlight($value, $q)."<br>"; } ?></ul>
+                                            <ul class="sym-list">
+                                                <?php foreach ($ths_sym_en as $key => $value) { echo '<li>'.highlight($value, $q).'</li>'; } ?>
+                                            </ul>
                                         </div>
                                     <?php } else { ?>
-
                                         <div class="float-right" aria-label="Basic example">
                                             <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.$q; ?>" class="btn btn-sm btn-success"><i class="fas fa-search"></i></a>
                                         </div>
-
                                     <?php
                                     } ?>
 
@@ -1041,15 +1047,13 @@ if ( strval($total) == 1) {
                             case 'es':
                     ?>
                                 <div class="col-12 col-md-12 font12">
-                                    <?php
-                                        if ( !empty($ths_mh_es)) {
-                                            echo highlight($ths_mh_es, $q);
-                                        } else {
-                                            if ( !empty($ths_mh_en)){ echo highlight($ths_mh_en, $q); echo "[en]"; }
-                                            echo "&nbsp;**&nbsp;"; _e('Without translation','ths');echo "&nbsp;-&nbsp;";
-                                            $Language = selectedLanguage($lang_another);echo "$Language";
-                                        }
-                                    ?>
+                                    <?php if ( !empty($ths_mh_es)) { ?>
+                                        <?php echo highlight($ths_mh_es, $q); ?> <span class="badge badge-primary badge-decs"><?php _e('Descriptor','ths'); ?></span>
+                                    <?php } else {
+                                        echo "&nbsp;**&nbsp;"; _e('Without translation','ths'); echo "&nbsp;-&nbsp;";
+                                        $Language = selectedLanguage($lang_another); echo "$Language";
+                                    } ?>
+
                                     <?php if ( !empty($ths_sym_es) ) { ?>
                                         <div class="float-right btn-group" data-toggle="collapse" role="group" aria-label="Basic example">
                                             <a class="btn btn-sm btn-outline-success" data-toggle="collapse" href="#sym<?php echo $nkey;?>es"><i class="fas fa-angle-down"></i></a>
@@ -1057,15 +1061,14 @@ if ( strval($total) == 1) {
                                         </div>
                                         <div class="clearfix"></div>
                                         <div class="collapse setaCollapse" style="padding-left: 15px;" id="sym<?php echo $nkey;?>es">
-                                            <ul><b><?php _e('Entry term(s)','ths'); ?>:</b><br>
-                                            <?php foreach ($ths_sym_es as $key => $value) { echo highlight($value, $q)."<br>"; } ?></ul>
+                                            <ul class="sym-list">
+                                                <?php foreach ($ths_sym_es as $key => $value) { echo '<li>'.highlight($value, $q).'</li>'; } ?>
+                                            </ul>
                                         </div>
                                     <?php } else { ?>
-
                                         <div class="float-right" aria-label="Basic example">
                                             <a href="<?php echo real_site_url($ths_plugin_slug); ?>resource/?id=<?php echo $ths_decs_code.'&filter='.$filter.'&q='.$q; ?>" class="btn btn-sm btn-success"><i class="fas fa-search"></i></a>
                                         </div>
-
                                     <?php
                                     } ?>
 
@@ -1075,15 +1078,13 @@ if ( strval($total) == 1) {
                             case 'pt-br':
                     ?>
                                 <div class="col-12 col-md-12 font12">
-                                    <?php
-                                        if ( !empty($ths_mh_pt)) {
-                                            echo highlight($ths_mh_pt, $q);
-                                        } else {
-                                            if ( !empty($ths_mh_en)){ echo highlight($ths_mh_en, $q); echo "[en]"; }
-                                            echo "&nbsp;**&nbsp;"; _e('Without translation','ths');echo "&nbsp;-&nbsp;";
-                                            $Language = selectedLanguage($lang_another);echo "$Language";
-                                        }
-                                    ?>
+                                    <?php if ( !empty($ths_mh_pt)) { ?>
+                                        <?php echo highlight($ths_mh_pt, $q); ?> <span class="badge badge-primary badge-decs"><?php _e('Descriptor','ths'); ?></span>
+                                    <?php } else {
+                                        echo "&nbsp;**&nbsp;"; _e('Without translation','ths'); echo "&nbsp;-&nbsp;";
+                                        $Language = selectedLanguage($lang_another); echo "$Language";
+                                    } ?>
+
                                     <?php if ( !empty($ths_sym_pt) ) { ?>
                                         <div class="float-right btn-group" data-toggle="collapse" role="group" aria-label="Basic example">
                                             <a class="btn btn-sm btn-outline-success" data-toggle="collapse" href="#sym<?php echo $nkey;?>pt"><i class="fas fa-angle-down"></i></a>
@@ -1091,8 +1092,9 @@ if ( strval($total) == 1) {
                                         </div>
                                         <div class="clearfix"></div>
                                         <div class="collapse setaCollapse" style="padding-left: 15px;" id="sym<?php echo $nkey;?>pt">
-                                            <ul><b><?php _e('Entry term(s)','ths'); ?>:</b><br>
-                                            <?php foreach ($ths_sym_pt as $key => $value) { echo highlight($value, $q)."<br>"; } ?></ul>
+                                            <ul class="sym-list">
+                                                <?php foreach ($ths_sym_pt as $key => $value) { echo '<li>'.highlight($value, $q).'</li>'; } ?>
+                                            </ul>
                                         </div>
                                     <?php } else { ?>
 
@@ -1109,15 +1111,13 @@ if ( strval($total) == 1) {
                             case 'fr':
                     ?>
                                 <div class="col-12 col-md-12 font12">
-                                    <?php
-                                        if ( !empty($ths_mh_fr)) {
-                                            echo highlight($ths_mh_fr, $q);
-                                        } else {
-                                            if ( !empty($ths_mh_en)){ echo highlight($ths_mh_en, $q); echo "[en]"; }
-                                            echo "&nbsp;**&nbsp;"; _e('Without translation','ths');echo "&nbsp;-&nbsp;";
-                                            $Language = selectedLanguage($lang_another);echo "$Language";
-                                        }
-                                    ?>
+                                    <?php if ( !empty($ths_mh_fr)) { ?>
+                                        <?php echo highlight($ths_mh_fr, $q); ?> <span class="badge badge-primary badge-decs"><?php _e('Descriptor','ths'); ?></span>
+                                    <?php } else {
+                                        echo "&nbsp;**&nbsp;"; _e('Without translation','ths'); echo "&nbsp;-&nbsp;";
+                                        $Language = selectedLanguage($lang_another); echo "$Language";
+                                    } ?>
+
                                     <?php if ( !empty($ths_sym_fr) ) { ?>
                                         <div class="float-right btn-group" data-toggle="collapse" role="group" aria-label="Basic example">
                                             <a class="btn btn-sm btn-outline-success" data-toggle="collapse" href="#sym<?php echo $nkey;?>fr"><i class="fas fa-angle-down"></i></a>
@@ -1125,8 +1125,9 @@ if ( strval($total) == 1) {
                                         </div>
                                         <div class="clearfix"></div>
                                         <div class="collapse setaCollapse" style="padding-left: 15px;" id="sym<?php echo $nkey;?>fr">
-                                            <ul><b><?php _e('Entry term(s)','ths'); ?>:</b><br>
-                                            <?php foreach ($ths_sym_fr as $key => $value) { echo highlight($value, $q)."<br>"; } ?></ul>
+                                            <ul class="sym-list">
+                                                <?php foreach ($ths_sym_fr as $key => $value) { echo '<li>'.highlight($value, $q).'</li>'; } ?>
+                                            </ul>
                                         </div>
                                     <?php } else { ?>
 
