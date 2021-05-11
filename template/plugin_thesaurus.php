@@ -258,7 +258,7 @@ if ($has_descriptor){
 } else {
 
 	// QUALIFIER
-	$json = file_get_contents($URL."qualif/thesaurus/?format=json&ths=$ths&decs_code=$decs_code");
+	$json = file_get_contents($ths_service_url."/api/qualif/thesaurus/?format=json&ths=$ths&decs_code=$decs_code");
 	$json_data = json_decode($json, true);
 	$has_qualifier=$json_data["objects"][0]["IdentifierQualif"][0]["decs_code"];
 	if ($has_qualifier){
