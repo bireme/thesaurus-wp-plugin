@@ -786,11 +786,12 @@ if($has_descriptor or $has_qualifier){
                                 </tr>
 
                                 <!-- Documents indexed in the Virtual Health Library (VHL) -->
+                                <?php $vhl_filter = ( $has_qualifier ) ? 'sh' : 'mh'; ?>
                                 <?php $descriptors = wp_list_pluck( $arr_PreferredDescriptors, 'term_string', 'language_code' ); ?>
                                 <tr>
                                     <td class="text-right badge-light align-middle"><?php _e('Documents indexed in the Virtual Health Library (VHL)','ths'); ?>:</td>
                                     <td style="vertical-align: middle;">
-                                        <a href='<?php echo $vhl_portal_url; ?>/?q=mh:("<?php echo $descriptors[$lang_ths]; ?>")' target="_blank"><?php _e('Click here to access the VHL documents','ths'); ?></a>
+                                        <a href='<?php echo $vhl_portal_url; ?>/?q=<?php echo $vhl_filter; ?>:("<?php echo $descriptors[$lang_ths]; ?>")' target="_blank"><?php _e('Click here to access the VHL documents','ths'); ?></a>
                                     </td>
                                 </tr>
 
