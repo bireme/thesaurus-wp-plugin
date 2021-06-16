@@ -58,7 +58,6 @@ if (file_exists($cachefile)){
 	$TAM=filesize($cachefile);
 	# 5000 bytes tamanho medio de um arquivo com problema
 	if ($TAM < 5000 or "true" == $fc){
-		echo "<pre>"; print_r($fc); echo "</pre>"; die();
 		unlink($cachefile);
 	}
 }
