@@ -3,6 +3,9 @@
 require_once(ABSPATH . 'wp-admin/includes/file.php');
 $home_path = get_home_path();
 
+// força a atualização do cache
+$fc = sanitize_text_field($_GET['fc']);
+
 # Recupera url solicitada
 $url = $_SERVER['REQUEST_URI'];
 
@@ -54,7 +57,8 @@ $cachetime = 3600 * 720; # Um mes de armazenamento - 24 x 30 = 720
 if (file_exists($cachefile)){
 	$TAM=filesize($cachefile);
 	# 5000 bytes tamanho medio de um arquivo com problema
-	if ($TAM < 5000 ){
+	if ($TAM < 5000 or "true" == $fc){
+		echo "<pre>"; print_r($fc); echo "</pre>"; die();
 		unlink($cachefile);
 	}
 }
