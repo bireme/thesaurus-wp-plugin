@@ -373,7 +373,9 @@ if($has_descriptor or $has_qualifier){
                                     $annotation = sanitize_array_keys($annotation);
                                     $ann = ( $lang_another ) ? $annotation[$lang_another] : $annotation[$lang_ths];
                                     $ann = ( $ann ) ? $ann : $annotation['en'];
+                                }
                                 ?>
+                                <?php if ( $ann ) { ?>
                                     <tr>
                                         <td class="text-right badge-light align-middle"><?php _e('Annotation','ths'); ?>:</td>
                                         <td><?php echo $ann.'<br />'; ?></td>
