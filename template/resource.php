@@ -331,22 +331,22 @@ if($has_descriptor or $has_qualifier){
                                 ?>
 
                                 <!-- RDF Unique Identifier -->
+                                <?php
+                                $uid = '';
+                                if ( !empty($arr_IdentifierDesc[0]['descriptor_ui']) and substr( $arr_IdentifierDesc[0]['descriptor_ui'], 0, 4 ) !== "DDCS" ){
+                                    $uid = $arr_IdentifierDesc[0]['descriptor_ui'];
+                                } elseif ( !empty($arr_IdentifierQualif[0]['qualifier_ui']) ){
+                                    $uid = $arr_IdentifierQualif[0]['qualifier_ui'];
+                                }
+                                ?>
+                                <?php if ( !empty($uid) ) { ?>
                                 <tr>
                                     <td class="text-right badge-light align-middle"><?php _e('RDF Unique Identifier','ths'); ?>:</td>
                                     <td>
-                                        <?php
-                                        $uid = '';
-                                        if ( !empty($arr_IdentifierDesc[0]['descriptor_ui']) and substr( $arr_IdentifierDesc[0]['descriptor_ui'], 0, 4 ) !== "DDCS" ){
-                                            $uid = $arr_IdentifierDesc[0]['descriptor_ui'];
-                                        } elseif ( !empty($arr_IdentifierQualif[0]['qualifier_ui']) ){
-                                            $uid = $arr_IdentifierQualif[0]['qualifier_ui'];
-                                        }
-                                        ?>
-                                        <?php if ( !empty($uid) ) { ?>
                                         <a href="https://id.nlm.nih.gov/mesh/<?php echo $uid; ?>.html" target="_blank">https://id.nlm.nih.gov/mesh/<?php echo $uid; ?></a>
-                                        <?php } ?>
                                     </td>
                                 </tr>
+                                <?php } ?>
 
                                 <!-- Scope Note -->
                                 <!-- Definição -->
