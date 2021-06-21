@@ -64,7 +64,7 @@ if ($response){
 <?php else : ?>
     <?php $term_lang = ( 'pt' == $lang ) ? 'pt-br' : $lang; ?>
     <?php foreach ($hierarchical_tree as $k => $v) : ?>
-        <?php if ( 'filho' == $v['tipo'] and $v['tree_number_original'] == $ancestor ) : ?>
+        <?php if ( 'filho' == $v['tipo'] and $v['tree_number_original'] == $ancestor and $v['term_string_translations'] ) : ?>
             <?php
                 $xurl = real_site_url($ths_plugin_slug) . 'resource/?id=' . $v['id'];
                 $term_string = wp_list_pluck( $v['term_string_translations'], 'term_string', 'language_code' );
